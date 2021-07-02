@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Question {
     public String Question;
-    public List<Answer> Answers;
+    public List<Answer> Answers = new List<Answer>();
 
+    public
 }
