@@ -15,14 +15,14 @@ public class QuestionsDaoFromCsv implements QuestionsDao {
         this.csvFileName = csvFilename;
     }
 
-
-    public List<Question> getQuestions() {
-
+    private List<Question> readFromCsv(){
         List<Question> questions = new ArrayList<>();
 
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(csvFileName)).getFile());
 
         return questions;
     }
+
+    public List<Question> getQuestions() { return  readFromCsv();}
 
 }
