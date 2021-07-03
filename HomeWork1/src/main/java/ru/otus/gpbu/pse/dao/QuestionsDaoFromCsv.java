@@ -10,19 +10,25 @@ import java.util.Objects;
 public class QuestionsDaoFromCsv implements QuestionsDao {
 
     private final String csvFileName;
+    private List<Question> questions;
 
     public QuestionsDaoFromCsv(String csvFilename){
         this.csvFileName = csvFilename;
     }
 
-    private List<Question> readFromCsv(){
-        List<Question> questions = new ArrayList<>();
+    private List<Question> readAllFromCsv(){
+
+        questions = new ArrayList<>();
 
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(csvFileName)).getFile());
 
-        return questions;
+        return this.questions;
     }
 
-    public List<Question> getQuestions() { return  readFromCsv();}
+    private void parseOneLineCsv(String lineToParse){
+
+    }
+
+    public List<Question> getQuestions() { return  readAllFromCsv();}
 
 }
