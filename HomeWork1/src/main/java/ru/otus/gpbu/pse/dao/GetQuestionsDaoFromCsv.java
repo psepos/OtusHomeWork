@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class QuestionsDaoFromCsv implements QuestionsDao {
+public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
     private final String csvFileName;
     private List<Question> questions;
 
-    public QuestionsDaoFromCsv(String csvFilename) {
+    public GetQuestionsDaoFromCsv(String csvFilename) {
         this.csvFileName = csvFilename;
     }
 

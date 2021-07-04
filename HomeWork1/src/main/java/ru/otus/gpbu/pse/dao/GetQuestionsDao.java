@@ -4,6 +4,6 @@ import ru.otus.gpbu.pse.domain.Question;
 
 import java.util.List;
 
-public interface QuestionsDao {
+public interface GetQuestionsDao {
     List<Question> getQuestions();
 }
