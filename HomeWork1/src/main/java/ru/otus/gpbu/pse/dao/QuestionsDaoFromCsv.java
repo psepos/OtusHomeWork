@@ -12,11 +12,11 @@ public class QuestionsDaoFromCsv implements QuestionsDao {
     private final String csvFileName;
     private List<Question> questions;
 
-    public QuestionsDaoFromCsv(String csvFilename){
+    public QuestionsDaoFromCsv(String csvFilename) {
         this.csvFileName = csvFilename;
     }
 
-    private List<Question> readAllFromCsv(){
+    private List<Question> readAllFromCsv() {
 
         questions = new ArrayList<>();
 
@@ -25,10 +25,12 @@ public class QuestionsDaoFromCsv implements QuestionsDao {
         return this.questions;
     }
 
-    private void parseOneLineCsv(String lineToParse){
+    private void parseOneLineCsv(String lineToParse) {
 
     }
 
-    public List<Question> getQuestions() { return  readAllFromCsv();}
+    public List<Question> getQuestions() {
+        return readAllFromCsv();
+    }
 
 }
