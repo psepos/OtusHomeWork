@@ -34,7 +34,10 @@
     </dependencies>
 
     <build>
-        <outputDirectory>build</outputDirectory>
+        <outputDirectory>archive</outputDirectory>
+        <directory>build</directory>
+        <finalName>${project.artifactId}</finalName>
+        <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -45,7 +48,6 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <classifier>exec</classifier>
                             <mainClass>ru.otus.gpbu.pse.homework01.Main</mainClass>
                             <executable>true</executable>
                         </configuration>
