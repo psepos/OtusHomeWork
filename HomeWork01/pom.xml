@@ -45,10 +45,9 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <classifier>spring-boot</classifier>
-                            <mainClass>
-                                ru.otus.gpbu.pse.homework01.Main
-                            </mainClass>
+                            <classifier>exec</classifier>
+                            <mainClass>ru.otus.gpbu.pse.homework01.Main</mainClass>
+                            <executable>true</executable>
                         </configuration>
                     </execution>
                 </executions>
