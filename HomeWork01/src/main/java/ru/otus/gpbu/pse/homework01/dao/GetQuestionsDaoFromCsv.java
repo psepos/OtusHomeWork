@@ -1,7 +1,6 @@
 package ru.otus.gpbu.pse.homework01.dao;
 
 import ru.otus.gpbu.pse.homework01.dao.helpers.ParseHelper;
-import ru.otus.gpbu.pse.homework01.dao.helpers.ParseHelperException;
 import ru.otus.gpbu.pse.homework01.domain.Question;
 
 import java.nio.charset.StandardCharsets;
@@ -10,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
