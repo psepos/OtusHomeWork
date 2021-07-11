@@ -8,8 +8,13 @@ import java.util.Scanner;
 public class ParseHelper {
 
     private static final String CSV_WORD_DELIMITER = ";";
+    private static final String STRING_EMPTY = "";
 
     public Question parseQuestionFromLine(String line) throws ParseHelperException {
+
+        if (line.equals(STRING_EMPTY)) {
+            throw new ParseHelperException("Empty line.");
+        }
 
         try {
             Scanner scanner = new Scanner(line);
@@ -17,7 +22,6 @@ public class ParseHelper {
             scanner.useDelimiter(CSV_WORD_DELIMITER);
 
             String questionString = scanner.next();
-
             Question question = new Question(questionString);
 
             while (scanner.hasNext()) {
