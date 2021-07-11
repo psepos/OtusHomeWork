@@ -7,7 +7,29 @@ public class Answer {
         this.answer = answer;
     }
 
-    public String getAnswer() {
+    public String get() {
         return this.answer;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null)
+            return false;
+
+        if (this.getClass() != obj.getClass())
+            return false;
+
+        Answer other = (Answer) obj;
+
+        return this.answer.equals(other.answer);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.answer.hashCode();
+    }
+
 }
