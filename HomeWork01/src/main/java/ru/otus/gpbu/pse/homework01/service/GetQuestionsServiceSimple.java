@@ -5,7 +5,7 @@ import ru.otus.gpbu.pse.homework01.domain.Question;
 
 import java.util.List;
 
-public class GetQuestionsServiceSimple implements GetQuestionsService{
+public class GetQuestionsServiceSimple implements GetQuestionsService {
 
     private final GetQuestionsDao dao;
 

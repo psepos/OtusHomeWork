@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Question {
     private final String question;
-    private final List<Answer> answers = new ArrayList<>();
+    private final List<Answer> correctAnswers = new ArrayList<>();
 
     public Question(String question) {
         this.question = question;
@@ -15,12 +15,12 @@ public class Question {
         return this.question;
     }
 
-    public List<Answer> getAnswers() {
-        return new ArrayList<>(answers);
+    public List<Answer> getCorrectAnswers() {
+        return new ArrayList<>(correctAnswers);
     }
 
     public boolean addAnswer(Answer answer) {
-        return this.answers.add(answer);
+        return this.correctAnswers.add(answer);
     }
 
 }

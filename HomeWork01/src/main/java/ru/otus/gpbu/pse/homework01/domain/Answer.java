@@ -1,5 +1,7 @@
 package ru.otus.gpbu.pse.homework01.domain;
 
+import java.util.List;
+
 public class Answer {
     private final String answer;
 
@@ -16,8 +18,9 @@ public class Answer {
         if (this == obj)
             return true;
 
-        if (obj == null)
+        if (obj == null) {
             return false;
+        }
 
         if (this.getClass() != obj.getClass())
             return false;
@@ -32,4 +35,16 @@ public class Answer {
         return this.answer.hashCode();
     }
 
+    public boolean checkingCorrectAnswer(List<Answer> correctAnswers) {
+
+        final boolean[] isCorrect = {false};
+
+        correctAnswers.forEach((s) -> {
+            if (s.answer.equals(this.answer)) {
+                isCorrect[0] = true;
+            }
+        });
+
+        return isCorrect[0];
+    }
 }
