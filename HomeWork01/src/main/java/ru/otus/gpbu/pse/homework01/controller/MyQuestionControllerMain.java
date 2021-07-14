@@ -20,12 +20,16 @@ public class MyQuestionControllerMain implements MyQuestionController {
     @Override
     public void run() {
         try {
-            List<Question> questions = prepareQuestions();
+            List<Question> questions = init();
+
+            ui.SendMessage("-----------Home work 1-------------");
+            ui.SendMessage("-----------Use configuring the Spring-------------");
+            ui.SendMessage("-----------Answer " + questions.size() + " questions -------------");
 
             int i = 1;
 
             for (Question question : questions) {
-                i = processOneQuestion(i, question);
+                processOneQuestion(i++, question);
             }
 
             ui.SendMessage("-----------The end.-------------");
@@ -36,18 +40,13 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     }
 
-    private List<Question> prepareQuestions() {
-        ui.SendMessage("-----------Home work 1-------------");
-        ui.SendMessage("-----------Use configuring the Spring-------------");
-
-        List<Question> questions = service.getQuestions();
-        ui.SendMessage("-----------Answer " + questions.size() + " questions -------------");
-        return questions;
+    private List<Question> init() {
+        return service.getQuestions();
     }
 
-    private int processOneQuestion(int i, Question question) {
+    private void processOneQuestion(int i, Question question) {
 
-        ui.SendMessage("-----------Question N" + (i++) + "-------------");
+        ui.SendMessage("-----------Question N" + i + "-------------");
         ui.SendMessage(question.getQuestion());
         ui.SendMessage("Your answer:");
         Answer answer = new Answer(ui.getMessage());
@@ -57,6 +56,5 @@ public class MyQuestionControllerMain implements MyQuestionController {
         } else {
             ui.SendMessageIncorrectAnswer("This is an incorrect answer");
         }
-        return i;
     }
 }
