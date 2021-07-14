@@ -19,28 +19,44 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     @Override
     public void run() {
+        try {
+            List<Question> questions = prepareQuestions();
+
+            int i = 1;
+
+            for (Question question : questions) {
+                i = processOneQuestion(i, question);
+            }
+
+            ui.SendMessage("-----------The end.-------------");
+
+        } catch (Exception | Error e) {
+            ui.SendMessageError(e.getMessage());
+        }
+
+    }
+
+    private List<Question> prepareQuestions() {
         ui.SendMessage("-----------Home work 1-------------");
         ui.SendMessage("-----------Use configuring the Spring-------------");
 
         List<Question> questions = service.getQuestions();
         ui.SendMessage("-----------Answer " + questions.size() + " questions -------------");
+        return questions;
+    }
 
-        int i = 1;
+    private int processOneQuestion(int i, Question question) {
 
-        for (Question question : questions
-        ) {
-            ui.SendMessage("-----------Question N" + (i++) + "-------------");
-            ui.SendMessage(question.getQuestion());
-            ui.SendMessage("Your answer:");
-            Answer answer = new Answer(ui.getMessage());
+        ui.SendMessage("-----------Question N" + (i++) + "-------------");
+        ui.SendMessage(question.getQuestion());
+        ui.SendMessage("Your answer:");
+        Answer answer = new Answer(ui.getMessage());
 
-            if (answer.checkingCorrectAnswer(question.getCorrectAnswers())) {
-                ui.SendMessage("This is the correct answer.");
-            } else {
-                ui.SendMessage("This is an incorrect answer");
-            }
+        if (answer.checkingCorrectAnswer(question.getCorrectAnswers())) {
+            ui.SendMessageCorrectAnswer("This is the correct answer.");
+        } else {
+            ui.SendMessageIncorrectAnswer("This is an incorrect answer");
         }
-
-        ui.SendMessage("-----------The end.-------------");
+        return i;
     }
 }
