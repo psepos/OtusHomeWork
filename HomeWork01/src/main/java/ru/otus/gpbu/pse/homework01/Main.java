@@ -10,6 +10,7 @@ public class Main {
     private static final String CSV_FILE = "/BOOT-INF/classes/data-source/questions-list.csv";
 
     public static void main(String[] args) {
+
         MyQuestionController controller = new MyQuestionControllerMain(new GetQuestionsServiceSimple(new GetQuestionsFromCsvDao(CSV_FILE)),new MyQuestionsConsoleUI());
         controller.run();
     }

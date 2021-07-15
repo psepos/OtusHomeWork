@@ -23,11 +23,11 @@ public class GetQuestionsFromCsvDao implements GetQuestionsDao {
     private List<Question> readFromCsv() throws DaoException {
 
         try {
-            ParseHelper lineParse = new ParseHelper();
+            ParseHelper parser = new ParseHelper();
 
             Files
                     .lines(Paths.get(csvFile), StandardCharsets.UTF_8)
-                    .forEach(s -> questions.add(lineParse.parseQuestionFromLine(s)));
+                    .forEach(s -> questions.add(parser.parseQuestionFromLine(s)));
 
         } catch (Exception | Error e) {
             throw new DaoException(e.getMessage() + " " + Arrays.toString(e.getStackTrace()));
