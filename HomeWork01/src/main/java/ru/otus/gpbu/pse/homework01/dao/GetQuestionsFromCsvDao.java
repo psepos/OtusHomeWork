@@ -3,12 +3,10 @@ package ru.otus.gpbu.pse.homework01.dao;
 import ru.otus.gpbu.pse.homework01.dao.helpers.ParseHelper;
 import ru.otus.gpbu.pse.homework01.domain.Question;
 
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.file.*;
+import java.util.*;
 
 public class GetQuestionsFromCsvDao implements GetQuestionsDao {
 
@@ -25,12 +23,18 @@ public class GetQuestionsFromCsvDao implements GetQuestionsDao {
         try {
             ParseHelper parser = new ParseHelper();
 
+            var uri = ClassLoader.getSystemResource(csvFile).toURI();
+            final Map<String, String> env = new HashMap<>();
+            final String[] array = uri.toString().split("!");
+            final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
+            final Path path = fs.getPath(array[1]);
+
             Files
-                    .lines(Paths.get(csvFile), StandardCharsets.UTF_8)
+                    .lines(path, StandardCharsets.UTF_8)
                     .forEach(s -> questions.add(parser.parseQuestionFromLine(s)));
 
         } catch (Exception | Error e) {
-            throw new DaoException(e.getMessage() + " " + Arrays.toString(e.getStackTrace()));
+            throw new DaoException(e + " " + Arrays.toString(e.getStackTrace()));
         }
 
         return this.questions;
