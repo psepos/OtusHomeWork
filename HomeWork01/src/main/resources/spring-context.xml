@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="getQuestionsFromCsvDao" class="ru.otus.gpbu.pse.homework01.dao.GetQuestionsFromCsvDao">
+        <constructor-arg name="csv-file" type="String" value="BOOT-INF/classes/data-source/questions-list.csv"/>
+    </bean>
+
+    <bean id="getQuestionsServiceSimple" class="ru.otus.gpbu.pse.homework01.service.GetQuestionsServiceSimple">
+        <constructor-arg name="dao" ref="getQuestionsFromCsvDao"/>
+    </bean>
+
+    <bean id="myQuestionsConsoleUI" class="ru.otus.gpbu.pse.homework01.ui.MyQuestionsConsoleUI">
+    </bean>
+
+    <bean id="myQuestionControllerMain" class="ru.otus.gpbu.pse.homework01.controller.MyQuestionControllerMain">
+        <constructor-arg name="service" ref="getQuestionsServiceSimple"/>
+        <constructor-arg name="ui" ref="myQuestionsConsoleUI"/>
+    </bean>
+
+
+</beans>
