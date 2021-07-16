@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="getQuestionsFromCsvDao" class="ru.otus.gpbu.pse.homework01.dao.GetQuestionsFromCsvDao">
-        <constructor-arg name="csv-file" type="String" value="BOOT-INF/classes/data-source/questions-list.csv"/>
+        <constructor-arg name="csvFile" type="String" value="BOOT-INF/classes/data-source/questions-list.csv"/>
     </bean>
 
     <bean id="getQuestionsServiceSimple" class="ru.otus.gpbu.pse.homework01.service.GetQuestionsServiceSimple">
