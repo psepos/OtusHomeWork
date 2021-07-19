@@ -2,7 +2,7 @@ package ru.otus.gpbu.pse.homework01.ui;
 
 import java.util.Scanner;
 
-public class MyQuestionsConsoleUI implements MyQuestionsUi {
+public class MyQuestionsConsoleUI implements MyQuestionsUI {
 
     static final String ANSI_RESET = (char) 27 + "[0m";
     static final String ANSI_RED = (char) 27 + "[31m";

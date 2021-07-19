@@ -3,16 +3,16 @@ package ru.otus.gpbu.pse.homework01.controller;
 import ru.otus.gpbu.pse.homework01.domain.Answer;
 import ru.otus.gpbu.pse.homework01.domain.Question;
 import ru.otus.gpbu.pse.homework01.service.GetQuestionsService;
-import ru.otus.gpbu.pse.homework01.ui.MyQuestionsUi;
+import ru.otus.gpbu.pse.homework01.ui.MyQuestionsUI;
 
 import java.util.List;
 
 public class MyQuestionControllerMain implements MyQuestionController {
 
     private final GetQuestionsService service;
-    private final MyQuestionsUi ui;
+    private final MyQuestionsUI ui;
 
-    public MyQuestionControllerMain(GetQuestionsService service, MyQuestionsUi ui) {
+    public MyQuestionControllerMain(GetQuestionsService service, MyQuestionsUI ui) {
         this.service = service;
         this.ui = ui;
     }
