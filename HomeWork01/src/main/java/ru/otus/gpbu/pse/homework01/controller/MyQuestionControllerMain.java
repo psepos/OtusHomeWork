@@ -20,11 +20,11 @@ public class MyQuestionControllerMain implements MyQuestionController {
     @Override
     public void run() {
         try {
-            List<Question> questions = init();
+            List<Question> questions = this.init();
 
-            ui.SendMessage("-----------Home work 1-------------");
-            ui.SendMessage("-----------Use configuring the Spring-------------");
-            ui.SendMessage("-----------Answer " + questions.size() + " questions -------------");
+            ui.SendMessage("Home work 1");
+            ui.SendMessage("Use configuring the Spring");
+            ui.SendMessage(questions.size() + " questions");
 
             int i = 1;
 
@@ -47,14 +47,23 @@ public class MyQuestionControllerMain implements MyQuestionController {
     private void processOneQuestion(int i, Question question) {
 
         ui.SendMessage("-----------Question N" + i + "-------------");
-        ui.SendMessage(question.getQuestion());
-        ui.SendMessage("Your answer:");
-        Answer answer = new Answer(ui.getMessage());
+        this.outQuestion(question);
+        this.outAnswers(question.getAnswers());
 
-        if (answer.checkingCorrectAnswer(question.getCorrectAnswers())) {
-            ui.SendMessageCorrectAnswer("This is the correct answer.");
-        } else {
-            ui.SendMessageIncorrectAnswer("This is an incorrect answer");
+
+    }
+
+    private void outQuestion(Question question) {
+        ui.SendMessage(question.getQuestion());
+    }
+
+    private void outAnswers(List<Answer> answers) {
+
+        int i = 1;
+
+        for (Answer answer : answers) {
+            String prefix = " [" + (i++) + "] ";
+            ui.SendMessage(prefix + answer.get());
         }
     }
 }

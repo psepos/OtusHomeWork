@@ -35,16 +35,4 @@ public class Answer {
         return this.answer.hashCode();
     }
 
-    public boolean checkingCorrectAnswer(List<Answer> correctAnswers) {
-
-        final boolean[] isCorrect = {false};
-
-        correctAnswers.forEach((s) -> {
-            if (s.answer.equals(this.answer)) {
-                isCorrect[0] = true;
-            }
-        });
-
-        return isCorrect[0];
-    }
 }

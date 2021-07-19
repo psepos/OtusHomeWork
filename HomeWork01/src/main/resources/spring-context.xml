@@ -6,6 +6,7 @@
 
     <bean id="getQuestionsFromCsvDao" class="ru.otus.gpbu.pse.homework01.dao.GetQuestionsFromCsvDao">
         <constructor-arg name="csvFile" type="String" value="BOOT-INF/classes/data-source/questions-list.csv"/>
+        <constructor-arg name="csvDelimiter" type="String" value=";"/>
     </bean>
 
     <bean id="getQuestionsServiceSimple" class="ru.otus.gpbu.pse.homework01.service.GetQuestionsServiceSimple">
