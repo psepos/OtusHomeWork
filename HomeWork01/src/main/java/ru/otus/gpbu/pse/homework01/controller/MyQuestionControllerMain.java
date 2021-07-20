@@ -45,12 +45,9 @@ public class MyQuestionControllerMain implements MyQuestionController {
     }
 
     private void processOneQuestion(int i, Question question) {
-
         ui.SendMessage("-----------Question N" + i + "-------------");
         this.outQuestion(question);
         this.outAnswers(question.getAnswers());
-
-
     }
 
     private void outQuestion(Question question) {

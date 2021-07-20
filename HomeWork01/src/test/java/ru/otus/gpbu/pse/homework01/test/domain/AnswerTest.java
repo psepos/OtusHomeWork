@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import ru.otus.gpbu.pse.homework01.domain.Answer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DisplayName("Class Answer")
+@DisplayName("Class ru.otus.gpbu.pse.homework01.domain.Answer")
 public class AnswerTest {
 
     @DisplayName("Correct constructor")
@@ -23,7 +24,7 @@ public class AnswerTest {
         Answer answer1 = new Answer("Test");
         Answer answer2 = new Answer("Test");
 
-        assertEquals(true, answer1.equals(answer2));
+        assertEquals(answer1, answer2);
     }
 
     @DisplayName("Correct hashCode")
@@ -32,7 +33,7 @@ public class AnswerTest {
         Answer answer1 = new Answer("Test2");
         Answer answer2 = new Answer("Test2");
 
-        assertEquals(true, answer1.hashCode() == answer2.hashCode());
+        assertEquals(answer1.hashCode(), answer2.hashCode());
     }
 
 }

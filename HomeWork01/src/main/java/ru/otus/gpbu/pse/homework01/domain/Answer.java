@@ -1,7 +1,5 @@
 package ru.otus.gpbu.pse.homework01.domain;
 
-import java.util.List;
-
 public class Answer {
     private final String answer;
 
