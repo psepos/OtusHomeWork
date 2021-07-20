@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.otus.gpbu.pse.homework01.domain.Answer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Class ru.otus.gpbu.pse.homework01.domain.Answer")
 public class AnswerTest {
