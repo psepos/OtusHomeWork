@@ -60,7 +60,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>ru.otus.gpbu.pse.homework01.Main</mainClass>
+                            <mainClass>ru.otus.gpbu.pse.homework02.Main</mainClass>
                             <executable>true</executable>
                         </configuration>
                     </execution>
