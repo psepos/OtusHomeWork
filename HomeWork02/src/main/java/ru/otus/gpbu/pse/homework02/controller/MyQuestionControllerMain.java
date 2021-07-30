@@ -2,6 +2,7 @@ package ru.otus.gpbu.pse.homework02.controller;
 
 import ru.otus.gpbu.pse.homework02.domain.Answer;
 import ru.otus.gpbu.pse.homework02.domain.Question;
+import ru.otus.gpbu.pse.homework02.domain.Student;
 import ru.otus.gpbu.pse.homework02.service.GetQuestionsService;
 import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
 
@@ -12,6 +13,8 @@ public class MyQuestionControllerMain implements MyQuestionController {
     private final GetQuestionsService service;
     private final MyQuestionsUI ui;
 
+    private Student student;
+
     public MyQuestionControllerMain(GetQuestionsService service, MyQuestionsUI ui) {
         this.service = service;
         this.ui = ui;
@@ -20,11 +23,12 @@ public class MyQuestionControllerMain implements MyQuestionController {
     @Override
     public void run() {
         try {
-            List<Question> questions = this.init();
 
-            ui.SendMessage("Home work 1");
-            ui.SendMessage("Use configuring the Spring");
-            ui.SendMessage(questions.size() + " questions");
+            this.ui.SendMessage("Home work 02");
+
+            List<Question> questions = service.getQuestions();
+
+            this.initStudent();
 
             int i = 1;
 
@@ -40,8 +44,10 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     }
 
-    private List<Question> init() {
-        return service.getQuestions();
+    private void initStudent(){
+        ui.SendMessage("Enter your name:");
+        String name = ui.GetString();
+        this.student = new Student(name);
     }
 
     private void processOneQuestion(int i, Question question) {

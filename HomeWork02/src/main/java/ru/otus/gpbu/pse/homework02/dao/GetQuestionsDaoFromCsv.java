@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-public class GetQuestionsFromCsvDao implements GetQuestionsDao {
+public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
     private static final String STRING_EMPTY = "";
     private final String csvDelimiter;
@@ -22,7 +22,7 @@ public class GetQuestionsFromCsvDao implements GetQuestionsDao {
     private final List<Question> questions = new ArrayList<>();
 
 
-    public GetQuestionsFromCsvDao(String csvFile, String csvDelimiter) {
+    public GetQuestionsDaoFromCsv(String csvFile, String csvDelimiter) {
         this.csvFile = csvFile;
         this.csvDelimiter = csvDelimiter;
     }
@@ -31,9 +31,7 @@ public class GetQuestionsFromCsvDao implements GetQuestionsDao {
 
         try {
 
-            Files
-                    .lines(this.getPath(), StandardCharsets.UTF_8)
-                    .forEach(s -> questions.add(this.parseQuestionFromLine(s)));
+            Files.lines(this.getPath(), StandardCharsets.UTF_8).forEach(s -> questions.add(this.parseQuestionFromLine(s)));
 
         } catch (Exception | Error e) {
             throw new DaoException(e + " " + Arrays.toString(e.getStackTrace()));
@@ -58,6 +56,12 @@ public class GetQuestionsFromCsvDao implements GetQuestionsDao {
 
             while (scanner.hasNext()) {
                 question.addAnswer(new Answer(scanner.next()));
+            }
+
+            if (question.getAnswers().size() > 0) {
+                question.setCorrectAnswer(question.getAnswers().get(0));
+            } else {
+                question.setCorrectAnswer(new Answer(""));
             }
 
             return question;

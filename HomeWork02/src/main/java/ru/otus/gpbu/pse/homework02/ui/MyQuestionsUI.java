@@ -4,4 +4,6 @@ public interface MyQuestionsUI {
     void SendMessage(String message);
 
     void SendMessageError(String message);
+
+    String GetString();
 }

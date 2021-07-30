@@ -1,5 +1,7 @@
 package ru.otus.gpbu.pse.homework02.ui;
 
+import java.util.Scanner;
+
 public class MyQuestionsConsoleUI implements MyQuestionsUI {
 
     static final String ANSI_RESET = (char) 27 + "[0m";
@@ -14,6 +16,11 @@ public class MyQuestionsConsoleUI implements MyQuestionsUI {
     @Override
     public void SendMessageError(String message) {
         System.out.println(ANSI_RED + message + ANSI_RESET);
+    }
+
+    @Override
+    public String GetString() {
+        return new Scanner(System.in).nextLine();
     }
 
 }

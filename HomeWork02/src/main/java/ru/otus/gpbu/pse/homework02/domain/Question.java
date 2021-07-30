@@ -7,6 +7,8 @@ public class Question {
     private final String question;
     private final List<Answer> answers = new ArrayList<>();
 
+    private Answer correctAnswer;
+
     public Question(String question) {
         this.question = question;
     }
@@ -23,4 +25,11 @@ public class Question {
         return this.answers.add(answer);
     }
 
+    public Answer getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(Answer correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 }
