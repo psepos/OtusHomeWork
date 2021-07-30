@@ -1,8 +1,7 @@
-package ru.otus.gpbu.pse.homework02.config;
+package ru.otus.gpbu.pse.homework02;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import ru.otus.gpbu.pse.homework02.Main;
 import ru.otus.gpbu.pse.homework02.controller.MyQuestionController;
 
 @ComponentScan
