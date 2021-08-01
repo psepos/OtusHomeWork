@@ -3,31 +3,31 @@ package ru.otus.gpbu.pse.homework02.domain;
 public class Student {
 
     private final String fio;
-    private Integer correctAnswerCount;
-    private Integer faultAnswerCount;
+    private Integer correctlyAnswerCount;
+    private Integer incorrectlyAnswerCount;
 
     public Student(String fio) {
         this.fio = fio;
-        this.correctAnswerCount = 0;
+        this.correctlyAnswerCount = 0;
     }
 
-    public String getFio(String fio) {
+    public String getFio() {
         return this.fio;
     }
 
-    public Integer getCorrectAnswerCount() {
-        return this.correctAnswerCount;
+    public Integer getCorrectlyAnswerCount() {
+        return this.correctlyAnswerCount;
     }
 
     public void increaseCorrectAnswerCount() {
-        this.correctAnswerCount++;
+        this.correctlyAnswerCount++;
     }
 
-    public Integer getFaultAnswerCount() {
-        return faultAnswerCount;
+    public Integer getIncorrectlyAnswerCount() {
+        return incorrectlyAnswerCount;
     }
 
-    public void increaseAnswerCount() {
-        this.faultAnswerCount++;
+    public void increaseIncorrectlyAnswerCount() {
+        this.incorrectlyAnswerCount++;
     }
 }

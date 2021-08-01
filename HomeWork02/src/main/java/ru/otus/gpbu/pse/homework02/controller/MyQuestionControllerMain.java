@@ -10,29 +10,39 @@ import java.util.List;
 
 public class MyQuestionControllerMain implements MyQuestionController {
 
-    private final GetQuestionsService service;
-    private final MyQuestionsUI ui;
     private final ControllerContext context = new ControllerContext();
 
-    private Student student;
-
-    public MyQuestionControllerMain(GetQuestionsService service, MyQuestionsUI ui) {
-        this.service = service;
-        this.ui = ui;
+    public MyQuestionControllerMain(GetQuestionsService service, MyQuestionsUI ui, String numberOfCorrectAnswersToEnd) {
+        context.setService(service);
+        context.setUi(ui);
+        context.setNumberOfCorrectAnswersToEnd(Integer.parseInt(numberOfCorrectAnswersToEnd));
     }
 
     @Override
     public void run() {
+        var ui = context.getUi();
+        var student = context.getStudent();
+
         try {
 
             ui.SendMessage("Homework 02");
 
-            initContext();
-
+            init();
 
             for (Question question : context.getQuestions()) {
-                processOneQuestion(question);
+
+                processOneStep(question);
+
+                context.increaseStep();
+
+                if (student.getCorrectlyAnswerCount() == context.getNumberOfCorrectAnswersToEnd() - 1) {
+                    break;
+                }
             }
+
+            ui.SendMessage(student.getFio() + " have total answered " + context.getStep() + " questions");
+            ui.SendMessage(student.getFio() + " correctly answered " + student.getCorrectlyAnswerCount() + " questions");
+            ui.SendMessage(student.getFio() + " incorrectly answered " + student.getIncorrectlyAnswerCount() + " questions");
 
             ui.SendMessage("-----------The end.-------------");
 
@@ -42,9 +52,10 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     }
 
+    private void init() {
+        context.setQuestions(context.getService().getQuestions());
 
-    private void initContext(){
-        context.setQuestions(this.service.getQuestions());
+        var ui = context.getUi();
 
         ui.SendMessage("Enter your name:");
         String name = ui.GetString();
@@ -53,22 +64,31 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     }
 
-    private void processOneQuestion(Question question) {
-        this.outQuestion(question);
-        this.outAnswers(question.getAnswers());
+    private void processOneStep(Question question) {
+
+        displayQuestion(question);
+        displayAnswers(question.getAnswers());
+
+        Answer humanAnswer = new Answer(context.getUi().GetString());
+
+        if (humanAnswer.equals(question.getCorrectAnswer())){
+            context.getStudent().increaseCorrectAnswerCount();
+        } else {
+            context.getStudent().increaseIncorrectlyAnswerCount();
+        }
     }
 
-    private void outQuestion(Question question) {
-        ui.SendMessage(question.getQuestion());
+    private void displayQuestion(Question question) {
+        context.getUi().SendMessage(question.getQuestion());
     }
 
-    private void outAnswers(List<Answer> answers) {
+    private void displayAnswers(List<Answer> answers) {
 
         int i = 1;
 
         for (Answer answer : answers) {
             String prefix = " [" + (i++) + "] ";
-            ui.SendMessage(prefix + answer.get());
+            context.getUi().SendMessage(prefix + answer.get());
         }
     }
 }
