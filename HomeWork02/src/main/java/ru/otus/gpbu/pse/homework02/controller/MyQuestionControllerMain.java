@@ -12,6 +12,7 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     private final GetQuestionsService service;
     private final MyQuestionsUI ui;
+    private final ControllerContext context = new ControllerContext();
 
     private Student student;
 
@@ -24,16 +25,13 @@ public class MyQuestionControllerMain implements MyQuestionController {
     public void run() {
         try {
 
-            this.ui.SendMessage("Home work 02");
+            ui.SendMessage("Homework 02");
 
-            List<Question> questions = service.getQuestions();
+            initContext();
 
-            this.initStudent();
 
-            int i = 1;
-
-            for (Question question : questions) {
-                processOneQuestion(i++, question);
+            for (Question question : context.getQuestions()) {
+                processOneQuestion(question);
             }
 
             ui.SendMessage("-----------The end.-------------");
@@ -44,14 +42,18 @@ public class MyQuestionControllerMain implements MyQuestionController {
 
     }
 
-    private void initStudent(){
+
+    private void initContext(){
+        context.setQuestions(this.service.getQuestions());
+
         ui.SendMessage("Enter your name:");
         String name = ui.GetString();
-        this.student = new Student(name);
+
+        context.setStudent(new Student(name));
+
     }
 
-    private void processOneQuestion(int i, Question question) {
-        ui.SendMessage("-----------Question N" + i + "-------------");
+    private void processOneQuestion(Question question) {
         this.outQuestion(question);
         this.outAnswers(question.getAnswers());
     }
