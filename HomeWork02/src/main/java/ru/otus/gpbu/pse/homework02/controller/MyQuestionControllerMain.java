@@ -8,7 +8,7 @@ import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
 
 import java.util.List;
 
-public class MyQuestionControllerMain implements MyQuestionController {
+public class MyQuestionControllerMain implements MyStudentTestController {
 
     private final ControllerContext context = new ControllerContext();
 
