@@ -9,8 +9,8 @@ import ru.otus.gpbu.pse.homework02.controller.MyQuestionControllerMain;
 import ru.otus.gpbu.pse.homework02.service.GetQuestionsService;
 import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
 
-@Configuration
 @PropertySource("classpath:application.properties")
+@Configuration
 public class ControllerConfig {
 
     @Bean
