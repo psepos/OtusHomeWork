@@ -64,9 +64,8 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
             testResult = "passed";
         }
 
-        ui.SendMessage("Test passing score: " + context.getPassingScore());
         ui.SendMessage("Student: " + student.getFio());
-
+        ui.SendMessage("Test passing score: " + context.getPassingScore());
         ui.SendMessage("Total answered: " + context.getStep() + " questions");
         ui.SendMessage("Correctly answered: " + student.getCorrectlyAnswerCount() + " questions");
         ui.SendMessage("Incorrectly answered: " + student.getIncorrectlyAnswerCount() + " questions");

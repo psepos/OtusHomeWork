@@ -11,7 +11,7 @@ import ru.otus.gpbu.pse.homework02.ui.MyStudentTestUI;
 
 @PropertySource("classpath:application.properties")
 @Configuration
-public class ControllerConfig {
+public class MyStudentTestControllerConfig {
 
     @Bean
     MyStudentTestController myQuestionController(GetQuestionsService service,
