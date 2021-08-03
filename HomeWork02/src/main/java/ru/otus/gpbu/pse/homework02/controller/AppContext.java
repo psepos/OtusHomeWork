@@ -7,13 +7,12 @@ import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
 
 import java.util.List;
 
-public class ControllerContext {
+public class AppContext {
 
     private Student student;
-    private List<Question> questions;
 
-    private Integer step;
-    private Integer numberOfCorrectAnswersToEnd;
+    private Integer step = 0;
+    private Integer passingScore = 0;
 
     private GetQuestionsService service;
     private MyQuestionsUI ui;
@@ -26,28 +25,20 @@ public class ControllerContext {
         return this.student;
     }
 
-    public void setQuestions(List<Question> questions1){
-        this.questions = questions1;
-    }
-
-    public List<Question> getQuestions() {
-        return this.questions;
-    }
-
     public Integer getStep() {
         return step;
     }
 
-    public void increaseStep() {
+    public void nextStep() {
         this.step++;
     }
 
-    public Integer getNumberOfCorrectAnswersToEnd() {
-        return numberOfCorrectAnswersToEnd;
+    public Integer getPassingScore() {
+        return passingScore;
     }
 
-    public void setNumberOfCorrectAnswersToEnd(Integer numberOfCorrectAnswersToEnd) {
-        this.numberOfCorrectAnswersToEnd = numberOfCorrectAnswersToEnd;
+    public void setPassingScore(Integer passingScore) {
+        this.passingScore = passingScore;
     }
 
     public GetQuestionsService getService() {

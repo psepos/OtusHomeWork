@@ -3,12 +3,11 @@ package ru.otus.gpbu.pse.homework02.domain;
 public class Student {
 
     private final String fio;
-    private Integer correctlyAnswerCount;
-    private Integer incorrectlyAnswerCount;
+    private Integer correctlyAnswerCount = 0;
+    private Integer incorrectlyAnswerCount = 0;
 
     public Student(String fio) {
         this.fio = fio;
-        this.correctlyAnswerCount = 0;
     }
 
     public String getFio() {
