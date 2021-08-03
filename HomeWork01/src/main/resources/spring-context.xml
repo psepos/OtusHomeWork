@@ -13,7 +13,7 @@
         <constructor-arg name="dao" ref="getQuestionsFromCsvDao"/>
     </bean>
 
-    <bean id="myQuestionsConsoleUI" class="ru.otus.gpbu.pse.homework02.ui.MyQuestionsConsoleUI">
+    <bean id="myQuestionsConsoleUI" class="ru.otus.gpbu.pse.homework02.ui.MyStudentTestUIConsole">
     </bean>
 
     <bean id="myQuestionControllerMain" class="ru.otus.gpbu.pse.homework02.controller.MyQuestionControllerMain">

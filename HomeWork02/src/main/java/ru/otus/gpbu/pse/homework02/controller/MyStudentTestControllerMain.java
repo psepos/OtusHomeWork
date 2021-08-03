@@ -4,7 +4,7 @@ import ru.otus.gpbu.pse.homework02.domain.Answer;
 import ru.otus.gpbu.pse.homework02.domain.Question;
 import ru.otus.gpbu.pse.homework02.domain.Student;
 import ru.otus.gpbu.pse.homework02.service.GetQuestionsService;
-import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
+import ru.otus.gpbu.pse.homework02.ui.MyStudentTestUI;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
 
     private final AppContext context = new AppContext();
 
-    public MyStudentTestControllerMain(GetQuestionsService service, MyQuestionsUI ui, String passingScore) {
+    public MyStudentTestControllerMain(GetQuestionsService service, MyStudentTestUI ui, String passingScore) {
         context.setService(service);
         context.setUi(ui);
         context.setPassingScore(Integer.parseInt(passingScore));

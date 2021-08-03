@@ -1,11 +1,8 @@
 package ru.otus.gpbu.pse.homework02.controller;
 
-import ru.otus.gpbu.pse.homework02.domain.Question;
 import ru.otus.gpbu.pse.homework02.domain.Student;
 import ru.otus.gpbu.pse.homework02.service.GetQuestionsService;
-import ru.otus.gpbu.pse.homework02.ui.MyQuestionsUI;
-
-import java.util.List;
+import ru.otus.gpbu.pse.homework02.ui.MyStudentTestUI;
 
 public class AppContext {
 
@@ -15,7 +12,7 @@ public class AppContext {
     private Integer passingScore = 0;
 
     private GetQuestionsService service;
-    private MyQuestionsUI ui;
+    private MyStudentTestUI ui;
 
     public void setStudent(Student currentStudent1){
         this.student = currentStudent1;
@@ -49,11 +46,11 @@ public class AppContext {
         this.service = service;
     }
 
-    public MyQuestionsUI getUi() {
+    public MyStudentTestUI getUi() {
         return ui;
     }
 
-    public void setUi(MyQuestionsUI ui) {
+    public void setUi(MyStudentTestUI ui) {
         this.ui = ui;
     }
 }
