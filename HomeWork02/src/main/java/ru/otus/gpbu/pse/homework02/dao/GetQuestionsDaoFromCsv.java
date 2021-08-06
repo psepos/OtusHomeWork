@@ -27,6 +27,11 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
         this.csvDelimiter = csvDelimiter;
     }
 
+    @Override
+    public List<Question> getQuestions() {
+        return readFromCsv();
+    }
+
     private List<Question> readFromCsv() throws DaoException {
 
         try {
@@ -77,10 +82,6 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
         final String[] array = uri.toString().split("!");
         final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
         return fs.getPath(array[1]);
-    }
-
-    public List<Question> getQuestions() {
-        return readFromCsv();
     }
 
 
