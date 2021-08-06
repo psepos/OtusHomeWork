@@ -4,19 +4,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="getQuestionsFromCsvDao" class="ru.otus.gpbu.pse.homework01.dao.GetQuestionsFromCsvDao">
+    <bean id="getQuestionsFromCsvDao" class="ru.otus.gpbu.pse.homework02.dao.GetQuestionsFromCsvDao">
         <constructor-arg name="csvFile" type="String" value="BOOT-INF/classes/data-source/questions-list.csv"/>
         <constructor-arg name="csvDelimiter" type="String" value=";"/>
     </bean>
 
-    <bean id="getQuestionsServiceSimple" class="ru.otus.gpbu.pse.homework01.service.GetQuestionsServiceSimple">
+    <bean id="getQuestionsServiceSimple" class="ru.otus.gpbu.pse.homework02.service.GetQuestionsServiceSimple">
         <constructor-arg name="dao" ref="getQuestionsFromCsvDao"/>
     </bean>
 
-    <bean id="myQuestionsConsoleUI" class="ru.otus.gpbu.pse.homework01.ui.MyQuestionsConsoleUI">
+    <bean id="myQuestionsConsoleUI" class="ru.otus.gpbu.pse.homework02.ui.MyStudentTestUIConsole">
     </bean>
 
-    <bean id="myQuestionControllerMain" class="ru.otus.gpbu.pse.homework01.controller.MyQuestionControllerMain">
+    <bean id="myQuestionControllerMain" class="ru.otus.gpbu.pse.homework02.controller.MyQuestionControllerMain">
         <constructor-arg name="service" ref="getQuestionsServiceSimple"/>
         <constructor-arg name="ui" ref="myQuestionsConsoleUI"/>
     </bean>
