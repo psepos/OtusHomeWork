@@ -1,0 +1,6 @@
+csv:
+  file: BOOT-INF/classes/data-source/questions-list.csv
+  delimiter: ;
+app:
+  passingScore: 2
+  locale: ru-RU

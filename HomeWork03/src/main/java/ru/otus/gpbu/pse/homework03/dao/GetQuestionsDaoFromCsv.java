@@ -1,6 +1,5 @@
 package ru.otus.gpbu.pse.homework03.dao;
 
-import ru.otus.gpbu.pse.homework03.domain.Answer;
 import ru.otus.gpbu.pse.homework03.domain.Question;
 
 import java.io.IOException;
@@ -15,8 +14,7 @@ import java.util.*;
 
 public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
-    private static final String STRING_EMPTY = "";
-    private final String csvDelimiter;
+    private final QuestionParser parser;
 
     private final String csvFile;
     private final List<Question> questions = new ArrayList<>();
@@ -24,7 +22,7 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
     public GetQuestionsDaoFromCsv(String csvFile, String csvDelimiter) {
         this.csvFile = csvFile;
-        this.csvDelimiter = csvDelimiter;
+        parser = new QuestionParser(csvDelimiter);
     }
 
     @Override
@@ -36,44 +34,13 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
         try {
 
-            Files.lines(this.getPath(), StandardCharsets.UTF_8).forEach(s -> questions.add(this.parseQuestionFromLine(s)));
+            Files.lines(this.getPath(), StandardCharsets.UTF_8).forEach(s -> questions.add(parser.getFromLine(s)));
 
         } catch (Exception | Error e) {
             throw new DaoException(e + " " + Arrays.toString(e.getStackTrace()));
         }
 
         return this.questions;
-    }
-
-    public Question parseQuestionFromLine(String line) {
-
-        if (line.equals(STRING_EMPTY)) {
-            throw new DaoException("Empty line.");
-        }
-
-        try {
-            Scanner scanner = new Scanner(line);
-
-            scanner.useDelimiter(this.csvDelimiter);
-
-            String questionString = scanner.next();
-            Question question = new Question(questionString);
-
-            while (scanner.hasNext()) {
-                question.addAnswer(new Answer(scanner.next()));
-            }
-
-            if (question.getAnswers().size() > 0) {
-                question.setCorrectAnswer(question.getAnswers().get(0));
-            } else {
-                question.setCorrectAnswer(new Answer(""));
-            }
-
-            return question;
-
-        } catch (Exception e) {
-            throw new DaoException(e.getMessage());
-        }
     }
 
     private Path getPath() throws URISyntaxException, IOException {

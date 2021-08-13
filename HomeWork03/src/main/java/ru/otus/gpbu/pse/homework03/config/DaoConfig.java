@@ -8,7 +8,7 @@ import ru.otus.gpbu.pse.homework03.dao.GetQuestionsDao;
 import ru.otus.gpbu.pse.homework03.dao.GetQuestionsDaoFromCsv;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 public class DaoConfig {
     @Bean
     GetQuestionsDao getQuestionsDao(@Value("${csv.file}") String csvFile,
