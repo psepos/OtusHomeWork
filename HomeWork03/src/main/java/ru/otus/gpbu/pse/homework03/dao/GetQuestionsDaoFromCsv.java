@@ -34,7 +34,9 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
         try {
 
-            Files.lines(this.getPath(), StandardCharsets.UTF_8).forEach(s -> questions.add(parser.getFromLine(s)));
+            Files.lines(this.getPath(), StandardCharsets.UTF_8).forEach(s -> questions.add(
+                    parser.getFromLine(s))
+            );
 
         } catch (Exception | Error e) {
             throw new DaoException(e + " " + Arrays.toString(e.getStackTrace()));

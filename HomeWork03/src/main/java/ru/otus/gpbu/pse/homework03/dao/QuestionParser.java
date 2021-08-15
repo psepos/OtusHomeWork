@@ -28,12 +28,14 @@ public class QuestionParser {
             String questionString = scanner.next();
             Question question = new Question(questionString);
 
+            int correctAnswerInOrder = scanner.nextInt();
+
             while (scanner.hasNext()) {
                 question.addAnswer(new Answer(scanner.next()));
             }
 
             if (question.getAnswers().size() > 0) {
-                question.setCorrectAnswer(question.getAnswers().get(0));
+                question.setCorrectAnswer(question.getAnswers().get(correctAnswerInOrder - 1));
             } else {
                 question.setCorrectAnswer(new Answer(""));
             }

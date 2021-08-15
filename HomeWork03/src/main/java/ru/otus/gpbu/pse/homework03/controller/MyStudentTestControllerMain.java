@@ -12,10 +12,10 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
 
     private final AppContext context = new AppContext();
 
-    public MyStudentTestControllerMain(GetQuestionsService service, MyStudentTestUI ui, String passingScore) {
+    public MyStudentTestControllerMain(GetQuestionsService service, MyStudentTestUI ui, Integer passingScore) {
         context.setService(service);
         context.setUi(ui);
-        context.setPassingScore(Integer.parseInt(passingScore));
+        context.setPassingScore(passingScore);
     }
 
     @Override
