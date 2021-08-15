@@ -1,18 +1,19 @@
 package ru.otus.gpbu.pse.homework03.controller;
 
+import org.springframework.context.MessageSource;
+import ru.otus.gpbu.pse.homework03.config.Environment;
 import ru.otus.gpbu.pse.homework03.domain.Student;
 import ru.otus.gpbu.pse.homework03.service.GetQuestionsService;
 import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 
-public class AppContext {
+public class MyStudentTestContext {
 
     private Student student;
-
     private Integer step = 0;
-    private Integer passingScore = 0;
-
     private GetQuestionsService service;
     private MyStudentTestUI ui;
+    private MessageSource messageSource;
+    private Environment environment;
 
     public void setStudent(Student currentStudent1){
         this.student = currentStudent1;
@@ -30,14 +31,6 @@ public class AppContext {
         this.step++;
     }
 
-    public Integer getPassingScore() {
-        return passingScore;
-    }
-
-    public void setPassingScore(Integer passingScore) {
-        this.passingScore = passingScore;
-    }
-
     public GetQuestionsService getService() {
         return service;
     }
@@ -52,5 +45,21 @@ public class AppContext {
 
     public void setUi(MyStudentTestUI ui) {
         this.ui = ui;
+    }
+
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
+
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

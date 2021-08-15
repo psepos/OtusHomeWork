@@ -1,6 +1,7 @@
 package ru.otus.gpbu.pse.homework03.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.gpbu.pse.homework03.controller.MyStudentTestController;
@@ -12,12 +13,14 @@ import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 public class MyStudentTestControllerConfig {
 
     @Autowired
-    private YAMLEnvironment environment;
+    private Environment environment;
 
     @Bean
     MyStudentTestController myQuestionController(GetQuestionsService service,
-                                                 MyStudentTestUI ui) {
-        return new MyStudentTestControllerMain(service, ui, environment.getPassingScore());
+                                                 MyStudentTestUI ui,
+                                                 MessageSource messageSource) {
+
+        return new MyStudentTestControllerMain(service, ui, messageSource, environment);
     }
 
 }

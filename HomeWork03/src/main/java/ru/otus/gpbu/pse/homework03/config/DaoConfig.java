@@ -14,6 +14,13 @@ public class DaoConfig {
 
     @Bean
     GetQuestionsDao getQuestionsDao() {
-        return new GetQuestionsDaoFromCsv(environment.getCsvFile(), environment.getCsvDelimiter());
+        String csvFile = environment.getCsvFile();
+        String locale = environment.getLocale();
+
+        if (!locale.equals("")) {
+            csvFile = csvFile.replace(".csv", "_" + locale + ".csv");
+        }
+
+        return new GetQuestionsDaoFromCsv(csvFile, environment.getCsvDelimiter());
     }
 }

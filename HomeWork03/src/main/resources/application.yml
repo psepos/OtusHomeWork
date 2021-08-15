@@ -1,4 +1,8 @@
 passingScore: 2
 locale: ru-RU
-csvFile: BOOT-INF/classes/data-source/questions-list_ru-RU.csv
+csvFile: BOOT-INF/classes/data-source/questions-list.csv
 csvDelimiter: ;
+spring:
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
