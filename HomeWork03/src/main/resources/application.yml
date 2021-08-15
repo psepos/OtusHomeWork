@@ -1,5 +1,4 @@
-application:
-  passingScore: 2
-  locale: ru-RU
-  csvFile: BOOT-INF/classes/data-source/questions-list_en-EN.csv
-  csvDelimiter: ;
+passingScore: 2
+locale: ru-RU
+csvFile: BOOT-INF/classes/data-source/questions-list_ru-RU.csv
+csvDelimiter: ;

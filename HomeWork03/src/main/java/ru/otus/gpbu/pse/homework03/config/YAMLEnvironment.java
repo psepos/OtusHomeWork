@@ -2,42 +2,48 @@ package ru.otus.gpbu.pse.homework03.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@EnableConfigurationProperties
-@ConfigurationProperties(prefix = "application")
+@ConfigurationProperties
 @PropertySource("classpath:application.yml")
-public class YEnvironment {
+@Component
+public class YAMLEnvironment {
 
-    @Value("${passingScore}")
     private Integer passingScore;
-
-    @Value("${locale}")
     private String locale;
-
-    @Value("${csvFile}")
     private String csvFile;
-
-    @Value("${csvDelimiter}")
     private String csvDelimiter;
-
 
     public Integer getPassingScore() {
         return passingScore;
+    }
+
+    public void setPassingScore(Integer passingScore) {
+        this.passingScore = passingScore;
     }
 
     public String getLocale() {
         return locale;
     }
 
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
+
     public String getCsvFile() {
         return csvFile;
     }
 
+    public void setCsvFile(String csvFile) {
+        this.csvFile = csvFile;
+    }
+
     public String getCsvDelimiter() {
         return csvDelimiter;
+    }
+
+    public void setCsvDelimiter(String csvDelimiter) {
+        this.csvDelimiter = csvDelimiter;
     }
 }

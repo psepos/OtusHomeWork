@@ -10,7 +10,7 @@ import ru.otus.gpbu.pse.homework03.dao.GetQuestionsDaoFromCsv;
 public class DaoConfig {
 
     @Autowired
-    private YEnvironment environment;
+    private YAMLEnvironment environment;
 
     @Bean
     GetQuestionsDao getQuestionsDao() {

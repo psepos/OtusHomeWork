@@ -12,7 +12,7 @@ import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 public class MyStudentTestControllerConfig {
 
     @Autowired
-    private YEnvironment environment;
+    private YAMLEnvironment environment;
 
     @Bean
     MyStudentTestController myQuestionController(GetQuestionsService service,
