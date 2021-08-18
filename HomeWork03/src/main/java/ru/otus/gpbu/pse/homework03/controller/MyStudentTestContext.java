@@ -1,5 +1,7 @@
 package ru.otus.gpbu.pse.homework03.controller;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.MessageSource;
 import ru.otus.gpbu.pse.homework03.config.Environment;
 import ru.otus.gpbu.pse.homework03.domain.Student;
@@ -8,58 +10,26 @@ import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 
 public class MyStudentTestContext {
 
+    @Getter @Setter
     private Student student;
+
+    @Getter
     private Integer step = 0;
+
+    @Getter @Setter
     private GetQuestionsService service;
+
+    @Getter @Setter
     private MyStudentTestUI ui;
+
+    @Getter @Setter
     private MessageSource messageSource;
+
+    @Getter @Setter
     private Environment environment;
-
-    public void setStudent(Student currentStudent1){
-        this.student = currentStudent1;
-    }
-
-    public Student getStudent(){
-        return this.student;
-    }
-
-    public Integer getStep() {
-        return step;
-    }
 
     public void nextStep() {
         this.step++;
     }
 
-    public GetQuestionsService getService() {
-        return service;
-    }
-
-    public void setService(GetQuestionsService service) {
-        this.service = service;
-    }
-
-    public MyStudentTestUI getUi() {
-        return ui;
-    }
-
-    public void setUi(MyStudentTestUI ui) {
-        this.ui = ui;
-    }
-
-    public MessageSource getMessageSource() {
-        return messageSource;
-    }
-
-    public void setMessageSource(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-
-    public Environment getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
 }
