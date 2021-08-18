@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class MyStudentTestControllerMain implements MyStudentTestController {
 
-    private final MyStudentTestContext context = new MyStudentTestContext();
+    private final ApplicationContext context = new ApplicationContext();
 
     public MyStudentTestControllerMain(GetQuestionsService service,
                                        MyStudentTestUI ui,
