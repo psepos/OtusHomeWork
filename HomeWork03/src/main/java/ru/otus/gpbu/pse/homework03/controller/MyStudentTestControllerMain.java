@@ -1,6 +1,8 @@
 package ru.otus.gpbu.pse.homework03.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework03.config.Environment;
 import ru.otus.gpbu.pse.homework03.domain.Answer;
 import ru.otus.gpbu.pse.homework03.domain.Question;
@@ -11,19 +13,11 @@ import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 import java.util.List;
 import java.util.Locale;
 
+@Component
 public class MyStudentTestControllerMain implements MyStudentTestController {
 
-    private final MyStudentTestContext context = new MyStudentTestContext();
-
-    public MyStudentTestControllerMain(GetQuestionsService service,
-                                       MyStudentTestUI ui,
-                                       MessageSource messageSource,
-                                       Environment environment) {
-        context.setService(service);
-        context.setUi(ui);
-        context.setMessageSource(messageSource);
-        context.setEnvironment(environment);
-    }
+    @Autowired
+    private MyStudentTestContext context;
 
     @Override
     public void run() {
@@ -45,15 +39,9 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
     private void init() {
 
         var ui = context.getUi();
-        var locale = context.getEnvironment().getLocale();
-        var messageSource = context.getMessageSource();
+        var msgSrc = context.getMessageSource();
 
-        var message = messageSource.getMessage(
-                "strings.enter-your-name",
-                new String[] {""},
-                Locale.forLanguageTag(locale));
-
-        ui.SendMessage(message);
+        ui.SendMessage(msgSrc.getMessage("strings.enter-your-name"));
 
         String name = ui.GetString();
 
@@ -72,46 +60,22 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
 
         var student = context.getStudent();
         var ui = context.getUi();
-        var messageSource = context.getMessageSource();
+        var msgSrc = context.getMessageSource();
         var passingScore = context.getEnvironment().getPassingScore();
         var locale = context.getEnvironment().getLocale();
 
-        String testResult = messageSource.getMessage(
-                "strings.not-passed",
-                new String[] {""},
-                Locale.forLanguageTag(locale));
+        String testResult = msgSrc.getMessage("strings.not-passed");
 
         if (student.getCorrectlyAnswerCount() >= passingScore) {
-            testResult = messageSource.getMessage(
-                    "strings.passed",new String[] {""},
-                    Locale.forLanguageTag(locale));
+            testResult = msgSrc.getMessage("strings.passed");
         }
 
-        ui.SendMessage(messageSource.getMessage(
-                        "strings.student",
-                        new String[] {student.getFio()},
-                        Locale.forLanguageTag(locale)));
-
-        ui.SendMessage( messageSource.getMessage(
-                "strings.test-passing-score",
-                new String[] {passingScore.toString()},
-                Locale.forLanguageTag(locale)));
-
-        ui.SendMessage( messageSource.getMessage("strings.total-answered",
-                new String[] {context.getStep().toString()},
-                Locale.forLanguageTag(locale)));
-
-        ui.SendMessage( messageSource.getMessage("strings.correctly-answered",
-                new String[] {student.getCorrectlyAnswerCount().toString()},
-                Locale.forLanguageTag(locale)));
-
-        ui.SendMessage( messageSource.getMessage("strings.incorrectly-answered",
-                new String[] {student.getIncorrectlyAnswerCount().toString()},
-                Locale.forLanguageTag(locale)));
-
-        ui.SendMessage( messageSource.getMessage("strings.test-result",
-                new String[] {testResult},
-                Locale.forLanguageTag(locale)));
+        ui.SendMessage(msgSrc.getMessage("strings.student", student.getFio()));
+        ui.SendMessage( msgSrc.getMessage("strings.test-passing-score",passingScore.toString()));
+        ui.SendMessage( msgSrc.getMessage("strings.total-answered",context.getStep().toString()));
+        ui.SendMessage( msgSrc.getMessage("strings.correctly-answered", student.getCorrectlyAnswerCount().toString()));
+        ui.SendMessage( msgSrc.getMessage("strings.incorrectly-answered", student.getIncorrectlyAnswerCount().toString()));
+        ui.SendMessage( msgSrc.getMessage("strings.test-result", testResult));
     }
 
 
@@ -123,9 +87,7 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
         displayQuestion(question);
         displayAnswers(question.getAnswers());
 
-        ui.SendMessage( messageSource.getMessage("strings.enter-your-answer",
-                new String[] {},
-                Locale.forLanguageTag(locale)));
+        ui.SendMessage( messageSource.getMessage("strings.enter-your-answer"));
 
         Answer humanAnswer = new Answer(ui.GetString());
 

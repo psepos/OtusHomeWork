@@ -1,7 +1,10 @@
 package ru.otus.gpbu.pse.homework03.ui;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Scanner;
 
+@Component
 public class MyStudentTestUIConsole implements MyStudentTestUI {
 
     static final String ANSI_RESET = (char) 27 + "[0m";

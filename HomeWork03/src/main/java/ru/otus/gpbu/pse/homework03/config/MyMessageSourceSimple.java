@@ -17,11 +17,11 @@ public class MyMessageSourceSimple implements MyMessageSource{
 
     @Override
     public String getMessage(String variable) {
-        return msg.getMessage(variable, new String[]{}, Locale.forLanguageTag(env.getLocale()) );
+        return msg.getMessage(variable, new String[]{}, Locale.forLanguageTag(env.getLocale()));
     }
 
     @Override
-    public String getMessage(String variable, String[] param) {
-        return null;
+    public String getMessage(String variable, String param) {
+        return msg.getMessage(variable, new String[]{param}, Locale.forLanguageTag(env.getLocale()));
     }
 }

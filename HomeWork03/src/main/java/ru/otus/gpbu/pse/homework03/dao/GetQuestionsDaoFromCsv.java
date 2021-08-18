@@ -1,5 +1,8 @@
 package ru.otus.gpbu.pse.homework03.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.otus.gpbu.pse.homework03.config.Environment;
 import ru.otus.gpbu.pse.homework03.domain.Question;
 
 import java.io.IOException;
@@ -12,18 +15,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+@Component
 public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
 
-    private final QuestionParser parser;
+    @Autowired
+    private Environment env;
 
-    private final String csvFile;
+    @Autowired
+    private QuestionParser parser;
+
     private final List<Question> questions = new ArrayList<>();
-
-
-    public GetQuestionsDaoFromCsv(String csvFile, String csvDelimiter) {
-        this.csvFile = csvFile;
-        parser = new QuestionParser(csvDelimiter);
-    }
 
     @Override
     public List<Question> getQuestions() {
@@ -45,8 +46,15 @@ public class GetQuestionsDaoFromCsv implements GetQuestionsDao {
         return this.questions;
     }
 
+    private String getCsvFile(){
+
+        if (env.getLocale().equals("")) { return env.getCsvFile();}
+        return env.getCsvFile().replace(".csv","_" + env.getLocale() + ".csv");
+
+    }
+
     private Path getPath() throws URISyntaxException, IOException {
-        var uri = ClassLoader.getSystemResource(csvFile).toURI();
+        var uri = ClassLoader.getSystemResource(this.getCsvFile()).toURI();
         final Map<String, String> env = new HashMap<>();
         final String[] array = uri.toString().split("!");
         final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);

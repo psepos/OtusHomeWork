@@ -2,12 +2,15 @@ package ru.otus.gpbu.pse.homework03.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.MessageSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework03.config.Environment;
+import ru.otus.gpbu.pse.homework03.config.MyMessageSource;
 import ru.otus.gpbu.pse.homework03.domain.Student;
 import ru.otus.gpbu.pse.homework03.service.GetQuestionsService;
 import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
 
+@Component
 public class MyStudentTestContext {
 
     @Getter @Setter
@@ -16,16 +19,16 @@ public class MyStudentTestContext {
     @Getter
     private Integer step = 0;
 
-    @Getter @Setter
+    @Getter @Setter @Autowired
     private GetQuestionsService service;
 
-    @Getter @Setter
+    @Getter @Setter @Autowired
     private MyStudentTestUI ui;
 
-    @Getter @Setter
-    private MessageSource messageSource;
+    @Getter @Setter @Autowired
+    private MyMessageSource messageSource;
 
-    @Getter @Setter
+    @Getter @Setter @Autowired
     private Environment environment;
 
     public void nextStep() {
