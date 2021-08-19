@@ -19,16 +19,17 @@ public class QuestionParserSimpleTest {
     @Test
     void getFromLineTest() {
 
-        boolean error = false;
         Question question = null;
 
         try {
             question = parser.getFromLine("Question;2;incorrectAnswer1;correctAnswer;incorrectAnswer2");
         } catch (DaoException e){
-            error = true;
+            Assertions.fail("Parse error");
         }
 
-        Assertions.assertFalse(error,"Parse error");
+        if(question == null){
+            Assertions.fail("null question");
+        }
 
         Assertions.assertEquals("Question", question.getQuestion(), "Incorrect question.size");
         Assertions.assertEquals(3, question.getAnswers().size(), "Incorrect answers.size");
