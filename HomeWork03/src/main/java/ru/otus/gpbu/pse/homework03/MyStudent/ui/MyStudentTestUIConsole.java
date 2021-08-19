@@ -1,6 +1,7 @@
-package ru.otus.gpbu.pse.homework03.ui;
+package ru.otus.gpbu.pse.homework03.MyStudent.ui;
 
 import org.springframework.stereotype.Component;
+import ru.otus.gpbu.pse.homework03.MyStudent.ui.MyStudentTestUI;
 
 import java.util.Scanner;
 

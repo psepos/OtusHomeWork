@@ -1,7 +1,7 @@
 package ru.otus.gpbu.pse.homework03.test.config;
 
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.pse.homework03.config.Environment;
+import ru.otus.gpbu.pse.homework03.MyStudent.config.Environment;
 
 @Component
 public class EnvironmentTest implements Environment {

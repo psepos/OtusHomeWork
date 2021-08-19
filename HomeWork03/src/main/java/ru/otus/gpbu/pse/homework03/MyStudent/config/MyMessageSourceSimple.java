@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework03.config;
+package ru.otus.gpbu.pse.homework03.MyStudent.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

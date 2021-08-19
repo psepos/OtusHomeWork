@@ -2,8 +2,8 @@ package ru.otus.gpbu.pse.homework03.test.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.otus.gpbu.pse.homework03.domain.Answer;
-import ru.otus.gpbu.pse.homework03.domain.Question;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

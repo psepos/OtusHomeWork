@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework03.config;
+package ru.otus.gpbu.pse.homework03.MyStudent.config;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,17 +1,12 @@
-package ru.otus.gpbu.pse.homework03.controller;
+package ru.otus.gpbu.pse.homework03.MyStudent.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.pse.homework03.config.Environment;
-import ru.otus.gpbu.pse.homework03.domain.Answer;
-import ru.otus.gpbu.pse.homework03.domain.Question;
-import ru.otus.gpbu.pse.homework03.domain.Student;
-import ru.otus.gpbu.pse.homework03.service.GetQuestionsService;
-import ru.otus.gpbu.pse.homework03.ui.MyStudentTestUI;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 
 import java.util.List;
-import java.util.Locale;
 
 @Component
 public class MyStudentTestControllerMain implements MyStudentTestController {
@@ -62,7 +57,6 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
         var ui = context.getUi();
         var msgSrc = context.getMessageSource();
         var passingScore = context.getEnvironment().getPassingScore();
-        var locale = context.getEnvironment().getLocale();
 
         String testResult = msgSrc.getMessage("strings.not-passed");
 

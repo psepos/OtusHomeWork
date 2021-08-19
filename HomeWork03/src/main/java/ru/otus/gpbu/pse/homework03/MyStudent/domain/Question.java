@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework03.domain;
+package ru.otus.gpbu.pse.homework03.MyStudent.domain;
 
 import java.util.ArrayList;
 import java.util.List;

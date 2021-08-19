@@ -1,10 +1,10 @@
-package ru.otus.gpbu.pse.homework03.dao;
+package ru.otus.gpbu.pse.homework03.MyStudent.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.pse.homework03.config.Environment;
-import ru.otus.gpbu.pse.homework03.domain.Answer;
-import ru.otus.gpbu.pse.homework03.domain.Question;
+import ru.otus.gpbu.pse.homework03.MyStudent.config.Environment;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
 
 import java.util.Scanner;
 

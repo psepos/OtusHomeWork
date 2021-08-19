@@ -7,11 +7,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.gpbu.pse.homework03.dao.GetQuestionsDao;
-import ru.otus.gpbu.pse.homework03.domain.Answer;
-import ru.otus.gpbu.pse.homework03.domain.Question;
-import ru.otus.gpbu.pse.homework03.service.GetQuestionsService;
-import ru.otus.gpbu.pse.homework03.service.GetQuestionsServiceSimple;
+import ru.otus.gpbu.pse.homework03.MyStudent.dao.GetQuestionsDao;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
+import ru.otus.gpbu.pse.homework03.MyStudent.service.GetQuestionsService;
+import ru.otus.gpbu.pse.homework03.MyStudent.service.GetQuestionsServiceSimple;
 
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 @SpringBootTest
-@DisplayName("Class ru.otus.gpbu.pse.homework03.service")
+@DisplayName("Class ru.otus.gpbu.pse.homework03.MyStudent.service")
 @ExtendWith(MockitoExtension.class)
 public class GetQuestionsServiceSimpleTest {
     @Mock

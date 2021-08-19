@@ -5,9 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.gpbu.pse.homework03.dao.DaoException;
-import ru.otus.gpbu.pse.homework03.dao.QuestionParser;
-import ru.otus.gpbu.pse.homework03.domain.Question;
+import ru.otus.gpbu.pse.homework03.MyStudent.dao.DaoException;
+import ru.otus.gpbu.pse.homework03.MyStudent.dao.QuestionParser;
+import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
 
 @SpringBootTest
 public class QuestionParserSimpleTest {

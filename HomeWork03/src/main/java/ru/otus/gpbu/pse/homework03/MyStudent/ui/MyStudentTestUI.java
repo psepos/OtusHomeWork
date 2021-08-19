@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework03.ui;
+package ru.otus.gpbu.pse.homework03.MyStudent.ui;
 
 public interface MyStudentTestUI {
     void SendMessage(String message);
