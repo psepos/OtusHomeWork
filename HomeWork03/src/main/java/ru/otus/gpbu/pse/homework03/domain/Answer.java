@@ -7,10 +7,6 @@ public class Answer {
         this.answer = answer;
     }
 
-    public String get() {
-        return this.answer;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -20,8 +16,9 @@ public class Answer {
             return false;
         }
 
-        if (this.getClass() != obj.getClass())
+        if (this.getClass() != obj.getClass()){
             return false;
+        }
 
         Answer other = (Answer) obj;
 
@@ -31,6 +28,11 @@ public class Answer {
     @Override
     public int hashCode() {
         return this.answer.hashCode();
+    }
+
+    @Override
+    public String toString(){
+        return answer;
     }
 
 }

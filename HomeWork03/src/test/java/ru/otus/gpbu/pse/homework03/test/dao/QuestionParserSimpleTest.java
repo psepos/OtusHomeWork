@@ -17,25 +17,27 @@ public class QuestionParserSimpleTest {
 
     @DisplayName("ru.otus.gpbu.pse.homework03.test.dao.getFromLineTest")
     @Test
-    void getFromLineTestDelimiter() {
+    void getFromLineTest() {
 
-        boolean correctDelimiterTest = false;
-
-        try {
-            Question question = parser.getFromLine("Question;2;incorrectAnswer;correctAnswer;incorrectAnswer");
-        } catch (DaoException e){
-            correctDelimiterTest = true;
-        }
-
-        Assertions.assertTrue(correctDelimiterTest,"Incorrect Delimiter - 1");
+        boolean error = false;
+        Question question = null;
 
         try {
-            Question question = parser.getFromLine("Question,2,incorrectAnswer,correctAnswer,incorrectAnswer");
+            question = parser.getFromLine("Question;2;incorrectAnswer1;correctAnswer;incorrectAnswer2");
         } catch (DaoException e){
-            correctDelimiterTest = false;
+            error = true;
         }
 
-        Assertions.assertTrue(correctDelimiterTest,"Incorrect Delimiter - 2");
+        Assertions.assertFalse(error,"Parse error");
+
+        Assertions.assertEquals("Question", question.getQuestion(), "Incorrect question.size");
+        Assertions.assertEquals(3, question.getAnswers().size(), "Incorrect answers.size");
+        Assertions.assertEquals("incorrectAnswer1", question.getAnswers().get(0).toString(), "Incorrect answer[0]. Must be 'incorrectAnswer1', but " + question.getAnswers().get(0).toString());
+        Assertions.assertEquals("correctAnswer", question.getAnswers().get(1).toString(), "Incorrect answer[1]. Must be 'correctAnswer', but " + question.getAnswers().get(1).toString());
+        Assertions.assertEquals("incorrectAnswer2", question.getAnswers().get(2).toString(), "Incorrect answer[2]. Must be 'incorrectAnswer2', but " + question.getAnswers().get(2).toString());
+        Assertions.assertEquals("correctAnswer", question.getCorrectAnswer().toString(), "Incorrect question.getCorrectAnswer(). Must be 'correctAnswer', but " + question.getCorrectAnswer().toString());
+
+
 
     }
 }

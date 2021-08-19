@@ -32,4 +32,10 @@ public class Question {
     public void setCorrectAnswer(Answer correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
+
+    @Override
+    public String toString(){
+        return question;
+    }
+
 }

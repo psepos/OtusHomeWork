@@ -106,7 +106,7 @@ public class MyStudentTestControllerMain implements MyStudentTestController {
 
         for (Answer answer : answers) {
             String prefix = "   ";
-            context.getUi().SendMessage(prefix + answer.get());
+            context.getUi().SendMessage(prefix + answer.toString());
         }
     }
 }

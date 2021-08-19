@@ -23,6 +23,6 @@ public class EnvironmentTest implements Environment {
 
     @Override
     public String getCsvDelimiter() {
-        return ",";
+        return ";";
     }
 }

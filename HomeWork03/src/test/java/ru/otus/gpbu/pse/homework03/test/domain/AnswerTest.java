@@ -17,7 +17,7 @@ public class AnswerTest {
     void shouldHaveCorrectConstructor() {
         Answer answer = new Answer("Yes");
 
-        assertEquals("Yes", answer.get());
+        assertEquals("Yes", answer.toString());
     }
 
     @DisplayName("Correct equals")
