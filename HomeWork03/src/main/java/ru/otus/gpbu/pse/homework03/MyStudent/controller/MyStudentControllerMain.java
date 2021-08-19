@@ -9,10 +9,10 @@ import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 import java.util.List;
 
 @Component
-public class MyStudentTestControllerMain implements MyStudentTestController {
+public class MyStudentControllerMain implements MyStudentController {
 
     @Autowired
-    private MyStudentTestContext context;
+    private MyStudentContext context;
 
     @Override
     public void run() {

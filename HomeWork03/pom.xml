@@ -33,6 +33,17 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.statemachine</groupId>
+			<artifactId>spring-statemachine-core</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.statemachine</groupId>
+			<artifactId>spring-statemachine-test</artifactId>
+			<version>3.0.1</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
 	<build>
