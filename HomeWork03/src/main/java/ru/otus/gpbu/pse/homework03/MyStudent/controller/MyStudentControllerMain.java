@@ -64,7 +64,7 @@ public class MyStudentControllerMain implements MyStudentController {
             testResult = msgSrc.getMessage("strings.passed");
         }
 
-        ui.SendMessage(msgSrc.getMessage("strings.student", student.getFio()));
+        ui.SendMessage(msgSrc.getMessage("strings.student", student.toString()));
         ui.SendMessage( msgSrc.getMessage("strings.test-passing-score",passingScore.toString()));
         ui.SendMessage( msgSrc.getMessage("strings.total-answered",context.getStep().toString()));
         ui.SendMessage( msgSrc.getMessage("strings.correctly-answered", student.getCorrectlyAnswerCount().toString()));

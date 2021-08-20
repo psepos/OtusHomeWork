@@ -10,4 +10,5 @@ import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent
 @EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<ApplicationState, ApplicationEvent> {
 
+
 }

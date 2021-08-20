@@ -12,8 +12,7 @@ public class Homework03Application {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(Homework03Application.class, args);
-		MyStudentController controller = ctx.getBean(MyStudentController.class);
-		controller.run();
+		ctx.getBean(MyStudentController.class).run();
 	}
 
 }

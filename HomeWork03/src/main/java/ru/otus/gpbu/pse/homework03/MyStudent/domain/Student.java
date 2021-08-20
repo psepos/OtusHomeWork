@@ -1,32 +1,31 @@
 package ru.otus.gpbu.pse.homework03.MyStudent.domain;
 
+import lombok.Getter;
+
 public class Student {
 
     private final String fio;
+
+    @Getter
     private Integer correctlyAnswerCount = 0;
+
+    @Getter
     private Integer incorrectlyAnswerCount = 0;
 
     public Student(String fio) {
         this.fio = fio;
     }
 
-    public String getFio() {
-        return this.fio;
-    }
-
-    public Integer getCorrectlyAnswerCount() {
-        return this.correctlyAnswerCount;
-    }
-
     public void increaseCorrectAnswerCount() {
         this.correctlyAnswerCount++;
     }
 
-    public Integer getIncorrectlyAnswerCount() {
-        return incorrectlyAnswerCount;
-    }
-
     public void increaseIncorrectlyAnswerCount() {
         this.incorrectlyAnswerCount++;
+    }
+
+    @Override
+    public String toString(){
+        return fio;
     }
 }
