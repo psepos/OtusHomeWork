@@ -11,8 +11,7 @@ import ru.otus.gpbu.pse.homework03.MyStudent.controller.MyStudentController;
 public class Homework03Application {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(Homework03Application.class, args);
-		ctx.getBean(MyStudentController.class).run();
+		SpringApplication.run(Homework03Application.class, args).getBean(MyStudentController.class).run();
 	}
 
 }
