@@ -1,6 +1,7 @@
 package ru.otus.gpbu.pse.homework03.MyStudent.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Controller;
 import ru.otus.gpbu.pse.homework03.MyStudent.config.Environment;
 import ru.otus.gpbu.pse.homework03.MyStudent.config.MyMessageSource;
@@ -8,6 +9,8 @@ import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 import ru.otus.gpbu.pse.homework03.MyStudent.service.GetQuestionsService;
+import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent;
+import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state.ApplicationState;
 import ru.otus.gpbu.pse.homework03.MyStudent.ui.MyStudentTestUI;
 
 import java.util.List;
@@ -30,19 +33,14 @@ public class MyStudentControllerMain implements MyStudentController {
     @Autowired
     private GetQuestionsService service;
 
+    @Autowired
+    private StateMachine<ApplicationState, ApplicationEvent> stateMachine;
+
     @Override
     public void run() {
 
-        try {
-
-            init();
-            testStart();
-            displayResults();
-
-        } catch (Exception | Error e) {
-            ui.SendMessageError(e.getMessage());
-        }
-
+        stateMachine.sendEvent(ApplicationEvent.DoInit);
+        stateMachine.sendEvent(ApplicationEvent.DoQuit);
     }
 
     private void init() {
