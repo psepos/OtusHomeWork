@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 
 @Component
-public class MyStudentContextMain implements MyStudentContext {
+public class MyStudentContextMain implements MyContext {
 
     @Getter @Setter
     private Student student;

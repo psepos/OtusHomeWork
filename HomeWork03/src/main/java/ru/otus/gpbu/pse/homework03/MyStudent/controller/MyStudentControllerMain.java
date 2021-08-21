@@ -11,7 +11,7 @@ import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 import ru.otus.gpbu.pse.homework03.MyStudent.service.GetQuestionsService;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state.ApplicationState;
-import ru.otus.gpbu.pse.homework03.MyStudent.ui.MyStudentTestUI;
+import ru.otus.gpbu.pse.homework03.MyStudent.ui.MyUI;
 
 import java.util.List;
 
@@ -19,13 +19,10 @@ import java.util.List;
 public class MyStudentControllerMain implements MyStudentController {
 
     @Autowired
-    private MyStudentContext context;
+    private MyContext context;
 
     @Autowired
-    private MyStudentTestUI ui;
-
-    @Autowired
-    private MyMessageSource messageSource;
+    private MyUI ui;
 
     @Autowired
     private Environment environment;
@@ -46,7 +43,7 @@ public class MyStudentControllerMain implements MyStudentController {
     private void init() {
 
 
-        ui.SendMessage(messageSource.getMessage("strings.enter-your-name"));
+        ui.SendMessageById("strings.enter-your-name");
 
         String name = ui.GetString();
 
@@ -65,7 +62,7 @@ public class MyStudentControllerMain implements MyStudentController {
 
         var student = context.getStudent();
         var passingScore = environment.getPassingScore();
-
+/*
         String testResult = messageSource.getMessage("strings.not-passed");
 
         if (student.getCorrectlyAnswerCount() >= passingScore) {
@@ -78,6 +75,7 @@ public class MyStudentControllerMain implements MyStudentController {
         ui.SendMessage(messageSource.getMessage("strings.correctly-answered", student.getCorrectlyAnswerCount().toString()));
         ui.SendMessage(messageSource.getMessage("strings.incorrectly-answered", student.getIncorrectlyAnswerCount().toString()));
         ui.SendMessage(messageSource.getMessage("strings.test-result", testResult));
+        */
     }
 
 
@@ -88,7 +86,7 @@ public class MyStudentControllerMain implements MyStudentController {
         displayQuestion(question);
         displayAnswers(question.getAnswers());
 
-        ui.SendMessage( messageSource.getMessage("strings.enter-your-answer"));
+        ui.SendMessageById( "strings.enter-your-answer");
 
         Answer humanAnswer = new Answer(ui.GetString());
 
@@ -100,7 +98,7 @@ public class MyStudentControllerMain implements MyStudentController {
     }
 
     private void displayQuestion(Question question) {
-        ui.SendMessage(question.getQuestion());
+        ui.SendMessageById(question.getQuestion());
     }
 
     private void displayAnswers(List<Answer> answers) {

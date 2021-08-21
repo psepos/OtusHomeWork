@@ -7,10 +7,10 @@ import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state.ApplicationState;
 
 @Component
-public class ErrorAction extends MyStudentAction implements Action<ApplicationState, ApplicationEvent> {
+public class ErrorAction extends MyAction implements Action<ApplicationState, ApplicationEvent> {
 
     @Override
     public void execute(StateContext<ApplicationState, ApplicationEvent> stateContext) {
-        super.SendMessage("strings.error",stateContext.getException().getMessage());
+        ui.SendMessageById("strings.error",stateContext.getException().getMessage());
     }
 }
