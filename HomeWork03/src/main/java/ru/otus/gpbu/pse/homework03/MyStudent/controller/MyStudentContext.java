@@ -1,21 +1,11 @@
 package ru.otus.gpbu.pse.homework03.MyStudent.controller;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
 
-@Component
-public class MyStudentContext {
+public interface MyStudentContext {
+    Student getStudent();
+    void  setStudent(Student student);
 
-    @Getter @Setter
-    private Student student;
-
-    @Getter
-    private Integer step = 0;
-
-    public void nextStep() {
-        this.step++;
-    }
-
+    Integer getStep();
+    void nextStep();
 }
