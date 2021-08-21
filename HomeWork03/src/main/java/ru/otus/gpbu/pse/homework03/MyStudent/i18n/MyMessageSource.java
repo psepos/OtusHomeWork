@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework03.MyStudent.config;
+package ru.otus.gpbu.pse.homework03.MyStudent.i18n;
 
 public interface MyMessageSource {
     String getMessage(String variable);

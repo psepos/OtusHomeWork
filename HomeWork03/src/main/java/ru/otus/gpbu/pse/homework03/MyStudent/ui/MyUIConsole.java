@@ -2,7 +2,7 @@ package ru.otus.gpbu.pse.homework03.MyStudent.ui;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.pse.homework03.MyStudent.config.MyMessageSource;
+import ru.otus.gpbu.pse.homework03.MyStudent.i18n.MyMessageSource;
 
 import java.util.Scanner;
 

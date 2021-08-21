@@ -8,11 +8,7 @@ import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
-import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.action.ErrorAction;
-import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.action.InitAction;
-import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.action.QuitAction;
-import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.action.WaitForLoginAction;
-import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.listener.MyStudentListener;
+import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.action.*;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state.ApplicationState;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent;
 
@@ -27,8 +23,10 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
                 .withStates()
                 .initial(ApplicationState.Start)
                 .end(ApplicationState.Quit)
+                .stateEntry(ApplicationState.Start, s -> s.getStateMachine().sendEvent(ApplicationEvent.DoInit))
+                .stateEntry(ApplicationState.Init, s -> s.getStateMachine().sendEvent(ApplicationEvent.DoLogin))
+                .stateEntry(ApplicationState.Logged, s -> s.getStateMachine().sendEvent(ApplicationEvent.DoBegin))
                 .states(EnumSet.allOf(ApplicationState.class));
-
     }
 
     @Override
@@ -36,7 +34,6 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
         config
                 .withConfiguration()
                 .autoStartup(true);
-                //.listener(new MyStudentListener());
     }
 
     @Override
@@ -52,17 +49,19 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
 
                 .withExternal()
                 .source(ApplicationState.Init)
-                .target(ApplicationState.Quit)
-                .event(ApplicationEvent.DoQuit)
-                .action(quitAct(), errorAct())
+                .target(ApplicationState.Logged)
+                .event(ApplicationEvent.DoLogin)
+                .action(LoginAct(), errorAct())
 
                 .and()
-
                 .withExternal()
-                .source(ApplicationState.Init)
-                .target(ApplicationState.WaitForLogin)
-                .event(ApplicationEvent.DoWaitForLogin)
-                .action(waitForLoginAct(), errorAct());
+                .source(ApplicationState.Logged)
+                .target(ApplicationState.Begin)
+                .event(ApplicationEvent.DoBegin)
+                .action(quitAct(), errorAct())
+
+
+        ;
 
     }
 
@@ -82,7 +81,12 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
     }
 
     @Bean
-    public Action<ApplicationState, ApplicationEvent> waitForLoginAct() {
-        return new WaitForLoginAction();
+    public Action<ApplicationState, ApplicationEvent> LoginAct() {
+        return new LoginAction();
+    }
+
+    @Bean
+    public Action<ApplicationState, ApplicationEvent> BeginAct() {
+        return new BeginAction();
     }
 }

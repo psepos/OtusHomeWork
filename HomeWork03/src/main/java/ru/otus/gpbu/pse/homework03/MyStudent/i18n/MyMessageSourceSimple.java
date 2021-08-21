@@ -1,8 +1,9 @@
-package ru.otus.gpbu.pse.homework03.MyStudent.config;
+package ru.otus.gpbu.pse.homework03.MyStudent.i18n;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+import ru.otus.gpbu.pse.homework03.MyStudent.config.Environment;
 
 import java.util.Locale;
 

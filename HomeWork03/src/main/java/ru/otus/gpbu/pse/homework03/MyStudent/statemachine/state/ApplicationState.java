@@ -3,7 +3,8 @@ package ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state;
 public enum ApplicationState {
     Start,
     Init,
-    WaitForLogin,
+    Logged,
+    Begin,
     CurrentQuestion,
     WaitForAnswer,
     PrintResult,

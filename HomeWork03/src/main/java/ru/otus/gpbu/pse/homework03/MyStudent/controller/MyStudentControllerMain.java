@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.stereotype.Controller;
 import ru.otus.gpbu.pse.homework03.MyStudent.config.Environment;
-import ru.otus.gpbu.pse.homework03.MyStudent.config.MyMessageSource;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Answer;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Question;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
@@ -36,8 +35,8 @@ public class MyStudentControllerMain implements MyStudentController {
     @Override
     public void run() {
 
-        stateMachine.sendEvent(ApplicationEvent.DoInit);
-        stateMachine.sendEvent(ApplicationEvent.DoQuit);
+        //stateMachine.sendEvent(ApplicationEvent.DoLogged);
+        //stateMachine.sendEvent(ApplicationEvent.DoQuit);
     }
 
     private void init() {
