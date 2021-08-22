@@ -16,6 +16,7 @@ public class QuestionParserSimple implements QuestionParser{
     @Autowired
     private Environment env;
 
+    @Override
     public Question getFromLine(String line) {
 
         if (line.equals(STRING_EMPTY)) {
