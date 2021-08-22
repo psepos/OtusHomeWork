@@ -5,7 +5,7 @@ public enum ApplicationState {
     Init,
     Logged,
     Begin,
-    CurrentQuestion,
+    Question,
     WaitForAnswer,
     PrintResult,
     End,

@@ -11,4 +11,5 @@ import ru.otus.gpbu.pse.homework03.MyStudent.ui.MyUI;
 public class MyAction {
     @Autowired
     protected MyUI ui;
+
 }

@@ -4,7 +4,7 @@ public enum ApplicationEvent {
     DoInit,
     DoLogin,
     DoBegin,
-    DoNextQuestion,
+    DoQuestion,
     DoWaitForAnswer,
     DoEnd,
     DoQuit

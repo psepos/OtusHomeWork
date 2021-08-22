@@ -6,6 +6,7 @@ import org.springframework.statemachine.action.Action;
 import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework03.MyStudent.controller.MyContext;
 import ru.otus.gpbu.pse.homework03.MyStudent.domain.Student;
+import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.context.Variables;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.event.ApplicationEvent;
 import ru.otus.gpbu.pse.homework03.MyStudent.statemachine.state.ApplicationState;
 
@@ -20,8 +21,8 @@ public class LoginAction extends MyAction implements Action<ApplicationState, Ap
         ui.SendMessageById("strings.enter-your-name");
 
         var studentName = ui.GetString();
-
-        stateContext.getExtendedState().getVariables().put("STUDENT", new Student(studentName));
+        var variables = stateContext.getExtendedState().getVariables();
+        variables.put(Variables.STUDENT, new Student(studentName));
 
         ui.SendMessageById("strings.after-logon");
     }

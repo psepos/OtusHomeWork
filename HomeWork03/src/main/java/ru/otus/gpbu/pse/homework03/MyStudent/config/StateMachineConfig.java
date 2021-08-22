@@ -46,7 +46,6 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
                 .action(initAct(), errorAct())
 
                 .and()
-
                 .withExternal()
                 .source(ApplicationState.Init)
                 .target(ApplicationState.Logged)
@@ -60,6 +59,12 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
                 .event(ApplicationEvent.DoBegin)
                 .action(quitAct(), errorAct())
 
+                .and()
+                .withExternal()
+                .source(ApplicationState.Begin)
+                .target(ApplicationState.Question)
+                .event(ApplicationEvent.DoQuestion)
+                .action(quitAct(), errorAct())
 
         ;
 
@@ -89,4 +94,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Applic
     public Action<ApplicationState, ApplicationEvent> BeginAct() {
         return new BeginAction();
     }
+
+    @Bean
+    public Action<ApplicationState, ApplicationEvent> QuestionAct() { return new QuestionAction(); }
 }
