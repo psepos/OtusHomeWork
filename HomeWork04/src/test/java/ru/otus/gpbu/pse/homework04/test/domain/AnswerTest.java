@@ -3,13 +3,15 @@ package ru.otus.gpbu.pse.homework04.test.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import ru.otus.gpbu.pse.homework04.MyStudent.domain.Answer;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@DisplayName("Class ru.otus.gpbu.pse.homework01.domain.Answer")
+@ComponentScan("ru.otus.gpbu.pse.homework04.test")
+@DisplayName("Class ru.otus.gpbu.pse.homework04.domain.Answer")
 public class AnswerTest {
 
     @DisplayName("Correct constructor")
