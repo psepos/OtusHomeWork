@@ -12,8 +12,4 @@ public class ShellCommands {
         return String.format("Welcome to test: %s", studentName);
     }
 
-    private Availability isPublishEventCommandAvailable() {
-        //return userName == null? Availability.unavailable("Сначала залогиньтесь"): Availability.available();
-        return Availability.available();
-    }
 }

@@ -95,7 +95,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                     .event(Events.DO_PRINT_RESULT).action(printResult(), error()).and()
                 .withExternal()
                     .source(States.PRINT_RESULT).target(States.QUIT)
-                    .event(Events.DO_QUIT).action(quit(), error());
+                    .event(Events.DO_QUIT).action(quitAct(), error());
 
     }
 
@@ -110,7 +110,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     }
 
     @Bean
-    public Action<States, Events> quit() {
+    public Action<States, Events> quitAct() {
         return new QuitAction();
     }
 
