@@ -1,6 +1,7 @@
 package ru.otus.gpbu.pse.homework04.MyStudent.statemachine.event;
 
 public enum Events {
+    DO_START,
     DO_INIT,
     DO_LOGIN,
     DO_BEGIN,

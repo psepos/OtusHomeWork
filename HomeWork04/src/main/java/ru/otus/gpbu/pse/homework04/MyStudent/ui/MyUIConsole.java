@@ -10,7 +10,11 @@ import java.util.Scanner;
 public class MyUIConsole implements MyUI {
 
     @Autowired
-    MyMessageSource msg;
+    private final MyMessageSource msg;
+
+    public MyUIConsole(MyMessageSource msg) {
+        this.msg = msg;
+    }
 
     @Override
     public void SendMessage(String message) {

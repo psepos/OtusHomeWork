@@ -44,7 +44,7 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 .stateEntry(States.WAIT_FOR_ANSWER, s -> s.getStateMachine().sendEvent(Events.DO_HUMAN_ANSWER))
                 .stateEntry(States.HUMAN_ANSWER, s -> s.getStateMachine().sendEvent(Events.DO_HAS_NEXT))
                 .stateEntry(States.END, s -> s.getStateMachine().sendEvent(Events.DO_PRINT_RESULT))
-                .stateEntry(States.PRINT_RESULT, s -> s.getStateMachine().sendEvent(Events.DO_QUIT))
+                .stateEntry(States.PRINT_RESULT, s -> s.getStateMachine().sendEvent(Events.DO_START))
                 .states(EnumSet.allOf(States.class));
     }
 
@@ -94,8 +94,8 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                     .source(States.END).target(States.PRINT_RESULT)
                     .event(Events.DO_PRINT_RESULT).action(printResult(), error()).and()
                 .withExternal()
-                    .source(States.PRINT_RESULT).target(States.QUIT)
-                    .event(Events.DO_QUIT).action(quitAct(), error());
+                    .source(States.PRINT_RESULT).target(States.START)
+                    .event(Events.DO_START);
 
     }
 
