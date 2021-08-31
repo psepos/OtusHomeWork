@@ -1,1 +1,6 @@
-insert into persons (id, `name`) values (1, 'masha');
+INSERT INTO AUTHOR (ID, NAME) VALUES (1, 'Ivanov');
+INSERT INTO AUTHOR (ID, NAME) VALUES (2, 'Petrov');
+INSERT INTO AUTHOR (ID, NAME) VALUES (3, 'Sidorov');
+
+INSERT INTO GENRE (ID, NAME) VALUES (1, 'Comedy');
+INSERT INTO GENRE (ID, NAME) VALUES (2, 'Drama');
