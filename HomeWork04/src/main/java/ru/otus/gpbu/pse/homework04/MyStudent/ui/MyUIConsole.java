@@ -17,22 +17,22 @@ public class MyUIConsole implements MyUI {
     }
 
     @Override
-    public void SendMessage(String message) {
+    public void sendMessage(String message) {
         System.out.println(message);
     }
 
     @Override
-    public void SendMessageById(String messageId) {
-        SendMessage(msg.getMessage(messageId));
+    public void sendMessageById(String messageId) {
+        sendMessage(msg.getMessage(messageId));
     }
 
     @Override
-    public void SendMessageById(String messageId, String param) {
-        SendMessage(msg.getMessage(messageId, param));
+    public void sendMessageById(String messageId, String param) {
+        sendMessage(msg.getMessage(messageId, param));
     }
 
     @Override
-    public String GetString() {
+    public String getString() {
         return new Scanner(System.in).nextLine();
     }
 }

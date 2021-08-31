@@ -11,6 +11,6 @@ public class InitAction extends MyAction implements Action<States, Events> {
 
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.welcome");
+        ui.sendMessageById("strings.welcome");
     }
 }

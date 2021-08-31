@@ -12,9 +12,9 @@ import ru.otus.gpbu.pse.homework04.MyStudent.statemachine.state.States;
 public class WaitForAnswerAction extends MyAction implements Action<States, Events> {
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.enter-your-answer");
+        ui.sendMessageById("strings.enter-your-answer");
 
-        Answer humanAnswer = new Answer(ui.GetString());
+        Answer humanAnswer = new Answer(ui.getString());
         stateContext.getExtendedState().getVariables().put(Variables.HUMAN_ANSWER, humanAnswer);
 
     }

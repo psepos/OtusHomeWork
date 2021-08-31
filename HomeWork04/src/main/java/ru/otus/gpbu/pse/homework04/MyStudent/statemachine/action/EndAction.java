@@ -10,6 +10,6 @@ import ru.otus.gpbu.pse.homework04.MyStudent.statemachine.state.States;
 public class EndAction extends MyAction implements Action<States, Events> {
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.end-test");
+        ui.sendMessageById("strings.end-test");
     }
 }

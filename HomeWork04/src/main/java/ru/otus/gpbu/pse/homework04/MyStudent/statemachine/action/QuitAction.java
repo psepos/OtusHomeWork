@@ -9,6 +9,6 @@ public class QuitAction extends MyAction implements Action<States, Events> {
 
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.quit");
+        ui.sendMessageById("strings.quit");
     }
 }

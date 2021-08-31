@@ -9,18 +9,15 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties
 @PropertySource("classpath:application.yml")
 @Component
+@Getter @Setter
 public class EnvironmentYAML implements Environment {
 
-    @Getter @Setter
     private Integer passingScore;
 
-    @Getter @Setter
     private String locale;
 
-    @Getter @Setter
     private String csvFile;
 
-    @Getter @Setter
     private String csvDelimiter;
 
 }

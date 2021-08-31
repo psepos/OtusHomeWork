@@ -14,9 +14,9 @@ public class LoginAction extends MyAction implements Action<States, Events> {
 
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.enter-your-name");
+        ui.sendMessageById("strings.enter-your-name");
 
-        var studentName = ui.GetString();
+        var studentName = ui.getString();
         var variables = stateContext.getExtendedState().getVariables();
         variables.put(Variables.STUDENT, new Student(studentName));
 

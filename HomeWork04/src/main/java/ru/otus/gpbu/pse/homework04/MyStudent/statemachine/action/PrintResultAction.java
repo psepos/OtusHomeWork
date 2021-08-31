@@ -33,10 +33,10 @@ public class PrintResultAction extends MyAction implements Action<States, Events
             testResult = messageSource.getMessage("strings.passed");
         }
 
-        ui.SendMessageById("strings.student", student.toString());
-        ui.SendMessageById("strings.test-passing-score", passingScore.toString());
-        ui.SendMessageById("strings.correctly-answered", student.getCorrectlyAnswerCount().toString());
-        ui.SendMessageById("strings.incorrectly-answered", student.getIncorrectlyAnswerCount().toString());
-        ui.SendMessageById("strings.test-result", testResult);
+        ui.sendMessageById("strings.student", student.toString());
+        ui.sendMessageById("strings.test-passing-score", passingScore.toString());
+        ui.sendMessageById("strings.correctly-answered", student.getCorrectlyAnswerCount().toString());
+        ui.sendMessageById("strings.incorrectly-answered", student.getIncorrectlyAnswerCount().toString());
+        ui.sendMessageById("strings.test-result", testResult);
     }
 }

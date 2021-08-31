@@ -11,6 +11,6 @@ public class ErrorAction extends MyAction implements Action<States, Events> {
 
     @Override
     public void execute(StateContext<States, Events> stateContext) {
-        ui.SendMessageById("strings.error", stateContext.getException().getMessage());
+        ui.sendMessageById("strings.error", stateContext.getException().getMessage());
     }
 }

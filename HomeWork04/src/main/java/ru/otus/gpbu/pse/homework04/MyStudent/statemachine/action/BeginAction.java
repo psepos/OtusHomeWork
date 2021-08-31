@@ -24,6 +24,6 @@ public class BeginAction extends MyAction implements Action<States, Events> {
         variables.put(Variables.QUESTIONS, questions);
         variables.put(Variables.QUESTION_ITERATOR, questions.iterator());
 
-        ui.SendMessageById("strings.begin-test");
+        ui.sendMessageById("strings.begin-test");
     }
 }

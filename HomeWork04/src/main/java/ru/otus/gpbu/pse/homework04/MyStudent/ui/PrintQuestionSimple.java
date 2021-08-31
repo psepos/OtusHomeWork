@@ -18,7 +18,7 @@ public class PrintQuestionSimple implements PrintQuestion {
     }
 
     private void printQ(Question question){
-        ui.SendMessage(question.toString());
+        ui.sendMessage(question.toString());
     }
 
     private void printA(Question question){
@@ -26,7 +26,7 @@ public class PrintQuestionSimple implements PrintQuestion {
         String prefix = "   ";
 
         for (Answer answer : question.getAnswers()) {
-            ui.SendMessage(prefix + answer.toString());
+            ui.sendMessage(prefix + answer.toString());
         }
 
     }

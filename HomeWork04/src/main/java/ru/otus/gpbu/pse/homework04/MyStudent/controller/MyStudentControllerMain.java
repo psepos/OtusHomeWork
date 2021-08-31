@@ -10,11 +10,14 @@ import ru.otus.gpbu.pse.homework04.MyStudent.statemachine.state.States;
 public class MyStudentControllerMain implements MyStudentController {
 
     @Autowired
-    private StateMachine<States, Events> stateMachine;
+    private final StateMachine<States, Events> stateMachine;
+
+    public MyStudentControllerMain(StateMachine<States, Events> stateMachine) {
+        this.stateMachine = stateMachine;
+    }
 
     @Override
     public void run() {
-
         stateMachine.sendEvent(Events.DO_INIT);
     }
 }
