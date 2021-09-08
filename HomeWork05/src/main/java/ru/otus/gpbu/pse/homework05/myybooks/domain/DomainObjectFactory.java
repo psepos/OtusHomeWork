@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework05.myybooks.domain;
 
-public class ObjectFactory {
+public class DomainObjectFactory {
     public static Author getAuthor(Long id, String name) {
         return new Author(id,name);
     }

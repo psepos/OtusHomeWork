@@ -3,7 +3,7 @@ package ru.otus.gpbu.pse.homework05.myybooks.shell;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Book;
-import ru.otus.gpbu.pse.homework05.myybooks.domain.ObjectFactory;
+import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;
 import ru.otus.gpbu.pse.homework05.myybooks.service.AuthorService;
 import ru.otus.gpbu.pse.homework05.myybooks.service.BookService;
 import ru.otus.gpbu.pse.homework05.myybooks.service.GenreService;
@@ -47,7 +47,7 @@ public class ShellCommandsBook {
 
     @ShellMethod(value = "book-update <id> <name> <genre_id> <author_id>")
     public void bookUpdate(Long id, String name, Long genre_id, Long author_id) {
-        bookService.update(ObjectFactory.getBook(
+        bookService.update(DomainObjectFactory.getBook(
                 id, name,
                 genreService.getById(genre_id),
                 authorService.getById(author_id)));
@@ -55,7 +55,7 @@ public class ShellCommandsBook {
 
     @ShellMethod(value = "book-insert <id> <name> <genre_id> <author_id>")
     public void bookInsert(Long id, String name, Long genre_id, Long author_id) {
-        bookService.insert(ObjectFactory.getBook(
+        bookService.insert(DomainObjectFactory.getBook(
                 id, name,
                 genreService.getById(genre_id),
                 authorService.getById(author_id)));
