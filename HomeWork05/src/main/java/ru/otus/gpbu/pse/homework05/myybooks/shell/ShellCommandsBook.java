@@ -17,8 +17,8 @@ public class ShellCommandsBook {
     private final GenreService genreService;
     private final AuthorService authorService;
 
-    public ShellCommandsBook(BookService service, GenreService genreService, AuthorService authorService) {
-        this.bookService = service;
+    public ShellCommandsBook(BookService bookService, GenreService genreService, AuthorService authorService) {
+        this.bookService = bookService;
         this.genreService = genreService;
         this.authorService = authorService;
     }
@@ -47,7 +47,18 @@ public class ShellCommandsBook {
 
     @ShellMethod(value = "book-update <id> <name> <genre_id> <author_id>")
     public void bookUpdate(Long id, String name, Long genre_id, Long author_id) {
-        bookService.update(ObjectFactory.getBook(id, name, genreService.getById(genre_id), authorService.getById(author_id)));
+        bookService.update(ObjectFactory.getBook(
+                id, name,
+                genreService.getById(genre_id),
+                authorService.getById(author_id)));
+    }
+
+    @ShellMethod(value = "book-insert <id> <name> <genre_id> <author_id>")
+    public void bookInsert(Long id, String name, Long genre_id, Long author_id) {
+        bookService.insert(ObjectFactory.getBook(
+                id, name,
+                genreService.getById(genre_id),
+                authorService.getById(author_id)));
     }
 
 }

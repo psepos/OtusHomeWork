@@ -31,7 +31,14 @@ public class BookDaoJdbc implements BookDao{
 
     @Override
     public void insert(Book book) {
-
+        var map = Map.of(
+                "id",book.getId(),
+                "name",book.getName(),
+                "genre_id",book.getGenre().getId(),
+                "author_id",book.getAuthor().getId());
+        var sql = "INSERT INTO book (id, name, genre_id, author_id) " +
+                  "VALUES (:id, :name, :genre_id, :author_id)";
+        jdbc.update(sql, map);
     }
 
     @Override
@@ -66,8 +73,8 @@ public class BookDaoJdbc implements BookDao{
                             "a.id   AS author_id, " +
                             "a.name AS author_name " +
                        "FROM book b " +
-                       "INNER JOIN genre g  ON g.id = b.genre_id " +
-                       "INNER JOIN author a ON a.id = b.author_id ";
+                       "LEFT JOIN genre g  ON g.id = b.genre_id " +
+                       "LEFT JOIN author a ON a.id = b.author_id ";
         return jdbc.query(sql, new BookMapper2());
     }
 
