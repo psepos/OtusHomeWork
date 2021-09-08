@@ -47,3 +47,5 @@
 1631101273666:author-delete-by-id 2
 1631101280921:author-get-all
 1631101496419:author-get-by-id 2
+1631103166852:genre-get-all
+1631103172933:book-get-all

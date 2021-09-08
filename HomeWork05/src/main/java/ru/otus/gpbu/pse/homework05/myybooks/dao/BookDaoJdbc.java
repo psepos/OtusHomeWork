@@ -22,18 +22,18 @@ public class BookDaoJdbc implements BookDao{
     }
 
     @Override
-    public Book insert(Book book) {
-        return null;
+    public void insert(Book book) {
+
     }
 
     @Override
-    public Book update(Book book) {
-        return null;
+    public void update(Book book) {
+
     }
 
     @Override
-    public Book deleteById(long id) {
-        return null;
+    public void deleteById(long id) {
+
     }
 
     @Override

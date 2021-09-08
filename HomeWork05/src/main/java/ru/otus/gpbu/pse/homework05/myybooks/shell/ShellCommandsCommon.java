@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 
 @ShellComponent
-public class ShellCommands {
+public class ShellCommandsCommon {
 
     @ShellMethod(value = "dbcon - Run H2 console")
     public void dbcon() throws SQLException {
