@@ -58,3 +58,11 @@
 1631108772402:book-delete-by-id 1
 1631108778224:book-get-all
 1631110022672:book-get-all2
+1631111331796:genre-get-by-id 8
+1631111356856:genre-get-all
+1631111371424:genre-get-by-id 1
+1631111380840:genre-get-by-id 4
+1631113940463:book-get-all2
+1631113980741:book-update 2 ffff 2 1
+1631113989564:book-get-all2
+1631114001163:exit

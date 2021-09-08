@@ -36,7 +36,14 @@ public class BookDaoJdbc implements BookDao{
 
     @Override
     public void update(Book book) {
+        var map = Map.of(
+                "id",book.getId(),
+                "name",book.getName(),
+                "genre_id",book.getGenre().getId(),
+                "author_id",book.getAuthor().getId());
 
+        var sql = "UPDATE book SET name = :name, genre_id = :genre_id, author_id = :author_id WHERE id = :id";
+        jdbc.update(sql, map);
     }
 
     @Override
