@@ -16,3 +16,34 @@
 1631047040387:count Genre
 1631048357538:count Author
 1631048373194:count Book
+1631079670611:genreCount
+1631079691997:hrlp
+1631079695959:help
+1631079849075:genre-count
+1631096162732:help
+1631096183032:genre-get-all
+1631096214795:genre-count
+1631096223120:genre-get-all
+1631097425624:genre-delete-by-id 1
+1631097432122:genre-get-all
+1631097986463:genre-get-by-id 2
+1631099331983:genre-get-all
+1631099356302:genre-insert 3 Tragedy
+1631099460695:genre-get-all
+1631099485775:genre-insert 3 Tragey
+1631099495077:genre-get-all
+1631100036339:genre-insert 3 Tragedy
+1631100044686:genre-get-all
+1631100051992:genre-count
+1631100067136:genre-delete-by-id 2
+1631100072950:genre-count
+1631100080230:genre-get-all
+1631100149029:genre-update 3 Tra
+1631100155372:genre-get-all
+1631100966655:genre-all
+1631100973556:genre-get-all
+1631100987844:author-get-all
+1631101254682:author-delete-by-id
+1631101273666:author-delete-by-id 2
+1631101280921:author-get-all
+1631101496419:author-get-by-id 2

@@ -17,4 +17,6 @@ public class ShellCommandBook {
     public Integer bookCount() {
         return bookDao.count();
     }
+
+
 }
