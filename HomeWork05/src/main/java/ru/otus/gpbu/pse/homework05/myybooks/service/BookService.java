@@ -11,6 +11,7 @@ public interface BookService {
     void deleteById(long id);
 
     List<Book> getAll();
+    List<Book> getAll2();
 
     int count();
 }

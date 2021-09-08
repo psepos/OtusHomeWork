@@ -49,3 +49,12 @@
 1631101496419:author-get-by-id 2
 1631103166852:genre-get-all
 1631103172933:book-get-all
+1631108068947:book-count
+1631108075400:book-get-all
+1631108398635:book-count
+1631108407424:book-get-all
+1631108609100:book-delete-by-id 1
+1631108753518:book-get-all
+1631108772402:book-delete-by-id 1
+1631108778224:book-get-all
+1631110022672:book-get-all2

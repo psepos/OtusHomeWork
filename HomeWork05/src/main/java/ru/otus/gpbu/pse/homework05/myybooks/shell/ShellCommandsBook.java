@@ -28,5 +28,15 @@ public class ShellCommandsBook {
         allBooks.forEach(book -> System.out.println(book.toString()));
     }
 
+    @ShellMethod(value = "book-get-all2 use joins and once select")
+    public void bookGetAll2() {
+        List<Book> allBooks = service.getAll2();
+        allBooks.forEach(book -> System.out.println(book.toString()));
+    }
+
+    @ShellMethod(value = "book-delete-by-id <id>")
+    public void bookDeleteById(Long id) {
+        service.deleteById(id);
+    }
 
 }

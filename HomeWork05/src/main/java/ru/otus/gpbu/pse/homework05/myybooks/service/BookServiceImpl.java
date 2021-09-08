@@ -40,6 +40,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    public List<Book> getAll2() {
+        return dao.getAll2();
+    }
+
+    @Override
     public int count() {
         return dao.count();
     }
