@@ -3,17 +3,16 @@ package ru.otus.gpbu.pse.homework05.myybooks.shell;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Genre;
-import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;
 import ru.otus.gpbu.pse.homework05.myybooks.service.GenreService;
 
 import java.util.List;
 
 @ShellComponent
-public class ShellCommandsGenre {
+public class ShellCommandsForGenre {
 
     private final GenreService service;
 
-    public ShellCommandsGenre(GenreService service) {
+    public ShellCommandsForGenre(GenreService service) {
         this.service = service;
     }
 
@@ -23,28 +22,30 @@ public class ShellCommandsGenre {
     }
 
     @ShellMethod(value = "genre-get-all")
-    public void genreGetAll() {
-        List<Genre> allGenre = service.getAll();
-        allGenre.forEach(genre -> System.out.println(genre.toString()));
+    public List<Genre> genreGetAll() {
+        return service.getAll();
     }
 
     @ShellMethod(value = "genre-delete-by-id <id>")
-    public void genreDeleteById(Long id) {
+    public String genreDeleteById(Long id) {
         service.deleteById(id);
+        return "Ok";
     }
 
     @ShellMethod(value = "genre-get-by-id <id>")
-    public String genreGetById(Long id) {
-        return service.getById(id).toString();
+    public Genre genreGetById(Long id) {
+        return service.getById(id);
     }
 
     @ShellMethod(value = "genre-insert <id> <name>")
-    public void genreInsert(Long id, String name) {
-        service.insert(DomainObjectFactory.getGenre(id, name));
+    public String genreInsert(Long id, String name) {
+        service.insert(id, name);
+        return "Ok";
     }
 
     @ShellMethod(value = "genre-update <id> <name>")
-    public void genreUpdate(Long id, String name) {
-        service.update(DomainObjectFactory.getGenre(id, name));
+    public String genreUpdate(Long id, String name) {
+        service.update(id, name);
+        return "Ok";
     }
 }

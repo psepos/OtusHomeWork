@@ -8,7 +8,9 @@ public interface AuthorService {
 
     Author getById(long id);
     void insert(Author author);
+    void insert(Long id, String name);
     void update(Author author);
+    void update(Long id, String name);
     void deleteById(long id);
 
     List<Author> getAll();

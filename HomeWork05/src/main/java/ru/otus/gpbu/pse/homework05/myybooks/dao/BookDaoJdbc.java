@@ -37,6 +37,23 @@ public class BookDaoJdbc implements BookDao{
     }
 
     @Override
+    public Book getById2(long id) {
+        Map<String, Object> params = Collections.singletonMap("id", id);
+
+        String sql = "SELECT b.id   AS book_id, " +
+                            "b.name AS book_name, " +
+                            "g.id   AS genre_id, " +
+                            "g.name AS genre_name, " +
+                            "a.id   AS author_id, " +
+                            "a.name AS author_name " +
+                        "FROM book b " +
+                        "LEFT JOIN genre g  ON g.id = b.genre_id " +
+                        "LEFT JOIN author a ON a.id = b.author_id " +
+                        "WHERE b.id = :id";
+        return namedParameterJdbcOperations.queryForObject(sql, params, bookMapper2);
+    }
+
+    @Override
     public void insert(Book book) {
         var map = Map.of(
                 "id",book.getId(),
