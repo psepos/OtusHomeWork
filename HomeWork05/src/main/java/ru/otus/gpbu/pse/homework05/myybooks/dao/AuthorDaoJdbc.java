@@ -1,5 +1,6 @@
 package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.AuthorMapper;
@@ -27,7 +28,12 @@ public class AuthorDaoJdbc implements AuthorDao {
     @Override
     public Author getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        return jdbcOperations.queryForObject("SELECT * FROM author WHERE id = :id", params, authorMapper);
+
+        try {
+            return jdbcOperations.queryForObject("SELECT * FROM author WHERE id = :id", params, authorMapper);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RuntimeException("Author does not exists", e);
+        }
     }
 
     @Override

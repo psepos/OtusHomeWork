@@ -32,7 +32,7 @@ public class ShellCommandsForAuthor {
         return "Ok";
     }
 
-    @ShellMethod(value = "Author-get-by-id <id>")
+    @ShellMethod(value = "Author-get-by-id <id>", key = "agi")
     public Author AuthorGetById(Long id) {
         return service.getById(id);
     }
