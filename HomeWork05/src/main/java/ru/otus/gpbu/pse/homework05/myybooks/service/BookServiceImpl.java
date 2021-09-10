@@ -26,11 +26,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getById2(long id) {
-        return dao.getById2(id);
-    }
-
-    @Override
     public void insert(Book book) {
         dao.insert(book);
     }
@@ -65,11 +60,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getAll() {
         return dao.getAll();
-    }
-
-    @Override
-    public List<Book> getAll2() {
-        return dao.getAll2();
     }
 
     @Override

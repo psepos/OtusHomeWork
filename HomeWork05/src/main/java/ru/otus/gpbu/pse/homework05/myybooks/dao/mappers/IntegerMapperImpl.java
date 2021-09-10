@@ -12,7 +12,7 @@ public class IntegerMapperImpl implements IntegerMapper {
 
     @Override
     public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
-            return resultSet.getInt(columnLabel);
+        return resultSet.getInt(columnLabel);
     }
 
     @Override

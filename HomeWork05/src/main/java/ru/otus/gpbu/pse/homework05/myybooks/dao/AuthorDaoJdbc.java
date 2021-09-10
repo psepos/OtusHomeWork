@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.AuthorMapper;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.IntegerMapper;
-import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.IntegerMapperImpl;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
 
 import java.util.Collections;
@@ -32,7 +31,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         try {
             return jdbcOperations.queryForObject("SELECT * FROM author WHERE id = :id", params, authorMapper);
         } catch (EmptyResultDataAccessException e) {
-            throw new RuntimeException("Author does not exists", e);
+            throw new DoesNotExistException("Author does not exists", e);
         }
     }
 
