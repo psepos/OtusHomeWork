@@ -7,7 +7,9 @@ import java.util.List;
 public interface GenreService {
     Genre getById(long id);
 
-    void insert(Genre genre);
+    long insert(Genre genre);
+
+    long insert(String name);
 
     void insert(Long id, String name);
 

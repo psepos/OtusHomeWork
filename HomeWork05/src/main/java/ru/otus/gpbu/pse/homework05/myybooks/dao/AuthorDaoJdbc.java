@@ -1,7 +1,11 @@
 package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.AuthorMapper;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.IntegerMapper;
@@ -36,15 +40,20 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public void insert(Author author) {
-        var map = Map.of("id", author.getId(), "name", author.getName());
+    public long insert(Author author) {
+
+        SqlParameterSource params = new MapSqlParameterSource().addValue("name", author.name());
+        KeyHolder kh = new GeneratedKeyHolder();
         var sql = "INSERT INTO author (id, name) VALUES (:id, :name)";
-        jdbcOperations.update(sql, map);
+        jdbcOperations.update(sql, params, kh);
+        author.id(kh.getKey().longValue());
+
+        return  author.id();
     }
 
     @Override
     public void update(Author author) {
-        var map = Map.of("id", author.getId(), "name", author.getName());
+        var map = Map.of("id", author.id(), "name", author.name());
         var sql = "UPDATE author SET name = :name WHERE id = :id";
         jdbcOperations.update(sql, map);
     }

@@ -22,13 +22,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void insert(Author author) {
-        dao.insert(author);
+    public long insert(Author author) {
+        return dao.insert(author);
     }
 
     @Override
-    public void insert(Long id, String name) {
-        this.insert(DomainObjectFactory.getAuthor(id, name));
+    public long insert(String name) {
+        return this.insert(DomainObjectFactory.getAuthor(0l, name));
     }
 
     @Override

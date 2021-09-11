@@ -8,9 +8,9 @@ public interface BookService {
 
     Book getById(long id);
 
-    void insert(Book book);
+    long insert(Book book);
 
-    void insert(Long id, String name, Long genre_id, Long author_id);
+    long insert(String name, Long genre_id, Long author_id);
 
     void update(Book book);
 

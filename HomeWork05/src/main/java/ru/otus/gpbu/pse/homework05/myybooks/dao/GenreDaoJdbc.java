@@ -1,7 +1,11 @@
 package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.GenreMapper;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.IntegerMapper;
@@ -14,12 +18,12 @@ import java.util.Map;
 @Repository
 public class GenreDaoJdbc implements GenreDao {
 
-    private final NamedParameterJdbcOperations jdbcOperations;
+    private final NamedParameterJdbcOperations jdbc;
     private final GenreMapper genreMapper;
     private final IntegerMapper integerMapper;
 
     public GenreDaoJdbc(NamedParameterJdbcOperations jdbcOperations, GenreMapper genreMapper, IntegerMapper integerMapper) {
-        this.jdbcOperations = jdbcOperations;
+        this.jdbc = jdbcOperations;
         this.genreMapper = genreMapper;
         this.integerMapper = integerMapper;
     }
@@ -28,39 +32,42 @@ public class GenreDaoJdbc implements GenreDao {
     public Genre getById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
         try {
-            return jdbcOperations.queryForObject("SELECT * FROM genre WHERE id = :id", params, genreMapper);
+            return jdbc.queryForObject("SELECT * FROM genre WHERE id = :id", params, genreMapper);
         } catch (EmptyResultDataAccessException e) {
             throw new DoesNotExistException("Genre does not exists", e);
         }
     }
 
     @Override
-    public void insert(Genre genre) {
-        var map = Map.of("id", genre.getId(), "name", genre.getName());
-        var sql = "INSERT INTO genre (id, name) VALUES (:id, :name)";
-        jdbcOperations.update(sql, map);
+    public long insert(Genre genre) {
+        SqlParameterSource params = new MapSqlParameterSource().addValue("name", genre.name());
+        var sql = "INSERT INTO genre (name) VALUES (:name)";
+        KeyHolder kh = new GeneratedKeyHolder();
+        jdbc.update(sql, params, kh);
+        genre.id(kh.getKey().longValue());
+        return genre.id();
     }
 
     @Override
     public void update(Genre genre) {
-        var map = Map.of("id", genre.getId(), "name", genre.getName());
+        var map = Map.of("id", genre.id(), "name", genre.name());
         var sql = "UPDATE genre SET name = :name WHERE id = :id";
-        jdbcOperations.update(sql, map);
+        jdbc.update(sql, map);
     }
 
     @Override
     public void deleteById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        jdbcOperations.update("DELETE FROM genre WHERE id = :id", params);
+        jdbc.update("DELETE FROM genre WHERE id = :id", params);
     }
 
     @Override
     public List<Genre> getAll() {
-        return jdbcOperations.query("SELECT * FROM genre", genreMapper);
+        return jdbc.query("SELECT * FROM genre", genreMapper);
     }
 
     @Override
     public int count() {
-        return jdbcOperations.query("SELECT count(*) AS Count FROM genre", integerMapper.setColumnLabel("Count")).get(0);
+        return jdbc.query("SELECT count(*) AS Count FROM genre", integerMapper.setColumnLabel("Count")).get(0);
     }
 }

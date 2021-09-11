@@ -37,10 +37,9 @@ public class ShellCommandsForGenre {
         return service.getById(id);
     }
 
-    @ShellMethod(value = "genre-insert <id> <name>", key = "gi")
-    public String genreInsert(Long id, String name) {
-        service.insert(id, name);
-        return "Ok";
+    @ShellMethod(value = "genre-insert <name>", key = "gi")
+    public long genreInsert(String name) {
+        return service.insert(name);
     }
 
     @ShellMethod(value = "genre-update <id> <name>", key = "gu")

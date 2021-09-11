@@ -2,6 +2,7 @@ package ru.otus.gpbu.pse.homework05.myybooks.dao.mappers;
 
 import org.springframework.stereotype.Component;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
+import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,6 @@ public class AuthorMapperImpl implements AuthorMapper {
 
         long id = resultSet.getLong("id");
         String name = resultSet.getString("name");
-        return new Author(id, name);
+        return DomainObjectFactory.getAuthor(id, name);
     }
 }

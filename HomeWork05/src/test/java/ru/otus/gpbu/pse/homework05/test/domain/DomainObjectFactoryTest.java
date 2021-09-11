@@ -17,16 +17,16 @@ public class DomainObjectFactoryTest {
     void getAuthor() {
         Author author = DomainObjectFactory.getAuthor(1l, "Sidorov");
         assertNotNull(author);
-        assertEquals("Sidorov", author.getName());
-        assertEquals(1l, author.getId());
+        assertEquals("Sidorov", author.name());
+        assertEquals(1l, author.id());
     }
 
     @Test
     void getGenre() {
         Genre genre = DomainObjectFactory.getGenre(1l, "Tragedy");
         assertNotNull(genre);
-        assertEquals("Tragedy", genre.getName());
-        assertEquals(1l, genre.getId());
+        assertEquals("Tragedy", genre.name());
+        assertEquals(1l, genre.id());
     }
 
     @Test
@@ -37,11 +37,11 @@ public class DomainObjectFactoryTest {
 
         assertNotNull(book);
 
-        assertEquals("BookName1", book.getName());
-        assertEquals(3l, book.getId());
-        assertEquals("Tragedy", book.getGenre().getName());
-        assertEquals(2l, book.getGenre().getId());
-        assertEquals("Sidorov", book.getAuthor().getName());
-        assertEquals(1l, book.getAuthor().getId());
+        assertEquals("BookName1", book.name());
+        assertEquals(3l, book.id());
+        assertEquals("Tragedy", book.genre().name());
+        assertEquals(2l, book.genre().id());
+        assertEquals("Sidorov", book.author().name());
+        assertEquals(1l, book.author().id());
     }
 }

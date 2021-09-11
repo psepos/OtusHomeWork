@@ -23,11 +23,10 @@ public class BookMapperImpl implements BookMapper {
                 resultSet.getLong("author_id"),
                 resultSet.getString("author_name"));
 
-        return new Book(
+        return DomainObjectFactory.getBook(
                 resultSet.getLong("book_id"),
                 resultSet.getString("book_name"),
                 genre,
                 author);
-
     }
 }

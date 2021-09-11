@@ -21,8 +21,13 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public void insert(Genre genre) {
-        dao.insert(genre);
+    public long insert(Genre genre) {
+        return dao.insert(genre);
+    }
+
+    @Override
+    public long insert(String name) {
+        return this.insert(DomainObjectFactory.getGenre(0l, name));
     }
 
     @Override

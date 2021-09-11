@@ -38,10 +38,9 @@ public class ShellCommandsForBook {
         return "Ok";
     }
 
-    @ShellMethod(value = "book-insert <id> <name> <genre_id> <author_id>", key = "bi")
-    public String bookInsert(Long id, String name, Long genre_id, Long author_id) {
-        bookService.insert(id, name, genre_id, author_id);
-        return "Ok";
+    @ShellMethod(value = "book-insert <name> <genre_id> <author_id>", key = "bi")
+    public long bookInsert(String name, Long genre_id, Long author_id) {
+        return bookService.insert(name, genre_id, author_id);
     }
 
     @ShellMethod(value = "book-get-by-id <id>", key = "bgbi")

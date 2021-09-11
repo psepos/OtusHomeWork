@@ -1,11 +1,13 @@
 package ru.otus.gpbu.pse.homework05.myybooks.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(fluent = true)
 public class Book {
-    private final long id;
-    private final String name;
-    private final Genre genre;
-    private final Author author;
+    private long id;
+    private String name;
+    private Genre genre;
+    private Author author;
 }

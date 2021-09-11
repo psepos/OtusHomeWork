@@ -37,10 +37,9 @@ public class ShellCommandsForAuthor {
         return service.getById(id);
     }
 
-    @ShellMethod(value = "author-insert <id> <name>", key = "ai")
-    public String authorInsert(Long id, String name) {
-        service.insert(id, name);
-        return "Ok";
+    @ShellMethod(value = "author-insert <name>", key = "ai")
+    public long authorInsert(String name) {
+        return service.insert(name);
     }
 
     @ShellMethod(value = "author-update <id> <name>")

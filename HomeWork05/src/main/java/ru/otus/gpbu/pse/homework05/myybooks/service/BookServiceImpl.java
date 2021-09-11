@@ -26,15 +26,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void insert(Book book) {
-        dao.insert(book);
+    public long insert(Book book) {
+        return dao.insert(book);
     }
 
     @Override
-    public void insert(Long id, String name, Long genre_id, Long author_id) {
-        this.insert(
+    public long insert(String name, Long genre_id, Long author_id) {
+        return this.insert(
                 DomainObjectFactory.getBook(
-                        id, name,
+                        0l, name,
                         genreService.getById(genre_id),
                         authorService.getById(author_id)));
     }

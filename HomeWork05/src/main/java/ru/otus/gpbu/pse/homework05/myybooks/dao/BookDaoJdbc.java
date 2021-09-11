@@ -1,7 +1,11 @@
 package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.BookMapper;
 import ru.otus.gpbu.pse.homework05.myybooks.dao.mappers.IntegerMapper;
@@ -47,24 +51,27 @@ public class BookDaoJdbc implements BookDao {
     }
 
     @Override
-    public void insert(Book book) {
-        var map = Map.of(
-                "id", book.getId(),
-                "name", book.getName(),
-                "genre_id", book.getGenre().getId(),
-                "author_id", book.getAuthor().getId());
-        var sql = "INSERT INTO book (id, name, genre_id, author_id) " +
-                "VALUES (:id, :name, :genre_id, :author_id)";
-        namedParameterJdbcOperations.update(sql, map);
+    public long insert(Book book) {
+        SqlParameterSource params = new MapSqlParameterSource()
+                .addValue("name", book.name())
+                .addValue("genre_id", book.genre().id())
+                .addValue("author_id", book.author().id());
+        KeyHolder kh = new GeneratedKeyHolder();
+
+        var sql = "INSERT INTO book (name, genre_id, author_id) " +
+                "VALUES (:name, :genre_id, :author_id)";
+        namedParameterJdbcOperations.update(sql, params, kh);
+        book.id(kh.getKey().longValue());
+        return book.id();
     }
 
     @Override
     public void update(Book book) {
         var map = Map.of(
-                "id", book.getId(),
-                "name", book.getName(),
-                "genre_id", book.getGenre().getId(),
-                "author_id", book.getAuthor().getId());
+                "id", book.id(),
+                "name", book.name(),
+                "genre_id", book.genre().id(),
+                "author_id", book.author().id());
 
         var sql = "UPDATE book SET name = :name, genre_id = :genre_id, author_id = :author_id WHERE id = :id";
         namedParameterJdbcOperations.update(sql, map);
