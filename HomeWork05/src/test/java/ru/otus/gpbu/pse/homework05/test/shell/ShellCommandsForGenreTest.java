@@ -10,10 +10,7 @@ import org.springframework.shell.jline.ScriptShellApplicationRunner;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest(properties = {
-        InteractiveShellApplicationRunner.SPRING_SHELL_INTERACTIVE_ENABLED + "=false",
-        ScriptShellApplicationRunner.SPRING_SHELL_SCRIPT + ".enabled=false"
-})
+@SpringBootTest
 @ComponentScan("ru.otus.gpbu.pse.homework05.myybooks.shell")
 class ShellCommandsForGenreTest {
 
