@@ -15,17 +15,18 @@ import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class AuthorDaoJdbc implements AuthorDao {
 
-    private final NamedParameterJdbcOperations jdbcOperations;
+    private final NamedParameterJdbcOperations jdbc;
     private final AuthorMapper authorMapper;
     private final IntegerMapper integerMapper;
 
     @Autowired
     public AuthorDaoJdbc(NamedParameterJdbcOperations jdbcOperations, AuthorMapper authorMapper, IntegerMapper integerMapper) {
-        this.jdbcOperations = jdbcOperations;
+        this.jdbc = jdbcOperations;
         this.authorMapper = authorMapper;
         this.integerMapper = integerMapper;
     }
@@ -35,7 +36,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         Map<String, Object> params = Collections.singletonMap("id", id);
 
         try {
-            return jdbcOperations.queryForObject("SELECT * FROM author WHERE id = :id", params, authorMapper);
+            return jdbc.queryForObject("SELECT * FROM author WHERE id = :id", params, authorMapper);
         } catch (EmptyResultDataAccessException e) {
             throw new DoesNotExistException("Author does not exists", e);
         }
@@ -47,8 +48,8 @@ public class AuthorDaoJdbc implements AuthorDao {
         SqlParameterSource params = new MapSqlParameterSource().addValue("name", author.name());
         KeyHolder kh = new GeneratedKeyHolder();
         var sql = "INSERT INTO author (name) VALUES (:name)";
-        jdbcOperations.update(sql, params, kh);
-        author.id(kh.getKey().longValue());
+        jdbc.update(sql, params, kh);
+        author.id(Objects.requireNonNull(kh.getKey()).longValue());
 
         return author.id();
     }
@@ -57,22 +58,22 @@ public class AuthorDaoJdbc implements AuthorDao {
     public void update(Author author) {
         var map = Map.of("id", author.id(), "name", author.name());
         var sql = "UPDATE author SET name = :name WHERE id = :id";
-        jdbcOperations.update(sql, map);
+        jdbc.update(sql, map);
     }
 
     @Override
     public void deleteById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        jdbcOperations.update("DELETE FROM author WHERE id = :id", params);
+        jdbc.update("DELETE FROM author WHERE id = :id", params);
     }
 
     @Override
     public List<Author> getAll() {
-        return jdbcOperations.query("SELECT * FROM author", authorMapper);
+        return jdbc.query("SELECT * FROM author", authorMapper);
     }
 
     @Override
     public int count() {
-        return jdbcOperations.query("SELECT count(*) AS Count FROM author", integerMapper.setColumnLabel("Count")).get(0);
+        return jdbc.query("SELECT count(*) AS Count FROM author", integerMapper.setColumnLabel("Count")).get(0);
     }
 }

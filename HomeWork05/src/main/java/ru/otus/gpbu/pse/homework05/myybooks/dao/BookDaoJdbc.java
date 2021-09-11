@@ -14,16 +14,17 @@ import ru.otus.gpbu.pse.homework05.myybooks.domain.Book;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class BookDaoJdbc implements BookDao {
 
-    private final NamedParameterJdbcOperations namedParameterJdbcOperations;
+    private final NamedParameterJdbcOperations jdbc;
     private final BookMapper bookMapper2;
     private final IntegerMapper integerMapper;
 
     public BookDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations, BookMapper bookMapper2, IntegerMapper integerMapper) {
-        this.namedParameterJdbcOperations = namedParameterJdbcOperations;
+        this.jdbc = namedParameterJdbcOperations;
         this.bookMapper2 = bookMapper2;
         this.integerMapper = integerMapper;
     }
@@ -44,7 +45,7 @@ public class BookDaoJdbc implements BookDao {
                 "LEFT JOIN author a ON a.id = b.author_id " +
                 "WHERE b.id = :id";
         try {
-            return namedParameterJdbcOperations.queryForObject(sql, params, bookMapper2);
+            return jdbc.queryForObject(sql, params, bookMapper2);
         } catch (EmptyResultDataAccessException e) {
             throw new DoesNotExistException("Does not exists", e);
         }
@@ -60,8 +61,8 @@ public class BookDaoJdbc implements BookDao {
 
         var sql = "INSERT INTO book (name, genre_id, author_id) " +
                 "VALUES (:name, :genre_id, :author_id)";
-        namedParameterJdbcOperations.update(sql, params, kh);
-        book.id(kh.getKey().longValue());
+        jdbc.update(sql, params, kh);
+        book.id(Objects.requireNonNull(kh.getKey()).longValue());
         return book.id();
     }
 
@@ -74,13 +75,13 @@ public class BookDaoJdbc implements BookDao {
                 "author_id", book.author().id());
 
         var sql = "UPDATE book SET name = :name, genre_id = :genre_id, author_id = :author_id WHERE id = :id";
-        namedParameterJdbcOperations.update(sql, map);
+        jdbc.update(sql, map);
     }
 
     @Override
     public void deleteById(long id) {
         Map<String, Object> params = Collections.singletonMap("id", id);
-        namedParameterJdbcOperations.update("DELETE FROM book WHERE id = :id", params);
+        jdbc.update("DELETE FROM book WHERE id = :id", params);
     }
 
     @Override
@@ -94,11 +95,11 @@ public class BookDaoJdbc implements BookDao {
                 "FROM book b " +
                 "LEFT JOIN genre g  ON g.id = b.genre_id " +
                 "LEFT JOIN author a ON a.id = b.author_id ";
-        return namedParameterJdbcOperations.query(sql, bookMapper2);
+        return jdbc.query(sql, bookMapper2);
     }
 
     @Override
     public int count() {
-        return namedParameterJdbcOperations.query("SELECT count(*) AS Count FROM BOOK", integerMapper.setColumnLabel("Count")).get(0);
+        return jdbc.query("SELECT count(*) AS Count FROM BOOK", integerMapper.setColumnLabel("Count")).get(0);
     }
 }

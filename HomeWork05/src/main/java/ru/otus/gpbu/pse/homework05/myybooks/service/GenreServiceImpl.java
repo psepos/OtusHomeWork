@@ -27,12 +27,12 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public long insert(String name) {
-        return this.insert(DomainObjectFactory.getGenre(0l, name));
+        return this.insert(DomainObjectFactory.getGenre(name));
     }
 
     @Override
     public void insert(Long id, String name) {
-        this.insert(DomainObjectFactory.getGenre(id, name));
+        this.insert(DomainObjectFactory.getGenre(name));
     }
 
     @Override

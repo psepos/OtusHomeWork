@@ -61,20 +61,48 @@ public class AuthorDaoJdbcTest {
     @Test
     void count() {
         long count = dao.count();
-        assertEquals(4L, count);
+        assertEquals(5L, count);
     }
 
     @Test
     void insert() {
-        Author author = DomainObjectFactory.getAuthor(0L, "Author5");
+        Author author = DomainObjectFactory.getAuthor("Author5");
         long id = dao.insert(author);
+
         assertEquals(5L, author.id());
         assertEquals(5L, id);
+
+        Author insertedAuthor = dao.getById(id);
+
+        assertNotNull(insertedAuthor);
+        assertEquals("Author5", insertedAuthor.name());
+
     }
 
     @Test
     void deleteById() {
-        dao.deleteById(5L);
+        Author author = dao.getById(5L);
+        assertNotNull(author);
+
+        dao.deleteById(author.id());
         assertThrows(DoesNotExistException.class, () -> dao.getById(5L));
+    }
+
+    @Test
+    void update() {
+        Author author = dao.getById(3L);
+        assertNotNull(author);
+
+        author.name("Author33");
+
+        dao.update(author);
+
+        Author updatedAuthor = dao.getById(3L);
+
+        assertNotNull(updatedAuthor);
+
+        assertEquals(author, updatedAuthor);
+        assertEquals("Author33", updatedAuthor.name());
+
     }
 }
