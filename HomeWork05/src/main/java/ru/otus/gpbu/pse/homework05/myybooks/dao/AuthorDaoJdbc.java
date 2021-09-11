@@ -1,5 +1,6 @@
 package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -22,6 +23,7 @@ public class AuthorDaoJdbc implements AuthorDao {
     private final AuthorMapper authorMapper;
     private final IntegerMapper integerMapper;
 
+    @Autowired
     public AuthorDaoJdbc(NamedParameterJdbcOperations jdbcOperations, AuthorMapper authorMapper, IntegerMapper integerMapper) {
         this.jdbcOperations = jdbcOperations;
         this.authorMapper = authorMapper;
@@ -44,11 +46,11 @@ public class AuthorDaoJdbc implements AuthorDao {
 
         SqlParameterSource params = new MapSqlParameterSource().addValue("name", author.name());
         KeyHolder kh = new GeneratedKeyHolder();
-        var sql = "INSERT INTO author (id, name) VALUES (:id, :name)";
+        var sql = "INSERT INTO author (name) VALUES (:name)";
         jdbcOperations.update(sql, params, kh);
         author.id(kh.getKey().longValue());
 
-        return  author.id();
+        return author.id();
     }
 
     @Override
