@@ -20,12 +20,12 @@ import java.util.Objects;
 public class BookDaoJdbc implements BookDao {
 
     private final NamedParameterJdbcOperations jdbc;
-    private final BookMapper bookMapper2;
+    private final BookMapper bookMapper;
     private final IntegerMapper integerMapper;
 
-    public BookDaoJdbc(NamedParameterJdbcOperations namedParameterJdbcOperations, BookMapper bookMapper2, IntegerMapper integerMapper) {
-        this.jdbc = namedParameterJdbcOperations;
-        this.bookMapper2 = bookMapper2;
+    public BookDaoJdbc(NamedParameterJdbcOperations jdbc, BookMapper bookMapper, IntegerMapper integerMapper) {
+        this.jdbc = jdbc;
+        this.bookMapper = bookMapper;
         this.integerMapper = integerMapper;
     }
 
@@ -45,7 +45,7 @@ public class BookDaoJdbc implements BookDao {
                 "LEFT JOIN author a ON a.id = b.author_id " +
                 "WHERE b.id = :id";
         try {
-            return jdbc.queryForObject(sql, params, bookMapper2);
+            return jdbc.queryForObject(sql, params, bookMapper);
         } catch (EmptyResultDataAccessException e) {
             throw new DoesNotExistException("Does not exists", e);
         }
@@ -95,7 +95,7 @@ public class BookDaoJdbc implements BookDao {
                 "FROM book b " +
                 "LEFT JOIN genre g  ON g.id = b.genre_id " +
                 "LEFT JOIN author a ON a.id = b.author_id ";
-        return jdbc.query(sql, bookMapper2);
+        return jdbc.query(sql, bookMapper);
     }
 
     @Override

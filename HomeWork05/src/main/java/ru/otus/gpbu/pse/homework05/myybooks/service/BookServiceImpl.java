@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
     public long insert(String name, Long genre_id, Long author_id) {
         return this.insert(
                 DomainObjectFactory.getBook(
-                        0l, name,
+                        name,
                         genreService.getById(genre_id),
                         authorService.getById(author_id)));
     }
