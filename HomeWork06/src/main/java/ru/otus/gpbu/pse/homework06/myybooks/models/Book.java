@@ -25,11 +25,15 @@ public class Book {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    @JoinTable(name = "book_genre",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id"))
     private Genre genre;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
     private Author author;
 
     @BatchSize(size = 100)
