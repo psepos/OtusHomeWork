@@ -1,7 +1,7 @@
 package ru.otus.gpbu.pse.homework05.myybooks.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework05.myybooks.dao.AuthorDao;
+import ru.otus.gpbu.pse.homework05.myybooks.repository.AuthorDao;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;
 

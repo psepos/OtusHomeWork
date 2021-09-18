@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.gpbu.pse.homework05.Homework05Application;
-import ru.otus.gpbu.pse.homework05.myybooks.dao.AuthorDao;
-import ru.otus.gpbu.pse.homework05.myybooks.dao.DoesNotExistException;
+import ru.otus.gpbu.pse.homework05.myybooks.repository.AuthorDao;
+import ru.otus.gpbu.pse.homework05.myybooks.repository.DoesNotExistException;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;
 

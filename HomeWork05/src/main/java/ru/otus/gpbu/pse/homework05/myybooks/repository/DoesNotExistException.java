@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework05.myybooks.dao;
+package ru.otus.gpbu.pse.homework05.myybooks.repository;
 
 public class DoesNotExistException extends RuntimeException{
     public DoesNotExistException(String message, Throwable e){
