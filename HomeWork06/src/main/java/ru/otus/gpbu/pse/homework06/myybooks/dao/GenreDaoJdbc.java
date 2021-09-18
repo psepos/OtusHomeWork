@@ -9,7 +9,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework06.myybooks.dao.mappers.GenreMapper;
 import ru.otus.gpbu.pse.homework06.myybooks.dao.mappers.IntegerMapper;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Genre;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import java.util.Collections;
 import java.util.List;

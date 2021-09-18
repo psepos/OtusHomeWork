@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework06.myybooks.domain;
+package ru.otus.gpbu.pse.homework06.myybooks.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

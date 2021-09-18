@@ -1,8 +1,8 @@
 package ru.otus.gpbu.pse.homework06.myybooks.dao.mappers;
 
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Author;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
+import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

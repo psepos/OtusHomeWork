@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework06.myybooks.dao;
 
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Author;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 
 import java.util.List;
 

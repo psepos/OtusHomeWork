@@ -2,7 +2,7 @@ package ru.otus.gpbu.pse.homework06.myybooks.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Author;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.service.AuthorService;
 
 import java.util.List;

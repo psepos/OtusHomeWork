@@ -2,10 +2,10 @@ package ru.otus.gpbu.pse.homework06.test.domain;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Author;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Book;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.DomainObjectFactory;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Genre;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
+import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

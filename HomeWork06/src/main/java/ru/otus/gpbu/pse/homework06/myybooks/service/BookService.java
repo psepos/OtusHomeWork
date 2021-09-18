@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework06.myybooks.service;
 
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Book;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 
 import java.util.List;
 

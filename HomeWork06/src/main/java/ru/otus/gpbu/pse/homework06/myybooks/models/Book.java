@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework06.myybooks.domain;
+package ru.otus.gpbu.pse.homework06.myybooks.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +34,7 @@ public class Book {
 
     @BatchSize(size = 100)
     @OneToMany
-    @JoinTable(name = "book-comments",
+    @JoinTable(name = "book_comments",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
     private List<Comment> comments;

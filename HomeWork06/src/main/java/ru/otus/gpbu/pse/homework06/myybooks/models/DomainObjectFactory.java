@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework06.myybooks.domain;
+package ru.otus.gpbu.pse.homework06.myybooks.models;
 
 public class DomainObjectFactory {
     public static Author getAuthor(Long id, String name) {

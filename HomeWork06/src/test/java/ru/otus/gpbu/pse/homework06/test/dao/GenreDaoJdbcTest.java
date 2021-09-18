@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import ru.otus.gpbu.pse.homework06.myybooks.HomeWork06Application;
 import ru.otus.gpbu.pse.homework06.myybooks.dao.DoesNotExistException;
 import ru.otus.gpbu.pse.homework06.myybooks.dao.GenreDao;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.DomainObjectFactory;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Genre;
+import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import java.util.List;
 

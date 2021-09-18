@@ -2,8 +2,8 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework06.myybooks.dao.BookDao;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.Book;
-import ru.otus.gpbu.pse.homework06.myybooks.domain.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
+import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
 import java.util.List;
 
