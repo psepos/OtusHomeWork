@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.gpbu.pse.homework05.myybooks.repository.BookDao;
+import ru.otus.gpbu.pse.homework05.myybooks.dao.BookDao;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Author;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Book;
 import ru.otus.gpbu.pse.homework05.myybooks.domain.DomainObjectFactory;

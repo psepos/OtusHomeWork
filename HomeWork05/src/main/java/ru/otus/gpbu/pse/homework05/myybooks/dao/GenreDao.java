@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework05.myybooks.repository;
+package ru.otus.gpbu.pse.homework05.myybooks.dao;
 
 import ru.otus.gpbu.pse.homework05.myybooks.domain.Genre;
 
