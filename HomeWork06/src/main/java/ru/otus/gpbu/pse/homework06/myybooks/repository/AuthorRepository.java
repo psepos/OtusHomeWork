@@ -1,11 +1,12 @@
-package ru.otus.gpbu.pse.homework06.myybooks.dao;
+package ru.otus.gpbu.pse.homework06.myybooks.repository;
 
 import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface AuthorDao {
-    Author getById(long id);
+public interface AuthorRepository {
+    Optional<Author> getById(long id);
 
     long insert(Author author);
 

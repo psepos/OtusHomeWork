@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.BookDao;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.BookRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
@@ -29,7 +29,7 @@ class BookServiceImplTest {
     private List<Author> authors;
 
     @Mock
-    private BookDao bookDao;
+    private BookRepository bookDao;
 
     @Mock
     private AuthorService authorService;

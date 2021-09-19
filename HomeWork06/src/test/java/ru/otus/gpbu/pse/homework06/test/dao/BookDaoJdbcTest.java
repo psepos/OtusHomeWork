@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.gpbu.pse.homework06.myybooks.HomeWork06Application;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.AuthorDao;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.BookDao;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.DoesNotExistException;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.GenreDao;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.AuthorRepository;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.BookRepository;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.DoesNotExistException;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.GenreRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
@@ -23,13 +23,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BookDaoJdbcTest {
 
     @Autowired
-    private BookDao bookDao;
+    private BookRepository bookDao;
 
     @Autowired
-    private GenreDao genreDao;
+    private GenreRepository genreDao;
 
     @Autowired
-    private AuthorDao authorDao;
+    private AuthorRepository authorDao;
     
     @Test
     void getById() {

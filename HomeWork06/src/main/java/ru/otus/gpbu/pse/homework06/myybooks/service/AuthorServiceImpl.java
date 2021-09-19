@@ -1,7 +1,7 @@
 package ru.otus.gpbu.pse.homework06.myybooks.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.AuthorDao;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.AuthorRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
@@ -10,20 +10,20 @@ import java.util.List;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-    private final AuthorDao dao;
+    private final AuthorRepository authorRepository;
 
-    public AuthorServiceImpl(AuthorDao dao) {
-        this.dao = dao;
+    public AuthorServiceImpl(AuthorRepository dao) {
+        this.authorRepository = dao;
     }
 
     @Override
     public Author getById(long id) {
-        return dao.getById(id);
+        return authorRepository.getById(id);
     }
 
     @Override
     public long insert(Author author) {
-        return dao.insert(author);
+        return authorRepository.insert(author);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void update(Author author) {
-        dao.update(author);
+        authorRepository.update(author);
     }
 
     @Override
@@ -43,16 +43,16 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteById(long id) {
-        dao.deleteById(id);
+        authorRepository.deleteById(id);
     }
 
     @Override
     public List<Author> getAll() {
-        return dao.getAll();
+        return authorRepository.getAll();
     }
 
     @Override
     public int count() {
-        return dao.count();
+        return authorRepository.count();
     }
 }

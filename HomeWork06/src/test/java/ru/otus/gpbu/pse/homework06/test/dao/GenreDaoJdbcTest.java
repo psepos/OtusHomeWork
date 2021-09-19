@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import ru.otus.gpbu.pse.homework06.myybooks.HomeWork06Application;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.DoesNotExistException;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.GenreDao;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.DoesNotExistException;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.GenreRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ComponentScan("ru.otus.gpbu.pse.homework06.myybooks.dao")
 public class GenreDaoJdbcTest {
     @Autowired
-    private GenreDao dao;
+    private GenreRepository dao;
 
     @Test
     void count() {

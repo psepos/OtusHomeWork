@@ -1,7 +1,7 @@
 package ru.otus.gpbu.pse.homework06.myybooks.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework06.myybooks.dao.BookDao;
+import ru.otus.gpbu.pse.homework06.myybooks.repository.BookRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
@@ -10,24 +10,24 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
-    private final BookDao dao;
+    private final BookRepository bookRepository;
     private final GenreService genreService;
     private final AuthorService authorService;
 
-    public BookServiceImpl(BookDao dao, GenreService genreService, AuthorService authorService) {
-        this.dao = dao;
+    public BookServiceImpl(BookRepository dao, GenreService genreService, AuthorService authorService) {
+        this.bookRepository = dao;
         this.genreService = genreService;
         this.authorService = authorService;
     }
 
     @Override
     public Book getById(long id) {
-        return dao.getById(id);
+        return bookRepository.getById(id);
     }
 
     @Override
     public long insert(Book book) {
-        return dao.insert(book);
+        return bookRepository.insert(book);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void update(Book book) {
-        dao.update(book);
+        bookRepository.update(book);
     }
 
     @Override
@@ -54,16 +54,16 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(long id) {
-        dao.deleteById(id);
+        bookRepository.deleteById(id);
     }
 
     @Override
     public List<Book> getAll() {
-        return dao.getAll();
+        return bookRepository.getAll();
     }
 
     @Override
     public int count() {
-        return dao.count();
+        return bookRepository.count();
     }
 }
