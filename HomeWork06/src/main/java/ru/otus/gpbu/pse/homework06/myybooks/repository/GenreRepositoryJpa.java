@@ -1,7 +1,6 @@
 package ru.otus.gpbu.pse.homework06.myybooks.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import javax.persistence.EntityManager;
@@ -38,7 +37,7 @@ public class GenreRepositoryJpa implements GenreRepository {
 
     @Override
     public void update(Genre genre) {
-
+        this.insert(genre);
     }
 
     @Override

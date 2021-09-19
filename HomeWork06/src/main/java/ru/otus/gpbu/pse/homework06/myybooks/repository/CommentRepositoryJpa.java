@@ -1,7 +1,7 @@
 package ru.otus.gpbu.pse.homework06.myybooks.repository;
 
 import org.springframework.stereotype.Repository;
-import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
+import ru.otus.gpbu.pse.homework06.myybooks.models.Comment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,53 +11,53 @@ import java.util.Optional;
 
 @Transactional
 @Repository
-public class AuthorRepositoryJpa implements AuthorRepository {
+public class CommentRepositoryJpa implements CommentRepository {
 
     @PersistenceContext
     private final EntityManager em;
 
-    public AuthorRepositoryJpa(EntityManager em) {
+    public CommentRepositoryJpa(EntityManager em) {
         this.em = em;
     }
 
     @Override
-    public Optional<Author> getById(long id) {
-        return Optional.ofNullable(em.find(Author.class, id));
+    public Optional<Comment> getById(long id) {
+        return Optional.ofNullable(em.find(Comment.class, id));
     }
 
     @Override
-    public long insert(Author author) {
-        if (author.id() > 0) {
-            em.merge(author);
+    public long insert(Comment comment) {
+        if (comment.id() > 0) {
+            em.merge(comment);
         } else {
-            em.persist(author);
+            em.persist(comment);
         }
 
-        return author.id();
+        return comment.id();
     }
 
     @Override
-    public void update(Author author) {
-        this.insert(author);
+    public void update(Comment comment) {
+        this.insert(comment);
     }
 
     @Override
     public long deleteById(long id) {
         return em
-                .createQuery("DELETE FROM Author a WHERE a.id =: id")
+                .createQuery("DELETE FROM Comment c WHERE c.id =: id")
                 .setParameter("id", id)
                 .executeUpdate();
     }
 
     @Override
-    public List<Author> getAll() {
-        return em.createQuery("SELECT a FROM Author a", Author.class).getResultList();
+    public List<Comment> getAll() {
+        return em.createQuery("SELECT c FROM Comment c", Comment.class).getResultList();
     }
 
     @Override
     public long count() {
         long count = 0;
-        var list = em.createQuery("SELECT COUNT(a) FROM Author a").getResultList();
+        var list = em.createQuery("SELECT COUNT(c) FROM Comment c").getResultList();
         if (list.size() > 0) {
             count = (long) list.get(0);
         }

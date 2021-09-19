@@ -9,3 +9,10 @@ INSERT INTO genre (name) VALUES ('Scientific');
 
 INSERT INTO book (name) VALUES ('Titanic on Space');
 INSERT INTO book (name) VALUES ('Space from outside');
+
+INSERT INTO comment (description) VALUES ('Description1');
+INSERT INTO comment (description) VALUES ('Description2');
+INSERT INTO comment (description) VALUES ('Description3');
+INSERT INTO comment (description) VALUES ('Description4');
+INSERT INTO comment (description) VALUES ('Description5');
+

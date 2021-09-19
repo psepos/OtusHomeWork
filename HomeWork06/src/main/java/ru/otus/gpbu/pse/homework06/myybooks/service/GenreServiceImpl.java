@@ -2,7 +2,7 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework06.myybooks.repository.GenreRepository;
-import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import java.util.List;
@@ -28,12 +28,12 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public long insert(String name) {
-        return this.insert(DomainObjectFactory.getGenre(name));
+        return this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
     public void insert(Long id, String name) {
-        this.insert(DomainObjectFactory.getGenre(name));
+        this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void update(Long id, String name) {
-        this.update(DomainObjectFactory.getGenre(id, name));
+        this.update(ModelsObjectFactory.getGenre(id, name));
     }
 
     @Override

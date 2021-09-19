@@ -3,7 +3,7 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework06.myybooks.repository.BookRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
-import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
+import ru.otus.gpbu.pse.homework06.myybooks.models.ModelsObjectFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public long insert(String name, Long genre_id, Long author_id) {
         return this.insert(
-                DomainObjectFactory.getBook(
+                ModelsObjectFactory.getBook(
                         name,
                         genreService.getById(genre_id).get(),
                         authorService.getById(author_id).get()));
@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void update(Long id, String name, Long genre_id, Long author_id) {
-        this.update(DomainObjectFactory.getBook(
+        this.update(ModelsObjectFactory.getBook(
                 id, name,
                 genreService.getById(genre_id).get(),
                 authorService.getById(author_id).get()));
