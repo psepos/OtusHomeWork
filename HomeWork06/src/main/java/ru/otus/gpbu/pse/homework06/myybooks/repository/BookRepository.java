@@ -10,9 +10,9 @@ public interface BookRepository {
     Optional<Book> getById(long id);
     long insert(Book book);
     void update(Book book);
-    void deleteById(long id);
+    long deleteById(long id);
     List<Book> getAll();
 
-    int count();
+    long count();
 
 }

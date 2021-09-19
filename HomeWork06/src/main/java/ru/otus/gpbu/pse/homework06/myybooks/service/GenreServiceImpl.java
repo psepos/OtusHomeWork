@@ -5,6 +5,7 @@ import ru.otus.gpbu.pse.homework06.myybooks.repository.GenreRepository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,36 +18,43 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @Transactional
     public Optional<Genre> getById(long id) {
         return genreRepository.getById(id);
     }
 
     @Override
+    @Transactional
     public long insert(Genre genre) {
         return genreRepository.insert(genre);
     }
 
     @Override
+    @Transactional
     public long insert(String name) {
         return this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
+    @Transactional
     public void insert(Long id, String name) {
         this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
+    @Transactional
     public void update(Genre genre) {
         genreRepository.update(genre);
     }
 
     @Override
+    @Transactional
     public void update(Long id, String name) {
         this.update(ModelsObjectFactory.getGenre(id, name));
     }
 
     @Override
+    @Transactional
     public long deleteById(long id) {
         return genreRepository.deleteById(id);
     }

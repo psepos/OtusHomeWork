@@ -3,11 +3,9 @@ package ru.otus.gpbu.pse.homework06.myybooks.repository;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class BookRepositoryJpa implements BookRepository{
     @Override
@@ -26,8 +24,8 @@ public class BookRepositoryJpa implements BookRepository{
     }
 
     @Override
-    public void deleteById(long id) {
-
+    public long deleteById(long id) {
+        return 0;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class BookRepositoryJpa implements BookRepository{
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 }

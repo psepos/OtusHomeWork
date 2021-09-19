@@ -5,11 +5,9 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Repository
 public class AuthorRepositoryJpa implements AuthorRepository {
 

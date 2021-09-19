@@ -5,6 +5,7 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.Comment;
 import ru.otus.gpbu.pse.homework06.myybooks.models.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.myybooks.repository.CommentRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,16 +19,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public Optional<Comment> getById(long id) {
         return repository.getById(id);
     }
 
     @Override
+    @Transactional
     public long insert(Comment comment) {
         return repository.insert(comment);
     }
 
     @Override
+    @Transactional
     public long insert(String description) {
         Comment comment = ModelsObjectFactory.getComment(description);
 
@@ -35,17 +39,20 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void update(Comment comment) {
         repository.update(comment);
     }
 
     @Override
+    @Transactional
     public void update(long id, String description) {
         Comment comment = ModelsObjectFactory.getComment(id, description);
         repository.update(comment);
     }
 
     @Override
+    @Transactional
     public long deleteById(long id) {
         return repository.deleteById(id);
     }

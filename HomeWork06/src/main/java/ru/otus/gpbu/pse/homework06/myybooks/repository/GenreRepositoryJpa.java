@@ -5,12 +5,10 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public class GenreRepositoryJpa implements GenreRepository {
 
     @PersistenceContext

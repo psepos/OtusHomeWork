@@ -21,5 +21,5 @@ public interface BookService {
 
     List<Book> getAll();
 
-    int count();
+    long count();
 }
