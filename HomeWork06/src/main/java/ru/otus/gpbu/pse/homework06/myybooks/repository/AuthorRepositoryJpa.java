@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Transactional
 @Repository
-public class AuthorRepositoryJpa implements AuthorRepository{
+public class AuthorRepositoryJpa implements AuthorRepository {
 
     @PersistenceContext
     private final EntityManager em;
@@ -27,7 +27,13 @@ public class AuthorRepositoryJpa implements AuthorRepository{
 
     @Override
     public long insert(Author author) {
-        return 0;
+        if (author.id() > 0) {
+            em.merge(author);
+        } else {
+            em.persist(author);
+        }
+
+        return author.id();
     }
 
     @Override
@@ -36,17 +42,25 @@ public class AuthorRepositoryJpa implements AuthorRepository{
     }
 
     @Override
-    public void deleteById(long id) {
-
+    public int deleteById(long id) {
+        return em
+                .createQuery("DELETE FROM Author a WHERE a.id =: id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
     public List<Author> getAll() {
-        return null;
+        return em.createQuery("SELECT e FROM Author e", Author.class).getResultList();
     }
 
     @Override
-    public int count() {
-        return 0;
+    public long count() {
+        long count = 0;
+        var list = em.createQuery("SELECT COUNT(a) FROM Author a").getResultList();
+        if (list.size() > 0) {
+            count = (long) list.get(0);
+        }
+        return count;
     }
 }

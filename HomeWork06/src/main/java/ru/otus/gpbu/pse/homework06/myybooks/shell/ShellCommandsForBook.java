@@ -45,6 +45,6 @@ public class ShellCommandsForBook {
 
     @ShellMethod(value = "book-get-by-id <id>", key = "bgbi")
     public Book bookGetById2(Long id) {
-        return bookService.getById(id);
+        return bookService.getById(id).get();
     }
 }

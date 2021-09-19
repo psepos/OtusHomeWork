@@ -3,10 +3,11 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookService {
 
-    Book getById(long id);
+    Optional<Book> getById(long id);
 
     long insert(Book book);
 

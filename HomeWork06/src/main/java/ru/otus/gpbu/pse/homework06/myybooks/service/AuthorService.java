@@ -3,10 +3,11 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AuthorService {
 
-    Author getById(long id);
+    Optional<Author> getById(long id);
 
     long insert(Author author);
 
@@ -20,5 +21,5 @@ public interface AuthorService {
 
     List<Author> getAll();
 
-    int count();
+    long count();
 }

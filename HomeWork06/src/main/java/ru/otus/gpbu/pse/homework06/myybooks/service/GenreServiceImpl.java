@@ -6,6 +6,7 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -16,7 +17,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Genre getById(long id) {
+    public Optional<Genre> getById(long id) {
         return genreRepository.getById(id);
     }
 
@@ -56,7 +57,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public int count() {
+    public long count() {
         return genreRepository.count();
     }
 }

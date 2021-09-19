@@ -17,7 +17,7 @@ public class ShellCommandsForGenre {
     }
 
     @ShellMethod(value = "genre-count", key = "gc")
-    public Integer genreCount() {
+    public long genreCount() {
         return service.count();
     }
 
@@ -34,7 +34,7 @@ public class ShellCommandsForGenre {
 
     @ShellMethod(value = "genre-get-by-id <id>", key = "ggbi")
     public Genre genreGetById(Long id) {
-        return service.getById(id);
+        return service.getById(id).get();
     }
 
     @ShellMethod(value = "genre-insert <name>", key = "gi")

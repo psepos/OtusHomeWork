@@ -6,6 +6,7 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -21,7 +22,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getById(long id) {
+    public Optional<Book> getById(long id) {
         return bookRepository.getById(id);
     }
 
@@ -35,8 +36,8 @@ public class BookServiceImpl implements BookService {
         return this.insert(
                 DomainObjectFactory.getBook(
                         name,
-                        genreService.getById(genre_id),
-                        authorService.getById(author_id)));
+                        genreService.getById(genre_id).get(),
+                        authorService.getById(author_id).get()));
     }
 
     @Override
@@ -48,8 +49,8 @@ public class BookServiceImpl implements BookService {
     public void update(Long id, String name, Long genre_id, Long author_id) {
         this.update(DomainObjectFactory.getBook(
                 id, name,
-                genreService.getById(genre_id),
-                authorService.getById(author_id)));
+                genreService.getById(genre_id).get(),
+                authorService.getById(author_id).get()));
     }
 
     @Override

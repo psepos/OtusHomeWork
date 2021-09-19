@@ -3,9 +3,10 @@ package ru.otus.gpbu.pse.homework06.myybooks.service;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Genre;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GenreService {
-    Genre getById(long id);
+    Optional<Genre> getById(long id);
 
     long insert(Genre genre);
 
@@ -21,5 +22,5 @@ public interface GenreService {
 
     List<Genre> getAll();
 
-    int count();
+    long count();
 }

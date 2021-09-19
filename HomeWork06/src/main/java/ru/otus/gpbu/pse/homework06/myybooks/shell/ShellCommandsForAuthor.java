@@ -17,7 +17,7 @@ public class ShellCommandsForAuthor {
     }
 
     @ShellMethod(value = "author-count", key = "ac")
-    public Integer authorCount() {
+    public Long authorCount() {
         return service.count();
     }
 
@@ -32,9 +32,9 @@ public class ShellCommandsForAuthor {
         return "Ok";
     }
 
-    @ShellMethod(value = "author-get-by-id <id>", key = "agi")
+    @ShellMethod(value = "author-get-by-id <id>", key = "agbi")
     public Author authorGetById(Long id) {
-        return service.getById(id);
+        return service.getById(id).get();
     }
 
     @ShellMethod(value = "author-insert <name>", key = "ai")

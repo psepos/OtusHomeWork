@@ -16,5 +16,5 @@ public interface GenreRepository {
 
     List<Genre> getAll();
 
-    int count();
+    long count();
 }

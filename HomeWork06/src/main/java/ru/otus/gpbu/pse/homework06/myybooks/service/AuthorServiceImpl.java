@@ -6,6 +6,7 @@ import ru.otus.gpbu.pse.homework06.myybooks.models.Author;
 import ru.otus.gpbu.pse.homework06.myybooks.models.DomainObjectFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -17,7 +18,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getById(long id) {
+    public Optional<Author> getById(long id) {
         return authorRepository.getById(id);
     }
 
@@ -52,7 +53,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public int count() {
+    public long count() {
         return authorRepository.count();
     }
 }

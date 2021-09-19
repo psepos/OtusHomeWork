@@ -1,10 +1,14 @@
 package ru.otus.gpbu.pse.homework06.myybooks.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
+@Repository
 public class BookRepositoryJpa implements BookRepository{
     @Override
     public Optional<Book> getById(long id) {
