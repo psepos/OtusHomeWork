@@ -27,9 +27,8 @@ public class ShellCommandsForGenre {
     }
 
     @ShellMethod(value = "genre-delete-by-id <id>", key = "gdbi")
-    public String genreDeleteById(Long id) {
-        service.deleteById(id);
-        return "Ok";
+    public long genreDeleteById(Long id) {
+        return service.deleteById(id);
     }
 
     @ShellMethod(value = "genre-get-by-id <id>", key = "ggbi")

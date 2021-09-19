@@ -42,7 +42,7 @@ public class AuthorRepositoryJpa implements AuthorRepository {
     }
 
     @Override
-    public int deleteById(long id) {
+    public long deleteById(long id) {
         return em
                 .createQuery("DELETE FROM Author a WHERE a.id =: id")
                 .setParameter("id", id)

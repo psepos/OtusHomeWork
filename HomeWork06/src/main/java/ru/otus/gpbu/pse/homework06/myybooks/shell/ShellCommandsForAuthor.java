@@ -27,9 +27,8 @@ public class ShellCommandsForAuthor {
     }
 
     @ShellMethod(value = "author-delete-by-id <id>", key = "adbi")
-    public String authorDeleteById(Long id) {
-        service.deleteById(id);
-        return "Ok";
+    public long authorDeleteById(Long id) {
+        return service.deleteById(id);
     }
 
     @ShellMethod(value = "author-get-by-id <id>", key = "agbi")

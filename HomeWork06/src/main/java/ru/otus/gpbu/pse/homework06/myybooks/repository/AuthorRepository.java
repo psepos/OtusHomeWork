@@ -12,7 +12,7 @@ public interface AuthorRepository {
 
     void update(Author author);
 
-    int deleteById(long id);
+    long deleteById(long id);
 
     List<Author> getAll();
 

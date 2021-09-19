@@ -12,7 +12,7 @@ public interface GenreRepository {
 
     void update(Genre genre);
 
-    void deleteById(long id);
+    long deleteById(long id);
 
     List<Genre> getAll();
 
