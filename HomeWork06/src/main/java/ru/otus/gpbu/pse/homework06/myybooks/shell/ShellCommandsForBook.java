@@ -17,7 +17,7 @@ public class ShellCommandsForBook {
     }
 
     @ShellMethod(value = "book-count", key = "bc")
-    public Integer bookCount() {
+    public long bookCount() {
         return bookService.count();
     }
 
