@@ -25,13 +25,13 @@ public class AuthorRepositoryJpa implements AuthorRepository {
 
     @Override
     public long insert(Author author) {
-        if (author.id() > 0) {
+        if (author.getId() > 0) {
             em.merge(author);
         } else {
             em.persist(author);
         }
 
-        return author.id();
+        return author.getId();
     }
 
     @Override

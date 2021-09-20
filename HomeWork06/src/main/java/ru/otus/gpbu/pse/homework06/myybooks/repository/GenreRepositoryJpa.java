@@ -25,12 +25,12 @@ public class GenreRepositoryJpa implements GenreRepository {
 
     @Override
     public long insert(Genre genre) {
-        if (genre.id() > 0) {
+        if (genre.getId() > 0) {
             em.merge(genre);
         } else {
             em.persist(genre);
         }
-        return genre.id();
+        return genre.getId();
     }
 
     @Override

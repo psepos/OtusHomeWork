@@ -3,14 +3,13 @@ package ru.otus.gpbu.pse.homework06.myybooks.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Accessors(fluent = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -37,9 +36,10 @@ public class Book {
     private Author author;
 
     @BatchSize(size = 100)
-    @OneToMany
+    @ManyToOne(targetEntity = Comment.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "book_comments",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
+    @Setter
     private List<Comment> comments;
 }

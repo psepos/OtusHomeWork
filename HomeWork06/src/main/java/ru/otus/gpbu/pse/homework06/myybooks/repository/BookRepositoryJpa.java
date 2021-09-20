@@ -3,14 +3,24 @@ package ru.otus.gpbu.pse.homework06.myybooks.repository;
 import org.springframework.stereotype.Repository;
 import ru.otus.gpbu.pse.homework06.myybooks.models.Book;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class BookRepositoryJpa implements BookRepository{
+
+    @PersistenceContext
+    private final EntityManager em;
+
+    public BookRepositoryJpa(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public Optional<Book> getById(long id) {
-        return Optional.empty();
+        return Optional.ofNullable(em.find(Book.class, id));
     }
 
     @Override
@@ -30,7 +40,7 @@ public class BookRepositoryJpa implements BookRepository{
 
     @Override
     public List<Book> getAll() {
-        return null;
+        return em.createQuery("SELECT e FROM Book e", Book.class).getResultList();
     }
 
     @Override

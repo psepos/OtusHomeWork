@@ -25,13 +25,13 @@ public class CommentRepositoryJpa implements CommentRepository {
 
     @Override
     public long insert(Comment comment) {
-        if (comment.id() > 0) {
+        if (comment.getId() > 0) {
             em.merge(comment);
         } else {
             em.persist(comment);
         }
 
-        return comment.id();
+        return comment.getId();
     }
 
     @Override
