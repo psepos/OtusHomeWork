@@ -1,4 +1,6 @@
-package ru.otus.gpbu.pse.homework06.mybooks.genre;
+package ru.otus.gpbu.pse.homework06.mybooks.genre.repository;
+
+import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 
 import java.util.List;
 import java.util.Optional;

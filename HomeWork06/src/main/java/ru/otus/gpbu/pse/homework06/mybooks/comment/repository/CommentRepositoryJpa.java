@@ -1,6 +1,7 @@
-package ru.otus.gpbu.pse.homework06.mybooks.comment;
+package ru.otus.gpbu.pse.homework06.mybooks.comment.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

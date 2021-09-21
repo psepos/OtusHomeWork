@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework06.mybooks.comment;
+package ru.otus.gpbu.pse.homework06.mybooks.author.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +10,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "comment")
-public class Comment {
+@Table(name = "author")
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "name")
+    private String name;
 }

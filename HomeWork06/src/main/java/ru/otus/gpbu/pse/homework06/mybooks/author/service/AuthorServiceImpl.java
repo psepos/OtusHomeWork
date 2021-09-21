@@ -1,6 +1,8 @@
-package ru.otus.gpbu.pse.homework06.mybooks.author;
+package ru.otus.gpbu.pse.homework06.mybooks.author.service;
 
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework06.mybooks.author.repository.AuthorRepository;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 
 import javax.transaction.Transactional;

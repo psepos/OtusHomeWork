@@ -1,7 +1,9 @@
-package ru.otus.gpbu.pse.homework06.mybooks.author;
+package ru.otus.gpbu.pse.homework06.mybooks.author.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework06.mybooks.author.service.AuthorService;
 
 import java.util.List;
 

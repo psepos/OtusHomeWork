@@ -1,9 +1,9 @@
 package ru.otus.gpbu.pse.homework06.mybooks.common;
 
-import ru.otus.gpbu.pse.homework06.mybooks.author.Author;
-import ru.otus.gpbu.pse.homework06.mybooks.book.Book;
-import ru.otus.gpbu.pse.homework06.mybooks.comment.Comment;
-import ru.otus.gpbu.pse.homework06.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 
 public class ModelsObjectFactory {
     public static Author getAuthor(long id, String name) {

@@ -1,6 +1,8 @@
-package ru.otus.gpbu.pse.homework06.mybooks.comment;
+package ru.otus.gpbu.pse.homework06.mybooks.comment.service;
 
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.repository.CommentRepository;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 
 import javax.transaction.Transactional;

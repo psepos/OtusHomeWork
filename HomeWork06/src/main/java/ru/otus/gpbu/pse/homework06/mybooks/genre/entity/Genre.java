@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework06.mybooks.author;
+package ru.otus.gpbu.pse.homework06.mybooks.genre.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,12 +6,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "author")
-public class Author {
+@Table(name = "genre")
+public class Genre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

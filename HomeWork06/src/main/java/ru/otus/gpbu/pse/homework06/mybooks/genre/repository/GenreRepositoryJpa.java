@@ -1,6 +1,7 @@
-package ru.otus.gpbu.pse.homework06.mybooks.genre;
+package ru.otus.gpbu.pse.homework06.mybooks.genre.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,7 +1,9 @@
-package ru.otus.gpbu.pse.homework06.mybooks.comment;
+package ru.otus.gpbu.pse.homework06.mybooks.comment.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.service.CommentService;
 
 import java.util.List;
 

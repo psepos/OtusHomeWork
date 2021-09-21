@@ -1,7 +1,9 @@
-package ru.otus.gpbu.pse.homework06.mybooks.book;
+package ru.otus.gpbu.pse.homework06.mybooks.book.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
+import ru.otus.gpbu.pse.homework06.mybooks.book.service.BookService;
 
 import java.util.List;
 

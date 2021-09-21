@@ -1,4 +1,6 @@
-package ru.otus.gpbu.pse.homework06.mybooks.comment;
+package ru.otus.gpbu.pse.homework06.mybooks.comment.repository;
+
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,11 +1,13 @@
-package ru.otus.gpbu.pse.homework06.mybooks.book;
+package ru.otus.gpbu.pse.homework06.mybooks.book.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework06.mybooks.author.Author;
-import ru.otus.gpbu.pse.homework06.mybooks.author.AuthorService;
+import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework06.mybooks.author.service.AuthorService;
+import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
+import ru.otus.gpbu.pse.homework06.mybooks.book.repository.BookRepository;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
-import ru.otus.gpbu.pse.homework06.mybooks.genre.Genre;
-import ru.otus.gpbu.pse.homework06.mybooks.genre.GenreService;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.service.GenreService;
 
 import javax.transaction.Transactional;
 import java.util.List;

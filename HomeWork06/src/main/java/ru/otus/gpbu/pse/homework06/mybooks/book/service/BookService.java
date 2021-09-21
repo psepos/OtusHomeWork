@@ -1,4 +1,6 @@
-package ru.otus.gpbu.pse.homework06.mybooks.book;
+package ru.otus.gpbu.pse.homework06.mybooks.book.service;
+
+import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
 
 import java.util.List;
 import java.util.Optional;

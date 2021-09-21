@@ -1,7 +1,9 @@
-package ru.otus.gpbu.pse.homework06.mybooks.genre;
+package ru.otus.gpbu.pse.homework06.mybooks.genre.service;
 
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework06.mybooks.genre.repository.GenreRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
