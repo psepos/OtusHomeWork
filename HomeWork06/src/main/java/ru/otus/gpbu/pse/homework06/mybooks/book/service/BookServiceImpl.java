@@ -135,4 +135,26 @@ public class BookServiceImpl implements BookService {
         commentService.insert(comment);
         return this.insertComment(book.get(), comment);
     }
+
+    @Override
+    @Transactional
+    public long deleteComment(Book book, Comment comment) {
+        book.getComments().remove(comment);
+        return bookRepository.update(book);
+    }
+
+    @Override
+    @Transactional
+    public long deleteComment(long bookId, long commentId) {
+
+        Optional<Book> book = bookRepository.getById(bookId);
+        if (book.isEmpty()) {
+            return -1;
+        }
+        Optional<Comment> comment = commentService.getById(commentId);
+        if (comment.isEmpty()) {
+            return -2;
+        }
+        return this.deleteComment(book.get(), comment.get());
+    }
 }

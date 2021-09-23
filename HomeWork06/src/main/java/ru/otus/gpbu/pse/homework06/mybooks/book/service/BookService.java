@@ -18,4 +18,6 @@ public interface BookService {
     long insertComment(Book book, Comment comment);
     long insertComment(long bookId, long commentId);
     long insertComment(long bookId, String commentDescription);
+    long deleteComment(Book book, Comment comment);
+    long deleteComment(long bookId, long commentId);
 }
