@@ -27,15 +27,13 @@ public class BookShellCommands {
     }
 
     @ShellMethod(value = "book-delete-by-id <id>", key = "bdbi")
-    public String bookDeleteById(Long id) {
-        bookService.deleteById(id);
-        return "Ok";
+    public long bookDeleteById(Long id) {
+        return bookService.deleteById(id);
     }
 
     @ShellMethod(value = "book-update <id> <name> <genre_id> <author_id>", key = "bu")
-    public String bookUpdate(Long id, String name, Long genre_id, Long author_id) {
-        bookService.update(id, name, genre_id, author_id);
-        return "Ok";
+    public long bookUpdate(Long id, String name, Long genre_id, Long author_id) {
+        return bookService.update(id, name, genre_id, author_id);
     }
 
     @ShellMethod(value = "book-insert <name> <genre_id> <author_id>", key = "bi")
@@ -44,7 +42,12 @@ public class BookShellCommands {
     }
 
     @ShellMethod(value = "book-get-by-id <id>", key = "bgbi")
-    public Book bookGetById2(Long id) {
-        return bookService.getById(id).get();
+    public Book bookGetById(Long bookId) {
+        return bookService.getById(bookId).get();
+    }
+
+    @ShellMethod(value = "book-add-comment <id> <commentDescription>", key = "bac")
+    public long bookAddComment(Long id, String commentDescription) {
+        return bookService.insertComment(id, commentDescription);
     }
 }

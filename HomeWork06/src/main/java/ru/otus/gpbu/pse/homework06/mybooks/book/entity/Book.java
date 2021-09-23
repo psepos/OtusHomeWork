@@ -26,18 +26,12 @@ public class Book {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(name = "book_genre",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id"))
+    @ManyToOne(targetEntity = Genre.class)
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 
-    @ManyToOne
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(name = "book_author",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)

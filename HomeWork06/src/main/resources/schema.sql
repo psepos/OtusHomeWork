@@ -8,21 +8,7 @@ DROP TABLE IF EXISTS comment;
 CREATE TABLE comment(id BIGSERIAL, description VARCHAR(255), CONSTRAINT comment_pk PRIMARY KEY (id));
 
 DROP TABLE IF EXISTS book;
-CREATE TABLE book(id BIGSERIAL, name VARCHAR(255), CONSTRAINT book_pk PRIMARY KEY (id));
-
-DROP TABLE IF EXISTS book_genre;
-CREATE TABLE book_genre(
-    book_id BIGINT REFERENCES book(id) ON DELETE CASCADE,
-    genre_id BIGINT REFERENCES genre(id),
-    CONSTRAINT book_genre_pk PRIMARY KEY (book_id)
-);
-
-DROP TABLE IF EXISTS book_author;
-CREATE TABLE book_author(
-    book_id BIGINT REFERENCES book(id) ON DELETE CASCADE,
-    author_id BIGINT REFERENCES author(id),
-    CONSTRAINT book_author_pk PRIMARY KEY (book_id)
-);
+CREATE TABLE book(id BIGSERIAL, name VARCHAR(255), author_id BIGINT, genre_id BIGINT, CONSTRAINT book_pk PRIMARY KEY (id));
 
 DROP TABLE IF EXISTS book_comments;
 CREATE TABLE book_comments(

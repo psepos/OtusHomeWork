@@ -25,17 +25,25 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public long insert(Book book) {
-        return 0;
+        if (book.getId() > 0) {
+            em.merge(book);
+        } else {
+            em.persist(book);
+        }
+
+        return book.getId();
     }
 
     @Override
-    public void update(Book book) {
-
+    public long update(Book book) {
+        return this.insert(book);
     }
 
     @Override
     public long deleteById(long id) {
-        return 0;
+        return em.createQuery("DELETE Book b WHERE b.id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
@@ -45,6 +53,7 @@ public class BookRepositoryJpa implements BookRepository {
 
     @Override
     public long count() {
-        return 0;
+        return (long) em.createQuery("SELECT COUNT(*) FROM Book").getSingleResult();
     }
+
 }
