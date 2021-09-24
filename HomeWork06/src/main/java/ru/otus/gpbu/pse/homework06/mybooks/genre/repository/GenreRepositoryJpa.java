@@ -34,8 +34,8 @@ public class GenreRepositoryJpa implements GenreRepository {
     }
 
     @Override
-    public void update(Genre genre) {
-        this.insert(genre);
+    public long update(Genre genre) {
+        return this.insert(genre);
     }
 
     @Override

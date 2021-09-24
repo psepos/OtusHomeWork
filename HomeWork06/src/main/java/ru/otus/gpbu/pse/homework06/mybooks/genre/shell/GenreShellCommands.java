@@ -42,8 +42,7 @@ public class GenreShellCommands {
     }
 
     @ShellMethod(value = "genre-update <id> <name>", key = "gu")
-    public String genreUpdate(Long id, String name) {
-        service.update(id, name);
-        return "Ok";
+    public long genreUpdate(Long id, String name) {
+        return service.update(id, name);
     }
 }

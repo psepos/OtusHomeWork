@@ -37,20 +37,20 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     @Transactional
-    public void insert(Long id, String name) {
-        this.insert(ModelsObjectFactory.getGenre(name));
+    public long insert(Long id, String name) {
+        return this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
     @Transactional
-    public void update(Genre genre) {
-        genreRepository.update(genre);
+    public long update(Genre genre) {
+        return genreRepository.update(genre);
     }
 
     @Override
     @Transactional
-    public void update(Long id, String name) {
-        this.update(ModelsObjectFactory.getGenre(id, name));
+    public long update(Long id, String name) {
+        return this.update(ModelsObjectFactory.getGenre(id, name));
     }
 
     @Override

@@ -7,14 +7,9 @@ import java.util.Optional;
 
 public interface GenreRepository {
     Optional<Genre> getById(long id);
-
     long insert(Genre genre);
-
-    void update(Genre genre);
-
+    long update(Genre genre);
     long deleteById(long id);
-
     List<Genre> getAll();
-
     long count();
 }

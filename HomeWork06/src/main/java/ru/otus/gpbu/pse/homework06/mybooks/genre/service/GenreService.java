@@ -12,11 +12,11 @@ public interface GenreService {
 
     long insert(String name);
 
-    void insert(Long id, String name);
+    long insert(Long id, String name);
 
-    void update(Genre genre);
+    long update(Genre genre);
 
-    void update(Long id, String name);
+    long update(Long id, String name);
 
     long deleteById(long id);
 
