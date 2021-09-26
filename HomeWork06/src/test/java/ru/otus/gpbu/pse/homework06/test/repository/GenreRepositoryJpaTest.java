@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework06.mybooks.HomeWork06Application;
+import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.repository.GenreRepository;
 
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork06Application.class)
 public class GenreRepositoryJpaTest {
@@ -35,7 +37,18 @@ public class GenreRepositoryJpaTest {
     }
 
     @Test
+    @Transactional()
     public void insert() {
+        Genre newGenre = ModelsObjectFactory.getGenre("newGenre");
+
+        assertNotNull(newGenre);
+        long newId = genreRepository.insert(newGenre);
+
+        Optional<Genre> insertedGenre = genreRepository.getById(newId);
+
+        assertNotNull(insertedGenre);
+        assertTrue(insertedGenre.isPresent());
+        assertEquals("newGenre", insertedGenre.get().getName());
 
     }
 
@@ -65,22 +78,28 @@ public class GenreRepositoryJpaTest {
         assertNotNull(genreOptional);
         assertTrue(genreOptional.isPresent());
 
-        long result = genreRepository.deleteById(6);
+        long result = genreRepository.deleteById(genreOptional.get().getId());
 
         assertEquals(1, result);
 
         Optional<Genre> genreDeleted = genreRepository.getById(6);
         assertNotNull(genreDeleted);
-        assertTrue(genreDeleted.isEmpty());
+        System.out.println(genreDeleted.get());
+
     }
 
     @Test
     public void getAll() {
+        var allGenre = genreRepository.getAll();
+        assertNotNull(allGenre);
+        System.out.println(allGenre);
+        assertEquals(6, allGenre.size());
     }
 
     @Test
     public void count() {
-
+        long count = genreRepository.count();
+        assertEquals(6, count);
     }
 }
 

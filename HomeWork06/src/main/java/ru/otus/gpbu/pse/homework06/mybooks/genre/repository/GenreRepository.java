@@ -10,6 +10,7 @@ public interface GenreRepository {
     long insert(Genre genre);
     long update(Genre genre);
     long deleteById(long id);
+    long delete(Genre genre);
     List<Genre> getAll();
     long count();
 }
