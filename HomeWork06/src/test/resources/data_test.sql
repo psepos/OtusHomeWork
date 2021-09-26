@@ -23,10 +23,10 @@ INSERT INTO comment (description) VALUES ('Comment8');
 INSERT INTO comment (description) VALUES ('Comment9');
 INSERT INTO comment (description) VALUES ('Comment10');
 
-INSERT INTO book (name, author_id, genre_id) VALUES ('book1', 1, 1);
-INSERT INTO book (name, author_id, genre_id) VALUES ('book2', 2, 2);
-INSERT INTO book (name, author_id, genre_id) VALUES ('book3', 3, 3);
-INSERT INTO book (name, author_id, genre_id) VALUES ('book4', 4, 4);
+INSERT INTO book (name, author_id, genre_id) VALUES ('Book1', 1, 1);
+INSERT INTO book (name, author_id, genre_id) VALUES ('Book2', 2, 2);
+INSERT INTO book (name, author_id, genre_id) VALUES ('Book3', 3, 3);
+INSERT INTO book (name, author_id, genre_id) VALUES ('Book4', 4, 4);
 
 INSERT INTO book_comments (book_id, comment_id)
     VALUES (1, 1), (1, 2),

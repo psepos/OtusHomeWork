@@ -8,17 +8,21 @@ import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.repository.GenreRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork06Application.class)
 public class GenreRepositoryJpaTest {
 
     @Autowired
     private GenreRepository genreRepository;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Test
     public void contextLoads() {
@@ -71,20 +75,26 @@ public class GenreRepositoryJpaTest {
 
     }
 
+    private static final long GENRE_ID_FOR_DELETE = 6;
+    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long EMPTY_LIST_AFTER_DELETE = 0;
+
     @Test
     @Transactional
     public void deleteById() {
-        long result = genreRepository.deleteById(6);
+        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.deleteById(GENRE_ID_FOR_DELETE));
 
-        assertEquals(1, result);
+        var result = em.createQuery("SELECT g FROM Genre g WHERE g.id = :id", Genre.class)
+                .setParameter("id", GENRE_ID_FOR_DELETE)
+                .getResultList();
 
+        assertEquals(EMPTY_LIST_AFTER_DELETE, result.size());
     }
 
     @Test
     public void getAll() {
         var allGenre = genreRepository.getAll();
         assertNotNull(allGenre);
-        System.out.println(allGenre);
         assertEquals(6, allGenre.size());
     }
 

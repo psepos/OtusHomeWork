@@ -8,17 +8,21 @@ import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
 import ru.otus.gpbu.pse.homework06.mybooks.author.repository.AuthorRepository;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork06Application.class)
 public class AuthorRepositoryJpaTest {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Test
     void contextLoads() {
@@ -50,10 +54,12 @@ public class AuthorRepositoryJpaTest {
         assertEquals("NewAuthor", insertedAuthor.get().getName());
     }
 
+    private static final long AUTHOR_ID_FOR_UPDATE = 6;
+
     @Test
     @Transactional
     public void update() {
-        Optional<Author> author = authorRepository.getById(5);
+        Optional<Author> author = authorRepository.getById(AUTHOR_ID_FOR_UPDATE);
 
         assertNotNull(author);
         assertTrue(author.isPresent());
@@ -62,7 +68,7 @@ public class AuthorRepositoryJpaTest {
 
         authorRepository.update(author.get());
 
-        Optional<Author> authorUpdated = authorRepository.getById(5);
+        Optional<Author> authorUpdated = Optional.ofNullable(em.find(Author.class, AUTHOR_ID_FOR_UPDATE));
 
         assertNotNull(authorUpdated);
         assertTrue(authorUpdated.isPresent());
@@ -71,13 +77,24 @@ public class AuthorRepositoryJpaTest {
 
     }
 
+    private static final long AUTHOR_ID_FOR_DELETE = 6;
+    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long EMPTY_LIST_AFTER_DELETE = 0;
+
     @Test
     @Transactional
     public void deleteById() {
-        long result = authorRepository.deleteById(6);
 
-        assertEquals(1, result);
+        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.deleteById(AUTHOR_ID_FOR_DELETE));
+
+        var result = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class)
+                .setParameter("id", AUTHOR_ID_FOR_DELETE)
+                .getResultList();
+
+        assertEquals(EMPTY_LIST_AFTER_DELETE, result.size());
     }
+
+    private static final long AUTHORS_COUNT = 6;
 
     @Test
     @Transactional
@@ -85,13 +102,11 @@ public class AuthorRepositoryJpaTest {
         var allAuthors = authorRepository.getAll();
 
         assertNotNull(allAuthors);
-        assertEquals(6, allAuthors.size());
+        assertEquals(AUTHORS_COUNT, allAuthors.size());
     }
 
     @Test
     public void count() {
-        long count = authorRepository.count();
-
-        assertEquals(6, count);
+        assertEquals(AUTHORS_COUNT, authorRepository.count());
     }
 }

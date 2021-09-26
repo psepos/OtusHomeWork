@@ -8,6 +8,8 @@ import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework06.mybooks.comment.repository.CommentRepository;
 import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -18,6 +20,9 @@ public class CommentRepositoryJpaTest {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Test
     public void contextLoads() {
@@ -84,20 +89,36 @@ public class CommentRepositoryJpaTest {
         assertEquals(DESCRIPTION_AFTER_UPDATE, updatedCommentOpt.get().getDescription());
     }
 
+    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long COMMENT_ID_FOR_DELETE = 9;
+    private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void deleteById() {
+        assertEquals(CORRECT_CODE_FOR_DELETE, commentRepository.deleteById(COMMENT_ID_FOR_DELETE));
+
+        var result = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id", Comment.class)
+                .setParameter("id", COMMENT_ID_FOR_DELETE)
+                .getResultList();
+
+        assertEquals(EMPTY_LIST_AFTER_DELETE, result.size());
 
     }
 
+    private static final long COMMENTS_COUNT = 10;
+
     @Test
+    @Transactional
     public void getAll() {
-
+        var allComments = commentRepository.getAll();
+        assertNotNull(allComments);
+        assertEquals(COMMENTS_COUNT, allComments.size());
     }
 
     @Test
+    @Transactional
     public void count() {
-
+        assertEquals(COMMENTS_COUNT, commentRepository.count());
     }
 }
