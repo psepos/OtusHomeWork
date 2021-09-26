@@ -42,9 +42,8 @@ public class CommentShellCommands {
     }
 
     @ShellMethod(value = "comment-update <id> <description>", key = "cu")
-    public String commentUpdate(Long id, String description) {
-        service.update(id, description);
-        return "Ok";
+    public long commentUpdate(Long id, String description) {
+        return service.update(id, description);
     }
 
 }

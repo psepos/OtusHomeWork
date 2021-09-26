@@ -35,8 +35,8 @@ public class CommentRepositoryJpa implements CommentRepository {
     }
 
     @Override
-    public void update(Comment comment) {
-        this.insert(comment);
+    public long update(Comment comment) {
+        return this.insert(comment);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface CommentRepository {
 
     long insert(Comment comment);
 
-    void update(Comment comment);
+    long update(Comment comment);
 
     long deleteById(long id);
 

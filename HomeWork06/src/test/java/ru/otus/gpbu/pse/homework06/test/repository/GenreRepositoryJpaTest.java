@@ -74,17 +74,9 @@ public class GenreRepositoryJpaTest {
     @Test
     @Transactional
     public void deleteById() {
-        Optional<Genre> genreOptional = genreRepository.getById(6);
-        assertNotNull(genreOptional);
-        assertTrue(genreOptional.isPresent());
-
-        long result = genreRepository.deleteById(genreOptional.get().getId());
+        long result = genreRepository.deleteById(6);
 
         assertEquals(1, result);
-
-        Optional<Genre> genreDeleted = genreRepository.getById(6);
-        assertNotNull(genreDeleted);
-        System.out.println(genreDeleted.get());
 
     }
 

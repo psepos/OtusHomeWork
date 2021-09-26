@@ -40,15 +40,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void update(Comment comment) {
-        repository.update(comment);
+    public long update(Comment comment) {
+        return repository.update(comment);
     }
 
     @Override
     @Transactional
-    public void update(long id, String description) {
+    public long update(long id, String description) {
         Comment comment = ModelsObjectFactory.getComment(id, description);
-        repository.update(comment);
+        return repository.update(comment);
     }
 
     @Override
