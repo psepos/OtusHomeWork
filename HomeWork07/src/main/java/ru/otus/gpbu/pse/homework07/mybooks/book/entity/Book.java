@@ -1,8 +1,9 @@
 package ru.otus.gpbu.pse.homework07.mybooks.book.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ru.otus.gpbu.pse.homework07.mybooks.author.entity.Author;
@@ -12,11 +13,12 @@ import ru.otus.gpbu.pse.homework07.mybooks.genre.entity.Genre;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "book")
+@Getter
+@Setter
 public class Book {
 
     @Id

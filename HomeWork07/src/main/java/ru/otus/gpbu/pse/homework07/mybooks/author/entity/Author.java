@@ -1,16 +1,18 @@
 package ru.otus.gpbu.pse.homework07.mybooks.author.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "author")
+@Getter
+@Setter
 public class Author {
 
     @Id
