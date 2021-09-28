@@ -78,14 +78,14 @@ public class AuthorRepositoryJpaTest {
     }
 
     private static final long AUTHOR_ID_FOR_DELETE = 6;
-    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long CORRECT_CODE_FOR_DELETE = 0;
     private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void deleteById() {
 
-        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.deleteById(AUTHOR_ID_FOR_DELETE));
+        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.delete(ModelsObjectFactory.getAuthor(AUTHOR_ID_FOR_DELETE)));
 
         var result = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class)
                 .setParameter("id", AUTHOR_ID_FOR_DELETE)

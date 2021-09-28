@@ -7,14 +7,9 @@ import java.util.Optional;
 
 public interface AuthorRepository {
     Optional<Author> getById(long id);
-
     long insert(Author author);
-
     void update(Author author);
-
-    long deleteById(long id);
-
+    long delete(Author author);
     List<Author> getAll();
-
     long count();
 }

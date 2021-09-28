@@ -51,7 +51,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return repository.deleteById(id);
+        return repository.delete(ModelsObjectFactory.getAuthor(id));
     }
 
     @Override

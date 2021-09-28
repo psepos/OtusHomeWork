@@ -19,6 +19,12 @@ public class ModelsObjectFactory {
         return author;
     }
 
+    public static Author getAuthor(long id) {
+        Author author = new Author();
+        author.setId(id);
+        return author;
+    }
+
     public static Genre getGenre(long id, String name) {
         Genre genre = new Genre();
         genre.setId(id);
