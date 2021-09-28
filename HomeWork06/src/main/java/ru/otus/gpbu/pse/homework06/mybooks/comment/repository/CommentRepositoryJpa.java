@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework06.mybooks.comment.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
 
 import javax.persistence.EntityManager;
@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Service
 public class CommentRepositoryJpa implements CommentRepository {
 
     @PersistenceContext
