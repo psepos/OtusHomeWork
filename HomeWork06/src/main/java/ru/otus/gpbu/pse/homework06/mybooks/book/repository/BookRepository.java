@@ -9,7 +9,7 @@ public interface BookRepository {
     Optional<Book> getById(long id);
     long insert(Book book);
     long update(Book book);
-    long deleteById(long id);
+    long delete(Book book);
     List<Book> getAll();
     long count();
 }

@@ -89,14 +89,14 @@ public class CommentRepositoryJpaTest {
         assertEquals(DESCRIPTION_AFTER_UPDATE, updatedCommentOpt.get().getDescription());
     }
 
-    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long CORRECT_CODE_FOR_DELETE = 0;
     private static final long COMMENT_ID_FOR_DELETE = 9;
     private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void deleteById() {
-        assertEquals(CORRECT_CODE_FOR_DELETE, commentRepository.deleteById(COMMENT_ID_FOR_DELETE));
+        assertEquals(CORRECT_CODE_FOR_DELETE, commentRepository.delete(commentRepository.getById(COMMENT_ID_FOR_DELETE).get()));
 
         var result = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id", Comment.class)
                 .setParameter("id", COMMENT_ID_FOR_DELETE)

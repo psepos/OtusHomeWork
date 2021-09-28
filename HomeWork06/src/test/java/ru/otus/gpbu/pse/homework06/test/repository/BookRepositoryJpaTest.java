@@ -154,7 +154,7 @@ public class BookRepositoryJpaTest {
     @Test
     @Transactional
     public void deleteById() {
-        assertEquals(1, bookRepository.deleteById(BOOK_ID_FOR_DELETE));
+        assertEquals(0, bookRepository.delete(bookRepository.getById(BOOK_ID_FOR_DELETE).get()));
 
         var result = em.createQuery("SELECT b FROM Book b WHERE b.id = :id", Book.class)
                 .setParameter("id", BOOK_ID_FOR_DELETE)

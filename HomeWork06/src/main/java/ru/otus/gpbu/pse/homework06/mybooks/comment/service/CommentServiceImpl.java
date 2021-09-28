@@ -54,7 +54,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return repository.deleteById(id);
+        Optional<Comment> commentOpt = repository.getById(id);
+        if (commentOpt.isEmpty()) {
+            return -1;
+        }
+        return repository.delete(commentOpt.get());
     }
 
     @Override

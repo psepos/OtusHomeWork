@@ -56,7 +56,12 @@ public class GenreServiceImpl implements GenreService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return genreRepository.deleteById(id);
+        Optional<Genre> genreOpt = genreRepository.getById(id);
+        if (genreOpt.isEmpty())
+        {
+            return -1;
+        }
+        return genreRepository.delete(genreOpt.get());
     }
 
     @Override

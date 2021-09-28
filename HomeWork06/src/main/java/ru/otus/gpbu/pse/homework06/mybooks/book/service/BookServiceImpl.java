@@ -88,7 +88,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return bookRepository.deleteById(id);
+        return bookRepository.delete(ModelsObjectFactory.getBook(id));
     }
 
     @Override

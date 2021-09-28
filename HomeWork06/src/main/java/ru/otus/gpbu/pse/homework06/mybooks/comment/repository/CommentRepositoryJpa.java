@@ -40,11 +40,9 @@ public class CommentRepositoryJpa implements CommentRepository {
     }
 
     @Override
-    public long deleteById(long id) {
-        return em
-                .createQuery("DELETE FROM Comment c WHERE c.id =: id")
-                .setParameter("id", id)
-                .executeUpdate();
+    public long delete(Comment comment) {
+        em.remove(comment);
+        return 0;
     }
 
     @Override

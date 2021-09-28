@@ -13,7 +13,7 @@ public interface CommentRepository {
 
     long update(Comment comment);
 
-    long deleteById(long id);
+    long delete(Comment comment);
 
     List<Comment> getAll();
 

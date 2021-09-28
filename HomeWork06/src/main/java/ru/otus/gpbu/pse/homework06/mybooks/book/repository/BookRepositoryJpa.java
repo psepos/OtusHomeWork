@@ -40,10 +40,9 @@ public class BookRepositoryJpa implements BookRepository {
     }
 
     @Override
-    public long deleteById(long id) {
-        return em.createQuery("DELETE Book b WHERE b.id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
+    public long delete(Book book) {
+        em.remove(book);
+        return 0;
     }
 
     @Override

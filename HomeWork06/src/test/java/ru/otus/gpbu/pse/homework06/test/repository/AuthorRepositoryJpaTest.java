@@ -85,7 +85,7 @@ public class AuthorRepositoryJpaTest {
     @Transactional
     public void deleteById() {
 
-        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.delete(ModelsObjectFactory.getAuthor(AUTHOR_ID_FOR_DELETE)));
+        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.delete(authorRepository.getById(AUTHOR_ID_FOR_DELETE).get()));
 
         var result = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class)
                 .setParameter("id", AUTHOR_ID_FOR_DELETE)

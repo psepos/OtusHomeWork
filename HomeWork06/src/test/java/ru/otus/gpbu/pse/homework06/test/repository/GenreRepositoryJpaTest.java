@@ -81,8 +81,8 @@ public class GenreRepositoryJpaTest {
 
     @Test
     @Transactional
-    public void deleteById() {
-        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.deleteById(GENRE_ID_FOR_DELETE));
+    public void delete() {
+        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.delete(genreRepository.getById(GENRE_ID_FOR_DELETE).get()));
 
         var result = em.createQuery("SELECT g FROM Genre g WHERE g.id = :id", Genre.class)
                 .setParameter("id", GENRE_ID_FOR_DELETE)

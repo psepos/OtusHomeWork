@@ -38,6 +38,12 @@ public class ModelsObjectFactory {
         return genre;
     }
 
+    public static Book getBook(long id) {
+        Book book = new Book();
+        book.setId(id);
+        return book;
+    }
+
     public static Book getBook(long id, String name, Genre genre, Author author) {
         Book book = new Book();
         book.setId(id);
