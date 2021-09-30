@@ -40,7 +40,8 @@ public class GenreRepositoryJpa implements GenreRepository {
 
     @Override
     public long delete(Genre genre) {
-        return this.delete(genre);
+        em.remove(genre);
+        return 0;
     }
 
     @Override

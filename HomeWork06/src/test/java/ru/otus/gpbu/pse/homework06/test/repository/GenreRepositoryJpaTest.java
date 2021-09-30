@@ -76,13 +76,18 @@ public class GenreRepositoryJpaTest {
     }
 
     private static final long GENRE_ID_FOR_DELETE = 6;
-    private static final long CORRECT_CODE_FOR_DELETE = 1;
+    private static final long CORRECT_CODE_FOR_DELETE = 0;
     private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void delete() {
-        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.delete(genreRepository.getById(GENRE_ID_FOR_DELETE).get()));
+        Optional<Genre> genreOpt = genreRepository.getById(GENRE_ID_FOR_DELETE);
+        assertNotNull(genreOpt);
+        assertTrue(genreOpt.isPresent());
+        Genre genre = genreOpt.get();
+
+        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.delete(genre));
 
         var result = em.createQuery("SELECT g FROM Genre g WHERE g.id = :id", Genre.class)
                 .setParameter("id", GENRE_ID_FOR_DELETE)
