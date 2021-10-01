@@ -32,11 +32,10 @@ public class AuthorRepositoryJpaTest {
     @Test
     @Transactional
     public void getById() {
-        Optional<Author> author = authorRepository.getById(1);
+        Author author = authorRepository.getById(1L);
         assertNotNull(author);
-        assertTrue(author.isPresent());
 
-        assertEquals("Author1", author.get().getName());
+        assertEquals("Author1", author.getName());
 
     }
 
@@ -45,9 +44,9 @@ public class AuthorRepositoryJpaTest {
     public void insert() {
         Author newAuthor = ModelsObjectFactory.getAuthor("NewAuthor");
         assertNotNull(newAuthor);
-        long newId = authorRepository.insert(newAuthor);
+        newAuthor = authorRepository.save(newAuthor);
 
-        Optional<Author> insertedAuthor = authorRepository.getById(newId);
+        Optional<Author> insertedAuthor = Optional.of(authorRepository.getById(newAuthor.getId()));
 
         assertNotNull(insertedAuthor);
         assertTrue(insertedAuthor.isPresent());
@@ -59,14 +58,13 @@ public class AuthorRepositoryJpaTest {
     @Test
     @Transactional
     public void update() {
-        Optional<Author> author = authorRepository.getById(AUTHOR_ID_FOR_UPDATE);
+        Author author = authorRepository.getById(AUTHOR_ID_FOR_UPDATE);
 
         assertNotNull(author);
-        assertTrue(author.isPresent());
 
-        author.get().setName("UpdateTestAuthor");
+        author.setName("UpdateTestAuthor");
 
-        authorRepository.update(author.get());
+        authorRepository.save(author);
 
         Optional<Author> authorUpdated = Optional.ofNullable(em.find(Author.class, AUTHOR_ID_FOR_UPDATE));
 
@@ -85,7 +83,7 @@ public class AuthorRepositoryJpaTest {
     @Transactional
     public void deleteById() {
 
-        assertEquals(CORRECT_CODE_FOR_DELETE, authorRepository.deleteById(AUTHOR_ID_FOR_DELETE));
+        authorRepository.deleteById(AUTHOR_ID_FOR_DELETE);
 
         var result = em.createQuery("SELECT a FROM Author a WHERE a.id = :id", Author.class)
                 .setParameter("id", AUTHOR_ID_FOR_DELETE)
@@ -99,7 +97,7 @@ public class AuthorRepositoryJpaTest {
     @Test
     @Transactional
     public void getAll() {
-        var allAuthors = authorRepository.getAll();
+        var allAuthors = authorRepository.findAll();
 
         assertNotNull(allAuthors);
         assertEquals(AUTHORS_COUNT, allAuthors.size());

@@ -1,16 +1,12 @@
 package ru.otus.gpbu.pse.homework07.mybooks.book.repository;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import ru.otus.gpbu.pse.homework07.mybooks.book.entity.Book;
 
-import java.util.List;
-import java.util.Optional;
+public interface BookRepository extends
+        CrudRepository<Book, Long>,
+        JpaRepository<Book, Long> {
 
-public interface BookRepository {
-    Optional<Book> getById(long id);
-    long insert(Book book);
-    long update(Book book);
-    long deleteById(long id);
-    List<Book> getAll();
-    long count();
 }

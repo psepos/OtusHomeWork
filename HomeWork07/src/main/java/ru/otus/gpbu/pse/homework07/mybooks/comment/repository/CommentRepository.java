@@ -1,21 +1,11 @@
 package ru.otus.gpbu.pse.homework07.mybooks.comment.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import ru.otus.gpbu.pse.homework07.mybooks.comment.entity.Comment;
 
-import java.util.List;
-import java.util.Optional;
+public interface CommentRepository extends
+        CrudRepository<Comment, Long>,
+        JpaRepository<Comment, Long> {
 
-public interface CommentRepository {
-
-    Optional<Comment> getById(long id);
-
-    long insert(Comment comment);
-
-    long update(Comment comment);
-
-    long deleteById(long id);
-
-    List<Comment> getAll();
-
-    long count();
 }

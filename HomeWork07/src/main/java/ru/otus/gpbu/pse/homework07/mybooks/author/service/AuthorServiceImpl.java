@@ -19,15 +19,15 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional
     public Optional<Author> getById(long id) {
-        return repository.getById(id);
+        return repository.findById(id);
     }
 
     @Override
     @Transactional
     public long insert(Author author) {
-        return repository.insert(author);
+        repository.save(author);
+        return author.getId();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public void update(Author author) {
-        repository.update(author);
+        repository.save(author);
     }
 
     @Override
@@ -51,12 +51,13 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return repository.deleteById(id);
+        repository.deleteById(id);
+        return 0;
     }
 
     @Override
     public List<Author> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override

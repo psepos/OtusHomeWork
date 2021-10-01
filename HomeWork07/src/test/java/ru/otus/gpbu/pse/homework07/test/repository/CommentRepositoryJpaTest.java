@@ -11,9 +11,9 @@ import ru.otus.gpbu.pse.homework07.mybooks.common.ModelsObjectFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork07Application.class)
 public class CommentRepositoryJpaTest {
@@ -35,15 +35,14 @@ public class CommentRepositoryJpaTest {
 
     @Test
     public void getById() {
-        Optional<Comment> comment = commentRepository.getById(EXISTENT_COMMENT_ID);
+        Comment comment = commentRepository.getById(EXISTENT_COMMENT_ID);
 
         assertNotNull(comment);
-        assertTrue(comment.isPresent());
-        assertEquals(DESCRIPTION_FOR_EXISTENT_COMMENT, comment.get().getDescription());
+        assertEquals(DESCRIPTION_FOR_EXISTENT_COMMENT, comment.getDescription());
 
         comment = commentRepository.getById(NON_EXISTENT_COMMENT_ID);
         assertNotNull(comment);
-        assertTrue(comment.isEmpty());
+
     }
 
     private static final String DESCRIPTION_FOR_NEW_COMMENT = "NewDescription";
@@ -55,13 +54,12 @@ public class CommentRepositoryJpaTest {
 
         assertNotNull(newComment);
 
-        long commentId = commentRepository.insert(newComment);
+        long commentId = commentRepository.save(newComment).getId();
 
-        Optional<Comment> insertedComment = commentRepository.getById(commentId);
+        Comment insertedComment = commentRepository.getById(commentId);
 
         assertNotNull(insertedComment);
-        assertTrue(insertedComment.isPresent());
-        assertEquals(DESCRIPTION_FOR_NEW_COMMENT, insertedComment.get().getDescription());
+        assertEquals(DESCRIPTION_FOR_NEW_COMMENT, insertedComment.getDescription());
 
     }
 
@@ -72,21 +70,18 @@ public class CommentRepositoryJpaTest {
     @Test
     @Transactional
     public void update() {
-        Optional<Comment> commentOpt = commentRepository.getById(UPDATED_COMMENT_ID);
-        assertNotNull(commentOpt);
-        assertTrue(commentOpt.isPresent());
-        assertEquals(DESCRIPTION_BEFORE_UPDATE, commentOpt.get().getDescription());
+        Comment comment = commentRepository.getById(UPDATED_COMMENT_ID);
+        assertNotNull(comment);
+        assertEquals(DESCRIPTION_BEFORE_UPDATE, comment.getDescription());
 
-        Comment comment = commentOpt.get();
         comment.setDescription("UpdateTestComment");
 
-        commentRepository.update(comment);
+        commentRepository.save(comment);
 
-        Optional<Comment> updatedCommentOpt = commentRepository.getById(UPDATED_COMMENT_ID);
+        Comment updatedCommentOpt = commentRepository.getById(UPDATED_COMMENT_ID);
 
         assertNotNull(updatedCommentOpt);
-        assertTrue(updatedCommentOpt.isPresent());
-        assertEquals(DESCRIPTION_AFTER_UPDATE, updatedCommentOpt.get().getDescription());
+        assertEquals(DESCRIPTION_AFTER_UPDATE, updatedCommentOpt.getDescription());
     }
 
     private static final long CORRECT_CODE_FOR_DELETE = 1;
@@ -96,7 +91,7 @@ public class CommentRepositoryJpaTest {
     @Test
     @Transactional
     public void deleteById() {
-        assertEquals(CORRECT_CODE_FOR_DELETE, commentRepository.deleteById(COMMENT_ID_FOR_DELETE));
+        commentRepository.deleteById(COMMENT_ID_FOR_DELETE);
 
         var result = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id", Comment.class)
                 .setParameter("id", COMMENT_ID_FOR_DELETE)
@@ -111,7 +106,7 @@ public class CommentRepositoryJpaTest {
     @Test
     @Transactional
     public void getAll() {
-        var allComments = commentRepository.getAll();
+        var allComments = commentRepository.findAll();
         assertNotNull(allComments);
         assertEquals(COMMENTS_COUNT, allComments.size());
     }

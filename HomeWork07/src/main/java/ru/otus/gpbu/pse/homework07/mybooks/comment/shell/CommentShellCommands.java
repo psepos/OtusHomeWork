@@ -34,7 +34,7 @@ public class CommentShellCommands {
 
     @ShellMethod(value = "comment-get-by-id <id>", key = "cgbi")
     public Comment commentGetById(Long id) {
-        return service.getById(id).get();
+        return service.getById(id);
     }
 
     @ShellMethod(value = "comment-insert <description>", key = "ci")

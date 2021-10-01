@@ -34,15 +34,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public Optional<Book> getById(long id) {
-        return bookRepository.getById(id);
+        return Optional.of(bookRepository.getById(id));
     }
 
     @Override
     @Transactional
     public long insert(Book book) {
-        return bookRepository.insert(book);
+        return bookRepository.save(book).getId();
     }
 
     @Override
@@ -64,7 +63,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public long update(Book book) {
-        return bookRepository.update(book);
+        return bookRepository.save(book).getId();
     }
 
     @Override
@@ -88,12 +87,13 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public long deleteById(long id) {
-        return bookRepository.deleteById(id);
+        bookRepository.deleteById(id);
+        return 1;
     }
 
     @Override
     public List<Book> getAll() {
-        return bookRepository.getAll();
+        return bookRepository.findAll();
     }
 
     @Override
@@ -104,57 +104,46 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public long insertComment(Book book, Comment comment) {
-        book.getComments().add(comment);
-        return bookRepository.update(book);
+        book.addComment(comment);
+        return bookRepository.save(book).getId();
     }
 
     @Override
     @Transactional
     public long insertComment(long bookId, long commentId) {
-        Optional<Book> book = bookRepository.getById(bookId);
-        if (book.isEmpty()) {
-            return -1;
-        }
-        Optional<Comment> comment = commentService.getById(commentId);
-        if (comment.isEmpty()) {
-            return -2;
-        }
-        return this.insertComment(book.get(), comment.get());
+        Book book = bookRepository.getById(bookId);
+
+        Comment comment = commentService.getById(commentId);
+
+        return this.insertComment(book, comment);
     }
 
     @Override
     @Transactional
     public long insertComment(long bookId, String commentDescription) {
 
-        Optional<Book> book = bookRepository.getById(bookId);
-        if (book.isEmpty()) {
-            return -1;
-        }
+        Book book = bookRepository.getById(bookId);
 
         Comment comment = ModelsObjectFactory.getComment(commentDescription);
         commentService.insert(comment);
-        return this.insertComment(book.get(), comment);
+        return this.insertComment(book, comment);
     }
 
     @Override
     @Transactional
     public long deleteComment(Book book, Comment comment) {
-        book.getComments().remove(comment);
-        return bookRepository.update(book);
+        book.removeComment(comment);
+        bookRepository.delete(book);
+        return 1;
     }
 
     @Override
     @Transactional
     public long deleteComment(long bookId, long commentId) {
 
-        Optional<Book> book = bookRepository.getById(bookId);
-        if (book.isEmpty()) {
-            return -1;
-        }
-        Optional<Comment> comment = commentService.getById(commentId);
-        if (comment.isEmpty()) {
-            return -2;
-        }
-        return this.deleteComment(book.get(), comment.get());
+        Book book = bookRepository.getById(bookId);
+        Comment comment = commentService.getById(commentId);
+
+        return this.deleteComment(book, comment);
     }
 }

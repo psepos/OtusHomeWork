@@ -1,18 +1,16 @@
 package ru.otus.gpbu.pse.homework07.mybooks.genre.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "genre")
+@Getter
+@Setter
 public class Genre {
 
     @Id
@@ -22,4 +20,11 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

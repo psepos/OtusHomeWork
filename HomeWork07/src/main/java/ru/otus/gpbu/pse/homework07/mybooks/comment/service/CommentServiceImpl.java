@@ -1,6 +1,5 @@
 package ru.otus.gpbu.pse.homework07.mybooks.comment.service;
 
-
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework07.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework07.mybooks.comment.repository.CommentRepository;
@@ -8,7 +7,6 @@ import ru.otus.gpbu.pse.homework07.mybooks.common.ModelsObjectFactory;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -20,15 +18,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
-    public Optional<Comment> getById(long id) {
+    public Comment getById(long id) {
         return repository.getById(id);
     }
 
     @Override
     @Transactional
     public long insert(Comment comment) {
-        return repository.insert(comment);
+        return repository.save(comment).getId();
     }
 
     @Override
@@ -36,31 +33,32 @@ public class CommentServiceImpl implements CommentService {
     public long insert(String description) {
         Comment comment = ModelsObjectFactory.getComment(description);
 
-        return repository.insert(comment);
+        return repository.save(comment).getId();
     }
 
     @Override
     @Transactional
     public long update(Comment comment) {
-        return repository.update(comment);
+        return repository.save(comment).getId();
     }
 
     @Override
     @Transactional
     public long update(long id, String description) {
         Comment comment = ModelsObjectFactory.getComment(id, description);
-        return repository.update(comment);
+        return repository.save(comment).getId();
     }
 
     @Override
     @Transactional
     public long deleteById(long id) {
-        return repository.deleteById(id);
+        repository.deleteById(id);
+        return 1;
     }
 
     @Override
     public List<Comment> getAll() {
-        return repository.getAll();
+        return repository.findAll();
     }
 
     @Override
