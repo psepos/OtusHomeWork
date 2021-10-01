@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.otus.gpbu.pse.homework07.mybooks.book.entity.Book;
 
 import javax.persistence.*;
 
@@ -23,6 +22,4 @@ public class Genre {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    private Book book;
 }

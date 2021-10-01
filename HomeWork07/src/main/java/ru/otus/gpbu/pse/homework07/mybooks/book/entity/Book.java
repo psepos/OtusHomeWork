@@ -37,7 +37,7 @@ public class Book {
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(targetEntity = Comment.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Comment.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @Override
