@@ -70,15 +70,14 @@ public class BookRepositoryJpaTest {
     @Test
     @Transactional
     public void insert() {
-        Optional<Genre> genre = genreRepository.getById(GENRE_ID_FOR_NEW_BOOK);
+        Genre genre = genreRepository.getById(GENRE_ID_FOR_NEW_BOOK);
         assertNotNull(genre);
-        assertTrue(genre.isPresent());
 
         Optional<Author> author = authorRepository.getById(AUTHOR_ID_FOR_NEW_BOOK);
         assertNotNull(author);
         assertTrue(author.isPresent());
 
-        Book book = ModelsObjectFactory.getBook(NAME_FOR_NEW_BOOK, genre.get(), author.get());
+        Book book = ModelsObjectFactory.getBook(NAME_FOR_NEW_BOOK, genre, author.get());
         assertNotNull(book);
 
         long bookId = bookRepository.insert(book);
@@ -117,9 +116,8 @@ public class BookRepositoryJpaTest {
         assertEquals(GENRE_ID_BEFORE_UPDATE,book.getGenre().getId());
         assertEquals(AUTHOR_ID_BEFORE_UPDATE,book.getAuthor().getId());
         assertEquals(COMMENTS_COUNT_BEFORE_UPDATE, book.getComments().size());
-        Optional<Genre> genre = genreRepository.getById(GENRE_ID_AFTER_UPDATE);
+        Genre genre = genreRepository.getById(GENRE_ID_AFTER_UPDATE);
         assertNotNull(genre);
-        assertTrue(genre.isPresent());
 
         Optional<Author> author = authorRepository.getById(AUTHOR_ID_AFTER_UPDATE);
         assertNotNull(author);
@@ -129,7 +127,7 @@ public class BookRepositoryJpaTest {
         assertNotNull(newComment);
 
         book.setName(BOOK_NAME_AFTER_UPDATE);
-        book.setGenre(genre.get());
+        book.setGenre(genre);
         book.setAuthor(author.get());
         book.getComments().add(newComment);
 

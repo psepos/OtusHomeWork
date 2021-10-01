@@ -14,55 +14,52 @@ import java.util.Optional;
 public class GenreServiceImpl implements GenreService {
     private final GenreRepository genreRepository;
 
-    public GenreServiceImpl(GenreRepository dao) {
-        this.genreRepository = dao;
+    public GenreServiceImpl(GenreRepository genreRepository) {
+        this.genreRepository = genreRepository;
     }
 
     @Override
     @Transactional
     public Optional<Genre> getById(long id) {
-        return genreRepository.getById(id);
+        return genreRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public long insert(Genre genre) {
-        return genreRepository.insert(genre);
+    public Genre insert(Genre genre) {
+        return genreRepository.save(genre);
     }
 
     @Override
-    @Transactional
-    public long insert(String name) {
+    public Genre insert(String name) {
+        return this.insert(ModelsObjectFactory.getGenre(name));
+    }
+
+    @Override
+    public Genre insert(Long id, String name) {
         return this.insert(ModelsObjectFactory.getGenre(name));
     }
 
     @Override
     @Transactional
-    public long insert(Long id, String name) {
-        return this.insert(ModelsObjectFactory.getGenre(name));
+    public Genre update(Genre genre) {
+        return genreRepository.save(genre);
     }
 
     @Override
-    @Transactional
-    public long update(Genre genre) {
-        return genreRepository.update(genre);
-    }
-
-    @Override
-    @Transactional
-    public long update(Long id, String name) {
+    public Genre update(Long id, String name) {
         return this.update(ModelsObjectFactory.getGenre(id, name));
     }
 
     @Override
     @Transactional
-    public long deleteById(long id) {
-        return genreRepository.deleteById(id);
+    public void deleteById(long id) {
+        genreRepository.deleteById(id);
     }
 
     @Override
     public List<Genre> getAll() {
-        return genreRepository.getAll();
+        return genreRepository.findAll();
     }
 
     @Override

@@ -21,4 +21,12 @@ public class Author {
 
     @Column(name = "name")
     private String name;
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

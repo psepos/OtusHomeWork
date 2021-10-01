@@ -8,17 +8,17 @@ import java.util.Optional;
 public interface GenreService {
     Optional<Genre> getById(long id);
 
-    long insert(Genre genre);
+    Genre insert(Genre genre);
 
-    long insert(String name);
+    Genre insert(String name);
 
-    long insert(Long id, String name);
+    Genre insert(Long id, String name);
 
-    long update(Genre genre);
+    Genre update(Genre genre);
 
-    long update(Long id, String name);
+    Genre update(Long id, String name);
 
-    long deleteById(long id);
+    void deleteById(long id);
 
     List<Genre> getAll();
 

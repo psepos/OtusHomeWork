@@ -38,8 +38,16 @@ public class Book {
 
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(targetEntity = Comment.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "book_comments",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
     private List<Comment> comments;
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", genre=" + genre +
+                ", author=" + author +
+                ", comments=" + comments +
+                '}';
+    }
 }

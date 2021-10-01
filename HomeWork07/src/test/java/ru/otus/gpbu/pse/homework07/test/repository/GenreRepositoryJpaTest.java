@@ -11,7 +11,6 @@ import ru.otus.gpbu.pse.homework07.mybooks.genre.repository.GenreRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,49 +28,43 @@ public class GenreRepositoryJpaTest {
         assertNotNull(genreRepository);
     }
 
-
+    private static final long GENRE_ID_FOR_GET = 1L;
+    private static final String GENRE_NAME_FOR_GET = "Genre1";
     @Test
     public void getById() {
-        Optional<Genre> genreOptional = genreRepository.getById(1);
-        assertNotNull(genreOptional);
-        assertTrue(genreOptional.isPresent());
-        Genre genre = genreOptional.get();
-
-        assertEquals("Genre1", genre.getName());
+        assertTrue(genreRepository.existsById(GENRE_ID_FOR_GET));
+        Genre genre = genreRepository.getById(GENRE_ID_FOR_GET);
+        assertNotNull(genre);
+        assertEquals(GENRE_NAME_FOR_GET, genre.getName());
     }
+
+    private static final String GENRE_NAME_FOR_INSERT = "newGenre";
 
     @Test
     @Transactional()
     public void insert() {
-        Genre newGenre = ModelsObjectFactory.getGenre("newGenre");
+        Genre genre = ModelsObjectFactory.getGenre(GENRE_NAME_FOR_INSERT);
+        assertNotNull(genre);
 
-        assertNotNull(newGenre);
-        long newId = genreRepository.insert(newGenre);
-
-        Optional<Genre> insertedGenre = genreRepository.getById(newId);
-
+        Genre insertedGenre = genreRepository.save(genre);
         assertNotNull(insertedGenre);
-        assertTrue(insertedGenre.isPresent());
-        assertEquals("newGenre", insertedGenre.get().getName());
+        assertEquals(GENRE_NAME_FOR_INSERT, insertedGenre.getName());
 
     }
 
     @Test
     @Transactional
     public void update() {
-        Optional<Genre> genreOptional = genreRepository.getById(5);
-        assertNotNull(genreOptional);
-        assertTrue(genreOptional.isPresent());
-        Genre genre = genreOptional.get();
+        Genre genre = genreRepository.getById(5L);
+        assertNotNull(genre);
 
         genre.setName("GenreTestUpdate");
-        genreRepository.update(genre);
+        genreRepository.save(genre);
 
-        Optional<Genre> genreOptionalAfterUpdate = genreRepository.getById(5);
-        assertNotNull(genreOptionalAfterUpdate);
-        assertTrue(genreOptionalAfterUpdate.isPresent());
+        Genre genreAfterUpdate = genreRepository.getById(5L);
+        assertNotNull(genreAfterUpdate);
 
-        assertEquals("GenreTestUpdate", genreOptionalAfterUpdate.get().getName());
+        assertEquals("GenreTestUpdate", genreAfterUpdate.getName());
 
     }
 
@@ -82,7 +75,7 @@ public class GenreRepositoryJpaTest {
     @Test
     @Transactional
     public void deleteById() {
-        assertEquals(CORRECT_CODE_FOR_DELETE, genreRepository.deleteById(GENRE_ID_FOR_DELETE));
+        genreRepository.deleteById(GENRE_ID_FOR_DELETE);
 
         var result = em.createQuery("SELECT g FROM Genre g WHERE g.id = :id", Genre.class)
                 .setParameter("id", GENRE_ID_FOR_DELETE)
@@ -93,7 +86,7 @@ public class GenreRepositoryJpaTest {
 
     @Test
     public void getAll() {
-        var allGenre = genreRepository.getAll();
+        var allGenre = genreRepository.findAll();
         assertNotNull(allGenre);
         assertEquals(6, allGenre.size());
     }

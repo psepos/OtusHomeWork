@@ -21,4 +21,12 @@ public class Comment {
 
     @Column(name = "description")
     private String description;
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

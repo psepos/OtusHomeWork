@@ -27,8 +27,9 @@ public class GenreShellCommands {
     }
 
     @ShellMethod(value = "genre-delete-by-id <id>", key = "gdbi")
-    public long genreDeleteById(Long id) {
-        return service.deleteById(id);
+    public String genreDeleteById(Long id) {
+        service.deleteById(id);
+        return "OK";
     }
 
     @ShellMethod(value = "genre-get-by-id <id>", key = "ggbi")
@@ -37,12 +38,12 @@ public class GenreShellCommands {
     }
 
     @ShellMethod(value = "genre-insert <name>", key = "gi")
-    public long genreInsert(String name) {
+    public Genre genreInsert(String name) {
         return service.insert(name);
     }
 
     @ShellMethod(value = "genre-update <id> <name>", key = "gu")
-    public long genreUpdate(Long id, String name) {
+    public Genre genreUpdate(Long id, String name) {
         return service.update(id, name);
     }
 }
