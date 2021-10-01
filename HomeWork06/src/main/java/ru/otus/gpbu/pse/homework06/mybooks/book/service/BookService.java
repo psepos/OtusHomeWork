@@ -20,4 +20,5 @@ public interface BookService {
     long insertComment(long bookId, String commentDescription);
     long deleteComment(Book book, Comment comment);
     long deleteComment(long bookId, long commentId);
+    List<Comment> getComments(long bookId);
 }

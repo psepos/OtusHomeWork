@@ -1,16 +1,15 @@
 package ru.otus.gpbu.pse.homework06.mybooks.author.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "author")
+@Getter
+@Setter
 public class Author {
 
     @Id
@@ -19,4 +18,12 @@ public class Author {
 
     @Column(name = "name")
     private String name;
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

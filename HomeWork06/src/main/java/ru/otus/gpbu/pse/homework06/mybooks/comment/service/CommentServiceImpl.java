@@ -19,7 +19,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public Optional<Comment> getById(long id) {
         return repository.getById(id);
     }

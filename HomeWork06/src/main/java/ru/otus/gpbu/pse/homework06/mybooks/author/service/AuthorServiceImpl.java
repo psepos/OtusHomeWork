@@ -19,7 +19,6 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    @Transactional
     public Optional<Author> getById(long id) {
         return repository.getById(id);
     }

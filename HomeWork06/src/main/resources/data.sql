@@ -10,14 +10,9 @@ INSERT INTO genre (name) VALUES ('Genre3');
 INSERT INTO book (name, author_id, genre_id) VALUES ('Book1', 1, 2);
 INSERT INTO book (name, author_id, genre_id) VALUES ('Book2', 2, 2);
 
-INSERT INTO comment (description) VALUES ('Description1');
-INSERT INTO comment (description) VALUES ('Description2');
-INSERT INTO comment (description) VALUES ('Description3');
-INSERT INTO comment (description) VALUES ('Description4');
-INSERT INTO comment (description) VALUES ('Description5');
-
-INSERT INTO book_comments (book_id, comment_id)
-    VALUES (1, 1), (1, 2), (1, 3),
-           (2, 4), (2, 5);
-
+INSERT INTO comment (description, book_id) VALUES ('Description1', 1);
+INSERT INTO comment (description, book_id) VALUES ('Description2', 1);
+INSERT INTO comment (description, book_id) VALUES ('Description3', 1);
+INSERT INTO comment (description, book_id) VALUES ('Description4', 2);
+INSERT INTO comment (description, book_id) VALUES ('Description5', 2);
 

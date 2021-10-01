@@ -1,16 +1,16 @@
 package ru.otus.gpbu.pse.homework06.mybooks.comment.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
 
 import javax.persistence.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "comment")
+@Getter
+@Setter
 public class Comment {
 
     @Id
@@ -19,4 +19,18 @@ public class Comment {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Book.class)
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", bookId=" + book.getId() +
+                '}';
+    }
+
 }

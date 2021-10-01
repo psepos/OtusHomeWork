@@ -4,6 +4,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import ru.otus.gpbu.pse.homework06.mybooks.book.entity.Book;
 import ru.otus.gpbu.pse.homework06.mybooks.book.service.BookService;
+import ru.otus.gpbu.pse.homework06.mybooks.comment.entity.Comment;
 
 import java.util.List;
 
@@ -66,5 +67,10 @@ public class BookShellCommands {
     @ShellMethod(value = "book-delete-comment <id> <commentId>", key = "bdc")
     public long bookDeleteComment(long bookId, long commentId) {
         return bookService.deleteComment(bookId, commentId);
+    }
+
+    @ShellMethod(value = "book-get-comments <bookId>", key = "bgcs")
+    public List<Comment> bookGetComments(long bookId) {
+        return bookService.getComments(bookId);
     }
 }

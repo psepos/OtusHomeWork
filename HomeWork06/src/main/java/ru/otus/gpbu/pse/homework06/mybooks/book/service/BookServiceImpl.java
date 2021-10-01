@@ -11,6 +11,8 @@ import ru.otus.gpbu.pse.homework06.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 import ru.otus.gpbu.pse.homework06.mybooks.genre.service.GenreService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -23,18 +25,22 @@ public class BookServiceImpl implements BookService {
     private final AuthorService authorService;
     private final CommentService commentService;
 
+    @PersistenceContext
+    private final EntityManager em;
+
     public BookServiceImpl(BookRepository bookRepository,
                            GenreService genreService,
                            AuthorService authorService,
-                           CommentService commentService) {
+                           CommentService commentService,
+                           EntityManager em) {
         this.bookRepository = bookRepository;
         this.genreService = genreService;
         this.authorService = authorService;
         this.commentService = commentService;
+        this.em = em;
     }
 
     @Override
-    @Transactional
     public Optional<Book> getById(long id) {
         return bookRepository.getById(id);
     }
@@ -104,7 +110,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public long insertComment(Book book, Comment comment) {
-        book.getComments().add(comment);
+        book.addComment(comment);
         return bookRepository.update(book);
     }
 
@@ -156,5 +162,10 @@ public class BookServiceImpl implements BookService {
             return -2;
         }
         return this.deleteComment(book.get(), comment.get());
+    }
+
+    @Override
+    public List<Comment> getComments(long bookId) {
+        return em.createQuery("SELECT c FROM Comment c WHERE c.book.id = :bookId", Comment.class).setParameter("bookId", bookId).getResultList();
     }
 }

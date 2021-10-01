@@ -1,8 +1,6 @@
 package ru.otus.gpbu.pse.homework06.mybooks.book.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import ru.otus.gpbu.pse.homework06.mybooks.author.entity.Author;
@@ -12,11 +10,12 @@ import ru.otus.gpbu.pse.homework06.mybooks.genre.entity.Genre;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "book")
+@Getter
+@Setter
 public class Book {
 
     @Id
@@ -35,9 +34,27 @@ public class Book {
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(targetEntity = Comment.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "book_comments",
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "comment_id", referencedColumnName = "id"))
+    @OneToMany(targetEntity = Comment.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setBook(this);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setBook(null);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", genre=" + genre +
+                ", author=" + author +
+                ", comments=" + comments +
+                '}';
+    }
 }

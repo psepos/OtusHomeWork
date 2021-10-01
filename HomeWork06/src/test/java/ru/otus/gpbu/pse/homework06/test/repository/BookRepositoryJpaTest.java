@@ -46,7 +46,7 @@ public class BookRepositoryJpaTest {
 
     private static final long BOOK_ID = 1;
     private static final String BOOK_NAME = "Book1";
-    private static final long BOOK_COMMENTS_COUNT = 2;
+    private static final long BOOK_COMMENTS_COUNT = 4;
     private static final String BOOK_GENRE = "Genre1";
     private static final String BOOK_AUTHOR = "Author1";
 
