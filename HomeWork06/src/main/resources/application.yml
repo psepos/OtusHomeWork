@@ -11,6 +11,7 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: none
+      enable_lazy_load_no_trans: true
 
     properties:
       hibernate:
@@ -19,3 +20,6 @@ spring:
 logging:
   level:
     ROOT: ERROR
+
+hibernate:
+  enable_lazy_load_no_trans: true

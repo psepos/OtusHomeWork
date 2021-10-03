@@ -25,19 +25,14 @@ public class BookServiceImpl implements BookService {
     private final AuthorService authorService;
     private final CommentService commentService;
 
-    @PersistenceContext
-    private final EntityManager em;
-
     public BookServiceImpl(BookRepository bookRepository,
                            GenreService genreService,
                            AuthorService authorService,
-                           CommentService commentService,
-                           EntityManager em) {
+                           CommentService commentService) {
         this.bookRepository = bookRepository;
         this.genreService = genreService;
         this.authorService = authorService;
         this.commentService = commentService;
-        this.em = em;
     }
 
     @Override
@@ -166,6 +161,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Comment> getComments(long bookId) {
-        return em.createQuery("SELECT c FROM Comment c WHERE c.book.id = :bookId", Comment.class).setParameter("bookId", bookId).getResultList();
+        return this.getById(bookId).get().getComments();
     }
 }
