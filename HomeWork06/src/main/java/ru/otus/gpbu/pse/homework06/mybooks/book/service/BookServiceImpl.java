@@ -14,6 +14,7 @@ import ru.otus.gpbu.pse.homework06.mybooks.genre.service.GenreService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -160,7 +161,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public List<Comment> getComments(long bookId) {
-        return this.getById(bookId).get().getComments();
+        return new ArrayList<Comment>(this.getById(bookId).get().getComments());
     }
 }
