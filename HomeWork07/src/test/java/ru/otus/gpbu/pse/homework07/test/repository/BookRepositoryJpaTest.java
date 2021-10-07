@@ -94,8 +94,8 @@ public class BookRepositoryJpaTest {
     private static final long GENRE_ID_AFTER_UPDATE = 2;
     private static final long AUTHOR_ID_BEFORE_UPDATE = 4;
     private static final long AUTHOR_ID_AFTER_UPDATE = 3;
-    private static final long COMMENTS_COUNT_BEFORE_UPDATE = 2;
-    private static final long COMMENTS_COUNT_AFTER_UPDATE = 3;
+    private static final long COMMENTS_COUNT_BEFORE_UPDATE = 3;
+    private static final long COMMENTS_COUNT_AFTER_UPDATE = 4;
     private static final String NEW_COMMENT_FOR_UPDATE = "NewComment";
     private static final String BOOK_NAME_BEFORE_UPDATE = "Book4";
     private static final String BOOK_NAME_AFTER_UPDATE = "UpdatedBook4";
@@ -134,7 +134,7 @@ public class BookRepositoryJpaTest {
         assertEquals(GENRE_ID_AFTER_UPDATE, updatedBook.getGenre().getId());
         assertEquals(AUTHOR_ID_AFTER_UPDATE, updatedBook.getAuthor().getId());
         assertEquals(COMMENTS_COUNT_AFTER_UPDATE, updatedBook.getComments().size());
-        assertEquals(NEW_COMMENT_FOR_UPDATE, updatedBook.getComments().get(2).getDescription());
+        assertEquals(NEW_COMMENT_FOR_UPDATE, updatedBook.getComments().get(3).getDescription());
 
     }
 
