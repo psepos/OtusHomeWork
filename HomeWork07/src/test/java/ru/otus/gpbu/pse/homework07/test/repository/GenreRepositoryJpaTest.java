@@ -31,11 +31,14 @@ public class GenreRepositoryJpaTest {
     private static final long GENRE_ID_FOR_GET = 1L;
     private static final String GENRE_NAME_FOR_GET = "Genre1";
     @Test
+    @Transactional
     public void getById() {
+        System.out.println("getById: BEGIN");
         assertTrue(genreRepository.existsById(GENRE_ID_FOR_GET));
         Genre genre = genreRepository.getById(GENRE_ID_FOR_GET);
         assertNotNull(genre);
         assertEquals(GENRE_NAME_FOR_GET, genre.getName());
+        System.out.println("getById: END");
     }
 
     private static final String GENRE_NAME_FOR_INSERT = "newGenre";
@@ -69,19 +72,13 @@ public class GenreRepositoryJpaTest {
     }
 
     private static final long GENRE_ID_FOR_DELETE = 6;
-    private static final long CORRECT_CODE_FOR_DELETE = 1;
-    private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void deleteById() {
         genreRepository.deleteById(GENRE_ID_FOR_DELETE);
-
-        var result = em.createQuery("SELECT g FROM Genre g WHERE g.id = :id", Genre.class)
-                .setParameter("id", GENRE_ID_FOR_DELETE)
-                .getResultList();
-
-        assertEquals(EMPTY_LIST_AFTER_DELETE, result.size());
+        var genreAfterDelete = genreRepository.findById(GENRE_ID_FOR_DELETE);
+        assertTrue(genreAfterDelete.isEmpty());
     }
 
     @Test

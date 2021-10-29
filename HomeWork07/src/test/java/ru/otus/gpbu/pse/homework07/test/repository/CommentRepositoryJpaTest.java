@@ -12,8 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = HomeWork07Application.class)
 public class CommentRepositoryJpaTest {
@@ -34,6 +33,7 @@ public class CommentRepositoryJpaTest {
     private static final long NON_EXISTENT_COMMENT_ID = 120;
 
     @Test
+    @Transactional
     public void getById() {
         Comment comment = commentRepository.getById(EXISTENT_COMMENT_ID);
 
@@ -84,20 +84,14 @@ public class CommentRepositoryJpaTest {
         assertEquals(DESCRIPTION_AFTER_UPDATE, updatedCommentOpt.getDescription());
     }
 
-    private static final long CORRECT_CODE_FOR_DELETE = 1;
     private static final long COMMENT_ID_FOR_DELETE = 9;
-    private static final long EMPTY_LIST_AFTER_DELETE = 0;
 
     @Test
     @Transactional
     public void deleteById() {
         commentRepository.deleteById(COMMENT_ID_FOR_DELETE);
-
-        var result = em.createQuery("SELECT c FROM Comment c WHERE c.id = :id", Comment.class)
-                .setParameter("id", COMMENT_ID_FOR_DELETE)
-                .getResultList();
-
-        assertEquals(EMPTY_LIST_AFTER_DELETE, result.size());
+        var commentAfterDelete = commentRepository.findById(COMMENT_ID_FOR_DELETE);
+        assertTrue(commentAfterDelete.isEmpty());
 
     }
 
