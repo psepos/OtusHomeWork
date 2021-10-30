@@ -6,7 +6,6 @@ import ru.otus.gpbu.pse.homework07.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework07.mybooks.genre.entity.Genre;
 import ru.otus.gpbu.pse.homework07.mybooks.genre.repository.GenreRepository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +23,6 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @Transactional
     public Genre insert(Genre genre) {
         return genreRepository.save(genre);
     }
@@ -40,7 +38,6 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @Transactional
     public Genre update(Genre genre) {
         return genreRepository.save(genre);
     }
@@ -51,7 +48,6 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    @Transactional
     public void deleteById(long id) {
         genreRepository.deleteById(id);
     }

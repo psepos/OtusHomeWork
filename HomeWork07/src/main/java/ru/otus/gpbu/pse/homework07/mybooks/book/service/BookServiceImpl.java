@@ -11,7 +11,6 @@ import ru.otus.gpbu.pse.homework07.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework07.mybooks.genre.entity.Genre;
 import ru.otus.gpbu.pse.homework07.mybooks.genre.service.GenreService;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,13 +38,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long insert(Book book) {
         return bookRepository.save(book).getId();
     }
 
     @Override
-    @Transactional
     public long insert(String name, Long genre_id, Long author_id) {
         Optional<Genre> genre = genreService.getById(genre_id);
         if (genre.isEmpty()) {
@@ -61,13 +58,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long update(Book book) {
         return bookRepository.save(book).getId();
     }
 
     @Override
-    @Transactional
     public long update(Long id, String name, Long genre_id, Long author_id) {
         Optional<Genre> genre = genreService.getById(genre_id);
         Optional<Author> author = authorService.getById(author_id);
@@ -85,7 +80,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long deleteById(long id) {
         bookRepository.deleteById(id);
         return 1;
@@ -102,14 +96,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long insertComment(Book book, Comment comment) {
         book.addComment(comment);
         return bookRepository.save(book).getId();
     }
 
     @Override
-    @Transactional
     public long insertComment(long bookId, long commentId) {
         Book book = bookRepository.getById(bookId);
 
@@ -119,7 +111,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long insertComment(long bookId, String commentDescription) {
 
         Book book = bookRepository.getById(bookId);
@@ -130,7 +121,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long deleteComment(Book book, Comment comment) {
         book.removeComment(comment);
         bookRepository.delete(book);
@@ -138,7 +128,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public long deleteComment(long bookId, long commentId) {
 
         Book book = bookRepository.getById(bookId);

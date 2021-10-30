@@ -5,7 +5,6 @@ import ru.otus.gpbu.pse.homework07.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework07.mybooks.comment.repository.CommentRepository;
 import ru.otus.gpbu.pse.homework07.mybooks.common.ModelsObjectFactory;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -23,13 +22,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public long insert(Comment comment) {
         return repository.save(comment).getId();
     }
 
     @Override
-    @Transactional
     public long insert(String description) {
         Comment comment = ModelsObjectFactory.getComment(description);
 
@@ -37,20 +34,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public long update(Comment comment) {
         return repository.save(comment).getId();
     }
 
     @Override
-    @Transactional
     public long update(long id, String description) {
         Comment comment = ModelsObjectFactory.getComment(id, description);
         return repository.save(comment).getId();
     }
 
     @Override
-    @Transactional
     public long deleteById(long id) {
         repository.deleteById(id);
         return 1;
