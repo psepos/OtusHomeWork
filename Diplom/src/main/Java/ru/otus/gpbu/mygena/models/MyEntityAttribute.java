@@ -1,4 +1,4 @@
-package ru.otus.gpbu.gena.models.settings;
+package ru.otus.gpbu.mygena.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,10 +10,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "author")
+@Table(name = "entity_attr")
 @Getter
 @Setter
-public class MySetting {
+public class MyEntityAttribute {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class MySetting {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "value")
-    private String value;
+    @Column(name = "type")
+    private String type;
 }

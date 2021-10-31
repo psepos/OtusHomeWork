@@ -1,4 +1,4 @@
-package ru.otus.gpbu.gena.shell;
+package ru.otus.gpbu.mygena.shell;
 
 import org.springframework.shell.standard.ShellComponent;
 
