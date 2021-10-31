@@ -14,6 +14,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class MySetting {
+    @Override
+    public String toString() {
+        return "MySetting{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

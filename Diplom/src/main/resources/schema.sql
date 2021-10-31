@@ -6,6 +6,8 @@ CREATE TABLE setting(
     value varchar(255),
     CONSTRAINT setting_pk PRIMARY KEY (id));
 
+CREATE INDEX setting_code ON setting(code);
+
 DROP TABLE IF EXISTS entity;
 CREATE TABLE entity(
     id BIGSERIAL,
