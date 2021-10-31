@@ -12,7 +12,13 @@ public class MySettingShell {
 
     @ShellMethod(value = "get-setting-by-id", key = "gsbi")
     public String getSettingById(Long id) {
-        return mySettingService.findById(id).get().toString();
+        var setting = mySettingService.findById(id);
+        if (setting.isPresent()) {
+            return setting.get().toString();
+        } else {
+            return "not found";
+        }
+
     }
 
     @ShellMethod(value = "get-setting-all", key = "gsa")
