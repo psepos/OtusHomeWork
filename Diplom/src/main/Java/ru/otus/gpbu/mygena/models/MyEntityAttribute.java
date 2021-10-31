@@ -24,4 +24,13 @@ public class MyEntityAttribute {
 
     @Column(name = "type")
     private String type;
+
+    @Override
+    public String toString() {
+        return "MyEntityAttribute{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

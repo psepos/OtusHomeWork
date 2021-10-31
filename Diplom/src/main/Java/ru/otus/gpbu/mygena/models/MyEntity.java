@@ -28,4 +28,12 @@ public class MyEntity {
 
     private List<MyEntityAttribute> attributes;
 
+    @Override
+    public String toString() {
+        return "MyEntity{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
