@@ -1,4 +1,5 @@
 INSERT INTO setting (code, description, value) VALUES ('OUTPUT_DIR', 'Каталог для выгрузки сгенерированных файлов', 'd:\temp');
+INSERT INTO setting (code, description, value) VALUES ('GENERATE_REPO', 'Генерировать репозитории для каждой сущности', 'yes');
 
 INSERT INTO entity (code, description) VALUES ('Entity1', 'EntityDescription1');
 

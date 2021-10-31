@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.models;
+package ru.otus.gpbu.mygena.models.myentity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

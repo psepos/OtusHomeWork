@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.models;
+package ru.otus.gpbu.mygena.models.myentity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
