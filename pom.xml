@@ -9,13 +9,24 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
+        <module>Diplom</module>
         <module>HomeWork01</module>
         <module>HomeWork02</module>
         <module>HomeWork03</module>
         <module>HomeWork04</module>
         <module>HomeWork05</module>
         <module>HomeWork06</module>
-        <module>Diplom</module>
+        <module>HomeWork08</module>
+        <module>HomeWork09</module>
+        <module>HomeWork10</module>
+        <module>HomeWork11</module>
+        <module>HomeWork12</module>
+        <module>HomeWork13</module>
+        <module>HomeWork14</module>
+        <module>HomeWork15</module>
+        <module>HomeWork16</module>
+        <module>HomeWork17</module>
+        <module>HomeWork18</module>
     </modules>
 
     <properties>
