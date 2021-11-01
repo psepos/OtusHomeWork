@@ -9,13 +9,13 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>Diplom</module>
         <module>HomeWork01</module>
         <module>HomeWork02</module>
         <module>HomeWork03</module>
         <module>HomeWork04</module>
         <module>HomeWork05</module>
         <module>HomeWork06</module>
+        <module>HomeWork07</module>
         <module>HomeWork08</module>
         <module>HomeWork09</module>
         <module>HomeWork10</module>
