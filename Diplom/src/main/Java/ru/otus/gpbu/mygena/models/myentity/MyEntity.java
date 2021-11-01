@@ -42,4 +42,9 @@ public class MyEntity {
                 ", attributes=" + attributes.toString() +
                 '}';
     }
+
+    public void addAttribute(MyEntityAttribute attribute){
+        attributes.add(attribute);
+        attribute.setMyEntity(this);
+    }
 }

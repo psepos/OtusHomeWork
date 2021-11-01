@@ -30,12 +30,18 @@ public class MyEntityAttribute {
     @JoinColumn(name = "entity_id")
     private MyEntity entity;
 
+    public void setMyEntity(MyEntity entity){
+        this.entity = entity;
+        entity.addAttribute(this);
+    }
+
     @Override
     public String toString() {
         return "MyEntityAttribute{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", type='" + type + '\'' +
+                ", entity_id=" + entity.getId() +
                 '}';
     }
 }
