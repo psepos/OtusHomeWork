@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 
 import javax.persistence.*;
 
@@ -24,6 +25,10 @@ public class MyEntityAttribute {
 
     @Column(name = "type")
     private String type;
+
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = MyEntity.class)
+    @JoinColumn(name = "entity_id")
+    private MyEntity entity;
 
     @Override
     public String toString() {

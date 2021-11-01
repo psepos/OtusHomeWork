@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +29,9 @@ public class MyEntity {
     @Column(name = "description")
     private String description;
 
-    //private List<MyEntityAttribute> attributes;
+    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(targetEntity = MyEntityAttribute.class, mappedBy = "entity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<MyEntityAttribute> attributes;
 
     @Override
     public String toString() {
@@ -33,6 +39,7 @@ public class MyEntity {
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", description='" + description + '\'' +
+                ", attributes=" + attributes.toString() +
                 '}';
     }
 }

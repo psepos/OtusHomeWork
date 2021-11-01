@@ -15,6 +15,8 @@ CREATE TABLE entity(
     description varchar(255),
     CONSTRAINT entity_pk PRIMARY KEY (id));
 
+CREATE UNIQUE INDEX entity_code ON entity(code);
+
 DROP TABLE IF EXISTS entity_attr;
 CREATE TABLE entity_attr(
     id BIGSERIAL,
@@ -23,3 +25,5 @@ CREATE TABLE entity_attr(
     type varchar(255),
     entity_id BIGINT,
     CONSTRAINT entity_attr_pk PRIMARY KEY (id));
+
+CREATE UNIQUE INDEX entity_attr_entity_id ON entity_attr(entity_id, code);
