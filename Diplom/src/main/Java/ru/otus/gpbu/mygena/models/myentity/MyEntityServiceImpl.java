@@ -26,4 +26,13 @@ public class MyEntityServiceImpl implements MyEntityService {
         return myEntityRepository.findByCode(code);
     }
 
+    @Override
+    public void saveOrUpdate(MyEntity entity) {
+        myEntityRepository.save(entity);
+    }
+
+    @Override
+    public void delete(MyEntity entity) {
+        myEntityRepository.delete(entity);
+    }
 }

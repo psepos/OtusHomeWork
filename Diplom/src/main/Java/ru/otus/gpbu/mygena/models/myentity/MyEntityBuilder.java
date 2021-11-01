@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class MyEntityBuilder {
 
-    private MyEntity entity = new MyEntity();
+    private final MyEntity entity = new MyEntity();
 
     public MyEntityBuilder setCode(String code) {
         this.entity.setCode(code);

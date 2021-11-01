@@ -6,4 +6,6 @@ import java.util.Optional;
 public interface MyEntityService {
     List<MyEntity> findAll();
     Optional<MyEntity> findByCode(String code);
+    void saveOrUpdate(MyEntity entity);
+    void delete(MyEntity entity);
 }
