@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MySettingServiceImpl implements MySettingService {
+public class MySettingServiceImpl implements MySettingService, MySettingServiceCrud {
 
     @Autowired
     private MySettingRepository mySettingRepository;

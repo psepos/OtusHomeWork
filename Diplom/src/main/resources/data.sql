@@ -1,5 +1,6 @@
 INSERT INTO setting (code, description, value) VALUES ('OUTPUT_DIR', 'Каталог для выгрузки сгенерированных файлов', 'd:\temp\generate');
-INSERT INTO setting (code, description, value) VALUES ('GENERATE_REPO', 'Генерировать репозитории для каждой сущности', 'yes');
+INSERT INTO setting (code, description, value) VALUES ('GENERATE_REPO', 'Генерировать репозитории для каждой сущности, Да/Нет', 'Да');
+INSERT INTO setting (code, description, value) VALUES ('PACKAGE_FOR_ENTITY', 'Пакет для генерируемых сущностей', 'ru.otus.gpbu.mygena.runtime.entity');
 
 INSERT INTO entity (code, description) VALUES ('Entity1', 'EntityDescription1');
 INSERT INTO entity (code, description) VALUES ('Entity2', 'EntityDescription2');

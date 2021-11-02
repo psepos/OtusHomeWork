@@ -8,11 +8,14 @@ import org.springframework.shell.standard.ShellMethod;
 public class MySettingShell {
 
     @Autowired
+    private MySettingServiceCrud mySettingServiceCrud;
+
+    @Autowired
     private MySettingService mySettingService;
 
     @ShellMethod(value = "get-setting-by-id", key = "gsbi")
     public String getSettingById(Long id) {
-        var setting = mySettingService.findById(id);
+        var setting = mySettingServiceCrud.findById(id);
         if (setting.isPresent()) {
             return setting.get().toString();
         } else {
@@ -23,7 +26,7 @@ public class MySettingShell {
 
     @ShellMethod(value = "get-setting-all", key = "gsa")
     public String getSettingAll() {
-        return mySettingService.findAll().toString();
+        return mySettingServiceCrud.findAll().toString();
     }
 
     @ShellMethod(value = "get-setting", key = "gs")
