@@ -1,5 +1,6 @@
 "# OtusHomeWork"
 Курс "Разработчик на Spring Framework"
+https://otus.ru/lessons/javaspring
 Палагин Сергей
 Дипломная работа.
 Система автоматизированной генерации кода

@@ -34,7 +34,11 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
 
     @Override
     public String getSetting(String code) {
+        return getSetting(code, "");
+    }
 
+    @Override
+    public String getSetting(String code, String defaultValue) {
         String result;
 
         Optional<MySetting> setting = mySettingRepository.findByCode(code);
@@ -43,7 +47,7 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
             result = setting.get().getValue();
         } else
         {
-            result = "";
+            result = defaultValue;
         }
 
         return result;
