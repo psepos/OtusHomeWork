@@ -69,7 +69,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
         }
 
         if (path3 == null) {
-            path3 = Paths.get(destinationPath + "\\demo\\src\\main\\java");
+            path3 = Paths.get(destinationPath + "\\src\\main\\java");
         }
 
         Files.copy(path2, path1, StandardCopyOption.REPLACE_EXISTING);
@@ -91,8 +91,10 @@ public class GeneratorEntityImpl implements GeneratorEntity {
 
         entityClassBuilder.addAnnotation(Entity.class);
 
+        String tableName = "USER_" + entityModel.getCode().toUpperCase(Locale.ROOT);
+
         AnnotationSpec ann = AnnotationSpec.builder(Table.class)
-                .addMember("name", "USER_" + entityModel.getCode().toUpperCase(Locale.ROOT))
+                .addMember("name", "\"" + tableName + "\"")
                         .build();
 
         entityClassBuilder.addAnnotation(ann);
@@ -102,7 +104,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
         entityClassBuilder.addAnnotation(NoArgsConstructor.class);
         entityClassBuilder.addAnnotation(AllArgsConstructor.class);
 
-        ann = AnnotationSpec.builder(GeneratedValue.class).addMember("strategy", "GenerationType.IDENTITY").build();
+        ann = AnnotationSpec.builder(GeneratedValue.class).addMember("strategy", "javax.persistence.GenerationType.IDENTITY").build();
 
         FieldSpec fieldId = FieldSpec.builder(Long.class, "id")
                 .addAnnotation(Id.class)
