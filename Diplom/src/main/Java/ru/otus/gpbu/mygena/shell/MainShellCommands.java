@@ -8,6 +8,7 @@ import ru.otus.gpbu.mygena.models.myentity.MyEntityService;
 import ru.otus.gpbu.mygena.service.GeneratorEntity;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @ShellComponent
@@ -20,7 +21,7 @@ public class MainShellCommands {
     private GeneratorEntity generator;
 
     @ShellMethod(value = "gen", key = "g")
-    public String gen(String entityCode) throws IOException {
+    public String gen(String entityCode) throws IOException, URISyntaxException {
         Optional<MyEntity> entity = myEntityService.findByCode(entityCode);
 
         if (entity.isEmpty()) {
