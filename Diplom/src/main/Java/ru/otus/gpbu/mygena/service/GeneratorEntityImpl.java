@@ -6,14 +6,15 @@ import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 
 @Service
-public class GenerateEntityImpl implements GenerateEntity {
+public class GeneratorEntityImpl implements GeneratorEntity {
 
     private MyEntity entityModel;
+    private String packageName;
 
     @Autowired
     private final MySettingService settings;
 
-    public GenerateEntityImpl(MySettingService settings) {
+    public GeneratorEntityImpl(MySettingService settings) {
         this.settings = settings;
     }
 
@@ -24,6 +25,9 @@ public class GenerateEntityImpl implements GenerateEntity {
 
     @Override
     public void generate() {
+
+        packageName = settings.getSetting("GENERATOR.PACKAGE.FOR_ENTITY");
+
 
     }
 }
