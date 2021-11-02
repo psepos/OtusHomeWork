@@ -21,7 +21,7 @@ public class MainShellCommands {
     private GeneratorEntity generator;
 
     @ShellMethod(value = "gen", key = "g")
-    public String gen(String entityCode) throws IOException, URISyntaxException {
+    public String gen(String entityCode) throws IOException, URISyntaxException, InterruptedException {
         Optional<MyEntity> entity = myEntityService.findByCode(entityCode);
 
         if (entity.isEmpty()) {

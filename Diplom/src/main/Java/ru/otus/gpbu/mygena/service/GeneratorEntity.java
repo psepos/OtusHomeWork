@@ -7,5 +7,5 @@ import java.net.URISyntaxException;
 
 public interface GeneratorEntity {
     void setEntity(MyEntity entityModel);
-    void generate() throws IOException, URISyntaxException;
+    void generate() throws IOException, URISyntaxException, InterruptedException;
 }

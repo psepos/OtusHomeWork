@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -51,7 +52,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
     }
 
     @Override
-    public void generate() throws IOException, URISyntaxException {
+    public void generate() throws IOException, URISyntaxException, InterruptedException {
 
         String packageName = settings.getSetting("GENERATOR.PACKAGE.FOR_ENTITY");
         String destinationPath = settings.getSetting("GENERATOR.OUTPUT_DIR");
@@ -121,6 +122,15 @@ public class GeneratorEntityImpl implements GeneratorEntity {
                 .build();
 
         entityFile.writeTo(path3);
+
+        Process process = Runtime.getRuntime().exec(
+                "cmd /c start mvnw.cmd clean package",
+                null,
+                new File(path.toString()));
+        process.waitFor();
+        if (process.exitValue() != 0) {
+            System.out.println("Error building runtime");
+        };
 
     }
 
