@@ -1,45 +1,33 @@
-package ru.otus.gpbu.mygena.service;
+package ru.otus.gpbu.mygena.service.runtime.entity;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.PathService;
-import ru.otus.gpbu.mygena.service.runtime.entity.ClassAnnotations;
-import ru.otus.gpbu.mygena.service.runtime.entity.Fields;
-import ru.otus.gpbu.mygena.service.runtime.entity.Header;
 
 import javax.lang.model.element.Modifier;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
+public class Class {
 
-@Service
-public class GeneratorEntityImpl implements GeneratorEntity {
+    private final MyEntity entityModel;
 
-    private MyEntity entityModel;
-
-    @Autowired
     private final MySettingService settings;
 
-    @Autowired
     private final PathService pathService;
 
-    public GeneratorEntityImpl(MySettingService settings, PathService pathService) {
+    public Class(MyEntity entityModel, MySettingService settings, PathService pathService){
+        this.entityModel = entityModel;
         this.settings = settings;
         this.pathService = pathService;
     }
 
-    @Override
-    public void setEntity(MyEntity entityModel) {
-        this.entityModel = entityModel;
+    public static Class get(MyEntity entityModel, MySettingService settings, PathService pathService){
+        return new Class(entityModel, settings, pathService);
     }
 
-    @Override
-    public void generate() throws IOException, URISyntaxException, InterruptedException {
-
+    public void generate() throws IOException {
         String packageName = settings.getSetting("GENERATOR.PACKAGE.FOR_ENTITY");
         String className = entityModel.getCode();
 
@@ -58,6 +46,5 @@ public class GeneratorEntityImpl implements GeneratorEntity {
                 .build();
 
         entityFile.writeTo(pathService.runtimeEnvironmentSources());
-
     }
 }

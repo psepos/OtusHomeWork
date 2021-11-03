@@ -18,20 +18,40 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     @Autowired
     private final PathService pathService;
 
-    public RuntimeEnvironmentImpl(PathService patches) {
+    @Autowired
+    private final Generator gena;
+
+    public RuntimeEnvironmentImpl(PathService patches, Generator gena) {
         this.pathService = patches;
+        this.gena = gena;
     }
 
     @Override
-    public void prepare() throws Exception {
+    public void generate() throws Exception {
+        this.runtimePrepare();
+        this.gena.start();
+        this.runtimeCompile();
+    }
+
+    @Override
+    public void run() throws InterruptedException, IOException {
+
+        Process process = Runtime.getRuntime().exec(
+                "cmd /c start java -jar " + pathService.artifactFileName(),
+                null,
+                new File(pathService.runtimeEnvironmentDestinationPath().toString() + "\\target"));
+
+        process.waitFor();
+    }
+
+    private void runtimePrepare() throws Exception {
         this.clear();
         this.copyTemplate();
         this.unzipTemplate();
         this.deleteTemplate();
     }
 
-    @Override
-    public void compile() throws InterruptedException, IOException {
+    private void runtimeCompile() throws InterruptedException, IOException {
 
         Process process = Runtime.getRuntime().exec(
                 "cmd /c mvnw.cmd clean package > " + pathService.compileLog(),
@@ -45,16 +65,7 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
         }
     }
 
-    @Override
-    public void run() throws InterruptedException, IOException {
 
-        Process process = Runtime.getRuntime().exec(
-                "cmd /c start java -jar " + pathService.artifactFileName(),
-                null,
-                new File(pathService.runtimeEnvironmentDestinationPath().toString() + "\\target"));
-
-        process.waitFor();
-    }
 
     private void clear() {
 

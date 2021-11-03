@@ -39,6 +39,8 @@ public class Fields {
     }
 
     private void field(MyEntityAttribute attributeModel) {
+
+        //TODO Расширить список типов
         switch (attributeModel.getType()) {
             case ("Long"):
                 fieldLong(attributeModel);
