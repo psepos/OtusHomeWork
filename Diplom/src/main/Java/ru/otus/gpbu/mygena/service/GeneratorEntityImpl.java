@@ -57,7 +57,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
             path = Paths.get(destinationPath);
         }
         if(path1 == null) {
-            path1 = Paths.get(destinationPath + "\\demo.zip");
+            path1 = Paths.get(destinationPath + "\\runtime.zip");
         }
 
         if (path2 == null) {
@@ -76,7 +76,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
         TypeSpec.Builder entityClassBuilder = TypeSpec.classBuilder(className);
 
         entityClassBuilder = Header.get(entityClassBuilder, entityModel).generate();
-        entityClassBuilder = entityClassBuilder.addModifiers(Modifier.PUBLIC);
+        entityClassBuilder.addModifiers(Modifier.PUBLIC);
         entityClassBuilder = ClassAnnotations.get(entityClassBuilder, entityModel).generate();
         entityClassBuilder = Fields.get(entityClassBuilder, entityModel).generate();
 
