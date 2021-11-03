@@ -73,4 +73,9 @@ public class PathServiceImpl implements PathService {
     public Path artifactPath() {
         return Paths.get(runtimeEnvironmentDestinationPath() + "\\target");
     }
+
+    @Override
+    public Path compileLog() {
+        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE_LOG"));
+    }
 }

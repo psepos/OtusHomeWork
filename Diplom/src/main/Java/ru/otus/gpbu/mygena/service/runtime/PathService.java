@@ -12,4 +12,5 @@ public interface PathService {
     Path runtimeEnvironmentSources();
     Path artifactFileName();
     Path artifactPath();
+    Path compileLog();
 }

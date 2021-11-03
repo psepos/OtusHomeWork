@@ -34,7 +34,7 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     public void compile() throws InterruptedException, IOException {
 
         Process process = Runtime.getRuntime().exec(
-                "cmd /c start mvnw.cmd clean package",
+                "cmd /c mvnw.cmd clean package > " + pathService.compileLog(),
                 null,
                 new File(pathService.runtimeEnvironmentDestinationPath().toString()));
 
@@ -64,8 +64,6 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
         Path templateFile = pathService.environmentTemplateFileWithPath();
         Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
 
-        System.out.println("1 " + templateFile);
-        System.out.println("2 " + destinationFile);
         Files.copy(templateFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
     }
 
