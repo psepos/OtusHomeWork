@@ -4,29 +4,24 @@ import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import net.lingala.zip4j.ZipFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.service.runtime.entity.ClassAnnotations;
+import ru.otus.gpbu.mygena.service.runtime.entity.Fields;
+import ru.otus.gpbu.mygena.service.runtime.entity.Header;
 
 import javax.lang.model.element.Modifier;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 
@@ -78,41 +73,12 @@ public class GeneratorEntityImpl implements GeneratorEntity {
         new ZipFile(path1.toFile())
                 .extractAll(path.toString());
 
-        var entityClassBuilder = TypeSpec
-                .classBuilder(className)
-                .addModifiers(Modifier.PUBLIC);
+        TypeSpec.Builder entityClassBuilder = TypeSpec.classBuilder(className);
 
-        entityClassBuilder.addJavadoc("Runtime generator java code by pse\n");
-        entityClassBuilder.addJavadoc("---------------Gena 1.0-----------\n");
-        entityClassBuilder.addJavadoc("Description: " + entityModel.getDescription() + "\n");
-        entityClassBuilder.addJavadoc("Developer: pse\n");
-        entityClassBuilder.addJavadoc("Version: 1\n");
-        entityClassBuilder.addJavadoc("DateTime: " + LocalDateTime.now() + "\n");
-        entityClassBuilder.addJavadoc("----------------------------------\n");
-
-        entityClassBuilder.addAnnotation(Entity.class);
-
-        String tableName = "USER_" + entityModel.getCode().toUpperCase(Locale.ROOT);
-
-        AnnotationSpec ann = AnnotationSpec.builder(Table.class)
-                .addMember("name", "\"" + tableName + "\"")
-                        .build();
-
-        entityClassBuilder.addAnnotation(ann);
-
-        entityClassBuilder.addAnnotation(Getter.class);
-        entityClassBuilder.addAnnotation(Setter.class);
-        entityClassBuilder.addAnnotation(NoArgsConstructor.class);
-        entityClassBuilder.addAnnotation(AllArgsConstructor.class);
-
-        ann = AnnotationSpec.builder(GeneratedValue.class).addMember("strategy", "javax.persistence.GenerationType.IDENTITY").build();
-
-        FieldSpec fieldId = FieldSpec.builder(Long.class, "id")
-                .addAnnotation(Id.class)
-                .addAnnotation(ann)
-                .build();
-
-        entityClassBuilder.addField(fieldId);
+        entityClassBuilder = Header.get(entityClassBuilder, entityModel).generate();
+        entityClassBuilder = entityClassBuilder.addModifiers(Modifier.PUBLIC);
+        entityClassBuilder = ClassAnnotations.get(entityClassBuilder, entityModel).generate();
+        entityClassBuilder = Fields.get(entityClassBuilder, entityModel).generate();
 
         TypeSpec entityClass = entityClassBuilder.build();
 
