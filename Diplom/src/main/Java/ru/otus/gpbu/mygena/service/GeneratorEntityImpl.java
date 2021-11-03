@@ -130,12 +130,12 @@ public class GeneratorEntityImpl implements GeneratorEntity {
         process.waitFor();
         if (process.exitValue() != 0) {
             System.out.println("Error building runtime");
-        };
+        }
 
     }
 
     private Path getPath() throws URISyntaxException, IOException {
-        var uri = ClassLoader.getSystemResource("BOOT-INF/classes/demo.zip").toURI();
+        var uri = ClassLoader.getSystemResource("BOOT-INF/classes/runtime.zip").toURI();
         final Map<String, String> env = new HashMap<>();
         final String[] array = uri.toString().split("!");
         final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
