@@ -5,7 +5,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 
 public interface PathService {
-    Path environmentTemplateFile() throws IOException, URISyntaxException;
+    Path environmentTemplateFileWithPath() throws IOException, URISyntaxException;
+    Path environmentTemplateFile();
     Path runtimeEnvironmentDestinationPath();
+    Path runtimeEnvironmentDestinationFileWithPath();
     Path runtimeEnvironmentSources();
+    Path artifactFileName();
+    Path artifactPath();
 }

@@ -1,9 +1,10 @@
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPO', 'Gen to the repository for every entity', 'Yes');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_ENTITY', 'Java package for entity', 'ru.otus.gpbu.mygena.runtime.entity');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\generate');
 
-INSERT INTO setting (code, description, value) VALUES ('RUNTIME.OUTPUT_DIR', 'Destination path', 'd:\temp\generate');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE', '', 'runtime.zip');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');
+INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME', '', 'runtime-0.0.1-SNAPSHOT.jar');
 
 INSERT INTO entity (code, description) VALUES ('Entity1', 'EntityDescription1');
 INSERT INTO entity (code, description) VALUES ('Entity2', 'EntityDescription2');

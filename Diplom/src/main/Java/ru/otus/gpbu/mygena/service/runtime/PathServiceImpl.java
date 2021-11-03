@@ -26,23 +26,27 @@ public class PathServiceImpl implements PathService {
 
 
     @Override
-    public Path environmentTemplateFile() throws IOException, URISyntaxException {
+    public Path environmentTemplateFileWithPath() throws IOException, URISyntaxException {
 
         Path path1;
 
-        String runtimeTemplateFile = sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE");
         String runtimeTemplatePath = sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH");
 
-        var uri = ClassLoader.getSystemResource(runtimeTemplatePath + runtimeTemplateFile).toURI();
+        var uri = ClassLoader.getSystemResource(runtimeTemplatePath + environmentTemplateFile()).toURI();
 
         final Map<String, String> env = new HashMap<>();
         final String[] array = uri.toString().split("!");
         final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
 
         path1 = fs.getPath(array[1]);
-        fs.close();
+        //fs.close();
 
         return path1;
+    }
+
+    @Override
+    public Path environmentTemplateFile() {
+        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
     }
 
     @Override
@@ -51,7 +55,22 @@ public class PathServiceImpl implements PathService {
     }
 
     @Override
+    public Path runtimeEnvironmentDestinationFileWithPath() {
+        return Paths.get(sett.getSetting("GENERATOR.OUTPUT_DIR") + sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
+    }
+
+    @Override
     public Path runtimeEnvironmentSources() {
         return Paths.get(runtimeEnvironmentDestinationPath() + "\\src\\main\\java");
+    }
+
+    @Override
+    public Path artifactFileName() {
+        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME"));
+    }
+
+    @Override
+    public Path artifactPath() {
+        return Paths.get(runtimeEnvironmentDestinationPath() + "\\target");
     }
 }

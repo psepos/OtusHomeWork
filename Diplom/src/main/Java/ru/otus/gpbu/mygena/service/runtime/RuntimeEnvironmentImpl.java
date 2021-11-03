@@ -1,14 +1,16 @@
 package ru.otus.gpbu.mygena.service.runtime;
 
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
@@ -29,13 +31,29 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     }
 
     @Override
-    public void compile() {
+    public void compile() throws InterruptedException, IOException {
 
+        Process process = Runtime.getRuntime().exec(
+                "cmd /c start mvnw.cmd clean package",
+                null,
+                new File(pathService.runtimeEnvironmentDestinationPath().toString()));
+
+        process.waitFor();
+
+        if (process.exitValue() != 0) {
+            System.out.println("Error building runtime");
+        }
     }
 
     @Override
-    public void run() {
+    public void run() throws InterruptedException, IOException {
 
+        Process process = Runtime.getRuntime().exec(
+                "cmd /c start java -jar " + pathService.artifactFileName(),
+                null,
+                new File(pathService.runtimeEnvironmentDestinationPath().toString() + "\\target"));
+
+        process.waitFor();
     }
 
     private void clear() {
@@ -43,17 +61,24 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     }
 
     private void copyTemplate() throws URISyntaxException, IOException {
-        Path fileTemplate = pathService.environmentTemplateFile();
+        Path templateFile = pathService.environmentTemplateFileWithPath();
+        Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
+
+        System.out.println("1 " + templateFile);
+        System.out.println("2 " + destinationFile);
+        Files.copy(templateFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    private void deleteTemplate() throws IOException {
+        Files.deleteIfExists(pathService.runtimeEnvironmentDestinationFileWithPath());
+    }
+
+    private void unzipTemplate() throws ZipException {
+
         Path destinationPath = pathService.runtimeEnvironmentDestinationPath();
+        Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
 
-        Files.copy(fileTemplate, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-    }
-
-    private void deleteTemplate() {
-    }
-
-    private void unzipTemplate() {
-
+        new ZipFile(destinationFile.toFile()).extractAll(destinationPath.toString());
     }
 
 
