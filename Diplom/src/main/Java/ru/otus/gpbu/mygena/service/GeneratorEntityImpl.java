@@ -68,7 +68,7 @@ public class GeneratorEntityImpl implements GeneratorEntity {
             path3 = Paths.get(destinationPath + "\\src\\main\\java");
         }
 
-        Files.copy(path2, path1, StandardCopyOption.REPLACE_EXISTING);
+
 
         new ZipFile(path1.toFile())
                 .extractAll(path.toString());
