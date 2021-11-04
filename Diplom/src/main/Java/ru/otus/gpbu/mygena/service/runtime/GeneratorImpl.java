@@ -30,10 +30,22 @@ public class GeneratorImpl implements Generator {
 
     @Override
     public void start() throws IOException {
+        this.genEntities();
+        this.genRepositories();
+    }
+
+    private void genEntities() throws IOException {
         List<MyEntity> entityModels = myEntityService.findAll();
 
         for(MyEntity entityModel : entityModels){
             ru.otus.gpbu.mygena.service.runtime.entity.Class.get(entityModel, settings, pathService).generate();
         }
     }
+
+    private void genRepositories() {
+    }
+
+
+
+
 }
