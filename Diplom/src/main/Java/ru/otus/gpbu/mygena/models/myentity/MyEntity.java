@@ -9,6 +9,7 @@ import org.hibernate.annotations.FetchMode;
 import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -43,8 +44,17 @@ public class MyEntity {
                 '}';
     }
 
-    public void addAttribute(MyEntityAttribute attribute){
+    public void addAttribute(MyEntityAttribute attribute) {
         attributes.add(attribute);
         attribute.setMyEntity(this);
+    }
+
+    public void removeAttribute(MyEntityAttribute attribute) {
+        attributes.remove(attribute);
+        attribute.clearMyEntity(this);
+    }
+
+    public void initAttributes() {
+        attributes = new ArrayList<>();
     }
 }

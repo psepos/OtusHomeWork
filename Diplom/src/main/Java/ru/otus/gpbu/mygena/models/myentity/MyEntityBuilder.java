@@ -10,7 +10,12 @@ public class MyEntityBuilder {
 
     public MyEntityBuilder setCode(String code) {
         this.entity.setCode(code);
+        entity.initAttributes();
         return this;
+    }
+
+    public static MyEntityBuilder get() {
+        return new MyEntityBuilder();
     }
 
     public MyEntityBuilder setDescription(String description) {
@@ -21,5 +26,9 @@ public class MyEntityBuilder {
     public MyEntityBuilder addAttribute(MyEntityAttribute attribute) {
         entity.addAttribute(attribute);
         return this;
+    }
+
+    public MyEntity build() {
+        return entity;
     }
 }

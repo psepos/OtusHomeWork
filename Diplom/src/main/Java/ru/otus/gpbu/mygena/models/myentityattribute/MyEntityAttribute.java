@@ -30,9 +30,16 @@ public class MyEntityAttribute {
     @JoinColumn(name = "entity_id")
     private MyEntity entity;
 
-    public void setMyEntity(MyEntity entity){
+    public void setMyEntity(MyEntity entity) {
         this.entity = entity;
-        entity.addAttribute(this);
+        if (!entity.getAttributes().contains(this)) {
+            entity.addAttribute(this);
+        }
+    }
+
+    public void clearMyEntity(MyEntity entity) {
+        entity.removeAttribute(this);
+        this.entity = null;
     }
 
     @Override
