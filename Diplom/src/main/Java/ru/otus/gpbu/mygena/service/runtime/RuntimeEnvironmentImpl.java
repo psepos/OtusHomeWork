@@ -54,7 +54,7 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     private void runtimeCompile() throws InterruptedException, IOException {
 
         Process process = Runtime.getRuntime().exec(
-                "cmd /c mvnw.cmd clean package > " + pathService.compileLog(),
+                "cmd /c mvnw.cmd package -T 1C -o -am -Dmaven.test.skip > " + pathService.compileLog(),
                 null,
                 new File(pathService.runtimeEnvironmentDestinationPath().toString()));
 
