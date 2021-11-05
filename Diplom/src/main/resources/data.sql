@@ -3,6 +3,9 @@ INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_EN
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_REPOSITORY', 'Java package for repository', 'ru.otus.gpbu.mygena.runtime.repository');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_SHELL', 'Java package for shell commands', 'ru.otus.gpbu.mygena.runtime.shell');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\generate\');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.CHUNK_SIZE', 'Chunk size for job generate', '5');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE', 'Page size for JpaPagingItemReader', '10');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.QUERY_STRING', 'QUERY STRING for JpaPagingItemReader', 'SELECT e FROM MyEntity e');
 
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE', '', 'runtime.zip');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');

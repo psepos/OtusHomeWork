@@ -1,5 +1,6 @@
 package ru.otus.gpbu.mygena.service.runtime;
 
+import com.squareup.javapoet.JavaFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 
 
 @Service
-public class GeneratorImpl implements Generator {
+public class GeneratorServiceImpl implements GeneratorService {
 
     @Autowired
     private final MyEntityService myEntityService;
@@ -22,7 +23,7 @@ public class GeneratorImpl implements Generator {
     @Autowired
     private final PathService pathService;
 
-    public GeneratorImpl(MyEntityService myEntityService, MySettingService settings, PathService pathService) {
+    public GeneratorServiceImpl(MyEntityService myEntityService, MySettingService settings, PathService pathService) {
         this.myEntityService = myEntityService;
         this.settings = settings;
         this.pathService = pathService;
@@ -32,6 +33,11 @@ public class GeneratorImpl implements Generator {
     public void start() throws IOException {
         this.genEntities();
         this.genRepositories();
+    }
+
+    @Override
+    public JavaFile doEntityGenerate(MyEntity entityModel) {
+        return null;
     }
 
     private void genEntities() throws IOException {

@@ -54,6 +54,11 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
     }
 
     @Override
+    public int getSettingInt(String code) {
+        return Integer.getInteger(getSetting(code));
+    }
+
+    @Override
     @Transactional
     public void setSetting(String code, String value) {
         Optional<MySetting> settingOpt = mySettingRepository.findByCode(code);

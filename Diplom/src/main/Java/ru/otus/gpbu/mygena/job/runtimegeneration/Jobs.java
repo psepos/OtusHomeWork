@@ -13,7 +13,7 @@ import org.springframework.lang.NonNull;
 
 @Configuration
 @Slf4j
-public class MainJob {
+public class Jobs {
 
 
     @Autowired
@@ -23,15 +23,16 @@ public class MainJob {
     public Job RuntimeEnvironmentGenerator(
             Step clearTargetDirectoryStep,
             Step copyTemplateEnvironmentToTargetDirectoryStep,
-            Step unzipTemplateEnvironmentStep
-           /* Step generateStep,
+            Step unzipTemplateEnvironmentStep,
+            Step generateEntitiesStep /*,
             Step compileAndBuildStep*/) {
         return jobBuilderFactory
                 .get("RuntimeEnvironmentGeneratorJob")
                 .start(clearTargetDirectoryStep)
                 .next(copyTemplateEnvironmentToTargetDirectoryStep)
                 .next(unzipTemplateEnvironmentStep)
-//                .next(generateStep)
+                .next(generateEntitiesStep)
+
 //                .next(compileAndBuildStep)
                 .listener(new JobExecutionListener() {
                     @Override

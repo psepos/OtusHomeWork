@@ -1,25 +1,33 @@
 package ru.otus.gpbu.mygena.job.runtimegeneration;
 
+import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.otus.gpbu.mygena.models.myentity.MyEntity;
+import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 
 @Configuration
 @Slf4j
-public class MainSteps {
+public class Steps {
 
     @Autowired
     private final StepBuilderFactory stepBuilderFactory;
 
+    @Autowired
+    private final MySettingService mySettingService;
 
     @Autowired
-    private final MainTasklets tasklets;
+    private final Tasklets tasklets;
 
-    public MainSteps(StepBuilderFactory stepBuilderFactory, MainTasklets tasklets) {
+    public Steps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, Tasklets tasklets) {
         this.stepBuilderFactory = stepBuilderFactory;
+        this.mySettingService = mySettingService;
         this.tasklets = tasklets;
     }
 
@@ -46,4 +54,18 @@ public class MainSteps {
                 .tasklet(tasklets.unzipTemplateEnvironmentStepTasklet())
                 .build();
     }
+
+    @Bean
+    public Step generateEntitiesStep(JpaPagingItemReader<MyEntity> myEntityReader,
+                                     JavaFileWriter<JavaFile> myEntityWriter,
+                                     ItemProcessor<MyEntity, JavaFile> itemProcessor){
+        return this.stepBuilderFactory
+                .get("generateEntitiesStep")
+                .<MyEntity, JavaFile>chunk(mySettingService.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
+                .reader(myEntityReader)
+                .writer(myEntityWriter)
+                .processor(itemProcessor)
+                .build();
+    }
+
 }

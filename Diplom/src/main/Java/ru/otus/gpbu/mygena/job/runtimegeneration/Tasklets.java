@@ -9,12 +9,12 @@ import ru.otus.gpbu.mygena.service.RuntimeEnvironmentGeneratorService;
 
 @Configuration
 @Slf4j
-public class MainTasklets {
+public class Tasklets {
 
     @Autowired
     private final RuntimeEnvironmentGeneratorService runtimeEnvironmentService;
 
-    public MainTasklets(RuntimeEnvironmentGeneratorService runtimeEnvironmentService) {
+    public Tasklets(RuntimeEnvironmentGeneratorService runtimeEnvironmentService) {
         this.runtimeEnvironmentService = runtimeEnvironmentService;
     }
 

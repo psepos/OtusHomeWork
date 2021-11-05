@@ -17,18 +17,32 @@ public class Class {
 
     private final PathService pathService;
 
-    public Class(MyEntity entityModel, MySettingService settings, PathService pathService){
+    public Class(MyEntity entityModel, MySettingService settings, PathService pathService) {
         this.entityModel = entityModel;
         this.settings = settings;
         this.pathService = pathService;
     }
 
-    public static Class get(MyEntity entityModel, MySettingService settings, PathService pathService){
+    public static Class get(MyEntity entityModel, MySettingService settings, PathService pathService) {
         return new Class(entityModel, settings, pathService);
     }
 
     public void generate() throws IOException {
+        this.doGenerateJavaFile().writeTo(pathService.runtimeEnvironmentSources());
+    }
+
+    public JavaFile doGenerateJavaFile() {
         String packageName = settings.getSetting("GENERATOR.PACKAGE.FOR_ENTITY");
+        TypeSpec entityClass = doGenerateTypeSpec();
+
+        return JavaFile
+                .builder(packageName, entityClass)
+                .indent("    ")
+                .build();
+    }
+
+    private TypeSpec doGenerateTypeSpec() {
+
         String className = entityModel.getCode();
 
         TypeSpec.Builder entityClassBuilder = TypeSpec.classBuilder(className);
@@ -38,13 +52,6 @@ public class Class {
         entityClassBuilder = ClassAnnotations.get(entityClassBuilder, entityModel).generate();
         entityClassBuilder = Fields.get(entityClassBuilder, entityModel).generate();
 
-        TypeSpec entityClass = entityClassBuilder.build();
-
-        JavaFile entityFile = JavaFile
-                .builder(packageName, entityClass)
-                .indent("    ")
-                .build();
-
-        entityFile.writeTo(pathService.runtimeEnvironmentSources());
+        return entityClassBuilder.build();
     }
 }

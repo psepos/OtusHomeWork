@@ -19,9 +19,9 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
     private final PathService pathService;
 
     @Autowired
-    private final Generator gena;
+    private final GeneratorService gena;
 
-    public RuntimeEnvironmentImpl(PathService patches, Generator gena) {
+    public RuntimeEnvironmentImpl(PathService patches, GeneratorService gena) {
         this.pathService = patches;
         this.gena = gena;
     }
@@ -89,7 +89,5 @@ public class RuntimeEnvironmentImpl implements RuntimeEnvironment {
 
         new ZipFile(destinationFile.toFile()).extractAll(destinationPath.toString());
     }
-
-
 
 }
