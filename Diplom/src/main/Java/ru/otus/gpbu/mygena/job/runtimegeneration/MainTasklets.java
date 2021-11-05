@@ -39,4 +39,15 @@ public class MainTasklets {
         return adapter;
 
     }
+
+    @Bean
+    public MethodInvokingTaskletAdapter unzipTemplateEnvironmentStepTasklet(){
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+
+        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetMethod("unzipTemplateEnvironment");
+
+        return adapter;
+
+    }
 }

@@ -39,5 +39,11 @@ public class MainSteps {
                 .build();
     }
 
-
+    @Bean
+    public Step unzipTemplateEnvironmentStep(){
+        return this.stepBuilderFactory
+                .get("unzipTemplateEnvironmentStep")
+                .tasklet(tasklets.unzipTemplateEnvironmentStepTasklet())
+                .build();
+    }
 }

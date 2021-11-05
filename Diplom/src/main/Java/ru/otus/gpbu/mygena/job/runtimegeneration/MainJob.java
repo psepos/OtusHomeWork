@@ -22,16 +22,15 @@ public class MainJob {
     @Bean
     public Job RuntimeEnvironmentGenerator(
             Step clearTargetDirectoryStep,
-            Step copyTemplateEnvironmentToTargetDirectoryStep
-            /*,
-            Step unzipTemplateEnvironmentStep,
-            Step generateStep,
+            Step copyTemplateEnvironmentToTargetDirectoryStep,
+            Step unzipTemplateEnvironmentStep
+           /* Step generateStep,
             Step compileAndBuildStep*/) {
         return jobBuilderFactory
                 .get("RuntimeEnvironmentGeneratorJob")
                 .start(clearTargetDirectoryStep)
                 .next(copyTemplateEnvironmentToTargetDirectoryStep)
-//                .next(unzipTemplateEnvironmentStep)
+                .next(unzipTemplateEnvironmentStep)
 //                .next(generateStep)
 //                .next(compileAndBuildStep)
                 .listener(new JobExecutionListener() {
