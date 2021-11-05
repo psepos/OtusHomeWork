@@ -58,13 +58,13 @@ public class Steps {
     @Bean
     public Step generateEntitiesStep(JpaPagingItemReader<MyEntity> myEntityReader,
                                      JavaFileWriter<JavaFile> myEntityWriter,
-                                     ItemProcessor<MyEntity, JavaFile> itemProcessor){
+                                     ItemProcessor<MyEntity, JavaFile> myEntityItemProcessor){
         return this.stepBuilderFactory
                 .get("generateEntitiesStep")
                 .<MyEntity, JavaFile>chunk(mySettingService.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
                 .reader(myEntityReader)
                 .writer(myEntityWriter)
-                .processor(itemProcessor)
+                .processor(myEntityItemProcessor)
                 .build();
     }
 

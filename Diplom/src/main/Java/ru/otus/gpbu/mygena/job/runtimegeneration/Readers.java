@@ -1,6 +1,7 @@
 package ru.otus.gpbu.mygena.job.runtimegeneration;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class Readers {
         this.entityManagerFactory = entityManagerFactory;
     }
 
+    @StepScope
     @Bean
     public JpaPagingItemReader<MyEntity> myEntityReader() {
         return new JpaPagingItemReaderBuilder<MyEntity>()
