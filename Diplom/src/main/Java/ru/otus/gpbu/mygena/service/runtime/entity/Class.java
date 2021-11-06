@@ -4,10 +4,8 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
-import ru.otus.gpbu.mygena.service.runtime.PathService;
 
 import javax.lang.model.element.Modifier;
-import java.io.IOException;
 
 public class Class {
 
@@ -15,20 +13,14 @@ public class Class {
 
     private final MySettingService settings;
 
-    private final PathService pathService;
 
-    public Class(MyEntity entityModel, MySettingService settings, PathService pathService) {
+    public Class(MyEntity entityModel, MySettingService settings) {
         this.entityModel = entityModel;
         this.settings = settings;
-        this.pathService = pathService;
     }
 
-    public static Class get(MyEntity entityModel, MySettingService settings, PathService pathService) {
-        return new Class(entityModel, settings, pathService);
-    }
-
-    public void generate() throws IOException {
-        this.doGenerateJavaFile().writeTo(pathService.runtimeEnvironmentSources());
+    public static Class get(MyEntity entityModel, MySettingService settings) {
+        return new Class(entityModel, settings);
     }
 
     public JavaFile doGenerateJavaFile() {
