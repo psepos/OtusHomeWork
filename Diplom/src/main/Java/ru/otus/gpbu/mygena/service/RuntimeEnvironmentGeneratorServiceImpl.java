@@ -1,10 +1,12 @@
 package ru.otus.gpbu.mygena.service;
 
+import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.PathService;
 
@@ -89,5 +91,10 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
             log.error("Error building runtime");
         }
 
+    }
+
+    @Override
+    public JavaFile doEntityGenerate(MyEntity entityModel) {
+        return ru.otus.gpbu.mygena.service.runtime.entity.Class.get(entityModel, settings).doGenerateJavaFile();
     }
 }
