@@ -22,6 +22,7 @@ public class Writers {
     @StepScope
     @Bean
     public JavaFileWriter<JavaFile> myEntityWriter() {
+
         return new JavaFileWriter<>(pathService);
     }
 }

@@ -32,12 +32,11 @@ public class GeneratorServiceImpl implements GeneratorService {
     @Override
     public void start() throws IOException {
         this.genEntities();
-        this.genRepositories();
     }
 
     @Override
     public JavaFile doEntityGenerate(MyEntity entityModel) {
-        return null;
+        return ru.otus.gpbu.mygena.service.runtime.entity.Class.get(entityModel, settings, pathService).doGenerateJavaFile();
     }
 
     private void genEntities() throws IOException {
@@ -48,8 +47,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
     }
 
-    private void genRepositories() {
-    }
 
 
 
