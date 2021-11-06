@@ -22,7 +22,7 @@ public class JavaFileWriter<T> implements ItemWriter<T> {
     @Override
     public void write(List<? extends T> list) {
         log.debug(list.toString());
-        System.out.println("JavaFileWriter:list = " + list.toString());
+
         list.forEach(
                 (e) -> {
                     try {
