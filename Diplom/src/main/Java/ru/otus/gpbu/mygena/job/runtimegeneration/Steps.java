@@ -83,4 +83,11 @@ public class Steps {
                 .build();
     }
 
+    @Bean
+    public Step compileAndBuildRuntimeStep(){
+        return this.stepBuilderFactory
+                .get("compileAndBuildRuntimeStep")
+                .tasklet(tasklets.compileAndBuildRuntimeStepTasklet())
+                .build();
+    }
 }

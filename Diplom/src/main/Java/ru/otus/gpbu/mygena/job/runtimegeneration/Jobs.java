@@ -24,28 +24,24 @@ public class Jobs {
             Step clearTargetDirectoryStep,
             Step copyTemplateEnvironmentToTargetDirectoryStep,
             Step unzipTemplateEnvironmentStep,
-            Step generateEntitiesStep /*,
-            Step compileAndBuildStep*/) {
+            Step generateEntitiesStep,
+            Step compileAndBuildRuntimeStep) {
         return jobBuilderFactory
                 .get("RuntimeEnvironmentGeneratorJob")
-                //.incrementer(new RunIdIncrementer())
                 .start(clearTargetDirectoryStep)
                 .next(copyTemplateEnvironmentToTargetDirectoryStep)
                 .next(unzipTemplateEnvironmentStep)
                 .next(generateEntitiesStep)
-
-//                .next(compileAndBuildStep)
+                .next(compileAndBuildRuntimeStep)
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {
                         log.info("Begin");
-                        System.out.println("Job begin");
                     }
 
                     @Override
                     public void afterJob(@NonNull JobExecution jobExecution) {
                         log.info("End");
-                        System.out.println("Job end");
                     }
                 })
                 .build();

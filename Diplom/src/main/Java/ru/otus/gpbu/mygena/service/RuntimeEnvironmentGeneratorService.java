@@ -9,4 +9,5 @@ public interface RuntimeEnvironmentGeneratorService {
     void clearTargetDirectory();
     void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException;
     void unzipTemplateEnvironment() throws ZipException;
+    void compileAndBuildRuntimeStep() throws InterruptedException, IOException;
 }

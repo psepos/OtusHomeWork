@@ -2,6 +2,7 @@ package ru.otus.gpbu.mygena.job.runtimegeneration;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,5 +50,15 @@ public class Tasklets {
 
         return adapter;
 
+    }
+
+    @Bean
+    public Tasklet compileAndBuildRuntimeStepTasklet() {
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+
+        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetMethod("compileAndBuildRuntimeStep");
+
+        return adapter;
     }
 }

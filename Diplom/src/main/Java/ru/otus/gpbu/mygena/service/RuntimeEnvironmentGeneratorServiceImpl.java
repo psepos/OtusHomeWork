@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.service.runtime.PathService;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -49,5 +50,20 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
         log.debug("unzipTemplateEnvironment():destinationFile = " + destinationFile);
 
         new ZipFile(destinationFile.toFile()).extractAll(destinationPath.toString());
+    }
+
+    @Override
+    public void compileAndBuildRuntimeStep() throws InterruptedException, IOException {
+        Process process = Runtime.getRuntime().exec(
+                "cmd /c mvnw.cmd package -T 1C -o -am -Dmaven.test.skip > " + pathService.compileLog(),
+                null,
+                new File(pathService.runtimeEnvironmentDestinationPath().toString()));
+
+        process.waitFor();
+
+        if (process.exitValue() != 0) {
+            log.error("Error building runtime");
+        }
+
     }
 }
