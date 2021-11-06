@@ -1,4 +1,5 @@
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPO', 'Gen to the repository for every entity', 'Yes');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPOSITORIES', 'Gen to the repository for every entity', 'YES');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_ENTITIES', 'Gen to the repository for every entity', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_ENTITY', 'Java package for entity', 'ru.otus.gpbu.mygena.runtime.entity');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_REPOSITORY', 'Java package for repository', 'ru.otus.gpbu.mygena.runtime.repository');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_SHELL', 'Java package for shell commands', 'ru.otus.gpbu.mygena.runtime.shell');

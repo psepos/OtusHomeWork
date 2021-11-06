@@ -23,14 +23,14 @@ public class Steps {
     private final StepBuilderFactory stepBuilderFactory;
 
     @Autowired
-    private final MySettingService mySettingService;
+    private final MySettingService settings;
 
     @Autowired
     private final Tasklets tasklets;
 
     public Steps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, Tasklets tasklets) {
         this.stepBuilderFactory = stepBuilderFactory;
-        this.mySettingService = mySettingService;
+        this.settings = mySettingService;
         this.tasklets = tasklets;
     }
 
@@ -64,7 +64,7 @@ public class Steps {
                                      ItemProcessor<MyEntity, JavaFile> myEntityItemProcessor){
         return this.stepBuilderFactory
                 .get("generateEntitiesStep")
-                .<MyEntity, JavaFile>chunk(mySettingService.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
+                .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
                 .reader(myEntityReader)
                 .writer(myEntityWriter)
                 .processor(myEntityItemProcessor)

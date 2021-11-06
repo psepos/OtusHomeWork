@@ -11,7 +11,7 @@ public class MySettingShell {
     private MySettingServiceCrud mySettingServiceCrud;
 
     @Autowired
-    private MySettingService mySettingService;
+    private MySettingService settings;
 
     @ShellMethod(value = "get-setting-by-id", key = "gsbi")
     public String getSettingById(Long id) {
@@ -31,11 +31,11 @@ public class MySettingShell {
 
     @ShellMethod(value = "get-setting", key = "gs")
     public String getSetting(String code) {
-        return mySettingService.getSetting(code);
+        return settings.getSetting(code);
     }
 
     @ShellMethod(value = "set-setting", key = "ss")
     public void setSetting(String code, String value) {
-        mySettingService.setSetting(code, value);
+        settings.setSetting(code, value);
     }
 }

@@ -23,11 +23,11 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     private final PathService pathService;
 
     @Autowired
-    private final MySettingService sett;
+    private final MySettingService settings;
 
-    public RuntimeEnvironmentGeneratorServiceImpl(PathService pathService, MySettingService sett) {
+    public RuntimeEnvironmentGeneratorServiceImpl(PathService pathService, MySettingService settings) {
         this.pathService = pathService;
-        this.sett = sett;
+        this.settings = settings;
     }
 
     @Override
@@ -62,14 +62,14 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
 
         String command;
 
-        if (sett.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW")) {
+        if (settings.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW")) {
             command = "cmd /c start mvnw.cmd";
         } else {
             command = "cmd /c mvnw.cmd";
         }
-        command = command + " " + sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS");
+        command = command + " " + settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS");
 
-        if (sett.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS")){
+        if (settings.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS")){
             command = command + " -Dmaven.test.skip";
         }
 

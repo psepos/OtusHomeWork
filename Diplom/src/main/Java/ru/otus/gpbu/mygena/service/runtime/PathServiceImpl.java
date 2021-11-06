@@ -18,10 +18,10 @@ import java.util.Map;
 public class PathServiceImpl implements PathService {
 
     @Autowired
-    private final MySettingService sett;
+    private final MySettingService settings;
 
     public PathServiceImpl(MySettingService settings) {
-        this.sett = settings;
+        this.settings = settings;
     }
 
 
@@ -30,7 +30,7 @@ public class PathServiceImpl implements PathService {
 
         Path path1;
 
-        String runtimeTemplatePath = sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH");
+        String runtimeTemplatePath = settings.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH");
 
         var uri = ClassLoader.getSystemResource(runtimeTemplatePath + environmentTemplateFile()).toURI();
 
@@ -46,17 +46,17 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path environmentTemplateFile() {
-        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
+        return Paths.get(settings.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
     }
 
     @Override
     public Path runtimeEnvironmentDestinationPath() {
-        return Paths.get(sett.getSetting("GENERATOR.OUTPUT_DIR"));
+        return Paths.get(settings.getSetting("GENERATOR.OUTPUT_DIR"));
     }
 
     @Override
     public Path runtimeEnvironmentDestinationFileWithPath() {
-        return Paths.get(sett.getSetting("GENERATOR.OUTPUT_DIR") + sett.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
+        return Paths.get(settings.getSetting("GENERATOR.OUTPUT_DIR") + settings.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE"));
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path artifactFileName() {
-        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME"));
+        return Paths.get(settings.getSetting("RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME"));
     }
 
     @Override
@@ -76,6 +76,6 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path compileLog() {
-        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE"));
+        return Paths.get(settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE"));
     }
 }

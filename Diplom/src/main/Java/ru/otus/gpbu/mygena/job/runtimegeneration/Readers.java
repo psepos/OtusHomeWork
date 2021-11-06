@@ -17,13 +17,13 @@ import javax.persistence.EntityManagerFactory;
 public class Readers {
 
     @Autowired
-    private final MySettingService mySettingService;
+    private final MySettingService settings;
 
     @Autowired
     private final EntityManagerFactory entityManagerFactory;
 
-    public Readers(MySettingService mySettingService, EntityManagerFactory entityManagerFactory) {
-        this.mySettingService = mySettingService;
+    public Readers(MySettingService settings, EntityManagerFactory entityManagerFactory) {
+        this.settings = settings;
         this.entityManagerFactory = entityManagerFactory;
     }
 
@@ -33,8 +33,8 @@ public class Readers {
         return new JpaPagingItemReaderBuilder<MyEntity>()
                 .name("myEntityReader")
                 .entityManagerFactory(entityManagerFactory)
-                .queryString(mySettingService.getSetting("GENERATOR.JOB.JPA_PAGING_ITEM_READER.QUERY_STRING"))
-                .pageSize(mySettingService.getSettingInt("GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE"))
+                .queryString(settings.getSetting("GENERATOR.JOB.JPA_PAGING_ITEM_READER.QUERY_STRING"))
+                .pageSize(settings.getSettingInt("GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE"))
                 .build();
     }
 }
