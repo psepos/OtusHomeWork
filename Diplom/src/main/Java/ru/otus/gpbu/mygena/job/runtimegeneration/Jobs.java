@@ -20,7 +20,7 @@ public class Jobs {
     private JobBuilderFactory jobBuilderFactory;
 
     @Bean
-    public Job RuntimeEnvironmentGenerator(
+    public Job RuntimeEnvironmentGeneratorJob(
             Step clearTargetDirectoryStep,
             Step copyTemplateEnvironmentToTargetDirectoryStep,
             Step unzipTemplateEnvironmentStep,
@@ -38,11 +38,13 @@ public class Jobs {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {
                         log.info("Begin");
+                        System.out.println("Job begin");
                     }
 
                     @Override
                     public void afterJob(@NonNull JobExecution jobExecution) {
                         log.info("End");
+                        System.out.println("Job end");
                     }
                 })
                 .build();

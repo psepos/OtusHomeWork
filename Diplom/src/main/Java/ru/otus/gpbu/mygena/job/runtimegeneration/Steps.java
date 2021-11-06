@@ -2,7 +2,10 @@ package ru.otus.gpbu.mygena.job.runtimegeneration;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepExecution;
+import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.JpaPagingItemReader;
@@ -65,6 +68,18 @@ public class Steps {
                 .reader(myEntityReader)
                 .writer(myEntityWriter)
                 .processor(myEntityItemProcessor)
+                .listener(new StepExecutionListener() {
+                    @Override
+                    public void beforeStep(StepExecution stepExecution) {
+                        System.out.println("generateEntitiesStep begin");
+                    }
+
+                    @Override
+                    public ExitStatus afterStep(StepExecution stepExecution) {
+                        System.out.println("generateEntitiesStep end");
+                        return new ExitStatus("Ok");
+                    }
+                })
                 .build();
     }
 

@@ -55,7 +55,7 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
 
     @Override
     public int getSettingInt(String code) {
-        return Integer.getInteger(getSetting(code));
+        return Integer.parseInt(getSetting(code));
     }
 
     @Override
