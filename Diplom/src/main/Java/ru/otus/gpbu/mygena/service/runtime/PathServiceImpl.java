@@ -76,6 +76,6 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path compileLog() {
-        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE_LOG"));
+        return Paths.get(sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE"));
     }
 }

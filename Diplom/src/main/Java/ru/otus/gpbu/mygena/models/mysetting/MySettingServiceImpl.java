@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -56,6 +57,12 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
     @Override
     public int getSettingInt(String code) {
         return Integer.parseInt(getSetting(code));
+    }
+
+    @Override
+    public boolean getSettingBool(String code) {
+        String setting = getSetting(code).toUpperCase(Locale.ROOT);
+        return setting.equals("YES") || setting.equals("TRUE") || setting.equals("ДА");
     }
 
     @Override

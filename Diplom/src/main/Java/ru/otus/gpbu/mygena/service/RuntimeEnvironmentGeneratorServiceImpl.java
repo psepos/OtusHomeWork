@@ -5,6 +5,7 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.PathService;
 
 import java.io.File;
@@ -21,8 +22,12 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     @Autowired
     private final PathService pathService;
 
-    public RuntimeEnvironmentGeneratorServiceImpl(PathService pathService) {
+    @Autowired
+    private final MySettingService sett;
+
+    public RuntimeEnvironmentGeneratorServiceImpl(PathService pathService, MySettingService sett) {
         this.pathService = pathService;
+        this.sett = sett;
     }
 
     @Override
@@ -54,8 +59,27 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
 
     @Override
     public void compileAndBuildRuntimeStep() throws InterruptedException, IOException {
+
+        String command;
+
+        if (sett.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW")) {
+            command = "cmd /c start mvnw.cmd";
+        } else {
+            command = "cmd /c mvnw.cmd";
+        }
+        command = command + " " + sett.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS");
+
+        if (sett.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS")){
+            command = command + " -Dmaven.test.skip";
+        }
+
+        command = command + " > " + pathService.compileLog();
+
+        log.debug("compileAndBuildRuntimeStep(): command = " + command);
+        System.out.println("command = " + command);
+
         Process process = Runtime.getRuntime().exec(
-                "cmd /c mvnw.cmd package -T 1C -o -am -Dmaven.test.skip > " + pathService.compileLog(),
+                command,
                 null,
                 new File(pathService.runtimeEnvironmentDestinationPath().toString()));
 
