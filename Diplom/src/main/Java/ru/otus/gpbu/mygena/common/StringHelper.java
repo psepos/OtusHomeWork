@@ -2,7 +2,10 @@ package ru.otus.gpbu.mygena.common;
 
 public class StringHelper {
     public static String getStringFirstLower(String string) {
-        String first = string.substring(0,1).toLowerCase();
-        return first + string.substring(1);
+        return string.substring(0,1).toLowerCase() + string.substring(1);
+    }
+
+    public static String getStringFirstUpper(String string) {
+        return string.substring(0,1).toUpperCase() + string.substring(1);
     }
 }
