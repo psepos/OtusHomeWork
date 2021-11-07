@@ -2,7 +2,6 @@ package ru.otus.gpbu.mygena.job.runtimegeneration;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepExecution;
@@ -71,12 +70,12 @@ public class Steps {
                 .processor(myEntityItemProcessor)
                 .listener(new StepExecutionListener() {
                     @Override
-                    public void beforeStep(@NotNull StepExecution stepExecution) {
+                    public void beforeStep(StepExecution stepExecution) {
                         log.info("generateEntitiesStep begin");
                     }
 
                     @Override
-                    public ExitStatus afterStep(@NotNull StepExecution stepExecution) {
+                    public ExitStatus afterStep(StepExecution stepExecution) {
                         log.info("generateEntitiesStep end");
                         return new ExitStatus("Ok");
                     }
@@ -96,12 +95,12 @@ public class Steps {
                 .processor(myEntityRepositoryItemProcessor)
                 .listener(new StepExecutionListener() {
                     @Override
-                    public void beforeStep(@NotNull StepExecution stepExecution) {
+                    public void beforeStep(StepExecution stepExecution) {
                         log.info("generateEntitiesRepositoriesStep begin");
                     }
 
                     @Override
-                    public ExitStatus afterStep(@NotNull StepExecution stepExecution) {
+                    public ExitStatus afterStep(StepExecution stepExecution) {
                         log.info("generateEntitiesRepositoriesStep end");
                         return new ExitStatus("Ok");
                     }
@@ -121,12 +120,12 @@ public class Steps {
                 .processor(myEntityServiceItemProcessor)
                 .listener(new StepExecutionListener() {
                     @Override
-                    public void beforeStep(@NotNull StepExecution stepExecution) {
+                    public void beforeStep(StepExecution stepExecution) {
                         log.info("generateEntitiesServicesStep begin");
                     }
 
                     @Override
-                    public ExitStatus afterStep(@NotNull StepExecution stepExecution) {
+                    public ExitStatus afterStep(StepExecution stepExecution) {
                         log.info("generateEntitiesServicesStep end");
                         return new ExitStatus("Ok");
                     }
@@ -147,12 +146,12 @@ public class Steps {
                 .processor(myEntityShellCommandsItemProcessor)
                 .listener(new StepExecutionListener() {
                     @Override
-                    public void beforeStep(@NotNull StepExecution stepExecution) {
+                    public void beforeStep(StepExecution stepExecution) {
                         log.info("generateEntityShellCommandsStep begin");
                     }
 
                     @Override
-                    public ExitStatus afterStep(@NotNull StepExecution stepExecution) {
+                    public ExitStatus afterStep(StepExecution stepExecution) {
                         log.info("generateEntityShellCommandsStep end");
                         return new ExitStatus("Ok");
                     }
