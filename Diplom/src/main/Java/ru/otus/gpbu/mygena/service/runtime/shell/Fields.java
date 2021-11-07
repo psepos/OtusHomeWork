@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.service.runtime.service;
+package ru.otus.gpbu.mygena.service.runtime.shell;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
@@ -11,6 +11,7 @@ import ru.otus.gpbu.mygena.service.runtime.Generator;
 import javax.lang.model.element.Modifier;
 
 public class Fields implements Generator {
+
     private final TypeSpec.Builder builder;
 
     private final MyEntity entityModel;
@@ -26,13 +27,16 @@ public class Fields implements Generator {
 
     @Override
     public TypeSpec.Builder doGenerate() {
-        this.repositoryField();
-        return builder;
+
+        this.serviceField();
+        this.entityField();
+
+        return this.builder;
     }
 
-    private void repositoryField() {
+    private void serviceField() {
 
-        String typeName = entityModel.getCode() + "Repository";
+        String typeName = entityModel.getCode() + "Service";
         String fieldName = StringHelper.getStringFirstLower(typeName);
 
         FieldSpec field = FieldSpec.builder(ClassName.get("", typeName), fieldName)
@@ -40,6 +44,16 @@ public class Fields implements Generator {
                 .addAnnotation(Autowired.class)
                 .build();
         builder.addField(field);
+
     }
 
+    private void entityField() {
+        String typeName = entityModel.getCode();
+        String fieldName = "entity";
+
+        FieldSpec field = FieldSpec.builder(ClassName.get("", typeName), fieldName)
+                .addModifiers(Modifier.PRIVATE)
+                .build();
+        builder.addField(field);
+    }
 }

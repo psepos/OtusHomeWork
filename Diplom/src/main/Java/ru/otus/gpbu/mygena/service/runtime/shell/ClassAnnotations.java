@@ -1,11 +1,10 @@
-package ru.otus.gpbu.mygena.service.runtime.service;
+package ru.otus.gpbu.mygena.service.runtime.shell;
 
 import com.squareup.javapoet.TypeSpec;
-import org.springframework.stereotype.Service;
+import org.springframework.shell.standard.ShellComponent;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
 
 public class ClassAnnotations implements Generator {
-
     private final TypeSpec.Builder builder;
 
     public ClassAnnotations(TypeSpec.Builder builder) {
@@ -16,13 +15,12 @@ public class ClassAnnotations implements Generator {
         return new ClassAnnotations(builder);
     }
 
-    @Override
     public TypeSpec.Builder doGenerate() {
-        this.serviceAnnotation();
+        this.shellAnnotation();
         return builder;
     }
 
-    private void serviceAnnotation() {
-        builder.addAnnotation(Service.class);
+    private void shellAnnotation() {
+        builder.addAnnotation(ShellComponent.class);
     }
 }

@@ -4,10 +4,11 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.service.runtime.GeneratorJavaFile;
 
 import javax.lang.model.element.Modifier;
 
-public class Class {
+public class Class implements GeneratorJavaFile {
     private final MyEntity entityModel;
 
     private final MySettingService settings;
@@ -21,6 +22,7 @@ public class Class {
         return new Class(entityModel, settings);
     }
 
+    @Override
     public JavaFile doGenerateJavaFile() {
 
         TypeSpec entityClass = doGenerateTypeSpec();
@@ -39,11 +41,11 @@ public class Class {
 
         TypeSpec.Builder serviceBuilder = TypeSpec.classBuilder(className);
 
-        serviceBuilder = Header.get(serviceBuilder, entityModel).generate();
+        serviceBuilder = Header.get(serviceBuilder, entityModel).doGenerate();
         serviceBuilder.addModifiers(Modifier.PUBLIC);
-        serviceBuilder = ClassAnnotations.get(serviceBuilder).generate();
-        serviceBuilder = Fields.get(serviceBuilder, entityModel).generate();
-        serviceBuilder = Methods.get(serviceBuilder, entityModel).generate();
+        serviceBuilder = ClassAnnotations.get(serviceBuilder).doGenerate();
+        serviceBuilder = Fields.get(serviceBuilder, entityModel).doGenerate();
+        serviceBuilder = Methods.get(serviceBuilder, entityModel).doGenerate();
 
         return serviceBuilder.build();
     }

@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.service.runtime.entity;
+package ru.otus.gpbu.mygena.service.runtime.shell;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
@@ -14,7 +14,6 @@ public class Class implements GeneratorJavaFile {
 
     private final MySettingService settings;
 
-
     public Class(MyEntity entityModel, MySettingService settings) {
         this.entityModel = entityModel;
         this.settings = settings;
@@ -24,8 +23,8 @@ public class Class implements GeneratorJavaFile {
         return new Class(entityModel, settings);
     }
 
+    @Override
     public JavaFile doGenerateJavaFile() {
-
         TypeSpec entityClass = doGenerateTypeSpec();
 
         String packageName = settings.getSetting("GENERATOR.PACKAGE.ROOT_NAME") + "." + entityModel.getCode().toLowerCase();
@@ -38,15 +37,16 @@ public class Class implements GeneratorJavaFile {
 
     private TypeSpec doGenerateTypeSpec() {
 
-        String className = entityModel.getCode();
+        String className = entityModel.getCode() + "ShellCommand";
 
-        TypeSpec.Builder entityClassBuilder = TypeSpec.classBuilder(className);
+        TypeSpec.Builder serviceBuilder = TypeSpec.classBuilder(className);
 
-        entityClassBuilder = Header.get(entityClassBuilder, entityModel).doGenerate();
-        entityClassBuilder.addModifiers(Modifier.PUBLIC);
-        entityClassBuilder = ClassAnnotations.get(entityClassBuilder, entityModel).doGenerate();
-        entityClassBuilder = Fields.get(entityClassBuilder, entityModel).doGenerate();
+        serviceBuilder = Header.get(serviceBuilder, entityModel).doGenerate();
+        serviceBuilder.addModifiers(Modifier.PUBLIC);
+        serviceBuilder = ClassAnnotations.get(serviceBuilder).doGenerate();
+        serviceBuilder = Fields.get(serviceBuilder, entityModel).doGenerate();
+        serviceBuilder = Methods.get(serviceBuilder, entityModel).doGenerate();
 
-        return entityClassBuilder.build();
+        return serviceBuilder.build();
     }
 }

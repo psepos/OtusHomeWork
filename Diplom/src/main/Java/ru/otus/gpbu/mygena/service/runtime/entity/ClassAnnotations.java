@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
+import ru.otus.gpbu.mygena.service.runtime.Generator;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Locale;
 
-public class ClassAnnotations {
+public class ClassAnnotations implements Generator  {
 
     private final TypeSpec.Builder builder;
 
@@ -27,7 +28,8 @@ public class ClassAnnotations {
         return new ClassAnnotations(builder, entityModel);
     }
 
-    public TypeSpec.Builder generate() {
+    @Override
+    public TypeSpec.Builder doGenerate() {
 
         this.entityAnnotation();
         this.tableAnnotation();

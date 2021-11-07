@@ -5,13 +5,14 @@ import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
+import ru.otus.gpbu.mygena.service.runtime.Generator;
 
 import javax.lang.model.element.Modifier;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-public class Fields {
+public class Fields implements Generator {
     private final TypeSpec.Builder builder;
 
     private final MyEntity entityModel;
@@ -25,8 +26,8 @@ public class Fields {
         return new Fields(builder, entityModel);
     }
 
-    public TypeSpec.Builder generate() {
-
+    @Override
+    public TypeSpec.Builder doGenerate() {
         this.idField();
         this.allField();
         return builder;

@@ -1,10 +1,9 @@
-package ru.otus.gpbu.mygena.service.runtime.repository;
+package ru.otus.gpbu.mygena.service.runtime.shell;
 
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.service.runtime.ClassHeader;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
-
 
 public class Header extends ClassHeader implements Generator {
 
@@ -22,7 +21,7 @@ public class Header extends ClassHeader implements Generator {
     @Override
     public TypeSpec.Builder doGenerate(){
         super.doGenerate();
-        builder.addJavadoc("Repository for " + entityModel.getCode() + "\n");
+        builder.addJavadoc("Shell commands for " + entityModel.getCode() + "\n");
         builder.addJavadoc("Description: " + entityModel.getDescription() + "\n");
         builder.addJavadoc("Developer: pse\n");
         builder.addJavadoc("Version: 1\n");

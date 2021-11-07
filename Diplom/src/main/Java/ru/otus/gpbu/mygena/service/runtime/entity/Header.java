@@ -3,8 +3,9 @@ package ru.otus.gpbu.mygena.service.runtime.entity;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.service.runtime.ClassHeader;
+import ru.otus.gpbu.mygena.service.runtime.Generator;
 
-public class Header extends ClassHeader {
+public class Header extends ClassHeader implements Generator {
 
     private final MyEntity entityModel;
 
@@ -18,8 +19,8 @@ public class Header extends ClassHeader {
     }
 
     @Override
-    public TypeSpec.Builder generate(){
-        super.generate();
+    public TypeSpec.Builder doGenerate(){
+        super.doGenerate();
         builder.addJavadoc("Description: " + entityModel.getDescription() + "\n");
         builder.addJavadoc("Developer: pse\n");
         builder.addJavadoc("Version: 1\n");

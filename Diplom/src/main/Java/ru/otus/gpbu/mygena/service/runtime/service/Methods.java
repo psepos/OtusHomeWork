@@ -6,16 +6,18 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.common.StringHelper;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
+import ru.otus.gpbu.mygena.service.runtime.Generator;
 
 import javax.lang.model.element.Modifier;
 import java.util.List;
 import java.util.Optional;
 
 
-public class Methods {
+public class Methods implements Generator {
     private final TypeSpec.Builder builder;
 
     private final MyEntity entityModel;
+
     private String repositoryName;
 
     public Methods(TypeSpec.Builder builder, MyEntity entityModel) {
@@ -27,7 +29,8 @@ public class Methods {
         return new Methods(builder, entityModel);
     }
 
-    public TypeSpec.Builder generate() {
+    @Override
+    public TypeSpec.Builder doGenerate() {
 
         this.repositoryName = StringHelper.getStringFirstLower(entityModel.getCode() + "Repository");
 

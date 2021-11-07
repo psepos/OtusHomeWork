@@ -7,10 +7,11 @@ import com.squareup.javapoet.TypeSpec;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.service.runtime.GeneratorJavaFile;
 
 import javax.lang.model.element.Modifier;
 
-public class Class {
+public class Class implements GeneratorJavaFile {
 
     private final MyEntity entityModel;
 
@@ -25,6 +26,7 @@ public class Class {
         return new Class(entityModel, settings);
     }
 
+    @Override
     public JavaFile doGenerateJavaFile() {
 
         TypeSpec entityClass = doGenerateTypeSpec();
@@ -43,7 +45,7 @@ public class Class {
 
         TypeSpec.Builder repositoryBuilder = TypeSpec.interfaceBuilder(interfaceName);
 
-        repositoryBuilder = Header.get(repositoryBuilder, entityModel).generate();
+        repositoryBuilder = Header.get(repositoryBuilder, entityModel).doGenerate();
         repositoryBuilder.addModifiers(Modifier.PUBLIC);
         repositoryBuilder.addSuperinterface(
                 ParameterizedTypeName.get(
