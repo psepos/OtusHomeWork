@@ -21,7 +21,7 @@ public class Header extends ClassHeader {
     @Override
     public TypeSpec.Builder generate(){
         super.generate();
-        builder.addJavadoc("Repository for Entity " + entityModel.getCode() + "\n");
+        builder.addJavadoc("Repository for " + entityModel.getCode() + "\n");
         builder.addJavadoc("Description: " + entityModel.getDescription() + "\n");
         builder.addJavadoc("Developer: pse\n");
         builder.addJavadoc("Version: 1\n");

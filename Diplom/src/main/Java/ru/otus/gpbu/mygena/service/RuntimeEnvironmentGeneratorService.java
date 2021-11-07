@@ -13,4 +13,5 @@ public interface RuntimeEnvironmentGeneratorService {
     void unzipTemplateEnvironment() throws ZipException;
     void compileAndBuildRuntimeStep() throws InterruptedException, IOException;
     JavaFile doEntityGenerate(MyEntity entityModel);
+    JavaFile doEntityRepositoriesGenerate(MyEntity entityModel);
 }

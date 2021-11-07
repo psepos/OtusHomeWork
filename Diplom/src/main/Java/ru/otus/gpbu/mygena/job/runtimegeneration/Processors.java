@@ -18,4 +18,10 @@ public class Processors {
     public ItemProcessor<MyEntity, JavaFile> myEntityItemProcessor(RuntimeEnvironmentGeneratorService generatorService){
         return generatorService::doEntityGenerate;
     }
+
+    @StepScope
+    @Bean
+    public ItemProcessor<MyEntity, JavaFile> myEntityRepositoryItemProcessor(RuntimeEnvironmentGeneratorService generatorService){
+        return generatorService::doEntityRepositoriesGenerate;
+    }
 }

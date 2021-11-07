@@ -22,3 +22,7 @@ spring:
 logging:
   level:
     ROOT: ERROR
+    ru:
+      otus:
+        gpbu:
+          mygena: DEBUG

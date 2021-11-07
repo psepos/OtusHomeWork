@@ -71,12 +71,37 @@ public class Steps {
                 .listener(new StepExecutionListener() {
                     @Override
                     public void beforeStep(StepExecution stepExecution) {
-                        System.out.println("generateEntitiesStep begin");
+                        log.info("generateEntitiesStep begin");
                     }
 
                     @Override
                     public ExitStatus afterStep(StepExecution stepExecution) {
-                        System.out.println("generateEntitiesStep end");
+                        log.info("generateEntitiesStep end");
+                        return new ExitStatus("Ok");
+                    }
+                })
+                .build();
+    }
+
+    @Bean
+    public Step generateEntitiesRepositoriesStep(JpaPagingItemReader<MyEntity> myEntityReader,
+                                     JavaFileWriter<JavaFile> myEntityWriter,
+                                     ItemProcessor<MyEntity, JavaFile> myEntityRepositoryItemProcessor){
+        return this.stepBuilderFactory
+                .get("generateEntitiesStep")
+                .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
+                .reader(myEntityReader)
+                .writer(myEntityWriter)
+                .processor(myEntityRepositoryItemProcessor)
+                .listener(new StepExecutionListener() {
+                    @Override
+                    public void beforeStep(StepExecution stepExecution) {
+                        log.info("generateEntitiesRepositoriesStep begin");
+                    }
+
+                    @Override
+                    public ExitStatus afterStep(StepExecution stepExecution) {
+                        log.info("generateEntitiesRepositoriesStep end");
                         return new ExitStatus("Ok");
                     }
                 })

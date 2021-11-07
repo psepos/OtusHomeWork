@@ -97,4 +97,9 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     public JavaFile doEntityGenerate(MyEntity entityModel) {
         return ru.otus.gpbu.mygena.service.runtime.entity.Class.get(entityModel, settings).doGenerateJavaFile();
     }
+
+    @Override
+    public JavaFile doEntityRepositoriesGenerate(MyEntity entityModel) {
+        return ru.otus.gpbu.mygena.service.runtime.repository.Class.get(entityModel, settings).doGenerateJavaFile();
+    }
 }
