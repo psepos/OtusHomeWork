@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.service.runtime;
+package ru.otus.gpbu.mygena.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

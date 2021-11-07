@@ -26,8 +26,10 @@ public class Class {
     }
 
     public JavaFile doGenerateJavaFile() {
-        String packageName = settings.getSetting("GENERATOR.PACKAGE.FOR_REPOSITORY");
+
         TypeSpec entityClass = doGenerateTypeSpec();
+
+        String packageName = settings.getSetting("GENERATOR.PACKAGE.ROOT_NAME") + "." + entityModel.getCode().toLowerCase();
 
         return JavaFile
                 .builder(packageName, entityClass)
@@ -36,8 +38,6 @@ public class Class {
     }
 
     private TypeSpec doGenerateTypeSpec() {
-
-        String packageEntityName = settings.getSetting("GENERATOR.PACKAGE.FOR_ENTITY");
 
         String interfaceName = entityModel.getCode() + "Repository";
 
@@ -48,7 +48,7 @@ public class Class {
         repositoryBuilder.addSuperinterface(
                 ParameterizedTypeName.get(
                         ClassName.get(JpaRepository.class),
-                        ClassName.get(packageEntityName, entityModel.getCode()),
+                        ClassName.get("", entityModel.getCode()),
                         ClassName.get(Long.class))
                 );
 

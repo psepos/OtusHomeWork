@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
-import ru.otus.gpbu.mygena.service.runtime.PathService;
 
 import java.io.File;
 import java.io.IOException;
@@ -101,5 +100,10 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     @Override
     public JavaFile doEntityRepositoriesGenerate(MyEntity entityModel) {
         return ru.otus.gpbu.mygena.service.runtime.repository.Class.get(entityModel, settings).doGenerateJavaFile();
+    }
+
+    @Override
+    public JavaFile doEntityServicesGenerate(MyEntity entityModel) {
+        return ru.otus.gpbu.mygena.service.runtime.service.Class.get(entityModel, settings).doGenerateJavaFile();
     }
 }

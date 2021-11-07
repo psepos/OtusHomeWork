@@ -1,8 +1,7 @@
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPOSITORIES', 'Gen to the repository for every entity', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_ENTITIES', 'Gen to the repository for every entity', 'YES');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_ENTITY', 'Java package for entity', 'ru.otus.gpbu.mygena.runtime.entity');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_REPOSITORY', 'Java package for repository', 'ru.otus.gpbu.mygena.runtime.repository');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.FOR_SHELL', 'Java package for shell commands', 'ru.otus.gpbu.mygena.runtime.shell');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.ROOT_NAME', 'Java package', 'ru.otus.gpbu.mygena.runtime.domain');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.SHELL_COMMANDS_NAME', 'Java package for shell commands', 'ru.otus.gpbu.mygena.runtime.shell');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\generate\');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.CHUNK_SIZE', 'Chunk size for job generate', '5');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE', 'Page size for JpaPagingItemReader', '10');

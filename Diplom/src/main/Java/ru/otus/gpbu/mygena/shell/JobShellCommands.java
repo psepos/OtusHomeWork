@@ -5,12 +5,12 @@ import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.gpbu.mygena.service.RuntimeEnvironmentGeneratorService;
+import ru.otus.gpbu.mygena.common.StringHelper;
+
+import java.time.LocalDateTime;
 
 @ShellComponent
 public class JobShellCommands {
-    @Autowired
-    private RuntimeEnvironmentGeneratorService runtime;
 
     @Autowired
     private final JobOperator jobOperator;
@@ -18,8 +18,7 @@ public class JobShellCommands {
     @Autowired
     private final JobExplorer jobExplorer;
 
-    public JobShellCommands(RuntimeEnvironmentGeneratorService runtime, JobOperator jobOperator, JobExplorer jobExplorer) {
-        this.runtime = runtime;
+    public JobShellCommands(JobOperator jobOperator, JobExplorer jobExplorer) {
         this.jobOperator = jobOperator;
         this.jobExplorer = jobExplorer;
     }
@@ -32,8 +31,12 @@ public class JobShellCommands {
 
     @ShellMethod(value = "start-gen", key = "sg")
     public void startGen() throws Exception {
-        Long executionId = jobOperator.start("RuntimeEnvironmentGeneratorJob", "");
+        Long executionId = jobOperator.start("RuntimeEnvironmentGeneratorJob", "start = " + LocalDateTime.now());
         System.out.println(jobOperator.getSummary(executionId));
     }
 
+    @ShellMethod(value = "helper", key = "h")
+    public String helper(String string) {
+        return StringHelper.getStringFirstLower(string);
+    }
 }

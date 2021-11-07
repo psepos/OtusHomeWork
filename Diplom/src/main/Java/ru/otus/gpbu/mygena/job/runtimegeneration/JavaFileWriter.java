@@ -4,7 +4,7 @@ import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.mygena.service.runtime.PathService;
+import ru.otus.gpbu.mygena.service.PathService;
 
 import java.io.IOException;
 import java.util.List;

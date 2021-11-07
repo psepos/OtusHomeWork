@@ -26,6 +26,7 @@ public class Jobs {
             Step unzipTemplateEnvironmentStep,
             Step generateEntitiesStep,
             Step generateEntitiesRepositoriesStep,
+            Step generateEntitiesServicesStep,
             Step compileAndBuildRuntimeStep) {
         return jobBuilderFactory
                 .get("RuntimeEnvironmentGeneratorJob")
@@ -34,6 +35,7 @@ public class Jobs {
                 .next(unzipTemplateEnvironmentStep)
                 .next(generateEntitiesStep)
                 .next(generateEntitiesRepositoriesStep)
+                .next(generateEntitiesServicesStep)
                 .next(compileAndBuildRuntimeStep)
                 .listener(new JobExecutionListener() {
                     @Override

@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.service.runtime.entity;
+package ru.otus.gpbu.mygena.service.runtime.service;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
@@ -8,11 +8,9 @@ import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 import javax.lang.model.element.Modifier;
 
 public class Class {
-
     private final MyEntity entityModel;
 
     private final MySettingService settings;
-
 
     public Class(MyEntity entityModel, MySettingService settings) {
         this.entityModel = entityModel;
@@ -37,15 +35,17 @@ public class Class {
 
     private TypeSpec doGenerateTypeSpec() {
 
-        String className = entityModel.getCode();
+        String className = entityModel.getCode() + "Service";
 
-        TypeSpec.Builder entityClassBuilder = TypeSpec.classBuilder(className);
+        TypeSpec.Builder serviceBuilder = TypeSpec.classBuilder(className);
 
-        entityClassBuilder = Header.get(entityClassBuilder, entityModel).generate();
-        entityClassBuilder.addModifiers(Modifier.PUBLIC);
-        entityClassBuilder = ClassAnnotations.get(entityClassBuilder, entityModel).generate();
-        entityClassBuilder = Fields.get(entityClassBuilder, entityModel).generate();
+        serviceBuilder = Header.get(serviceBuilder, entityModel).generate();
+        serviceBuilder.addModifiers(Modifier.PUBLIC);
+        serviceBuilder = ClassAnnotations.get(serviceBuilder).generate();
+        serviceBuilder = Fields.get(serviceBuilder, entityModel).generate();
+        serviceBuilder = Methods.get(serviceBuilder, entityModel).generate();
 
-        return entityClassBuilder.build();
+        return serviceBuilder.build();
     }
+
 }

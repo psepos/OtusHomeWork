@@ -6,7 +6,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.otus.gpbu.mygena.service.runtime.PathService;
+import ru.otus.gpbu.mygena.service.PathService;
 
 @Configuration
 @Slf4j

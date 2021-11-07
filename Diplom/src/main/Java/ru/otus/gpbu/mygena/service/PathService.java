@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.service.runtime;
+package ru.otus.gpbu.mygena.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

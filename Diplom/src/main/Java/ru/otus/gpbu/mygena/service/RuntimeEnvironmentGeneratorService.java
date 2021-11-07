@@ -14,4 +14,5 @@ public interface RuntimeEnvironmentGeneratorService {
     void compileAndBuildRuntimeStep() throws InterruptedException, IOException;
     JavaFile doEntityGenerate(MyEntity entityModel);
     JavaFile doEntityRepositoriesGenerate(MyEntity entityModel);
+    JavaFile doEntityServicesGenerate(MyEntity entityModel);
 }
