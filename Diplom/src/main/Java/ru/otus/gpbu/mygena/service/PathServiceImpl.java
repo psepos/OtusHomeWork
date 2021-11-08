@@ -20,26 +20,27 @@ public class PathServiceImpl implements PathService {
     @Autowired
     private final MySettingService settings;
 
+    private Path path1;
+
     public PathServiceImpl(MySettingService settings) {
         this.settings = settings;
     }
 
-
     @Override
     public Path environmentTemplateFileWithPath() throws IOException, URISyntaxException {
 
-        Path path1;
+        if (path1 == null) {
+            String runtimeTemplatePath = settings.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH");
 
-        String runtimeTemplatePath = settings.getSetting("RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH");
+            var uri = ClassLoader.getSystemResource(runtimeTemplatePath + environmentTemplateFile()).toURI();
 
-        var uri = ClassLoader.getSystemResource(runtimeTemplatePath + environmentTemplateFile()).toURI();
+            final Map<String, String> env = new HashMap<>();
+            final String[] array = uri.toString().split("!");
+            final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
 
-        final Map<String, String> env = new HashMap<>();
-        final String[] array = uri.toString().split("!");
-        final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
+            path1 = fs.getPath(array[1]);
 
-        path1 = fs.getPath(array[1]);
-        //fs.close();
+        }
 
         return path1;
     }
@@ -71,7 +72,7 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path artifactPath() {
-        return Paths.get(runtimeEnvironmentDestinationPath() + "\\target");
+        return Paths.get(runtimeEnvironmentDestinationPath() + "\\target\\");
     }
 
     @Override

@@ -2,10 +2,7 @@ package ru.otus.gpbu.mygena.service.runtime.entity;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.TypeSpec;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
 
@@ -33,8 +30,7 @@ public class ClassAnnotations implements Generator  {
 
         this.entityAnnotation();
         this.tableAnnotation();
-        this.getterAnnotation();
-        this.setterAnnotation();
+        this.dataAnnotation();
         this.noArgsConstructorAnnotation();
         this.allArgsConstructorAnnotation();
 
@@ -53,12 +49,8 @@ public class ClassAnnotations implements Generator  {
         builder.addAnnotation(ann);
     }
 
-    private void getterAnnotation(){
-        builder.addAnnotation(Getter.class);
-    }
-
-    private void setterAnnotation(){
-        builder.addAnnotation(Setter.class);
+    private void dataAnnotation(){
+        builder.addAnnotation(Data.class);
     }
 
     private void noArgsConstructorAnnotation(){

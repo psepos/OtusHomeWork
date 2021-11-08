@@ -1,5 +1,6 @@
 package ru.otus.gpbu.mygena.service.runtime.shell;
 
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -11,6 +12,7 @@ import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
 
 import javax.lang.model.element.Modifier;
+import javax.persistence.Table;
 import java.lang.reflect.Type;
 
 public class Methods implements Generator {
@@ -39,19 +41,31 @@ public class Methods implements Generator {
         this.generateFindByIdMethod();
         this.generateEditsMethod();
         this.generateSaveMethod();
+        this.generateFindAllMethod();
+
         return this.builder;
+    }
+
+    private void generateFindAllMethod() {
+
+        String methodName = "findAll" + entityModel.getCode();
+
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
+                .returns(String.class)
+                .addCode("var all = " + serviceName + ".findAll();\n")
+                .addCode("return all.toString();")
+                .build();
+
+        builder.addMethod(createNewEntityMethod);
     }
 
     private void generateSaveMethod() {
         String methodName = "save" + entityModel.getCode();
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
-                .returns(ClassName.get("", entityModel.getCode()))
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
+                .returns(String.class)
                 .addCode(serviceName + ".saveOrUpdate(entity);\n")
-                .addCode("return entity;")
+                .addCode("return entity.toString();")
                 .build();
 
         builder.addMethod(createNewEntityMethod);
@@ -64,14 +78,11 @@ public class Methods implements Generator {
     }
 
     private void generateEditMethod(MyEntityAttribute attrib) {
-        String methodName = "edit" + StringHelper.getStringFirstUpper(attrib.getCode());
+        String methodName = "edit" + StringHelper.getStringFirstUpper(attrib.getCode()) + StringHelper.getStringFirstUpper(entityModel.getCode());
 
         Type type = ReflectHelper.getType(attrib.getType());
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
                 .addParameter(type, attrib.getCode())
                 .addCode("entity.set" + StringHelper.getStringFirstUpper(attrib.getCode()) + "(" + attrib.getCode() + ");")
                 .build();
@@ -83,15 +94,12 @@ public class Methods implements Generator {
 
         String methodName = "find" + entityModel.getCode() + "ById";
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
                 .addParameter(Long.class, "id")
-                .returns(ClassName.get("", entityModel.getCode()))
+                .returns(String.class)
                 .addCode("var entityOpt = " + serviceName + ".findById(id);\n")
                 .addCode("entity = entityOpt.get();\n")
-                .addCode("return entity;")
+                .addCode("return entity.toString();")
                 .build();
 
         builder.addMethod(createNewEntityMethod);
@@ -101,10 +109,7 @@ public class Methods implements Generator {
 
         String methodName = "delete" + entityModel.getCode() + "ById";
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
                 .addParameter(Long.class, "id")
                 .addCode(serviceName + ".deleteById(id);")
                 .build();
@@ -115,12 +120,9 @@ public class Methods implements Generator {
     private void generateShowCurrentEntityMethod() {
         String methodName = "showCurrent" + entityModel.getCode();
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
-                .returns(ClassName.get("", entityModel.getCode()))
-                .addCode("return entity;")
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
+                .returns(String.class)
+                .addCode("return entity.toString();")
                 .build();
 
         builder.addMethod(createNewEntityMethod);
@@ -129,15 +131,25 @@ public class Methods implements Generator {
     private void generateCreateNewEntityMethod() {
         String methodName = "createNew" + entityModel.getCode();
 
-        MethodSpec createNewEntityMethod = MethodSpec
-                .methodBuilder(methodName)
-                .addModifiers(Modifier.PUBLIC)
-                .addAnnotation(ShellMethod.class)
-                .returns(ClassName.get("", entityModel.getCode()))
+        MethodSpec createNewEntityMethod = getMethodSpecBuilder(methodName)
+                .returns(String.class)
                 .addCode("entity = new " + entityModel.getCode() + "(); \n")
-                .addCode("return entity;")
+                .addCode("return entity.toString();")
                 .build();
 
         builder.addMethod(createNewEntityMethod);
+    }
+
+    private MethodSpec.Builder getMethodSpecBuilder(String methodName) {
+
+        AnnotationSpec ann = AnnotationSpec.builder(ShellMethod.class)
+                .addMember("value", "\"" + methodName + "\"")
+                .addMember("key", "\"" + methodName + "\"")
+                .build();
+
+        return MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(ann);
     }
 }

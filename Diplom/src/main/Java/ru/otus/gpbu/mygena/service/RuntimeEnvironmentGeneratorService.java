@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface RuntimeEnvironmentGeneratorService {
-    void clearTargetDirectory();
+    void clearTargetDirectory() throws IOException;
     void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException;
     void unzipTemplateEnvironment() throws ZipException;
     void compileAndBuildRuntimeStep() throws InterruptedException, IOException;

@@ -6,6 +6,7 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
 
@@ -32,7 +33,20 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     }
 
     @Override
-    public void clearTargetDirectory() {
+    public void clearTargetDirectory() throws IOException {
+
+        Path destination = pathService.runtimeEnvironmentDestinationPath();
+        log.debug("destination = {}", destination);
+
+        if (Files.exists(destination)) {
+            log.debug("destination exists");
+
+            boolean result = FileSystemUtils.deleteRecursively(pathService.runtimeEnvironmentDestinationPath());
+            log.debug("delete result = {}", result);
+        }
+
+        boolean result = destination.toFile().mkdir();
+        log.debug("mkdir result = {}", result);
 
     }
 
@@ -76,8 +90,7 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
 
         command = command + " > " + pathService.compileLog();
 
-        log.debug("compileAndBuildRuntimeStep(): command = " + command);
-        System.out.println("command = " + command);
+        log.debug("compileAndBuildRuntimeStep(): command = {}", command);
 
         Process process = Runtime.getRuntime().exec(
                 command,
