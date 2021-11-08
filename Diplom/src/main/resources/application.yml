@@ -14,11 +14,14 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: none
-
     properties:
       hibernate:
         format_sql: true
     show-sql: false
+  banner:
+    location: classpath:/banner.txt
+  main:
+    banner-mode: "off"
 logging:
   level:
     ROOT: ERROR
