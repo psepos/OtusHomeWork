@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
-import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
 
 import java.io.File;
 import java.io.IOException;

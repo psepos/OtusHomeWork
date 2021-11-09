@@ -3,7 +3,7 @@ package ru.otus.gpbu.mygena.service.runtime.entity;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
-import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.GeneratorJavaFile;
 
 import javax.lang.model.element.Modifier;

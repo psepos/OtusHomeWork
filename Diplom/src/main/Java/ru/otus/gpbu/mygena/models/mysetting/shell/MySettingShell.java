@@ -1,8 +1,10 @@
-package ru.otus.gpbu.mygena.models.mysetting;
+package ru.otus.gpbu.mygena.models.mysetting.shell;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingServiceCrud;
 
 @ShellComponent
 public class MySettingShell {

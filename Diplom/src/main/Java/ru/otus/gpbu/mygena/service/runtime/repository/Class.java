@@ -6,7 +6,7 @@ import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
-import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.GeneratorJavaFile;
 
 import javax.lang.model.element.Modifier;

@@ -1,7 +1,10 @@
-package ru.otus.gpbu.mygena.models.mysetting;
+package ru.otus.gpbu.mygena.models.mysetting.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.mygena.models.mysetting.MySetting;
+import ru.otus.gpbu.mygena.models.mysetting.MySettingBuilder;
+import ru.otus.gpbu.mygena.models.mysetting.repository.MySettingRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -24,6 +27,11 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
     }
 
     @Override
+    public Optional<MySetting> findByCode(String code) {
+        return mySettingRepository.findByCode(code);
+    }
+
+    @Override
     public List<MySetting> findAll() {
         return mySettingRepository.findAll();
     }
@@ -31,6 +39,11 @@ public class MySettingServiceImpl implements MySettingService, MySettingServiceC
     @Override
     public void saveOrUpdate(MySetting setting) {
         mySettingRepository.save(setting);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        mySettingRepository.deleteById(id);
     }
 
     @Override

@@ -2,7 +2,7 @@ package ru.otus.gpbu.mygena.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.mygena.models.mysetting.MySettingService;
+import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
 
 import java.io.IOException;
 import java.net.URI;

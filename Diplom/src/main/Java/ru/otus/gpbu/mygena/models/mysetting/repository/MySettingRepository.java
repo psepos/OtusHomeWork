@@ -1,6 +1,7 @@
-package ru.otus.gpbu.mygena.models.mysetting;
+package ru.otus.gpbu.mygena.models.mysetting.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import ru.otus.gpbu.mygena.models.mysetting.MySetting;
 
 import java.util.Optional;
 

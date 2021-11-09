@@ -1,4 +1,4 @@
-package ru.otus.gpbu.mygena.models.mysetting;
+package ru.otus.gpbu.mygena.models.mysetting.service;
 
 public interface MySettingService {
     String getSetting(String code);
