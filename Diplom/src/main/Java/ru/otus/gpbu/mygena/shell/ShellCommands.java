@@ -5,7 +5,6 @@ import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.gpbu.mygena.common.StringHelper;
 import ru.otus.gpbu.mygena.service.PathService;
 
 import java.io.File;
@@ -43,7 +42,7 @@ public class ShellCommands {
     }
 
     @ShellMethod(value = "run", key = "r")
-    public void runtimeRun() throws IOException {
+    public void run() throws IOException {
 
         String command = "cmd /c start java -jar " + path.artifactPath() + "\\" + path.artifactFileName();
 
