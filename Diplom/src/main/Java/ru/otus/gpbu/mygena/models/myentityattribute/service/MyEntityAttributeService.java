@@ -1,4 +1,6 @@
-package ru.otus.gpbu.mygena.models.myentityattribute;
+package ru.otus.gpbu.mygena.models.myentityattribute.service;
+
+import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 
 import java.util.List;
 

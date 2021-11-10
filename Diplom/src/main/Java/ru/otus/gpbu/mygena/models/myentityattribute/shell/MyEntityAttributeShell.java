@@ -1,8 +1,9 @@
-package ru.otus.gpbu.mygena.models.myentityattribute;
+package ru.otus.gpbu.mygena.models.myentityattribute.shell;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import ru.otus.gpbu.mygena.models.myentityattribute.service.MyEntityAttributeService;
 
 @ShellComponent
 public class MyEntityAttributeShell {

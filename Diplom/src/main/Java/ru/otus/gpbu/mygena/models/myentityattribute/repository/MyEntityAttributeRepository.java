@@ -1,7 +1,8 @@
-package ru.otus.gpbu.mygena.models.myentityattribute;
+package ru.otus.gpbu.mygena.models.myentityattribute.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
+import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 
 import java.util.List;
 

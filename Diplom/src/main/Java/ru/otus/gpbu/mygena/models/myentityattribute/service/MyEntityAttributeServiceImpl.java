@@ -1,9 +1,11 @@
-package ru.otus.gpbu.mygena.models.myentityattribute;
+package ru.otus.gpbu.mygena.models.myentityattribute.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.myentity.repository.MyEntityRepository;
+import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
+import ru.otus.gpbu.mygena.models.myentityattribute.repository.MyEntityAttributeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
