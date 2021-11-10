@@ -38,7 +38,7 @@ public class MySettingRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MySettingDto> findSettingById(@PathVariable("id") long id) {
+    public ResponseEntity<MySettingDto> findSettingById(@PathVariable long id) {
         return service.findById(id).map(mySetting -> ResponseEntity.ok().body(MySettingDto.toDto(mySetting))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

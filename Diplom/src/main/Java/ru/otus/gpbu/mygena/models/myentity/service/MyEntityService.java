@@ -9,5 +9,7 @@ public interface MyEntityService {
     List<MyEntity> findAll();
     Optional<MyEntity> findByCode(String code);
     void saveOrUpdate(MyEntity entity);
+    Optional<MyEntity> findById(Long id);
     void delete(MyEntity entity);
+    void deleteById(Long id);
 }

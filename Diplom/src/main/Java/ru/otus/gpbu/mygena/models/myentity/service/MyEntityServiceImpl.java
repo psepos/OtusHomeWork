@@ -34,7 +34,17 @@ public class MyEntityServiceImpl implements MyEntityService {
     }
 
     @Override
+    public Optional<MyEntity> findById(Long id) {
+        return myEntityRepository.findById(id);
+    }
+
+    @Override
     public void delete(MyEntity entity) {
         myEntityRepository.delete(entity);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        myEntityRepository.deleteById(id);
     }
 }

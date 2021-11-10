@@ -20,4 +20,9 @@ public @Data class MyEntityDto {
     public static MyEntityDto toDto(MyEntity entity) {
         return new MyEntityDto(entity.getId(), entity.getCode(), entity.getDescription(), MyEntityAttributeDto.toDto(entity.getAttributes()));
     }
+
+    public static MyEntity fromDto(MyEntityDto entity) {
+        return new MyEntity(entity.getId(), entity.getCode(), entity.getDescription(), MyEntityAttributeDto.fromDto(entity.getAttributes()));
+    }
+
 }

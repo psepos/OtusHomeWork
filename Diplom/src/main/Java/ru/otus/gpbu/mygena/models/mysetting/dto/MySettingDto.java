@@ -7,13 +7,18 @@ import ru.otus.gpbu.mygena.models.mysetting.MySetting;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public @Data class MySettingDto {
+public @Data
+class MySettingDto {
     private long id = -1;
     private String code;
     private String description;
     private String value;
 
-    public static MySettingDto toDto(MySetting setting){
+    public static MySettingDto toDto(MySetting setting) {
         return new MySettingDto(setting.getId(), setting.getCode(), setting.getDescription(), setting.getValue());
+    }
+
+    public static MySetting fromDto(MySettingDto settingDto) {
+        return new MySetting(settingDto.id, settingDto.code, settingDto.description, settingDto.value);
     }
 }

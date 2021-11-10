@@ -20,6 +20,7 @@ public class ShellCommands {
     @Autowired
     private final JobExplorer jobExplorer;
 
+
     @Autowired
     private final PathService path;
 
@@ -31,6 +32,7 @@ public class ShellCommands {
 
     @ShellMethod(value = "showInfoJobs", key = "i")
     public void showInfoJobs() {
+
         System.out.println(jobExplorer.getJobNames());
         System.out.println(jobExplorer.getLastJobInstance("RuntimeEnvironmentGeneratorJob"));
     }

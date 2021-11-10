@@ -3,6 +3,7 @@ package ru.otus.gpbu.mygena.models.myentityattribute.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.myentityattribute.MyEntityAttribute;
 
 import java.util.ArrayList;
@@ -28,5 +29,18 @@ class MyEntityAttributeDto {
             listDto.add(MyEntityAttributeDto.toDto(attrib));
         }
         return listDto;
+    }
+
+    public static MyEntityAttribute fromDto(MyEntityAttributeDto attrDto) {
+        return new MyEntityAttribute(attrDto.getId(), attrDto.getCode(), attrDto.getType(), new MyEntity());
+    }
+
+    public static List<MyEntityAttribute> fromDto(List<MyEntityAttributeDto> attributes) {
+        List<MyEntityAttribute> list = new ArrayList<>();
+
+        for (MyEntityAttributeDto attribDto : attributes) {
+            list.add(MyEntityAttributeDto.fromDto(attribDto));
+        }
+        return list;
     }
 }
