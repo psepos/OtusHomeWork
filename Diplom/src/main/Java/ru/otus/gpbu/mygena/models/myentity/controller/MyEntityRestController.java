@@ -36,4 +36,6 @@ public class MyEntityRestController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
 }
