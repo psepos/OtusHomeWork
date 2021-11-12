@@ -35,7 +35,7 @@ public class Steps {
     }
 
     @Bean
-    public Step clearTargetDirectoryStep(){
+    public Step clearTargetDirectoryStep() {
         return this.stepBuilderFactory
                 .get("clearTargetDirectoryStep")
                 .tasklet(tasklets.clearTargetDirectoryTasklet())
@@ -43,7 +43,7 @@ public class Steps {
     }
 
     @Bean
-    public Step copyTemplateEnvironmentToTargetDirectoryStep(){
+    public Step copyTemplateEnvironmentToTargetDirectoryStep() {
         return this.stepBuilderFactory
                 .get("copyTemplateEnvironmentToTargetDirectoryStep")
                 .tasklet(tasklets.copyTemplateEnvironmentToTargetDirectoryTasklet())
@@ -51,7 +51,7 @@ public class Steps {
     }
 
     @Bean
-    public Step unzipTemplateEnvironmentStep(){
+    public Step unzipTemplateEnvironmentStep() {
         return this.stepBuilderFactory
                 .get("unzipTemplateEnvironmentStep")
                 .tasklet(tasklets.unzipTemplateEnvironmentStepTasklet())
@@ -61,7 +61,7 @@ public class Steps {
     @Bean
     public Step generateEntitiesStep(JpaPagingItemReader<MyEntity> myEntityReader,
                                      JavaFileWriter<JavaFile> myEntityWriter,
-                                     ItemProcessor<MyEntity, JavaFile> myEntityItemProcessor){
+                                     ItemProcessor<MyEntity, JavaFile> myEntityItemProcessor) {
         return this.stepBuilderFactory
                 .get("generateEntitiesStep")
                 .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
@@ -85,8 +85,8 @@ public class Steps {
 
     @Bean
     public Step generateEntitiesRepositoriesStep(JpaPagingItemReader<MyEntity> myEntityReader,
-                                     JavaFileWriter<JavaFile> myEntityWriter,
-                                     ItemProcessor<MyEntity, JavaFile> myEntityRepositoryItemProcessor){
+                                                 JavaFileWriter<JavaFile> myEntityWriter,
+                                                 ItemProcessor<MyEntity, JavaFile> myEntityRepositoryItemProcessor) {
         return this.stepBuilderFactory
                 .get("generateEntitiesStep")
                 .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
@@ -110,8 +110,8 @@ public class Steps {
 
     @Bean
     public Step generateEntitiesServicesStep(JpaPagingItemReader<MyEntity> myEntityReader,
-                                                 JavaFileWriter<JavaFile> myEntityWriter,
-                                                 ItemProcessor<MyEntity, JavaFile> myEntityServiceItemProcessor){
+                                             JavaFileWriter<JavaFile> myEntityWriter,
+                                             ItemProcessor<MyEntity, JavaFile> myEntityServiceItemProcessor) {
         return this.stepBuilderFactory
                 .get("generateEntitiesServicesStep")
                 .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
@@ -137,9 +137,9 @@ public class Steps {
     public Step generateEntityShellCommandsStep(
             JpaPagingItemReader<MyEntity> myEntityReader,
             JavaFileWriter<JavaFile> myEntityWriter,
-            ItemProcessor<MyEntity, JavaFile> myEntityShellCommandsItemProcessor){
+            ItemProcessor<MyEntity, JavaFile> myEntityShellCommandsItemProcessor) {
         return this.stepBuilderFactory
-                .get("generateEntitiesServicesStep")
+                .get("generateEntityShellCommandsStep")
                 .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
                 .reader(myEntityReader)
                 .writer(myEntityWriter)
@@ -160,7 +160,33 @@ public class Steps {
     }
 
     @Bean
-    public Step compileAndBuildRuntimeStep(){
+    public Step generateEntityRestControllersStep(
+            JpaPagingItemReader<MyEntity> myEntityReader,
+            JavaFileWriter<JavaFile> myEntityWriter,
+            ItemProcessor<MyEntity, JavaFile> myEntityRestControllersItemProcessor) {
+        return this.stepBuilderFactory
+                .get("generateEntityRestControllersStep")
+                .<MyEntity, JavaFile>chunk(settings.getSettingInt("GENERATOR.JOB.CHUNK_SIZE"))
+                .reader(myEntityReader)
+                .writer(myEntityWriter)
+                .processor(myEntityRestControllersItemProcessor)
+                .listener(new StepExecutionListener() {
+                    @Override
+                    public void beforeStep(StepExecution stepExecution) {
+                        log.info("generateEntityRestControllersStep begin");
+                    }
+
+                    @Override
+                    public ExitStatus afterStep(StepExecution stepExecution) {
+                        log.info("generateEntityRestControllersStep end");
+                        return new ExitStatus("Ok");
+                    }
+                })
+                .build();
+    }
+
+    @Bean
+    public Step compileAndBuildRuntimeStep() {
         return this.stepBuilderFactory
                 .get("compileAndBuildRuntimeStep")
                 .tasklet(tasklets.compileAndBuildRuntimeStepTasklet())

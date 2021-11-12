@@ -4,11 +4,11 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.time.LocalDateTime;
 
-public class ClassHeader implements Generator {
+public class MyCommonHeader implements Generator {
 
     protected final TypeSpec.Builder builder;
 
-    public ClassHeader(TypeSpec.Builder builder) {
+    public MyCommonHeader(TypeSpec.Builder builder) {
         this.builder = builder;
     }
 

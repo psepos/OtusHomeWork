@@ -28,6 +28,7 @@ public class Jobs {
             Step generateEntitiesRepositoriesStep,
             Step generateEntitiesServicesStep,
             Step generateEntityShellCommandsStep,
+            Step generateEntityRestControllersStep,
             Step compileAndBuildRuntimeStep) {
         return jobBuilderFactory
                 .get("RuntimeEnvironmentGeneratorJob")
@@ -39,6 +40,7 @@ public class Jobs {
                 .next(generateEntitiesServicesStep)
                 .next(generateEntityShellCommandsStep)
                 .next(compileAndBuildRuntimeStep)
+                .next(generateEntityRestControllersStep)
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {

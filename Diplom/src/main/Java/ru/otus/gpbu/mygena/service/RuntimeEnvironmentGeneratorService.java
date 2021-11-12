@@ -16,4 +16,5 @@ public interface RuntimeEnvironmentGeneratorService {
     JavaFile doEntityRepositoriesGenerate(MyEntity entityModel);
     JavaFile doEntityServicesGenerate(MyEntity entityModel);
     JavaFile doEntityShellCommandsGenerate(MyEntity entityModel);
+    JavaFile myEntityRestControllersItemProcessor(MyEntity entityModel);
 }

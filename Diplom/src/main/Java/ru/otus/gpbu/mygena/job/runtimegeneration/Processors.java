@@ -36,4 +36,11 @@ public class Processors {
     public ItemProcessor<MyEntity, JavaFile> myEntityShellCommandsItemProcessor(RuntimeEnvironmentGeneratorService generatorService){
         return generatorService::doEntityShellCommandsGenerate;
     }
+
+    @StepScope
+    @Bean
+    public ItemProcessor<MyEntity, JavaFile> myEntityRestControllersItemProcessor(RuntimeEnvironmentGeneratorService generatorService){
+        return generatorService::myEntityRestControllersItemProcessor;
+    }
+
 }

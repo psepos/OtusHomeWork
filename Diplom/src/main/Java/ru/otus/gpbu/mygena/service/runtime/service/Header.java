@@ -2,10 +2,10 @@ package ru.otus.gpbu.mygena.service.runtime.service;
 
 import com.squareup.javapoet.TypeSpec;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
-import ru.otus.gpbu.mygena.service.runtime.ClassHeader;
+import ru.otus.gpbu.mygena.service.runtime.MyCommonHeader;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
 
-public class Header extends ClassHeader implements Generator {
+public class Header extends MyCommonHeader implements Generator {
 
     private final MyEntity entityModel;
 
