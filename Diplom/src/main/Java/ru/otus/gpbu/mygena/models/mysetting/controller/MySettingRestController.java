@@ -27,12 +27,11 @@ public class MySettingRestController {
     @GetMapping
     public ResponseEntity<List<MySettingDto>> findAllSettings() {
 
-        try{
+        try {
             List<MySettingDto> all = service.findAll().stream().map(MySettingDto::toDto).collect(Collectors.toList());
             return ResponseEntity.ok().body(all);
-        }
-        catch (Exception e) {
-            log.error("findAllSettings: ",e);
+        } catch (Exception e) {
+            log.error("findAllSettings: ", e);
             return ResponseEntity.internalServerError().build();
         }
     }
@@ -43,13 +42,13 @@ public class MySettingRestController {
     }
 
     @PostMapping
-    public ResponseEntity<MySettingDto> saveSetting(@Validated @RequestBody MySetting setting){
+    public ResponseEntity<MySettingDto> saveSetting(@Validated @RequestBody MySetting setting) {
         service.saveOrUpdate(setting);
         return ResponseEntity.ok().body(MySettingDto.toDto(setting));
     }
 
-    @RequestMapping(path = "/{id}", method = { RequestMethod.DELETE })
-    public ResponseEntity<Long> deleteSetting(@PathVariable Long id){
+    @RequestMapping(path = "/{id}", method = {RequestMethod.DELETE})
+    public ResponseEntity<Long> deleteSetting(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().body(id);
     }

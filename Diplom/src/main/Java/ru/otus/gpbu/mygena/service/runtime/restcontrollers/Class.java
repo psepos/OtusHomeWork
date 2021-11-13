@@ -6,7 +6,6 @@ import ru.otus.gpbu.mygena.common.StringHelper;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
 import ru.otus.gpbu.mygena.service.runtime.GeneratorJavaFile;
-import ru.otus.gpbu.mygena.service.runtime.repository.Header;
 
 import javax.lang.model.element.Modifier;
 
