@@ -2,9 +2,8 @@ package ru.otus.gpbu.mygena.service.runtime.restcontrollers;
 
 import com.squareup.javapoet.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.mygena.common.StringHelper;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.service.runtime.Generator;
@@ -18,12 +17,12 @@ public class Methods implements Generator {
 
     private final MyEntity entityModel;
 
-    private String entityClassName;
+    private ClassName entityClassName;
 
     public Methods(TypeSpec.Builder builder, MyEntity entityModel) {
         this.builder = builder;
         this.entityModel = entityModel;
-        entityClassName = StringHelper.getStringFirstUpper(entityModel.getCode());
+        entityClassName = ClassName.get("", StringHelper.getStringFirstUpper(entityModel.getCode()));
     }
 
     public static Methods get(TypeSpec.Builder builder, MyEntity entityModel) {
@@ -32,10 +31,39 @@ public class Methods implements Generator {
 
     @Override
     public TypeSpec.Builder doGenerate() {
-        this.findAllMethod();
+        this.findAll();
         this.findById();
         this.deleteById();
+        this.save();
         return builder;
+    }
+
+    private void save() {
+        String methodName = "save";
+
+        ParameterizedTypeName returnType = ParameterizedTypeName.get(
+                ClassName.get(ResponseEntity.class),
+                entityClassName);
+
+        String paramName = StringHelper.getStringFirstLower(entityClassName.simpleName());
+
+        ParameterSpec param = ParameterSpec
+                .builder(entityClassName, paramName)
+                .addAnnotation(Validated.class)
+                .addAnnotation(RequestBody.class)
+                .build();
+
+        MethodSpec findByIdMethod = MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(AnnotationSpec.builder(PostMapping.class).build())
+                .returns(returnType)
+                .addParameter(param)
+                .addStatement("service.saveOrUpdate($N)", paramName)
+                .addStatement("return ResponseEntity.ok().body($N)", paramName)
+                .build();
+
+        builder.addMethod(findByIdMethod);
     }
 
     private void deleteById() {
@@ -73,7 +101,7 @@ public class Methods implements Generator {
 
         CodeBlock body = CodeBlock
                 .builder()
-                .addStatement("java.util.Optional<$N> entity = service.findById(id)", entityClassName)
+                .addStatement("java.util.Optional<$N> entity = service.findById(id)", entityClassName.simpleName())
                 .beginControlFlow("if (entity.isEmpty())")
                 .addStatement("return ResponseEntity.notFound().build()")
                 .endControlFlow()
@@ -92,7 +120,7 @@ public class Methods implements Generator {
                         .build())
                 .returns(ParameterizedTypeName.get(
                         ClassName.get(ResponseEntity.class),
-                        ClassName.get("", entityClassName)))
+                        entityClassName))
                 .addCode(body)
                 .build();
 
@@ -100,13 +128,13 @@ public class Methods implements Generator {
 
     }
 
-    private void findAllMethod() {
+    private void findAll() {
 
         String methodName = "findAll";
 
         ParameterizedTypeName listOfEntity = ParameterizedTypeName.get(
                 ClassName.get(List.class),
-                ClassName.get("", entityClassName));
+                entityClassName);
 
 
         MethodSpec findByIdMethod = MethodSpec
@@ -117,7 +145,7 @@ public class Methods implements Generator {
                 .returns(ParameterizedTypeName.get(
                         ClassName.get(ResponseEntity.class),
                         listOfEntity))
-                .addCode("List<" + entityClassName + "> listAll = service.findAll();\n")
+                .addCode("List<" + entityClassName.simpleName() + "> listAll = service.findAll();\n")
                 .addCode("return ResponseEntity.ok().body(listAll);\n")
                 .build();
 
