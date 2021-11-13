@@ -12,7 +12,7 @@ INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMP
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME', '', 'runtime-0.0.1-SNAPSHOT.jar');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE', '', 'compile.log');
-INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW', '', 'YES');
+INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW', '', 'NO');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS', '', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS', '', 'package -T 1C -o -am');
 

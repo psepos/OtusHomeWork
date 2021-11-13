@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import ru.otus.gpbu.mygena.models.myentity.MyEntity;
 import ru.otus.gpbu.mygena.models.mysetting.service.MySettingService;
+import ru.otus.gpbu.mygena.service.runtime.BuildFaultException;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +74,7 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
     }
 
     @Override
-    public void compileAndBuildRuntimeStep() throws InterruptedException, IOException {
+    public void compileAndBuildRuntimeStep() throws InterruptedException, IOException, BuildFaultException {
 
         String command;
 
@@ -99,8 +100,10 @@ public class RuntimeEnvironmentGeneratorServiceImpl implements RuntimeEnvironmen
 
         process.waitFor();
 
-        if (process.exitValue() != 0) {
-            log.error("Error building runtime");
+        var exitValue = process.exitValue();
+        if (exitValue != 0) {
+            log.error("Fault building the runtime. error {}",exitValue);
+            throw new BuildFaultException();
         }
 
     }
