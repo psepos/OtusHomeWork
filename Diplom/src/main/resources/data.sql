@@ -1,7 +1,7 @@
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPOSITORIES', 'Gen to the repository for every entity', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_ENTITIES', 'Gen to the repository for every entity', 'YES');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.ROOT_NAME', 'Java package', 'ru.otus.gpbu.mygena.runtime.domain');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.SHELL_COMMANDS_NAME', 'Java package for shell commands', 'ru.otus.gpbu.mygena.runtime.shell');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.ROOT_NAME', 'Java package', 'ru.otus.gpbu.moon.domain');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.SHELL_COMMANDS_NAME', 'Java package for shell commands', 'ru.otus.gpbu.moon.shell');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\generate\');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.CHUNK_SIZE', 'Chunk size for job generate', '5');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE', 'Page size for JpaPagingItemReader', '10');
@@ -10,7 +10,7 @@ INSERT INTO setting (code, description, value) VALUES ('GENERATOR.REST_API_PREFI
 
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE', '', 'runtime.zip');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');
-INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME', '', 'runtime-0.0.1-SNAPSHOT.jar');
+INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME', '', 'moon-1.jar');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE', '', 'compile.log');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW', '', 'NO');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS', '', 'YES');
