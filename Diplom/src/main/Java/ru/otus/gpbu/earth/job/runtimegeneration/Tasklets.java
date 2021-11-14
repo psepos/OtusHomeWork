@@ -6,24 +6,25 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.otus.gpbu.earth.service.MoonGeneratorService;
+import ru.otus.gpbu.earth.service.MoonRuntimeOperations;
 
 @Configuration
 @Slf4j
 public class Tasklets {
 
     @Autowired
-    private final MoonGeneratorService runtimeEnvironmentService;
+    private final MoonRuntimeOperations moonRuntimeOperations;
 
-    public Tasklets(MoonGeneratorService runtimeEnvironmentService) {
-        this.runtimeEnvironmentService = runtimeEnvironmentService;
+    public Tasklets(MoonRuntimeOperations moonRuntimeOperations) {
+        this.moonRuntimeOperations = moonRuntimeOperations;
     }
+
 
     @Bean
     public MethodInvokingTaskletAdapter clearTargetDirectoryTasklet(){
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
-        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetObject(moonRuntimeOperations);
         adapter.setTargetMethod("clearTargetDirectory");
 
         return adapter;
@@ -34,7 +35,7 @@ public class Tasklets {
     public MethodInvokingTaskletAdapter copyTemplateEnvironmentToTargetDirectoryTasklet(){
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
-        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetObject(moonRuntimeOperations);
         adapter.setTargetMethod("copyTemplateEnvironmentToTargetDirectory");
 
         return adapter;
@@ -45,7 +46,7 @@ public class Tasklets {
     public MethodInvokingTaskletAdapter unzipTemplateEnvironmentStepTasklet(){
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
-        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetObject(moonRuntimeOperations);
         adapter.setTargetMethod("unzipTemplateEnvironment");
 
         return adapter;
@@ -56,7 +57,7 @@ public class Tasklets {
     public Tasklet compileAndBuildRuntimeStepTasklet() {
         MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
 
-        adapter.setTargetObject(runtimeEnvironmentService);
+        adapter.setTargetObject(moonRuntimeOperations);
         adapter.setTargetMethod("compileAndBuildRuntimeStep");
 
         return adapter;
