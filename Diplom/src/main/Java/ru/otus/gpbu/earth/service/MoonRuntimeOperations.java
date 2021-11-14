@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
 public interface MoonRuntimeOperations {
     void clearTargetDirectory() throws IOException;
     void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException;
-    void unzipTemplateEnvironment() throws ZipException;
+    void unzipTemplateEnvironment() throws IOException;
     void compileAndBuildRuntimeStep() throws InterruptedException, IOException, BuildFaultException;
 
 }

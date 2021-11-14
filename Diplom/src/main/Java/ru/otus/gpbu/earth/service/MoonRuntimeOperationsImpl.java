@@ -2,7 +2,6 @@ package ru.otus.gpbu.earth.service;
 
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -52,23 +51,25 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
     @Override
     public void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException {
         Path templateFile = pathService.environmentTemplateFileWithPath();
-        log.debug("copyTemplateEnvironmentToTargetDirectory():templateFile: " + templateFile);
+        log.debug("copyTemplateEnvironmentToTargetDirectory():templateFile: {}", templateFile);
+
 
         Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
-        log.debug("copyTemplateEnvironmentToTargetDirectory():destinationFile: " + destinationFile);
+        log.debug("copyTemplateEnvironmentToTargetDirectory():destinationFile: {}", destinationFile);
 
         Files.copy(templateFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
     }
 
     @Override
-    public void unzipTemplateEnvironment() throws ZipException {
+    public void unzipTemplateEnvironment() throws IOException {
         Path destinationPath = pathService.runtimeEnvironmentDestinationPath();
-        log.debug("unzipTemplateEnvironment():destinationPath = " + destinationPath);
+        log.debug("unzipTemplateEnvironment():destinationPath = {}", destinationPath);
 
         Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
-        log.debug("unzipTemplateEnvironment():destinationFile = " + destinationFile);
+        log.debug("unzipTemplateEnvironment():destinationFile = {}", destinationFile);
 
         new ZipFile(destinationFile.toFile()).extractAll(destinationPath.toString());
+        Files.deleteIfExists(destinationFile);
     }
 
     @Override

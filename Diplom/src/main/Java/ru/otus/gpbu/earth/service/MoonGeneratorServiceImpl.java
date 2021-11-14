@@ -12,16 +12,11 @@ import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
 public class MoonGeneratorServiceImpl implements MoonGeneratorService {
 
     @Autowired
-    private final PathService pathService;
-
-    @Autowired
     private final MySettingService settings;
 
-    public MoonGeneratorServiceImpl(PathService pathService, MySettingService settings) {
-        this.pathService = pathService;
+    public MoonGeneratorServiceImpl(MySettingService settings) {
         this.settings = settings;
     }
-
 
     @Override
     public JavaFile doEntityGenerate(MyEntity entityModel) {
