@@ -2,7 +2,7 @@ INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPOS
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_ENTITIES', 'Gen to the repository for every entity', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.ROOT_NAME', 'Java package', 'ru.otus.gpbu.moon.domain');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.SHELL_COMMANDS_NAME', 'Java package for shell commands', 'ru.otus.gpbu.moon.shell');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\generate\');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\moon\');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.CHUNK_SIZE', 'Chunk size for job generate', '5');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE', 'Page size for JpaPagingItemReader', '10');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.QUERY_STRING', 'QUERY STRING for JpaPagingItemReader', 'SELECT e FROM MyEntity e');
@@ -12,7 +12,6 @@ INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMP
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME', '', 'moon-1.jar');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE', '', 'compile.log');
-INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW', '', 'NO');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS', '', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS', '', 'clean package -T 1C -o -am');
 
