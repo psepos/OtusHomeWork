@@ -28,6 +28,7 @@
         <module>HomeWork17</module>
         <module>HomeWork18</module>
         <module>Diplom</module>
+        <module>AdminServer</module>
     </modules>
 
     <properties>

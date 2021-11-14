@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.otus.gpbu.pse</groupId>
-	<artifactId>diplom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Diplom</name>
-	<description>homework07</description>
+	<artifactId>EarthRuntime</artifactId>
+	<version>1</version>
+	<name>Earth</name>
+	<description>Earth Runtime generator</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -101,6 +101,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>2.5.4</version>
 		</dependency>
 	</dependencies>
 	<build>
