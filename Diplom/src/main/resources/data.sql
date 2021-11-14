@@ -14,7 +14,7 @@ INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.ARTI
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE', '', 'compile.log');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.OPEN_COMPILE_WINDOW', '', 'NO');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS', '', 'YES');
-INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS', '', 'package -T 1C -o -am');
+INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS', '', 'clean package -T 1C -o -am');
 
 INSERT INTO entity (code, description) VALUES ('Person', 'Person description');
 INSERT INTO entity (code, description) VALUES ('Customer', 'Customer description');
