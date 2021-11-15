@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.otus.gpbu.pse</groupId>
-	<artifactId>EarthRuntime</artifactId>
+	<artifactId>Earth</artifactId>
 	<version>1</version>
 	<name>Earth</name>
 	<description>Earth Runtime generator</description>

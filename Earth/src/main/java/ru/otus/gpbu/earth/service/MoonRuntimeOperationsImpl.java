@@ -75,27 +75,14 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
     @Override
     public void compileAndBuildRuntimeStep() throws InterruptedException, IOException, BuildFaultException {
 
-        String command;
 
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+        String command = this.getCommand();
 
-        if (isWindows) {
-            command = "cmd /c";
-        } else {
-            command = "sh /c";
-        }
 
-        command = command + " mvn";
-
-        command = command + " " + settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS");
-
-        if (settings.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS")) {
-            command = command + " -Dmaven.test.skip";
-        }
-
-        command = command + " > " + pathService.compileLog();
 
         log.debug("compileAndBuildRuntimeStep(): command = {}", command);
+
+        log.info("Begin Maven build");
 
         Process process = Runtime.getRuntime().exec(
                 command,
@@ -104,12 +91,39 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
 
         process.waitFor();
 
+        log.info("End Maven build");
+
         var exitValue = process.exitValue();
         if (exitValue != 0) {
             log.error("Fault building the runtime. error code {}", exitValue);
             throw new BuildFaultException();
         }
 
+    }
+
+    private String getCommand() {
+
+        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+
+        String command;
+
+        if (isWindows) {
+            // Windows
+            command = "cmd /c";
+        } else {
+            // Linux
+            command = "sh /c";
+        }
+
+        command += String.format(" mvn %s", settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS"));
+
+        if (settings.getSettingBool("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_SKIP_TESTS")) {
+            command += " -Dmaven.test.skip";
+        }
+
+        command = String.format("%s > %s", command, pathService.compileLog());
+
+        return command;
     }
 
 }

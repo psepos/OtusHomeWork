@@ -2,11 +2,14 @@ INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_REPOS
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.GENERATE_ENTITIES', 'Gen to the repository for every entity', 'YES');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.ROOT_NAME', 'Java package', 'ru.otus.gpbu.moon.domain');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.PACKAGE.SHELL_COMMANDS_NAME', 'Java package for shell commands', 'ru.otus.gpbu.moon.shell');
-INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\temp\moon\');
+INSERT INTO setting (code, description, value) VALUES ('GENERATOR.OUTPUT_DIR', 'Destination path', 'd:\MoonRuntime\');
+
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.CHUNK_SIZE', 'Chunk size for job generate', '5');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.PAGE_SIZE', 'Page size for JpaPagingItemReader', '10');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.JOB.JPA_PAGING_ITEM_READER.QUERY_STRING', 'QUERY STRING for JpaPagingItemReader', 'SELECT e FROM MyEntity e');
 INSERT INTO setting (code, description, value) VALUES ('GENERATOR.REST_API_PREFIX', 'Prefix for generate rest api', '/api/v1/entities');
+
+INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.HOME', 'Path', 'd:\AdminServer\');
 
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE', '', 'runtime.zip');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');

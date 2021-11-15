@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -28,12 +25,15 @@ class MyJobExecution {
     private Long jobInstanceId;
 
     @Column(name = "CREATE_TIME")
+    @Transient
     private Timestamp createTime;
 
     @Column(name = "START_TIME")
+    @Transient
     private Timestamp startTime;
 
     @Column(name = "END_TIME")
+    @Transient
     private Timestamp endTime;
 
     @Column(name = "STATUS")
@@ -46,6 +46,7 @@ class MyJobExecution {
     private String exitMessage;
 
     @Column(name = "LAST_UPDATED")
+    @Transient
     private Timestamp lastUpdated;
 
     @Column(name = "JOB_CONFIGURATION_LOCATION")
