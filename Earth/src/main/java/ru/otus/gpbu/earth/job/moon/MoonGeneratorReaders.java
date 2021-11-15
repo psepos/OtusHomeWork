@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @Slf4j
-public class Readers {
+public class MoonGeneratorReaders {
 
     @Autowired
     private final MySettingService settings;
@@ -22,7 +22,7 @@ public class Readers {
     @Autowired
     private final EntityManagerFactory entityManagerFactory;
 
-    public Readers(MySettingService settings, EntityManagerFactory entityManagerFactory) {
+    public MoonGeneratorReaders(MySettingService settings, EntityManagerFactory entityManagerFactory) {
         this.settings = settings;
         this.entityManagerFactory = entityManagerFactory;
     }

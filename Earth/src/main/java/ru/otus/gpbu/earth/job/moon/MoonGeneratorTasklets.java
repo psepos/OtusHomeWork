@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.step.tasklet.MethodInvokingTaskletAdapter;
@@ -6,16 +6,16 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.otus.gpbu.earth.service.MoonRuntimeOperations;
+import ru.otus.gpbu.earth.service.moon.MoonRuntimeOperations;
 
 @Configuration
 @Slf4j
-public class Tasklets {
+public class MoonGeneratorTasklets {
 
     @Autowired
     private final MoonRuntimeOperations moonRuntimeOperations;
 
-    public Tasklets(MoonRuntimeOperations moonRuntimeOperations) {
+    public MoonGeneratorTasklets(MoonRuntimeOperations moonRuntimeOperations) {
         this.moonRuntimeOperations = moonRuntimeOperations;
     }
 

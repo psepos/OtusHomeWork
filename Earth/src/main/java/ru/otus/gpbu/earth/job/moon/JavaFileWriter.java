@@ -1,10 +1,10 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
-import ru.otus.gpbu.earth.service.PathService;
+import ru.otus.gpbu.earth.service.patch.PathService;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +26,7 @@ public class JavaFileWriter<T> implements ItemWriter<T> {
         list.forEach(
                 (e) -> {
                     try {
-                        ((JavaFile) e).writeTo(pathService.runtimeEnvironmentSources());
+                        ((JavaFile) e).writeTo(pathService.moonSources());
                     } catch (IOException ex) {
                         log.error(ex.getMessage());
                     }

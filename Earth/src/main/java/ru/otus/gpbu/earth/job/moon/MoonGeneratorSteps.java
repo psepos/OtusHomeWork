@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
 
 @Configuration
 @Slf4j
-public class Steps {
+public class MoonGeneratorSteps {
 
     @Autowired
     private final StepBuilderFactory stepBuilderFactory;
@@ -26,9 +26,9 @@ public class Steps {
     private final MySettingService settings;
 
     @Autowired
-    private final Tasklets tasklets;
+    private final MoonGeneratorTasklets tasklets;
 
-    public Steps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, Tasklets tasklets) {
+    public MoonGeneratorSteps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, MoonGeneratorTasklets tasklets) {
         this.stepBuilderFactory = stepBuilderFactory;
         this.settings = mySettingService;
         this.tasklets = tasklets;

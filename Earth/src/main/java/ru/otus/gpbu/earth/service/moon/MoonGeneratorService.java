@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.service;
+package ru.otus.gpbu.earth.service.moon;
 
 import com.squareup.javapoet.JavaFile;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;

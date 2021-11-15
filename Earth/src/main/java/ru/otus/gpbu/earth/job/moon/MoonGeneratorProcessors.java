@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;
@@ -7,11 +7,11 @@ import org.springframework.batch.item.ItemProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;
-import ru.otus.gpbu.earth.service.MoonGeneratorService;
+import ru.otus.gpbu.earth.service.moon.MoonGeneratorService;
 
 @Configuration
 @Slf4j
-public class Processors {
+public class MoonGeneratorProcessors {
 
     @StepScope
     @Bean

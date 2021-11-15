@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.service;
+package ru.otus.gpbu.earth.service.moon;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;

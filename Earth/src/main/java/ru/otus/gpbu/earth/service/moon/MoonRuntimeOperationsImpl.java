@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.service;
+package ru.otus.gpbu.earth.service.moon;
 
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
+import ru.otus.gpbu.earth.service.patch.PathService;
 import ru.otus.gpbu.earth.service.runtime.BuildFaultException;
 
 import java.io.File;
@@ -33,13 +34,13 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
     @Override
     public void clearTargetDirectory() throws IOException {
 
-        Path destination = pathService.runtimeEnvironmentDestinationPath();
+        Path destination = pathService.moonDestinationPath();
         log.debug("destination = {}", destination);
 
         if (Files.exists(destination)) {
             log.debug("destination exists");
 
-            boolean result = FileSystemUtils.deleteRecursively(pathService.runtimeEnvironmentDestinationPath());
+            boolean result = FileSystemUtils.deleteRecursively(pathService.moonDestinationPath());
             log.debug("delete result = {}", result);
         }
 
@@ -50,11 +51,11 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
 
     @Override
     public void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException {
-        Path templateFile = pathService.environmentTemplateFileWithPath();
+        Path templateFile = pathService.moonTemplateFileWithPath();
         log.debug("copyTemplateEnvironmentToTargetDirectory():templateFile: {}", templateFile);
 
 
-        Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
+        Path destinationFile = pathService.moonDestinationFileWithPath();
         log.debug("copyTemplateEnvironmentToTargetDirectory():destinationFile: {}", destinationFile);
 
         Files.copy(templateFile, destinationFile, StandardCopyOption.REPLACE_EXISTING);
@@ -62,10 +63,10 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
 
     @Override
     public void unzipTemplateEnvironment() throws IOException {
-        Path destinationPath = pathService.runtimeEnvironmentDestinationPath();
+        Path destinationPath = pathService.moonDestinationPath();
         log.debug("unzipTemplateEnvironment():destinationPath = {}", destinationPath);
 
-        Path destinationFile = pathService.runtimeEnvironmentDestinationFileWithPath();
+        Path destinationFile = pathService.moonDestinationFileWithPath();
         log.debug("unzipTemplateEnvironment():destinationFile = {}", destinationFile);
 
         new ZipFile(destinationFile.toFile()).extractAll(destinationPath.toString());
@@ -87,7 +88,7 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
         Process process = Runtime.getRuntime().exec(
                 command,
                 null,
-                new File(pathService.runtimeEnvironmentDestinationPath().toString()));
+                new File(pathService.moonDestinationPath().toString()));
 
         process.waitFor();
 

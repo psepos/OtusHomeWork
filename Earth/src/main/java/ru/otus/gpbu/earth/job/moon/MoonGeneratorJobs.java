@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.runtimegeneration;
+package ru.otus.gpbu.earth.job.moon;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -13,14 +13,17 @@ import org.springframework.lang.NonNull;
 
 @Configuration
 @Slf4j
-public class Jobs {
-
+public class MoonGeneratorJobs {
 
     @Autowired
-    private JobBuilderFactory jobBuilderFactory;
+    private final JobBuilderFactory jobBuilderFactory;
+
+    public MoonGeneratorJobs(JobBuilderFactory jobBuilderFactory) {
+        this.jobBuilderFactory = jobBuilderFactory;
+    }
 
     @Bean
-    public Job RuntimeEnvironmentGeneratorJob(
+    public Job moonEnvironmentGeneratorJob(
             Step clearTargetDirectoryStep,
             Step copyTemplateEnvironmentToTargetDirectoryStep,
             Step unzipTemplateEnvironmentStep,
@@ -31,7 +34,7 @@ public class Jobs {
             Step generateEntityRestControllersStep,
             Step compileAndBuildRuntimeStep) {
         return jobBuilderFactory
-                .get("RuntimeEnvironmentGeneratorJob")
+                .get("MoonEnvironmentGeneratorJob")
                 .start(clearTargetDirectoryStep)
                 .next(copyTemplateEnvironmentToTargetDirectoryStep)
                 .next(unzipTemplateEnvironmentStep)

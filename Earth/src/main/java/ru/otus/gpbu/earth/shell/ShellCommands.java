@@ -5,7 +5,7 @@ import org.springframework.batch.core.launch.JobOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.gpbu.earth.service.PathService;
+import ru.otus.gpbu.earth.service.patch.PathService;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,24 +34,24 @@ public class ShellCommands {
     public void showInfoJobs() {
 
         System.out.println(jobExplorer.getJobNames());
-        System.out.println(jobExplorer.getLastJobInstance("RuntimeEnvironmentGeneratorJob"));
+        System.out.println(jobExplorer.getLastJobInstance("MoonEnvironmentGeneratorJob"));
     }
 
     @ShellMethod(value = "start-gen", key = "sg")
     public void startGen() throws Exception {
-        Long executionId = jobOperator.start("RuntimeEnvironmentGeneratorJob", "start = " + LocalDateTime.now());
+        Long executionId = jobOperator.start("MoonEnvironmentGeneratorJob", "start = " + LocalDateTime.now());
         System.out.println(jobOperator.getSummary(executionId));
     }
 
     @ShellMethod(value = "run", key = "r")
     public void run() throws IOException {
 
-        String command = "cmd /c start java -jar " + path.artifactPath() + "\\" + path.artifactFileName();
+        String command = "cmd /c start java -jar " + path.moonArtifactPath() + "\\" + path.moonArtifactFileName();
 
         Runtime.getRuntime().exec(
                 command,
                 null,
-                new File(path.runtimeEnvironmentDestinationPath().toString()));
+                new File(path.moonDestinationPath().toString()));
 
     }
 

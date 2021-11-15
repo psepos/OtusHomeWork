@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.service;
+package ru.otus.gpbu.earth.service.moon;
 
 import net.lingala.zip4j.exception.ZipException;
 import ru.otus.gpbu.earth.service.runtime.BuildFaultException;
