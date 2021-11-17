@@ -4,7 +4,7 @@ import com.squareup.javapoet.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.gpbu.earth.common.StringHelper;
+import ru.otus.gpbu.earth.helpers.StringHelper;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;
 import ru.otus.gpbu.earth.service.runtime.Generator;
 

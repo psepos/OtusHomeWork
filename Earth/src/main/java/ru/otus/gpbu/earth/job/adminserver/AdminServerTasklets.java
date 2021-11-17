@@ -24,4 +24,15 @@ public class AdminServerTasklets {
 
         return adapter;
     }
+
+    @Bean
+    public MethodInvokingTaskletAdapter installAdminServerTasklet() {
+
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+
+        adapter.setTargetObject(adminServerService);
+        adapter.setTargetMethod("install");
+
+        return adapter;
+    }
 }

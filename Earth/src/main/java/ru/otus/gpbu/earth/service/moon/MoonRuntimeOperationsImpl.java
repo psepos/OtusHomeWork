@@ -5,6 +5,7 @@ import net.lingala.zip4j.ZipFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
+import ru.otus.gpbu.earth.helpers.OsHelper;
 import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
 import ru.otus.gpbu.earth.service.patch.PathService;
 import ru.otus.gpbu.earth.service.runtime.BuildFaultException;
@@ -76,12 +77,7 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
     @Override
     public void compileAndBuildRuntimeStep() throws InterruptedException, IOException, BuildFaultException {
 
-
-        String command = this.getCommand();
-
-
-
-        log.debug("compileAndBuildRuntimeStep(): command = {}", command);
+        String command = this.getMavenCommand();
 
         log.info("Begin Maven build");
 
@@ -102,19 +98,9 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
 
     }
 
-    private String getCommand() {
+    private String getMavenCommand() {
 
-        boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-
-        String command;
-
-        if (isWindows) {
-            // Windows
-            command = "cmd /c";
-        } else {
-            // Linux
-            command = "sh /c";
-        }
+        String command = OsHelper.getCommand();
 
         command += String.format(" mvn %s", settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.MAVEN_BUILD_OPTIONS"));
 
@@ -123,6 +109,8 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
         }
 
         command = String.format("%s > %s", command, pathService.compileLog());
+
+        log.debug("compileAndBuildRuntimeStep(): command = {}", command);
 
         return command;
     }

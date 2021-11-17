@@ -82,21 +82,26 @@ public class PathServiceImpl implements PathService {
     }
 
     @Override
+    public Path adminServerPath() {
+        return Paths.get(settings.getSetting("ADMIN_SERVER.HOME_DIR"));
+    }
+
+    @Override
     public Path adminServerJarFile() {
         return Paths.get(settings.getSetting("ADMIN_SERVER.JAR_NAME"));
     }
 
     @Override
     public Path adminServerJarFileWithPath() {
-        return Paths.get(settings.getSetting("ADMIN_SERVER.HOME_DIR") + adminServerJarFile());
+        return Paths.get( settings.getSetting("ADMIN_SERVER.HOME_DIR") + adminServerJarFile());
     }
 
     @Override
     public Path adminServerTemplateJarFile() throws URISyntaxException, IOException {
         if (path2 == null) {
-            String runtimeTemplatePath = settings.getSetting("ADMIN_SERVER.TEMPLATE_SOURCE");
+            String adminServerTemplatePath = settings.getSetting("ADMIN_SERVER.TEMPLATE_SOURCE");
 
-            var uri = ClassLoader.getSystemResource(runtimeTemplatePath + moonTemplateFile()).toURI();
+            var uri = ClassLoader.getSystemResource(adminServerTemplatePath + adminServerJarFile()).toURI();
 
             final Map<String, String> env = new HashMap<>();
             final String[] array = uri.toString().split("!");

@@ -2,7 +2,7 @@ package ru.otus.gpbu.earth.service.runtime.restcontrollers;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
-import ru.otus.gpbu.earth.common.StringHelper;
+import ru.otus.gpbu.earth.helpers.StringHelper;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;
 import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
 import ru.otus.gpbu.earth.service.runtime.GeneratorJavaFile;

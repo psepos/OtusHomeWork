@@ -26,5 +26,11 @@ public class AdminServerSteps {
                 .build();
     }
 
-
+    @Bean
+    public Step installAdminServerStep() {
+        return this.stepBuilderFactory
+                .get("InstallAdminServerStep")
+                .tasklet(tasklets.installAdminServerTasklet())
+                .build();
+    }
 }

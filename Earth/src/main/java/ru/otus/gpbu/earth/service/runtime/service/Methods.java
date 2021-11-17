@@ -4,7 +4,7 @@ import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-import ru.otus.gpbu.earth.common.StringHelper;
+import ru.otus.gpbu.earth.helpers.StringHelper;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;
 import ru.otus.gpbu.earth.service.runtime.Generator;
 

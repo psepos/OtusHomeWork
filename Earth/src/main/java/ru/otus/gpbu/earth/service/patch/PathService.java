@@ -13,6 +13,7 @@ public interface PathService {
     Path moonArtifactFileName();
     Path moonArtifactPath();
     Path compileLog();
+    Path adminServerPath();
     Path adminServerJarFile();
     Path adminServerJarFileWithPath();
     Path adminServerTemplateJarFile() throws URISyntaxException, IOException;

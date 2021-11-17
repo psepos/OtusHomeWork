@@ -24,8 +24,27 @@ public class AdminServerJobs {
     @Bean
     public Job runAdminServer(Step runAdminServerStep ) {
         return jobBuilderFactory
-                .get("RunAdminServerJob")
+                .get("RunAdminServer")
                 .start(runAdminServerStep)
+                .listener(new JobExecutionListener() {
+                    @Override
+                    public void beforeJob(@NonNull JobExecution jobExecution) {
+                        log.info("Begin");
+                    }
+
+                    @Override
+                    public void afterJob(@NonNull JobExecution jobExecution) {
+                        log.info("End");
+                    }
+                })
+                .build();
+    }
+
+    @Bean
+    public Job installAdminServer(Step installAdminServerStep ) {
+        return jobBuilderFactory
+                .get("InstallAdminServer")
+                .start(installAdminServerStep)
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {

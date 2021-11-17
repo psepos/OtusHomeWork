@@ -32,9 +32,18 @@ public class ShellCommands {
 
     @ShellMethod(value = "showInfoJobs", key = "i")
     public void showInfoJobs() {
+        System.out.println(jobOperator.getJobNames());
+    }
 
-        System.out.println(jobExplorer.getJobNames());
-        System.out.println(jobExplorer.getLastJobInstance("MoonEnvironmentGeneratorJob"));
+    @ShellMethod(value = "getLastJobInstance", key = "gl")
+    public void getLastJobInstance(String jobName) {
+        System.out.println(jobExplorer.getLastJobInstance(jobName));
+    }
+
+    @ShellMethod(value = "startJob", key = "sj")
+    public void startJob(String jobName) throws Exception {
+        Long executionId = jobOperator.start(jobName, "start = " + LocalDateTime.now());
+        System.out.println(jobOperator.getSummary(executionId));
     }
 
     @ShellMethod(value = "start-gen", key = "sg")
