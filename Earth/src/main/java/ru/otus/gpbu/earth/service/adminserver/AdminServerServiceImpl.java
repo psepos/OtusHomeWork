@@ -32,7 +32,7 @@ public class AdminServerServiceImpl implements AdminServerService {
 
     @Override
     public void run() throws IOException, InterruptedException {
-        String command = OsHelper.getCommand(" start java -jar "," java -jar ");
+        String command = OsHelper.getCommand(" start java -jar ", " java -jar ");
         command += pathService.adminServerJarFile();
 
         log.debug("command: {}", command);
@@ -46,7 +46,7 @@ public class AdminServerServiceImpl implements AdminServerService {
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown() throws ShutdownErrorException {
 
         String url = settings.getSetting("ADMIN_SERVER.URL") + settings.getSetting("ADMIN_SERVER.SHUTDOWN_SUFFIX");
 
@@ -55,9 +55,14 @@ public class AdminServerServiceImpl implements AdminServerService {
         HttpEntity<String> request = new HttpEntity<>("", headers);
 
         RestTemplate rest = new RestTemplate();
-        String response = rest.postForObject(url, request, String.class);
-        log.debug(response);
-
+        try {
+            ShutdownDto response = rest.postForObject(url, request, ShutdownDto.class);
+            assert response != null;
+            log.debug(response.getMessage());
+        } catch (Exception e) {
+            log.error("shutdown fault", e);
+            throw new ShutdownErrorException("shutdown fault", e);
+        }
     }
 
     @Override

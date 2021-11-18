@@ -5,6 +5,6 @@ import java.net.URISyntaxException;
 
 public interface AdminServerService {
     void run() throws IOException, InterruptedException;
-    void shutdown();
+    void shutdown() throws ShutdownErrorException;
     void install() throws IOException, URISyntaxException;
 }
