@@ -1,6 +1,8 @@
 package ru.otus.gpbu.earth.models.myjobinstance;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,24 +12,21 @@ public
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "job_instance")
+@Table(name = "BATCH_JOB_INSTANCE")
 class MyJobInstance {
 
-    @Column(nullable = false)
+    @Column(name = "JOB_INSTANCE_ID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "code")
-    private String code;
+    @Column(name = "VERSION")
+    private long version;
 
-    @Column(name = "guid")
-    private String guid;
+    @Column(name = "JOB_NAME")
+    private String name;
 
-    @Column(name = "execution_id")
-    private Long executionId;
-
-    @Column(name = "parameters")
-    private String parameters;
+    @Column(name = "JOB_KEY")
+    private String key;
 
 }
