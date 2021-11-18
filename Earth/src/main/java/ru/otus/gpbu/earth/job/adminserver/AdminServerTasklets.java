@@ -35,4 +35,15 @@ public class AdminServerTasklets {
 
         return adapter;
     }
+
+    @Bean
+    public MethodInvokingTaskletAdapter shutdownAdminServerTasklet() {
+
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+
+        adapter.setTargetObject(adminServerService);
+        adapter.setTargetMethod("shutdown");
+
+        return adapter;
+    }
 }

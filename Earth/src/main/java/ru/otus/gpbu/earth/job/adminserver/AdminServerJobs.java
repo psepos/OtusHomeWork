@@ -29,12 +29,12 @@ public class AdminServerJobs {
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {
-                        log.info("Begin");
+                        log.info("RunAdminServer.Begin");
                     }
 
                     @Override
                     public void afterJob(@NonNull JobExecution jobExecution) {
-                        log.info("End");
+                        log.info("RunAdminServer.End");
                     }
                 })
                 .build();
@@ -48,12 +48,31 @@ public class AdminServerJobs {
                 .listener(new JobExecutionListener() {
                     @Override
                     public void beforeJob(@NonNull JobExecution jobExecution) {
-                        log.info("Begin");
+                        log.info("InstallAdminServer.Begin");
                     }
 
                     @Override
                     public void afterJob(@NonNull JobExecution jobExecution) {
-                        log.info("End");
+                        log.info("InstallAdminServer.End");
+                    }
+                })
+                .build();
+    }
+
+    @Bean
+    public Job shutdownAdminServer(Step shutdownAdminServerStep ) {
+        return jobBuilderFactory
+                .get("ShutdownAdminServer")
+                .start(shutdownAdminServerStep)
+                .listener(new JobExecutionListener() {
+                    @Override
+                    public void beforeJob(@NonNull JobExecution jobExecution) {
+                        log.info("ShutdownAdminServer.Begin");
+                    }
+
+                    @Override
+                    public void afterJob(@NonNull JobExecution jobExecution) {
+                        log.info("ShutdownAdminServer.End");
                     }
                 })
                 .build();

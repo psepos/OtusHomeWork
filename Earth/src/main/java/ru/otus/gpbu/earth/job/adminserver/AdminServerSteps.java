@@ -33,4 +33,12 @@ public class AdminServerSteps {
                 .tasklet(tasklets.installAdminServerTasklet())
                 .build();
     }
+
+    @Bean
+    public Step shutdownAdminServerStep() {
+        return this.stepBuilderFactory
+                .get("ShutdownAdminServerStep")
+                .tasklet(tasklets.shutdownAdminServerTasklet())
+                .build();
+    }
 }

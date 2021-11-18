@@ -13,6 +13,7 @@ INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.HOME_DIR', 
 INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.JAR_NAME', '', 'AdminServer.jar');
 INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.TEMPLATE_SOURCE', '', 'BOOT-INF/classes/');
 INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.URL', '', 'http://localhost:8081/');
+INSERT INTO setting (code, description, value) VALUES ('ADMIN_SERVER.SHUTDOWN_SUFFIX', '', '/actuator/shutdown');
 
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE', '', 'runtime.zip');
 INSERT INTO setting (code, description, value) VALUES ('RUNTIME.ENVIRONMENT.TEMPLATE_FILE_PATH', '', 'BOOT-INF/classes/');

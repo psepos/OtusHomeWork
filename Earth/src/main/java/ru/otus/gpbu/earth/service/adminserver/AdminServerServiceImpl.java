@@ -1,7 +1,9 @@
 package ru.otus.gpbu.earth.service.adminserver;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.client.RestTemplate;
@@ -46,9 +48,16 @@ public class AdminServerServiceImpl implements AdminServerService {
     @Override
     public void shutdown() {
 
-        String url = settings.getSetting("ADMIN_SERVER.URL") + "/actuator/shutdown";
+        String url = settings.getSetting("ADMIN_SERVER.URL") + settings.getSetting("ADMIN_SERVER.SHUTDOWN_SUFFIX");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>("", headers);
+
         RestTemplate rest = new RestTemplate();
-        ResponseEntity<String> response = rest.getForEntity(url, String.class);
+        String response = rest.postForObject(url, request, String.class);
+        log.debug(response);
+
     }
 
     @Override
