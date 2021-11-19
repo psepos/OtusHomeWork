@@ -2,6 +2,10 @@ package ru.otus.gpbu.earth.helpers;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+
 @Slf4j
 public class OsHelper {
 
@@ -39,4 +43,15 @@ public class OsHelper {
         return command;
     }
 
+    public static void runJar(Path destinationPath, Path jarFile) throws IOException {
+
+        String command = OsHelper.getCommand(" Start ", " ");
+
+        command += " java -jar " + destinationPath + "\\" + jarFile;
+
+        Runtime.getRuntime().exec(
+                command,
+                null,
+                new File(destinationPath.toString()));
+    }
 }

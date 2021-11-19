@@ -11,5 +11,6 @@ public interface MoonRuntimeOperations {
     void copyTemplateEnvironmentToTargetDirectory() throws IOException, URISyntaxException;
     void unzipTemplateEnvironment() throws IOException;
     void compileAndBuildRuntimeStep() throws InterruptedException, IOException, BuildFaultException;
+    void run() throws IOException;
 
 }

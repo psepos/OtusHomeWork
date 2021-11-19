@@ -10,6 +10,7 @@ import ru.otus.gpbu.earth.models.myjobinstance.MyJobInstance;
 import ru.otus.gpbu.earth.models.myjobinstance.service.MyJobInstanceService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,9 +30,9 @@ public class JobsRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MyJobInstance>> findAllInstances() {
+    public ResponseEntity<List<String>> findAllInstances() {
         try {
-            List<MyJobInstance> all = jobInstanceService.findAll();
+            List<String> all = new ArrayList<>(jobOperator.getJobNames());
             return ResponseEntity.ok().body(all);
         } catch (Exception e) {
             log.error("findAll: ", e);

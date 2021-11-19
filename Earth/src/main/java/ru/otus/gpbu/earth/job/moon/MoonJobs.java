@@ -13,12 +13,12 @@ import org.springframework.lang.NonNull;
 
 @Configuration
 @Slf4j
-public class MoonGeneratorJobs {
+public class MoonJobs {
 
     @Autowired
     private final JobBuilderFactory jobBuilderFactory;
 
-    public MoonGeneratorJobs(JobBuilderFactory jobBuilderFactory) {
+    public MoonJobs(JobBuilderFactory jobBuilderFactory) {
         this.jobBuilderFactory = jobBuilderFactory;
     }
 
@@ -58,5 +58,22 @@ public class MoonGeneratorJobs {
                 .build();
     }
 
+    @Bean
+    public Job moonRunJob(Step moonRunStep) {
+        return jobBuilderFactory
+                .get("MoonRunJob")
+                .start(moonRunStep)
+                .listener(new JobExecutionListener() {
+                    @Override
+                    public void beforeJob(@NonNull JobExecution jobExecution) {
+                        log.info("moonRunJob begin");
+                    }
 
+                    @Override
+                    public void afterJob(@NonNull JobExecution jobExecution) {
+                        log.info("moonRunJob end");
+                    }
+                })
+                .build();
+    }
 }

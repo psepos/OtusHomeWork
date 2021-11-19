@@ -77,6 +77,11 @@ public class PathServiceImpl implements PathService {
     }
 
     @Override
+    public Path moonArtifactFileNameWithPath() {
+        return Paths.get(moonDestinationPath() + "\\target\\" + settings.getSetting("RUNTIME.ENVIRONMENT.ARTIFACT_FILE_NAME"));
+    }
+
+    @Override
     public Path compileLog() {
         return Paths.get(settings.getSetting("RUNTIME.ENVIRONMENT.COMPILE.LOG_FILE"));
     }

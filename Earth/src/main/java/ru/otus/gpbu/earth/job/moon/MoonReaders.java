@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @Slf4j
-public class MoonGeneratorReaders {
+public class MoonReaders {
 
     @Autowired
     private final MySettingService settings;
@@ -22,7 +22,7 @@ public class MoonGeneratorReaders {
     @Autowired
     private final EntityManagerFactory entityManagerFactory;
 
-    public MoonGeneratorReaders(MySettingService settings, EntityManagerFactory entityManagerFactory) {
+    public MoonReaders(MySettingService settings, EntityManagerFactory entityManagerFactory) {
         this.settings = settings;
         this.entityManagerFactory = entityManagerFactory;
     }

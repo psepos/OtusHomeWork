@@ -98,6 +98,11 @@ public class MoonRuntimeOperationsImpl implements MoonRuntimeOperations {
 
     }
 
+    @Override
+    public void run() throws IOException {
+        OsHelper.runJar(pathService.moonDestinationPath(), pathService.moonArtifactFileName());
+    }
+
     private String getMavenCommand() {
 
         String command = OsHelper.getCommand();

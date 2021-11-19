@@ -12,6 +12,7 @@ public interface PathService {
     Path moonSources();
     Path moonArtifactFileName();
     Path moonArtifactPath();
+    Path moonArtifactFileNameWithPath();
     Path compileLog();
     Path adminServerPath();
     Path adminServerJarFile();

@@ -1,4 +1,4 @@
-package ru.otus.gpbu.earth.job.moon;
+package ru.otus.gpbu.earth.job.moon.writers;
 
 import com.squareup.javapoet.JavaFile;
 import lombok.extern.slf4j.Slf4j;

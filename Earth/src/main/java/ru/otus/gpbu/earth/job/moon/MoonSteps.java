@@ -12,12 +12,13 @@ import org.springframework.batch.item.database.JpaPagingItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.otus.gpbu.earth.job.moon.writers.JavaFileWriter;
 import ru.otus.gpbu.earth.models.myentity.MyEntity;
 import ru.otus.gpbu.earth.models.mysetting.service.MySettingService;
 
 @Configuration
 @Slf4j
-public class MoonGeneratorSteps {
+public class MoonSteps {
 
     @Autowired
     private final StepBuilderFactory stepBuilderFactory;
@@ -26,9 +27,9 @@ public class MoonGeneratorSteps {
     private final MySettingService settings;
 
     @Autowired
-    private final MoonGeneratorTasklets tasklets;
+    private final MoonTasklets tasklets;
 
-    public MoonGeneratorSteps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, MoonGeneratorTasklets tasklets) {
+    public MoonSteps(StepBuilderFactory stepBuilderFactory, MySettingService mySettingService, MoonTasklets tasklets) {
         this.stepBuilderFactory = stepBuilderFactory;
         this.settings = mySettingService;
         this.tasklets = tasklets;
@@ -190,6 +191,14 @@ public class MoonGeneratorSteps {
         return this.stepBuilderFactory
                 .get("compileAndBuildRuntimeStep")
                 .tasklet(tasklets.compileAndBuildRuntimeStepTasklet())
+                .build();
+    }
+
+    @Bean
+    public Step moonRunStep() {
+        return this.stepBuilderFactory
+                .get("MoonRunStep")
+                .tasklet(tasklets.moonRunTasklet())
                 .build();
     }
 }

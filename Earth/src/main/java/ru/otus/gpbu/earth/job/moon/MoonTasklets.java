@@ -10,12 +10,12 @@ import ru.otus.gpbu.earth.service.moon.MoonRuntimeOperations;
 
 @Configuration
 @Slf4j
-public class MoonGeneratorTasklets {
+public class MoonTasklets {
 
     @Autowired
     private final MoonRuntimeOperations moonRuntimeOperations;
 
-    public MoonGeneratorTasklets(MoonRuntimeOperations moonRuntimeOperations) {
+    public MoonTasklets(MoonRuntimeOperations moonRuntimeOperations) {
         this.moonRuntimeOperations = moonRuntimeOperations;
     }
 
@@ -59,6 +59,16 @@ public class MoonGeneratorTasklets {
 
         adapter.setTargetObject(moonRuntimeOperations);
         adapter.setTargetMethod("compileAndBuildRuntimeStep");
+
+        return adapter;
+    }
+
+    @Bean
+    public Tasklet moonRunTasklet() {
+        MethodInvokingTaskletAdapter adapter = new MethodInvokingTaskletAdapter();
+
+        adapter.setTargetObject(moonRuntimeOperations);
+        adapter.setTargetMethod("run");
 
         return adapter;
     }
