@@ -18,7 +18,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment getById(long id) {
-        return repository.getById(id);
+        return repository.findById(id).get();
     }
 
     @Override

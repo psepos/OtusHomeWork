@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> getById(long id) {
-        return Optional.of(bookRepository.getById(id));
+        return bookRepository.findById(id);
     }
 
     @Override
@@ -103,21 +103,21 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public long insertComment(long bookId, long commentId) {
-        Book book = bookRepository.getById(bookId);
+        Optional<Book> book = bookRepository.findById(bookId);
 
         Comment comment = commentService.getById(commentId);
 
-        return this.insertComment(book, comment);
+        return this.insertComment(book.get(), comment);
     }
 
     @Override
     public long insertComment(long bookId, String commentDescription) {
 
-        Book book = bookRepository.getById(bookId);
+        Optional<Book> book = bookRepository.findById(bookId);
 
         Comment comment = ModelsObjectFactory.getComment(commentDescription);
         commentService.insert(comment);
-        return this.insertComment(book, comment);
+        return this.insertComment(book.get(), comment);
     }
 
     @Override
@@ -130,9 +130,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public long deleteComment(long bookId, long commentId) {
 
-        Book book = bookRepository.getById(bookId);
+        Optional<Book> book = bookRepository.findById(bookId);
         Comment comment = commentService.getById(commentId);
 
-        return this.deleteComment(book, comment);
+        return this.deleteComment(book.get(), comment);
     }
 }

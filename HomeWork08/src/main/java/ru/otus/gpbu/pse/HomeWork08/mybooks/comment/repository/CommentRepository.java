@@ -1,8 +1,8 @@
 package ru.otus.gpbu.pse.homework08.mybooks.comment.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
 
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+public interface CommentRepository extends MongoRepository<Comment, Long> {
 
 }

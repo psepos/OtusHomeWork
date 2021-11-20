@@ -1,23 +1,21 @@
 package ru.otus.gpbu.pse.homework08.mybooks.genre.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "genre")
 @Getter
 @Setter
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name")
     private String name;
 
     @Override
