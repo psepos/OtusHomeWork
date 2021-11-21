@@ -1,16 +1,11 @@
 package ru.otus.gpbu.pse.homework08.test.repository;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework08.mybooks.HomeWork08Application;
-import ru.otus.gpbu.pse.homework08.mybooks.author.repository.AuthorRepository;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork08Application.class)
 public class AuthorRepositoryJpaTest {
-
+/*
     @Autowired
     private AuthorRepository authorRepository;
 

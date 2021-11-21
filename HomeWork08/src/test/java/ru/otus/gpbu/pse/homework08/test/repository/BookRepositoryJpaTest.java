@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework08.mybooks.HomeWork08Application;
-import ru.otus.gpbu.pse.homework08.mybooks.author.repository.AuthorRepository;
 import ru.otus.gpbu.pse.homework08.mybooks.book.repository.BookRepository;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.repository.CommentRepository;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.repository.GenreRepository;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -16,12 +14,6 @@ public class BookRepositoryJpaTest {
 
     @Autowired
     private BookRepository bookRepository;
-
-    @Autowired
-    private GenreRepository genreRepository;
-
-    @Autowired
-    private AuthorRepository authorRepository;
 
     @Autowired
     private CommentRepository commentRepository;

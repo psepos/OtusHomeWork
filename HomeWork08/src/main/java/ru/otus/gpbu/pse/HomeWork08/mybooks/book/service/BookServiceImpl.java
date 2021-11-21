@@ -1,15 +1,8 @@
 package ru.otus.gpbu.pse.homework08.mybooks.book.service;
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework08.mybooks.author.entity.Author;
-import ru.otus.gpbu.pse.homework08.mybooks.author.service.AuthorService;
 import ru.otus.gpbu.pse.homework08.mybooks.book.entity.Book;
 import ru.otus.gpbu.pse.homework08.mybooks.book.repository.BookRepository;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.service.CommentService;
-import ru.otus.gpbu.pse.homework08.mybooks.common.ModelsObjectFactory;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.entity.Genre;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.service.GenreService;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,121 +11,43 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
-    private final GenreService genreService;
-    private final AuthorService authorService;
-    private final CommentService commentService;
 
-    public BookServiceImpl(BookRepository bookRepository,
-                           GenreService genreService,
-                           AuthorService authorService,
-                           CommentService commentService) {
+    public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-        this.genreService = genreService;
-        this.authorService = authorService;
-        this.commentService = commentService;
     }
 
     @Override
-    public Optional<Book> getById(long id) {
-        return bookRepository.findById(id);
+    public Optional<Book> getById(String id) {
+        return Optional.empty();
     }
 
     @Override
-    public long insert(Book book) {
-        return bookRepository.save(book).getId();
+    public Book insert(Book book) {
+        return bookRepository.insert(book);
     }
 
     @Override
-    public long insert(String name, Long genre_id, Long author_id) {
-        Optional<Genre> genre = genreService.getById(genre_id);
-        if (genre.isEmpty()) {
-            return -1;
-        }
-
-        Optional<Author> author = authorService.getById(author_id);
-        if (author.isEmpty()) {
-            return -1;
-        }
-
-        return this.insert(ModelsObjectFactory.getBook(name, genre.get(), author.get()));
+    public Book save(Book book) {
+        return bookRepository.save(book);
     }
 
     @Override
-    public long update(Book book) {
-        return bookRepository.save(book).getId();
-    }
-
-    @Override
-    public long update(Long id, String name, Long genre_id, Long author_id) {
-        Optional<Genre> genre = genreService.getById(genre_id);
-        Optional<Author> author = authorService.getById(author_id);
-
-        if (genre.isEmpty()) {
-            return -1;
-        }
-        if (author.isEmpty()) {
-            return -2;
-        }
-
-        Book book = ModelsObjectFactory.getBook(id, name, genre.get(), author.get());
-
-        return this.update(book);
-    }
-
-    @Override
-    public long deleteById(long id) {
+    public void deleteById(String id) {
         bookRepository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public List<Book> getAll() {
+    public void delete(Book book) {
+        bookRepository.delete(book);
+    }
+
+    @Override
+    public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
     @Override
     public long count() {
-        return bookRepository.count();
-    }
-
-    @Override
-    public long insertComment(Book book, Comment comment) {
-        book.addComment(comment);
-        return bookRepository.save(book).getId();
-    }
-
-    @Override
-    public long insertComment(long bookId, long commentId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-
-        Comment comment = commentService.getById(commentId);
-
-        return this.insertComment(book.get(), comment);
-    }
-
-    @Override
-    public long insertComment(long bookId, String commentDescription) {
-
-        Optional<Book> book = bookRepository.findById(bookId);
-
-        Comment comment = ModelsObjectFactory.getComment(commentDescription);
-        commentService.insert(comment);
-        return this.insertComment(book.get(), comment);
-    }
-
-    @Override
-    public long deleteComment(Book book, Comment comment) {
-        book.removeComment(comment);
-        bookRepository.delete(book);
-        return 1;
-    }
-
-    @Override
-    public long deleteComment(long bookId, long commentId) {
-
-        Optional<Book> book = bookRepository.findById(bookId);
-        Comment comment = commentService.getById(commentId);
-
-        return this.deleteComment(book.get(), comment);
+        return 0;
     }
 }

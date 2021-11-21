@@ -1,22 +1,15 @@
 package ru.otus.gpbu.pse.homework08.test.repository;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework08.mybooks.HomeWork08Application;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.repository.GenreRepository;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = HomeWork08Application.class)
 public class GenreRepositoryJpaTest {
 
-    @Autowired
-    private GenreRepository genreRepository;
-
     @Test
     public void contextLoads() {
-        assertNotNull(genreRepository);
+
     }
 
     /*

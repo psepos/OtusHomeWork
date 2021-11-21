@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import ru.otus.gpbu.pse.homework08.mybooks.author.entity.Author;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework08.mybooks.genre.entity.Genre;
 
 import java.util.List;
@@ -18,34 +17,33 @@ import java.util.List;
 public class Book {
 
     @Id
-    private long id;
+    private String id;
 
     private String name;
 
-    private Genre genre;
+    private List<Genre> genres;
 
-    private Author author;
+    private List<Author> authors;
 
-    private List<Comment> comments;
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setBook(this);
+    public static Book get(){
+        return new Book();
     }
 
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-        comment.setBook(null);
+    public void addGenre(Genre genre) {
+        genres.add(genre);
+    }
+
+    public void addAuthor(Author author) {
+        authors.add(author);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", genre=" + genre +
-                ", author=" + author +
-                ", comments=" + comments +
+                ", genres=" + genres +
+                ", authors=" + authors +
                 '}';
     }
 }

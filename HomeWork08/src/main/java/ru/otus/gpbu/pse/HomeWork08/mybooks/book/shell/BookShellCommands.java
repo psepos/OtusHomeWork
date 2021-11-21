@@ -12,60 +12,43 @@ import java.util.List;
 public class BookShellCommands {
 
     private final BookService bookService;
+    private Book book = Book.get();
 
     public BookShellCommands(BookService bookService) {
         this.bookService = bookService;
     }
 
-    @ShellMethod(value = "book-count", key = "bc")
-    public long bookCount() {
-        return bookService.count();
+    @ShellMethod(value = "create-new-book", key = "crBook")
+    public Book createNewBook() {
+        book = Book.get();
+        return book;
     }
 
-    @ShellMethod(value = "book-get-all", key = "bga")
-    public List<Book> bookGetAll() {
-        return bookService.getAll();
+    @ShellMethod(value = "create-new-book-by-name", key = "crBookN")
+    public Book createNewBook(String name) {
+        book = Book.get();
+        book.setName(name);
+        return book;
     }
 
-    @ShellMethod(value = "book-delete-by-id <id>", key = "bdbi")
-    public long bookDeleteById(long id) {
-        return bookService.deleteById(id);
+    @ShellMethod(value = "show-book", key = "showb")
+    public Book showBook() {
+        return book;
     }
 
-    @ShellMethod(value = "book-update <id> <name> <genre_id> <author_id>", key = "bu")
-    public long bookUpdate(long id, String name, long genre_id, long author_id) {
-        return bookService.update(id, name, genre_id, author_id);
+    @ShellMethod(value = "insert-book", key = "ib")
+    public Book insertBook() {
+        return bookService.insert(this.book);
     }
 
-    @ShellMethod(value = "book-insert <name> <genre_id> <author_id>", key = "bi")
-    public long bookInsert(String name, Long genre_id, Long author_id) {
-        return bookService.insert(name, genre_id, author_id);
+    @ShellMethod(value = "find-all-book", key = "fab")
+    public List<Book> findAllBook() {
+        return bookService.findAll();
     }
 
-    @ShellMethod(value = "book-get-by-id <id>", key = "bgbi")
-    public Book bookGetById(long bookId) {
-
-        var book = bookService.getById(bookId);
-
-        if (book.isEmpty()){
-            return null;
-        }
-
-        return book.get();
-    }
-
-    @ShellMethod(value = "book-add-comment <id> <commentDescription>", key = "bac")
-    public long bookAddComment(long bookId, String commentDescription) {
-        return bookService.insertComment(bookId, commentDescription);
-    }
-
-    @ShellMethod(value = "book-add-comment-by-id <id> <commentId>", key = "bacbi")
-    public long bookAddCommentById(long bookId, long commentId) {
-        return bookService.insertComment(bookId, commentId);
-    }
-
-    @ShellMethod(value = "book-delete-comment <id> <commentId>", key = "bdc")
-    public long bookDeleteComment(long bookId, long commentId) {
-        return bookService.deleteComment(bookId, commentId);
+    @ShellMethod(value = "find-by-id-book", key = "fbib")
+    public Book findByIdBook(String id) {
+        book = bookService.getById(id).get();
+        return book;
     }
 }
