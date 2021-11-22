@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import ru.otus.gpbu.pse.homework08.mybooks.book.entity.Book;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +17,35 @@ public class Comment {
     @Id
     private String id;
 
+    private String bookId;
+
     private String description;
 
-    private Book book;
+    public static Comment get() {
+        return new Comment();
+    }
+
+    public static Comment get(String description) {
+        Comment comment = get();
+        comment.setDescription(description);
+        return comment;
+    }
+
+    public static Comment get(String description, String bookId) {
+        Comment comment = get(description);
+        comment.setBookId(bookId);
+        return comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", book_id='" + bookId + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 
 
 }

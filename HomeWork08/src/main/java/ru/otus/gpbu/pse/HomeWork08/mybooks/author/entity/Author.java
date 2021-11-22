@@ -11,6 +11,16 @@ class Author {
 
     private String name;
 
+    public static Author get() {
+        return new Author();
+    }
+
+    public static Author get(String name) {
+        Author author = new Author();
+        author.setName(name);
+        return author;
+    }
+
     @Override
     public String toString() {
         return "Author{" +

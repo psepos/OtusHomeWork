@@ -5,4 +5,6 @@ import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
 
 public interface CommentRepository extends MongoRepository<Comment, String> {
 
+
+
 }

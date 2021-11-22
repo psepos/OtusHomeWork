@@ -18,7 +18,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> getById(String id) {
-        return Optional.empty();
+        return bookRepository.findById(id);
     }
 
     @Override
@@ -46,8 +46,4 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
-    @Override
-    public long count() {
-        return 0;
-    }
 }
