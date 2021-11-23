@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework08.mybooks.genre.entity;
+package ru.otus.gpbu.pse.homework08.mybooks.genre;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

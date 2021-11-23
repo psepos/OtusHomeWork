@@ -1,12 +1,10 @@
-package ru.otus.gpbu.pse.homework08.mybooks.book.shell;
+package ru.otus.gpbu.pse.homework08.mybooks.book;
 
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-import ru.otus.gpbu.pse.homework08.mybooks.author.entity.Author;
-import ru.otus.gpbu.pse.homework08.mybooks.book.entity.Book;
-import ru.otus.gpbu.pse.homework08.mybooks.book.service.BookService;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
+import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
 
 import java.util.List;
 
@@ -57,11 +55,6 @@ public class BookShellCommands {
         return book;
     }
 
-    @ShellMethod(value = "insert-book", key = "b-insert")
-    public Book insertBook() {
-        return bookService.insert(this.book);
-    }
-
     @ShellMethod(value = "save-book", key = "b-save")
     public Book saveBook() {
         return bookService.save(this.book);
@@ -80,7 +73,7 @@ public class BookShellCommands {
 
     @ShellMethod(value = "find-by-id-book", key = "b-find-by-id")
     public Book findByIdBook(String id) {
-        book = bookService.getById(id).get();
+        book = bookService.findById(id).get();
         return book;
     }
 

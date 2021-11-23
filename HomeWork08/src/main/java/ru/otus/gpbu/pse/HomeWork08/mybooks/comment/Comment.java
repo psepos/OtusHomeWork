@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework08.mybooks.comment.entity;
+package ru.otus.gpbu.pse.homework08.mybooks.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

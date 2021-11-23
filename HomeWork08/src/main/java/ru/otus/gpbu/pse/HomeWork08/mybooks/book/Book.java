@@ -1,14 +1,14 @@
-package ru.otus.gpbu.pse.homework08.mybooks.book.entity;
+package ru.otus.gpbu.pse.homework08.mybooks.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import ru.otus.gpbu.pse.homework08.mybooks.author.entity.Author;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.entity.Comment;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.entity.Genre;
+import org.springframework.data.annotation.Transient;
+import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
+import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Book {
     private List<Genre> genres = new ArrayList<>();
     private List<Author> authors = new ArrayList<>();
 
-    @DBRef
+    @Transient
     private List<Comment> comments = new ArrayList<>();
 
     public static Book get() {
