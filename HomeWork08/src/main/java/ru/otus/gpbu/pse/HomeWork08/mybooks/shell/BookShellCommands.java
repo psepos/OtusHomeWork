@@ -56,6 +56,12 @@ public class BookShellCommands {
         return book;
     }
 
+    @ShellMethod(value = "delete-author", key = "b-delA")
+    public Book deleteAuthor(String authorName) {
+        book.deleteAuthor(Author.get(authorName));
+        return book;
+    }
+
     @ShellMethod(value = "show-book", key = "b-show")
     public Book showBook() {
         return book;
@@ -66,7 +72,7 @@ public class BookShellCommands {
         return bookService.save(this.book);
     }
 
-    @ShellMethod(value = "find-all-book", key = "b-find")
+    @ShellMethod(value = "find-all-book", key = "b-find-all")
     public List<Book> findAllBook() {
         return bookService.findAll();
     }
@@ -79,7 +85,8 @@ public class BookShellCommands {
 
     @ShellMethod(value = "find-by-id-book", key = "b-find-by-id")
     public Book findByIdBook(String id) {
-        return bookService.find(Book.get(id)).get();
+        book = bookService.find(Book.get(id)).get();
+        return book;
     }
 
     @ShellMethod(value = "add-comment", key = "b-addC")

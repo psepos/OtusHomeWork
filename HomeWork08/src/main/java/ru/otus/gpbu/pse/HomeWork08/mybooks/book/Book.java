@@ -8,8 +8,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
+import ru.otus.gpbu.pse.homework08.mybooks.common.LastUpdated;
 import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework08.mybooks.service.TriggerServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +20,14 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Book {
+public class Book implements LastUpdated {
 
     @Id
     private String id;
 
     private String name;
+
+    private LocalDateTime lastUpdate;
 
     private List<Genre> genres = new ArrayList<>();
     private List<Author> authors = new ArrayList<>();
@@ -41,10 +46,19 @@ public class Book {
 
     public void addGenre(Genre genre) {
         genres.add(genre);
+        TriggerServiceImpl.setLastUpd(genre);
+        TriggerServiceImpl.setLastUpd(this);
     }
 
     public void addAuthor(Author author) {
         authors.add(author);
+        TriggerServiceImpl.setLastUpd(author);
+        TriggerServiceImpl.setLastUpd(this);
+    }
+
+    public void deleteAuthor(Author author1) {
+        authors.remove(authors.stream().filter((a) -> a.getName() == author1.getName()));
+        TriggerServiceImpl.setLastUpd(this);
     }
 
     public void addComment(Comment comment) {
@@ -57,9 +71,13 @@ public class Book {
         return "Book{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", lastUpdate=" + lastUpdate +
                 ", genres=" + genres +
                 ", authors=" + authors +
                 ", comments=" + comments +
                 '}';
     }
+
+
+
 }
