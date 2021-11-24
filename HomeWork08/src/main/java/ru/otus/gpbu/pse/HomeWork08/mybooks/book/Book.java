@@ -33,6 +33,11 @@ public class Book {
     public static Book get() {
         return new Book();
     }
+    public static Book get(String bookId) {
+        Book book = new Book();
+        book.setId(bookId);
+        return book;
+    }
 
     public void addGenre(Genre genre) {
         genres.add(genre);
@@ -44,6 +49,7 @@ public class Book {
 
     public void addComment(Comment comment) {
         comments.add(comment);
+        comment.setBook(this);
     }
 
     @Override

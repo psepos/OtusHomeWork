@@ -2,7 +2,7 @@ package ru.otus.gpbu.pse.homework08.mybooks.book;
 
 import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
-import ru.otus.gpbu.pse.homework08.mybooks.comment.CommentRepository;
+import ru.otus.gpbu.pse.homework08.mybooks.comment.CommentService;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,21 +12,19 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-    private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
-    public BookServiceImpl(BookRepository bookRepository, CommentRepository commentRepository) {
+    public BookServiceImpl(BookRepository bookRepository, CommentService commentService) {
         this.bookRepository = bookRepository;
-        this.commentRepository = commentRepository;
+        this.commentService = commentService;
     }
 
     @Override
-    public Optional<Book> findById(String id) {
-        Optional<Book> bookOpt = bookRepository.findById(id);
+    public Optional<Book> find(Book book) {
 
-        if (bookOpt.isPresent()) {
-            Book book = bookOpt.get();
-            book.setComments(commentRepository.findByBookId(book.getId()));
-        }
+        Optional<Book> bookOpt = bookRepository.findById(book.getId());
+
+        bookOpt.ifPresent(book1 -> book1.setComments(commentService.findAllByBook(book)));
 
         return bookOpt;
     }
@@ -35,28 +33,22 @@ public class BookServiceImpl implements BookService {
     public Book save(Book book) {
         bookRepository.save(book);
         for (Comment comment : book.getComments()) {
-            comment.setBookId(book.getId());
-            commentRepository.save(comment);
+            comment.setBook(book);
+            commentService.save(comment);
         }
         return book;
     }
 
     @Override
-    public void deleteById(String bookId) {
-        commentRepository.deleteByBookId(bookId);
-        bookRepository.deleteById(bookId);
-    }
-
-    @Override
     public void delete(Book book) {
-        commentRepository.deleteByBookId(book.getId());
+        commentService.deleteAllByBook(book);
         bookRepository.delete(book);
     }
 
     @Override
     public List<Book> findAll() {
         List<Book> books = bookRepository.findAll();
-        books.forEach((book) -> book.setComments(commentRepository.findByBookId(book.getId())));
+        books.forEach((book) -> book.setComments(commentService.findAllByBook(book)));
         return books;
     }
 

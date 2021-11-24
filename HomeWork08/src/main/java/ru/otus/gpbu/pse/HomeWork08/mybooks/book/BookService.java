@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
-    Optional<Book> findById(String bookId);
+    Optional<Book> find(Book book);
     Book save(Book book);
-    void deleteById(String bookId);
     void delete(Book book);
     List<Book> findAll();
 }

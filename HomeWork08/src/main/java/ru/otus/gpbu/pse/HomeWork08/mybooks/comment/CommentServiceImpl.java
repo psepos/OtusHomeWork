@@ -1,8 +1,11 @@
 package ru.otus.gpbu.pse.homework08.mybooks.comment;
 
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.pse.homework08.mybooks.book.Book;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -14,8 +17,18 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> findByBookId(String bookId) {
-        return commentRepository.findByBookId(bookId);
+    public List<Comment> findAllByBook(Book book) {
+        return commentRepository.findByBookId(book.getId());
+    }
+
+    @Override
+    public List<Comment> findAll() {
+        return commentRepository.findAll();
+    }
+
+    @Override
+    public Optional<Comment> find(Comment comment) {
+        return commentRepository.findById(comment.getId());
     }
 
     @Override
@@ -24,7 +37,15 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void deleteById(String id) {
-        commentRepository.deleteById(id);
+    public void deleteAllByBook(Book book) {
+        commentRepository.deleteByBookId(book.getId());
+    }
+
+    @Override
+    public Comment save(Comment comment) {
+
+        comment.setLastUpdate(LocalDateTime.now());
+
+        return commentRepository.save(comment);
     }
 }

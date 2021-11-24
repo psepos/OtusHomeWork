@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ru.otus.gpbu.pse.homework08.mybooks.book.Book;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +24,8 @@ public class Comment {
 
     private String description;
 
+    private LocalDateTime lastUpdate;
+
     public static Comment get() {
         return new Comment();
     }
@@ -31,9 +36,9 @@ public class Comment {
         return comment;
     }
 
-    public static Comment get(String description, String bookId) {
+    public static Comment get(Book book, String description) {
         Comment comment = get(description);
-        comment.setBookId(bookId);
+        book.addComment(comment);
         return comment;
     }
 
@@ -47,5 +52,8 @@ public class Comment {
     }
 
 
-
+    public Comment setBook(Book book) {
+        this.bookId = book.getId();
+        return this;
+    }
 }

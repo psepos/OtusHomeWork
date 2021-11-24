@@ -15,9 +15,9 @@ class Genre {
         return new Genre();
     }
 
-    public static Genre get(String name) {
+    public static Genre get(String genreName) {
         Genre genre = new Genre();
-        genre.setName(name);
+        genre.setName(genreName);
         return genre;
     }
 
