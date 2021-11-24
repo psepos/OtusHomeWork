@@ -30,6 +30,7 @@ class Genre implements LastUpdated {
     public String toString() {
         return "Genre{" +
                 "name='" + name + '\'' +
+                ", lastUpdate=" + lastUpdate +
                 '}';
     }
 }
