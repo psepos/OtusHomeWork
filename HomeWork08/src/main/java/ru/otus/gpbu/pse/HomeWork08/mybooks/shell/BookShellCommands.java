@@ -56,9 +56,15 @@ public class BookShellCommands {
         return book;
     }
 
-    @ShellMethod(value = "delete-author", key = "b-delA")
-    public Book deleteAuthor(String authorName) {
-        book.deleteAuthor(Author.get(authorName));
+    @ShellMethod(value = "delete-authors", key = "b-delA")
+    public Book deleteAuthors() {
+        book.deleteAuthors();
+        return book;
+    }
+
+    @ShellMethod(value = "delete-genres", key = "b-delG")
+    public Book deleteGenres() {
+        book.deleteGenres();
         return book;
     }
 

@@ -56,9 +56,12 @@ public class Book implements LastUpdated {
         TriggerServiceImpl.setLastUpd(this);
     }
 
-    public void deleteAuthor(Author author1) {
-        authors.remove(authors.stream().filter((a) -> a.getName() == author1.getName()));
-        TriggerServiceImpl.setLastUpd(this);
+    public void deleteAuthors() {
+        authors.clear();
+    }
+
+    public void deleteGenres() {
+        genres.clear();
     }
 
     public void addComment(Comment comment) {
