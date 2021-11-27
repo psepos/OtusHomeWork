@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework08.mybooks.common.LastUpdated;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Document(collection = "book")
 public class Book implements LastUpdated {
 
     @Id
