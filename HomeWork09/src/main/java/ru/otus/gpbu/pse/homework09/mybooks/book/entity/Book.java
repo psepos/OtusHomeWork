@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import ru.otus.gpbu.pse.homework09.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
 

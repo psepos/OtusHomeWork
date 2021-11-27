@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework09.mybooks.author.service;
 
-import ru.otus.gpbu.pse.homework09.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 
 import java.util.List;
 import java.util.Optional;

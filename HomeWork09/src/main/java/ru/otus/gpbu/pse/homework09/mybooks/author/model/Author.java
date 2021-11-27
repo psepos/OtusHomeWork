@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework09.mybooks.author.entity;
+package ru.otus.gpbu.pse.homework09.mybooks.author.model;
 
 import lombok.*;
 
@@ -18,6 +18,8 @@ public class Author {
 
     @Column(name = "name")
     private String name;
+
+
 
     @Override
     public String toString() {

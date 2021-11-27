@@ -1,6 +1,6 @@
 package ru.otus.gpbu.pse.homework09.mybooks.common;
 
-import ru.otus.gpbu.pse.homework09.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;

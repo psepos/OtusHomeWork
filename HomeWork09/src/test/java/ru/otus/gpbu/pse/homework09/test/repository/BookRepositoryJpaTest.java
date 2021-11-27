@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework09.mybooks.HomeWork09Application;
-import ru.otus.gpbu.pse.homework09.mybooks.author.entity.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.author.repository.AuthorRepository;
 import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.repository.BookRepository;
