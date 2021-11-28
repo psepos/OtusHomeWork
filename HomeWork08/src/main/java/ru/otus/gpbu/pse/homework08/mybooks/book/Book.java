@@ -17,12 +17,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+public
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Document(collection = "book")
-public class Book implements LastUpdated {
+class Book implements LastUpdated {
 
     @Id
     private String id;
@@ -31,7 +33,12 @@ public class Book implements LastUpdated {
 
     private LocalDateTime lastUpdate;
 
+    private List<String> genreIds;
+
+    @Transient
     private List<Genre> genres = new ArrayList<>();
+
+    @Transient
     private List<Author> authors = new ArrayList<>();
 
     @Transient
@@ -40,6 +47,7 @@ public class Book implements LastUpdated {
     public static Book get() {
         return new Book();
     }
+
     public static Book get(String bookId) {
         Book book = new Book();
         book.setId(bookId);
@@ -82,7 +90,6 @@ public class Book implements LastUpdated {
                 ", comments=" + comments +
                 '}';
     }
-
 
 
 }

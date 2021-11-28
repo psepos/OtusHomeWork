@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.otus.gpbu.pse</groupId>
-	<artifactId>HomeWork08</artifactId>
+	<artifactId>homework08</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HomeWork08</name>
-	<description>HomeWork08</description>
+	<name>homework08</name>
+	<description>homework08</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

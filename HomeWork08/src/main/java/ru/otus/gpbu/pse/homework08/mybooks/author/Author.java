@@ -3,14 +3,19 @@ package ru.otus.gpbu.pse.homework08.mybooks.author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import ru.otus.gpbu.pse.homework08.mybooks.common.LastUpdated;
 
 import java.time.LocalDateTime;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public @Data
-class Author implements LastUpdated {
+@Document(collection = "author")
+public class Author implements LastUpdated {
+    @Id
+    private String id;
 
     private String name;
 
@@ -29,7 +34,8 @@ class Author implements LastUpdated {
     @Override
     public String toString() {
         return "Author{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", lastUpdate=" + lastUpdate +
                 '}';
     }
