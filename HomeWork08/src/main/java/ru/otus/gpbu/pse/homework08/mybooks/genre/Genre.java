@@ -26,8 +26,14 @@ class Genre implements LastUpdated {
         return new Genre();
     }
 
-    public static Genre get(String genreName) {
+    public static Genre get(String genreId) {
         Genre genre = new Genre();
+        genre.setId(genreId);
+        return genre;
+    }
+
+    public static Genre get(String genreId, String genreName) {
+        Genre genre = Genre.get(genreId);
         genre.setName(genreName);
         return genre;
     }

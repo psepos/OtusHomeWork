@@ -11,7 +11,6 @@ import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework08.mybooks.common.LastUpdated;
 import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
-import ru.otus.gpbu.pse.homework08.mybooks.service.TriggerServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,10 +32,12 @@ class Book implements LastUpdated {
 
     private LocalDateTime lastUpdate;
 
-    private List<String> genreIds;
+    private List<String> genreIds = new ArrayList<>();
 
     @Transient
     private List<Genre> genres = new ArrayList<>();
+
+    private List<String> authorIds = new ArrayList<>();
 
     @Transient
     private List<Author> authors = new ArrayList<>();
@@ -56,14 +57,12 @@ class Book implements LastUpdated {
 
     public void addGenre(Genre genre) {
         genres.add(genre);
-        TriggerServiceImpl.setLastUpd(genre);
-        TriggerServiceImpl.setLastUpd(this);
+        genreIds.add(genre.getId());
     }
 
     public void addAuthor(Author author) {
         authors.add(author);
-        TriggerServiceImpl.setLastUpd(author);
-        TriggerServiceImpl.setLastUpd(this);
+        authorIds.add(author.getId());
     }
 
     public void deleteAuthors() {
@@ -85,11 +84,11 @@ class Book implements LastUpdated {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", lastUpdate=" + lastUpdate +
+                ", genreIds=" + genreIds +
                 ", genres=" + genres +
+                ", authorIds=" + authorIds +
                 ", authors=" + authors +
                 ", comments=" + comments +
                 '}';
     }
-
-
 }

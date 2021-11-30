@@ -1,8 +1,12 @@
 package ru.otus.gpbu.pse.homework08.mybooks.book;
 
 import org.springframework.stereotype.Service;
+import ru.otus.gpbu.pse.homework08.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework08.mybooks.author.AuthorService;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.CommentService;
+import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework08.mybooks.genre.GenreService;
 import ru.otus.gpbu.pse.homework08.mybooks.service.TriggerService;
 
 import java.util.List;
@@ -17,10 +21,16 @@ public class BookServiceImpl implements BookService {
 
     private final TriggerService triggerService;
 
-    public BookServiceImpl(BookRepository bookRepository, CommentService commentService, TriggerService triggerService) {
+    private final GenreService genreService;
+
+    private final AuthorService authorService;
+
+    public BookServiceImpl(BookRepository bookRepository, CommentService commentService, TriggerService triggerService, GenreService genreService, AuthorService authorService) {
         this.bookRepository = bookRepository;
         this.commentService = commentService;
         this.triggerService = triggerService;
+        this.genreService = genreService;
+        this.authorService = authorService;
     }
 
     @Override
@@ -28,7 +38,7 @@ public class BookServiceImpl implements BookService {
 
         Optional<Book> bookOpt = bookRepository.findById(book.getId());
 
-        bookOpt.ifPresent(book1 -> book1.setComments(commentService.findAllByBook(book)));
+        bookOpt.ifPresent(this::refresh);
 
         return bookOpt;
     }
@@ -59,4 +69,24 @@ public class BookServiceImpl implements BookService {
         return books;
     }
 
+    @Override
+    public Book refresh(Book book) {
+
+        book.getGenreIds().forEach((id) -> genreService.find(Genre.get(id)).ifPresent(book::addGenre));
+        book.getAuthorIds().forEach((id) -> authorService.find(Author.get(id)).ifPresent(book::addAuthor));
+        book.setComments(commentService.findAllByBook(book));
+
+        return null;
+    }
+
+    @Override
+    public Book addGenre(Book book, String genreId) {
+        Genre genre = Genre.get(genreId);
+
+        Optional<Genre> genreOpt = genreService.find(genre);
+
+        genreOpt.ifPresent(book::addGenre);
+
+        return book;
+    }
 }

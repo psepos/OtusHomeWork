@@ -9,4 +9,6 @@ public interface BookService {
     Book save(Book book);
     void delete(Book book);
     List<Book> findAll();
+    Book refresh(Book book);
+    Book addGenre(Book book, String genreId);
 }

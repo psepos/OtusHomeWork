@@ -7,7 +7,6 @@ import ru.otus.gpbu.pse.homework08.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework08.mybooks.book.BookService;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework08.mybooks.comment.CommentService;
-import ru.otus.gpbu.pse.homework08.mybooks.genre.Genre;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +44,8 @@ public class BookShellCommands {
     }
 
     @ShellMethod(value = "add-genre", key = "b-addG")
-    public Book addGenre(String genreName) {
-        book.addGenre(Genre.get(genreName));
+    public Book addGenre(String genreId) {
+        bookService.addGenre(book, genreId);
         return book;
     }
 

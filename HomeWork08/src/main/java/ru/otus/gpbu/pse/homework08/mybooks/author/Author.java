@@ -25,9 +25,15 @@ public class Author implements LastUpdated {
         return new Author();
     }
 
-    public static Author get(String name) {
+    public static Author get(String authorId) {
         Author author = new Author();
-        author.setName(name);
+        author.setId(authorId);
+        return author;
+    }
+
+    public static Author get(String authorId, String authorName) {
+        Author author = Author.get(authorId);
+        author.setName(authorName);
         return author;
     }
 
