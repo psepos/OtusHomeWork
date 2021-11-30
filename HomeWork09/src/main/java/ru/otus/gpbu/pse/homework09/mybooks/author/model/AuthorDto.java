@@ -24,7 +24,7 @@ class AuthorDto {
         return authorsDto;
     }
 
-    public Author toModel(AuthorDto authorDto) {
+    public static Author toModel(AuthorDto authorDto) {
         return new Author(authorDto.getId(), authorDto.getName());
     }
 

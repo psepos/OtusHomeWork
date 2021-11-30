@@ -1,15 +1,14 @@
 package ru.otus.gpbu.pse.homework09.mybooks.author.rest;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.author.model.AuthorDto;
 import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -24,23 +23,36 @@ public class AuthorRestController {
     }
 
     @GetMapping
-    public String findAll(Model model, HttpServletRequest request) {
+    public String findAll(Model model) {
 
         List<AuthorDto> authors = AuthorDto.toDto(authorService.getAll());
-        var s = request;
-        String mappingPath = s.getPathTranslated();
 
         model.addAttribute("authors", authors);
-        model.addAttribute("mapping", mappingPath);
         return "author-list";
     }
 
     @GetMapping("/edit")
-    public String editPage(@RequestParam("id") int id, Model model, HttpServletRequest request) throws NotFoundException {
+    public String editPage(@RequestParam("id") int id, Model model) throws NotFoundException {
         AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
-        model.addAttribute("mapping", request.getPathInfo());
-        return "edit";
+        return "author-edit";
     }
 
+    @PostMapping(value = "/edit", params = "action=save")
+    public String save(AuthorDto authorDto, Model model) {
+        Author author = AuthorDto.toModel(authorDto);
+        authorService.update(author);
+        model.addAttribute(author);
+        return "redirect:/library/authors";
+    }
+
+    @PostMapping(value = "/edit", params = "action=cancel")
+    public String cancel() {
+        return "redirect:/library/authors";
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFound(NotFoundException ex) {
+        return ResponseEntity.badRequest().body("Not found");
+    }
 }
