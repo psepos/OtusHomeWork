@@ -12,6 +12,7 @@
             border: 1px solid lightgray;
             padding: 5px;
         }
+
     </style>
 </head>
 <body>
@@ -25,12 +26,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="author : ${authors}">
-        <td th:text="${author.id}">1</td>
-        <td th:text="${author.name}">John Doe</td>
-        <td><a th:href="@{/library/authors/edit(id=${author.id})}" href="author-edit.html">Edit</a></td>
-        <td><a th:href="@{/library/authors/delete(id=${author.id})}" href="author-delete.html">Delete</a></td>
-    </tr>
+        <tr th:each="author : ${authors}">
+            <td th:text="${author.id}">1</td>
+            <td th:text="${author.name}">John Doe</td>
+            <td><a th:href="@{/library/authors/edit/{id}(id=${author.id})}">Edit</a></td>
+            <td><a th:href="@{/library/authors/delete/{id}(id=${author.id})}">Delete</a></td>
+        </tr>
+        <td><a th:href="@{/library/authors/create}">Create</a></td>
     </tbody>
 </table>
 </body>

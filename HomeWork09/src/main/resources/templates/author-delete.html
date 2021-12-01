@@ -24,8 +24,7 @@
 </head>
 <body>
 
-<!-- Author edition -->
-<form id="edit-form" th:action="@{/library/authors/delete(id=${author.id})}" th:method="delete" action="author-delete.html">
+<form id="delete-form" th:action="@{/library/authors/delete/{id}(id=${author.id})}" th:method="post" action="author-delete.html">
     <h1>Author Info:</h1>
 
     <div class="row">

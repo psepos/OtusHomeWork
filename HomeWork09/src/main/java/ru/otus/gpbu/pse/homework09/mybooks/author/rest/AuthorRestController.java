@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.author.model.AuthorDto;
 import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorService;
+import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 
 import java.util.List;
 
@@ -31,9 +32,16 @@ public class AuthorRestController {
         return "author-list";
     }
 
-    @GetMapping("/edit")
-    public String editPage(@RequestParam("id") long id, Model model) throws NotFoundException {
+    @GetMapping("/edit/{id}")
+    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
         AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("author", author);
+        return "author-edit";
+    }
+
+    @GetMapping("/create")
+    public String editPage(Model model) {
+        AuthorDto author = AuthorDto.toDto(ModelsObjectFactory.getAuthor(""));
         model.addAttribute("author", author);
         return "author-edit";
     }
@@ -51,20 +59,20 @@ public class AuthorRestController {
         return "redirect:/library/authors";
     }
 
-    @GetMapping("/delete")
-    public String deletePage(@RequestParam("id") long id, Model model) throws NotFoundException {
+    @GetMapping("/delete/{id}")
+    public String deletePage(@PathVariable("id") long id, Model model) throws NotFoundException {
         AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
         return "author-delete";
     }
 
-    @DeleteMapping(value = "/delete")
-    public String delete(@RequestParam("id") long id) {
-        authorService.deleteById(id);
+    @PostMapping(value = "/delete", params = "action=delete")
+    public String delete(AuthorDto authorDto) {
+        authorService.deleteById(authorDto.getId());
         return "redirect:/library/authors";
     }
 
-    @DeleteMapping(value = "/post", params = "action=delete")
+    @PostMapping(value = "/delete", params = "action=cancel")
     public String deleteCancel() {
         return "redirect:/library/authors";
     }
