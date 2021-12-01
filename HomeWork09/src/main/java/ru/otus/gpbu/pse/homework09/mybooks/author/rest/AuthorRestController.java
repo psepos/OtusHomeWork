@@ -32,14 +32,14 @@ public class AuthorRestController {
     }
 
     @GetMapping("/edit")
-    public String editPage(@RequestParam("id") int id, Model model) throws NotFoundException {
+    public String editPage(@RequestParam("id") long id, Model model) throws NotFoundException {
         AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
     @PostMapping(value = "/edit", params = "action=save")
-    public String save(AuthorDto authorDto, Model model) {
+    public String editSave(AuthorDto authorDto, Model model) {
         Author author = AuthorDto.toModel(authorDto);
         authorService.update(author);
         model.addAttribute(author);
@@ -47,12 +47,30 @@ public class AuthorRestController {
     }
 
     @PostMapping(value = "/edit", params = "action=cancel")
-    public String cancel() {
+    public String editCancel() {
+        return "redirect:/library/authors";
+    }
+
+    @GetMapping("/delete")
+    public String deletePage(@RequestParam("id") long id, Model model) throws NotFoundException {
+        AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("author", author);
+        return "author-delete";
+    }
+
+    @DeleteMapping(value = "/delete")
+    public String delete(@RequestParam("id") long id) {
+        authorService.deleteById(id);
+        return "redirect:/library/authors";
+    }
+
+    @DeleteMapping(value = "/post", params = "action=delete")
+    public String deleteCancel() {
         return "redirect:/library/authors";
     }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(NotFoundException ex) {
-        return ResponseEntity.badRequest().body("Not found");
+        return ResponseEntity.badRequest().body("Not found: " + ex.getMessage());
     }
 }
