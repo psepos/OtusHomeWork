@@ -12,6 +12,7 @@ import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/library/books")
@@ -49,9 +50,14 @@ public class BookRestController {
 
     @PostMapping(value = "/edit", params = "action=save")
     public String editSave(BookDto bookDto, Model model) {
-        Book book = BookDto.toModel(bookDto);
-        bookService.update(book);
-        model.addAttribute(book);
+        Optional<Book> bookOpt = bookService.getById(bookDto.getId());
+
+        bookOpt.ifPresent(b -> {
+            Book book = BookDto.toModel(b, bookDto);
+            bookService.update(book);
+            model.addAttribute(book);
+        });
+
         return "redirect:/library/books";
     }
 

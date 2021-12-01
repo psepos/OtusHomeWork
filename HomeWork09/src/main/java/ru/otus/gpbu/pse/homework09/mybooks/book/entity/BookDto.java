@@ -3,7 +3,6 @@ package ru.otus.gpbu.pse.homework09.mybooks.book.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +14,11 @@ public class BookDto {
 
     private long id;
     private String name;
+    private String genre;
+    private String author;
 
     public static BookDto toDto(Book book) {
-        return new BookDto(book.getId(), book.getName());
+        return new BookDto(book.getId(), book.getName(), book.getGenre().getName(), book.getAuthor().getName());
     }
 
     public static List<BookDto> toDto(List<Book> book) {
@@ -26,8 +27,9 @@ public class BookDto {
         return booksDto;
     }
 
-    public static Book toModel(BookDto book) {
-        return ModelsObjectFactory.getBook(book.getId(), book.getName());
+    public static Book toModel(Book book, BookDto bookDto) {
+        book.setName(bookDto.getName());
+        return book;
     }
 
 }
