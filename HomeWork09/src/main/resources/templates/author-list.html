@@ -18,6 +18,8 @@
 <body>
 <h1>Authors:</h1>
 
+<td><a th:href="@{/library/authors/create}">Create new author</a></td>
+
 <table class="authors">
     <thead>
     <tr>
@@ -32,7 +34,6 @@
             <td><a th:href="@{/library/authors/edit/{id}(id=${author.id})}">Edit</a></td>
             <td><a th:href="@{/library/authors/delete/{id}(id=${author.id})}">Delete</a></td>
         </tr>
-        <td><a th:href="@{/library/authors/create}">Create</a></td>
     </tbody>
 </table>
 </body>

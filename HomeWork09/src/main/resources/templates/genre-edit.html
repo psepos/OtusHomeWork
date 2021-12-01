@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Delete author</title>
+    <title>Edit author</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="delete-form" th:action="@{/library/authors/delete(id=${author.id})}" th:method="post" action="author-delete.html">
+<form id="edit-form" th:action="@{/library/authors/edit(id=${author.id})}" th:method="post" action="author-edit.html">
     <h1>Author Info:</h1>
 
     <div class="row">
@@ -34,11 +34,11 @@
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" readonly="readonly" type="text" th:value="${author.name}" value="John Doe"/>
+        <input id="holder-input" name="name" type="text" th:value="${author.name}" value="John Doe"/>
     </div>
 
     <div class="row">
-        <button type="submit" name="action" value="delete">Delete</button>
+        <button type="submit" name="action" value="save">Save</button>
         <button type="submit" name="action" value="cancel">Cancel</button>
     </div>
 </form>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all genres</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .genres, .genres td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Genres:</h1>
+
+<td><a th:href="@{/library/genres/create}">Create new genre</a></td>
+
+<table class="genres">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="genre : ${genres}">
+            <td th:text="${genre.id}">1</td>
+            <td th:text="${genre.name}">Genre1</td>
+            <td><a th:href="@{/library/genres/edit/{id}(id=${genre.id})}">Edit</a></td>
+            <td><a th:href="@{/library/genres/delete/{id}(id=${genre.id})}">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
