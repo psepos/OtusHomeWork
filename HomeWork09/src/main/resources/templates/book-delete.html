@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Delete genre</title>
+    <title>Delete book</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -24,17 +24,17 @@
 </head>
 <body>
 
-<form id="delete-form" th:action="@{/library/genres/delete(id=${genre.id})}" th:method="post" action="genre-delete.html">
+<form id="delete-form" th:action="@{/library/books/delete(id=${book.id})}" th:method="post" action="book-delete.html">
     <h1>Author Info:</h1>
 
     <div class="row">
         <label for="id-input">Id:</label>
-        <input id="id-input" type="text" readonly="readonly" th:value="${genre.id}" value="1"/>
+        <input id="id-input" type="text" readonly="readonly" th:value="${book.id}" value="1"/>
     </div>
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" readonly="readonly" type="text" th:value="${genre.name}" value="John Doe"/>
+        <input id="holder-input" name="name" readonly="readonly" type="text" th:value="${book.name}" value="John Doe"/>
     </div>
 
     <div class="row">

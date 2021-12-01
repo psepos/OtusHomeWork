@@ -3,7 +3,6 @@ package ru.otus.gpbu.pse.homework09.mybooks.genre.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.gpbu.pse.homework09.mybooks.author.model.AuthorDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class GenreDto {
         return new GenreDto(genre.getId(), genre.getName());
     }
 
-    public static Genre toDomain(GenreDto genre) {
+    public static Genre toModel(GenreDto genre) {
         return new Genre(genre.getId(), genre.getName());
     }
 

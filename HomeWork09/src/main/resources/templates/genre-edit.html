@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Edit author</title>
+    <title>Edit genre</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -24,17 +24,17 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/authors/edit(id=${author.id})}" th:method="post" action="author-edit.html">
+<form id="edit-form" th:action="@{/library/genres/edit(id=${genre.id})}" th:method="post" action="genre-edit.html">
     <h1>Author Info:</h1>
 
     <div class="row">
         <label for="id-input">Id:</label>
-        <input id="id-input" type="text" readonly="readonly" th:value="${author.id}" value="1"/>
+        <input id="id-input" type="text" readonly="readonly" th:value="${genre.id}" value="1"/>
     </div>
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" type="text" th:value="${author.name}" value="John Doe"/>
+        <input id="holder-input" name="name" type="text" th:value="${genre.name}" value="John Doe"/>
     </div>
 
     <div class="row">

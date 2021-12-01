@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-public @Data
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-class AuthorDto {
+public class AuthorDto {
     private long id;
     private String name;
 
