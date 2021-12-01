@@ -5,11 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.gpbu.pse.homework09.mybooks.author.rest.NotFoundException;
 import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
-import ru.otus.gpbu.pse.homework09.mybooks.book.entity.BookDto;
+import ru.otus.gpbu.pse.homework09.mybooks.book.rest.dto.BookForEditDto;
+import ru.otus.gpbu.pse.homework09.mybooks.book.rest.dto.BookForListDto;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
+import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class BookRestController {
     @GetMapping
     public String findAll(Model model) {
 
-        List<BookDto> books = BookDto.toDto(bookService.getAll());
+        List<BookForListDto> books = BookForListDto.toDto(bookService.getAll());
 
         model.addAttribute("books", books);
         return "book-list";
@@ -36,27 +37,36 @@ public class BookRestController {
 
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookDto book = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("book", book);
         return "book-edit";
     }
 
     @GetMapping("/create")
     public String editPage(Model model) {
-        BookDto book = BookDto.toDto(ModelsObjectFactory.getBook());
+        BookForEditDto book = BookForEditDto.toDto(ModelsObjectFactory.getBook());
         model.addAttribute("book", book);
         return "book-edit";
     }
 
     @PostMapping(value = "/edit", params = "action=save")
-    public String editSave(BookDto bookDto, Model model) {
-        Optional<Book> bookOpt = bookService.getById(bookDto.getId());
+    public String editSave(BookForEditDto bookDto, Model model) {
 
-        bookOpt.ifPresent(b -> {
-            Book book = BookDto.toModel(b, bookDto);
-            bookService.update(book);
-            model.addAttribute(book);
-        });
+        long bookId = bookDto.getId();
+
+        if (bookId > 0) {
+
+            Optional<Book> bookOpt = bookService.getById(bookId);
+            bookOpt.ifPresent(b -> {
+                Book book = BookForEditDto.refreshModel(b, bookDto);
+                bookService.update(book);
+                model.addAttribute(book);
+            });
+        }
+        else {
+            Book book = BookForEditDto.toModel(bookDto);
+            bookService.insert(book);
+        }
 
         return "redirect:/library/books";
     }
@@ -68,13 +78,13 @@ public class BookRestController {
 
     @GetMapping("/delete/{id}")
     public String deletePage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookDto book = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("book", book);
         return "book-delete";
     }
 
     @PostMapping(value = "/delete", params = "action=delete")
-    public String delete(BookDto bookDto) {
+    public String delete(BookForListDto bookDto) {
         bookService.deleteById(bookDto.getId());
         return "redirect:/library/books";
     }

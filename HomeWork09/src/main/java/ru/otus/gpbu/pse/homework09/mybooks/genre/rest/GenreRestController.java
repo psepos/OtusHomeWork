@@ -5,10 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.gpbu.pse.homework09.mybooks.author.rest.NotFoundException;
+import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.GenreDto;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.rest.dto.GenreDto;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.service.GenreService;
 
 import java.util.List;

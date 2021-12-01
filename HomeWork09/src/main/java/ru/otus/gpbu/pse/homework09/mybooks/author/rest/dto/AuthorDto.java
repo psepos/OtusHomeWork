@@ -1,8 +1,9 @@
-package ru.otus.gpbu.pse.homework09.mybooks.author.model;
+package ru.otus.gpbu.pse.homework09.mybooks.author.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
-import ru.otus.gpbu.pse.homework09.mybooks.author.model.AuthorDto;
+import ru.otus.gpbu.pse.homework09.mybooks.author.rest.dto.AuthorDto;
 import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
+import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
 import java.util.List;
 
