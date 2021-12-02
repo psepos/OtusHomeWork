@@ -76,20 +76,13 @@ public class BookRestController {
         return "redirect:/library/books";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deletePage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("book", book);
-        return "book-delete";
-    }
-
-    @PostMapping(value = "/delete", params = "action=delete")
-    public String delete(BookForListDto bookDto) {
-        bookService.deleteById(bookDto.getId());
+    @PostMapping(value = "/{id}/delete", params = "action=delete")
+    public String delete(@PathVariable("id") long id) {
+        bookService.deleteById(id);
         return "redirect:/library/books";
     }
 
-    @PostMapping(value = "/delete", params = "action=cancel")
+    @PostMapping(value = "/{id}/delete", params = "action=cancel")
     public String deleteCancel() {
         return "redirect:/library/books";
     }

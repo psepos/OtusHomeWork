@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="delete-form" th:action="@{/library/authors/delete(id=${author.id})}" th:method="post" action="author-delete.html">
+<form id="view-form" th:action="@{/library/authors/{id}(id=${author.id})}" th:method="post" action="author-delete.html">
     <h1>Author Info:</h1>
 
     <div class="row">
@@ -38,6 +38,7 @@
     </div>
 
     <div class="row">
+        <button type="submit" name="action" value="edit">Edit</button>
         <button type="submit" name="action" value="delete">Delete</button>
         <button type="submit" name="action" value="cancel">Cancel</button>
     </div>

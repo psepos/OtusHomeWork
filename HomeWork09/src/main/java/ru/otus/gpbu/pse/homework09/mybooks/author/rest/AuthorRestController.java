@@ -33,11 +33,11 @@ public class AuthorRestController {
         return "author-list";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+    @GetMapping("/{id}")
+    public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
         AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
-        return "author-edit";
+        return "author-view";
     }
 
     @GetMapping("/create")
@@ -60,16 +60,9 @@ public class AuthorRestController {
         return "redirect:/library/authors";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deletePage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("author", author);
-        return "author-delete";
-    }
-
-    @PostMapping(value = "/delete", params = "action=delete")
-    public String delete(AuthorDto authorDto) {
-        authorService.deleteById(authorDto.getId());
+    @PostMapping(value = "/{id}/delete", params = "action=delete")
+    public String delete(@PathVariable("id") long id) {
+        authorService.deleteById(id);
         return "redirect:/library/authors";
     }
 
