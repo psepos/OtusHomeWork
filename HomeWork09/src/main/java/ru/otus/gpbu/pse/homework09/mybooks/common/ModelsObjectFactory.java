@@ -5,6 +5,8 @@ import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
 
+import java.util.ArrayList;
+
 public class ModelsObjectFactory {
     public static Author getAuthor(long id, String name) {
         Author author = new Author();
@@ -33,7 +35,9 @@ public class ModelsObjectFactory {
     }
 
     public static Book getBook() {
-        return new Book();
+        Book book = new Book();
+        book.setComments(new ArrayList<>());
+        return book;
     }
 
     public static Book getBook(long id, String name) {

@@ -35,8 +35,7 @@
             <td th:text="${book.name}">Clean code</td>
             <td th:text="${book.genre}">Programming</td>
             <td th:text="${book.author}">Martin R.</td>
-            <td><a th:href="@{/library/books/edit/{id}(id=${book.id})}">Edit</a></td>
-            <td><a th:href="@{/library/books/delete/{id}(id=${book.id})}">Delete</a></td>
+            <td><a th:href="@{/library/books/{id}(id=${book.id})}">View</a></td>
         </tr>
     </tbody>
 </table>

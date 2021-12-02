@@ -34,8 +34,14 @@ public class BookRestController {
         model.addAttribute("books", books);
         return "book-list";
     }
+    @GetMapping("/{id}")
+    public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("book", book);
+        return "book-view";
+    }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
         BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("book", book);
@@ -71,12 +77,22 @@ public class BookRestController {
         return "redirect:/library/books";
     }
 
-    @PostMapping(value = "/edit", params = "action=cancel")
+    @PostMapping(value = "/{id}/edit", params = "action=cancel")
     public String editCancel() {
         return "redirect:/library/books";
     }
 
-    @PostMapping(value = "/{id}/delete", params = "action=delete")
+    @PostMapping(value = "/{id}", params = "action=cancel")
+    public String viewCancel() {
+        return "redirect:/library/books";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=edit")
+    public String viewEdit(@PathVariable("id") long id) {
+        return "redirect:/library/books/" + id + "/edit";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=delete")
     public String delete(@PathVariable("id") long id) {
         bookService.deleteById(id);
         return "redirect:/library/books";
