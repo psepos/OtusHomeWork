@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework09.mybooks.genre.entity;
+package ru.otus.gpbu.pse.homework09.mybooks.genre;
 
 import lombok.*;
 

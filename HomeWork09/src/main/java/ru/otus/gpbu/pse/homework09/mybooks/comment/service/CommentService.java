@@ -1,17 +1,14 @@
 package ru.otus.gpbu.pse.homework09.mybooks.comment.service;
 
-import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CommentService {
-    Comment getById(long id);
-    long insert(Comment comment);
-    long insert(String description);
-    long update(Comment comment);
-    long update(long id, String description);
-    long deleteById(long id);
+    Optional<Comment> getById(long id);
+    Comment insert(Comment comment);
+    Comment update(Comment comment);
+    void deleteById(long id);
     List<Comment> getAll();
-    long count();
-
 }

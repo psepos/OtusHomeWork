@@ -2,8 +2,7 @@ package ru.otus.gpbu.pse.homework09.mybooks.genre.service;
 
 
 import org.springframework.stereotype.Service;
-import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.repository.GenreRepository;
 
 import java.util.List;
@@ -28,23 +27,8 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public Genre insert(String name) {
-        return this.insert(ModelsObjectFactory.getGenre(name));
-    }
-
-    @Override
-    public Genre insert(Long id, String name) {
-        return this.insert(ModelsObjectFactory.getGenre(name));
-    }
-
-    @Override
     public Genre update(Genre genre) {
         return genreRepository.save(genre);
-    }
-
-    @Override
-    public Genre update(Long id, String name) {
-        return this.update(ModelsObjectFactory.getGenre(id, name));
     }
 
     @Override
@@ -55,10 +39,5 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public List<Genre> getAll() {
         return genreRepository.findAll();
-    }
-
-    @Override
-    public long count() {
-        return genreRepository.count();
     }
 }

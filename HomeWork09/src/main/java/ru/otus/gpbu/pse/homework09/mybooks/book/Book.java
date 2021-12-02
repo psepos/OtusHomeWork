@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework09.mybooks.book.entity;
+package ru.otus.gpbu.pse.homework09.mybooks.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import ru.otus.gpbu.pse.homework09.mybooks.author.model.Author;
-import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
 
 import javax.persistence.*;
 import java.util.List;

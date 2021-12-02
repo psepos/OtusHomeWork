@@ -1,9 +1,9 @@
-package ru.otus.gpbu.pse.homework09.mybooks.genre.rest.dto;
+package ru.otus.gpbu.pse.homework09.mybooks.genre.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
 
 import java.util.ArrayList;
 import java.util.List;

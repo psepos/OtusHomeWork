@@ -1,10 +1,10 @@
-package ru.otus.gpbu.pse.homework09.mybooks.comment.entity;
+package ru.otus.gpbu.pse.homework09.mybooks.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
+import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 
 import javax.persistence.*;
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework09.mybooks.HomeWork09Application;
-import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.repository.CommentRepository;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 

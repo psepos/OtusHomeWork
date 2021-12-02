@@ -1,9 +1,9 @@
-package ru.otus.gpbu.pse.homework09.mybooks.comment.rest.dto;
+package ru.otus.gpbu.pse.homework09.mybooks.comment.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.gpbu.pse.homework09.mybooks.comment.entity.Comment;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 
 import java.util.ArrayList;

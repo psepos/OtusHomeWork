@@ -1,9 +1,9 @@
-package ru.otus.gpbu.pse.homework09.mybooks.book.rest.dto;
+package ru.otus.gpbu.pse.homework09.mybooks.book.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
+import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 
 @Data

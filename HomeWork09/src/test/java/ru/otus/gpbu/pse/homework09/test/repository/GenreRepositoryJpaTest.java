@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.otus.gpbu.pse.homework09.mybooks.HomeWork09Application;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.entity.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.repository.GenreRepository;
 
 import javax.persistence.EntityManager;

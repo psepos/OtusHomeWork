@@ -5,10 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.gpbu.pse.homework09.mybooks.book.entity.Book;
-import ru.otus.gpbu.pse.homework09.mybooks.book.rest.dto.BookForEditDto;
-import ru.otus.gpbu.pse.homework09.mybooks.book.rest.dto.BookForListDto;
+import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.rest.CommentDto;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
@@ -29,21 +28,26 @@ public class BookRestController {
     @GetMapping
     public String findAll(Model model) {
 
-        List<BookForListDto> books = BookForListDto.toDto(bookService.getAll());
+        List<BookDto> books = BookDto.toDto(bookService.getAll());
 
         model.addAttribute("books", books);
         return "book-list";
     }
     @GetMapping("/{id}")
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("book", book);
+
+        Book book = bookService.getById(id).orElseThrow(NotFoundException::new);
+
+        BookDto bookDto = BookDto.toDto(book);
+        List<CommentDto> comments = CommentDto.toDto(book.getComments());
+        model.addAttribute("book", bookDto);
+        model.addAttribute("comments", comments);
         return "book-view";
     }
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookForListDto book = BookForListDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        BookDto book = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("book", book);
         return "book-edit";
     }

@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework09.mybooks.author.model;
+package ru.otus.gpbu.pse.homework09.mybooks.author;
 
 import lombok.*;
 
