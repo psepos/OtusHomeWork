@@ -40,14 +40,21 @@ public class AuthorRestController {
         return "author-view";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+        AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("author", author);
+        return "author-edit";
+    }
+
     @GetMapping("/create")
-    public String editPage(Model model) {
+    public String createPage(Model model) {
         AuthorDto author = AuthorDto.toDto(ModelsObjectFactory.getAuthor(""));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
-    @PostMapping(value = "/edit", params = "action=save")
+    @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(AuthorDto authorDto, Model model) {
         Author author = AuthorDto.toModel(authorDto);
         authorService.update(author);
@@ -55,19 +62,24 @@ public class AuthorRestController {
         return "redirect:/library/authors";
     }
 
-    @PostMapping(value = "/edit", params = "action=cancel")
-    public String editCancel() {
-        return "redirect:/library/authors";
+    @PostMapping(value = "/{id}", params = "action=edit")
+    public String toEditPage(@PathVariable("id") long id) {
+        return "redirect:/library/authors/" + id + "/edit";
     }
 
-    @PostMapping(value = "/{id}/delete", params = "action=delete")
-    public String delete(@PathVariable("id") long id) {
+    @PostMapping(value = "/{id}", params = "action=delete")
+    public String viewPageDelete(@PathVariable("id") long id) {
         authorService.deleteById(id);
         return "redirect:/library/authors";
     }
 
-    @PostMapping(value = "/delete", params = "action=cancel")
-    public String deleteCancel() {
+    @PostMapping(value = "/{id}", params = "action=cancel")
+    public String viewPageCancel() {
+        return "redirect:/library/authors";
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=cancel")
+    public String editPageCancel() {
         return "redirect:/library/authors";
     }
 

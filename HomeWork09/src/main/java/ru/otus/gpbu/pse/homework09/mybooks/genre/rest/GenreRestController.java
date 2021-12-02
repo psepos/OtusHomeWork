@@ -32,7 +32,14 @@ public class GenreRestController {
         return "genre-list";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/{id}")
+    public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+        GenreDto genre = GenreDto.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("genre", genre);
+        return "genre-view";
+    }
+
+    @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
         GenreDto genre = GenreDto.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("genre", genre);
@@ -46,7 +53,7 @@ public class GenreRestController {
         return "genre-edit";
     }
 
-    @PostMapping(value = "/edit", params = "action=save")
+    @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(GenreDto genreDto, Model model) {
         Genre genre = GenreDto.toModel(genreDto);
         genreService.update(genre);
@@ -54,28 +61,33 @@ public class GenreRestController {
         return "redirect:/library/genres";
     }
 
+    @PostMapping(value = "/{id}/edit", params = "action=cancel")
+    public String toHomePage() {
+        return "redirect:/library/genres";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=edit")
+    public String toEditPage(@PathVariable("id") long id) {
+        return "redirect:/library/genres/" + id + "/edit";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=cancel")
+    public String toHomePage(@PathVariable("id") long id) {
+        return "redirect:/library/genres/";
+    }
+
     @PostMapping(value = "/edit", params = "action=cancel")
     public String editCancel() {
         return "redirect:/library/genres";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deletePage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        GenreDto genre = GenreDto.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("genre", genre);
-        return "genre-delete";
-    }
-
-    @PostMapping(value = "/delete", params = "action=delete")
-    public String delete(GenreDto genreDto) {
-        genreService.deleteById(genreDto.getId());
+    @PostMapping(value = "/{id}", params = "action=delete")
+    public String delete(@PathVariable("id") long id) {
+        genreService.deleteById(id);
         return "redirect:/library/genres";
     }
 
-    @PostMapping(value = "/delete", params = "action=cancel")
-    public String deleteCancel() {
-        return "redirect:/library/genres";
-    }
+
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(NotFoundException ex) {

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Delete genre</title>
+    <title>View genre</title>
     <style type="text/css">
         body {
             padding: 50px;
@@ -24,8 +24,8 @@
 </head>
 <body>
 
-<form id="delete-form" th:action="@{/library/genres/delete(id=${genre.id})}" th:method="post" action="genre-delete.html">
-    <h1>Genre Info:</h1>
+<form id="delete-form" th:action="@{/library/genres/{id}(id=${genre.id})}" th:method="post" action="genre-delete.html">
+    <h1>Genre view:</h1>
 
     <div class="row">
         <label for="id-input">Id:</label>
@@ -38,6 +38,7 @@
     </div>
 
     <div class="row">
+        <button type="submit" name="action" value="edit">Edit</button>
         <button type="submit" name="action" value="delete">Delete</button>
         <button type="submit" name="action" value="cancel">Cancel</button>
     </div>

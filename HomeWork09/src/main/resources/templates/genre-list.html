@@ -31,8 +31,7 @@
         <tr th:each="genre : ${genres}">
             <td th:text="${genre.id}">1</td>
             <td th:text="${genre.name}">Genre1</td>
-            <td><a th:href="@{/library/genres/edit/{id}(id=${genre.id})}">Edit</a></td>
-            <td><a th:href="@{/library/genres/delete/{id}(id=${genre.id})}">Delete</a></td>
+            <td><a th:href="@{/library/genres/{id}(id=${genre.id})}">View</a></td>
         </tr>
     </tbody>
 </table>

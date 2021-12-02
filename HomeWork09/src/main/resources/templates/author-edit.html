@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/authors/edit(id=${author.id})}" th:method="post" action="author-edit.html">
+<form id="edit-form" th:action="@{/library/authors/{id}/edit(id=${author.id})}" th:method="post" action="author-edit.html">
     <h1>Author Info:</h1>
 
     <div class="row">
