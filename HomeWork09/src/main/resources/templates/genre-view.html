@@ -25,6 +25,11 @@
 <body>
 
 <form id="delete-form" th:action="@{/library/genres/{id}(id=${genre.id})}" th:method="post" action="genre-delete.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
     <h1>Genre view:</h1>
 
     <div class="row">

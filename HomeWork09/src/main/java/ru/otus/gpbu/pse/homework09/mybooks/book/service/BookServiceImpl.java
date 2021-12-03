@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.repository.BookRepository;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +12,11 @@ import java.util.Optional;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final EntityManager em;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, EntityManager em) {
         this.bookRepository = bookRepository;
+        this.em = em;
     }
 
     @Override

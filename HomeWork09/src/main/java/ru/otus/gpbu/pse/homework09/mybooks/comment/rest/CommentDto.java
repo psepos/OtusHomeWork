@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDto {
-    private long id;
+    private long commentId;
     private String description;
 
     public static CommentDto toDto(Comment comment) {
@@ -27,6 +27,6 @@ public class CommentDto {
     }
 
     public static Comment toModel(CommentDto comment) {
-        return ModelsObjectFactory.getComment(comment.getId(),comment.getDescription());
+        return ModelsObjectFactory.getComment(comment.getCommentId(),comment.getDescription());
     }
 }

@@ -25,6 +25,10 @@
 <body>
 
 <form id="edit-form" th:action="@{/library/genres/{id}/edit(id=${genre.id})}" th:method="post" action="genre-edit.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
     <h1>Genre edit:</h1>
 
     <div class="row">

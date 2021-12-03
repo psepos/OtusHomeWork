@@ -25,6 +25,10 @@
 <body>
 
 <form id="view-form" th:action="@{/library/authors/{id}(id=${author.id})}" th:method="post" action="author-view.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
     <h1>Author:</h1>
 
     <div class="row">

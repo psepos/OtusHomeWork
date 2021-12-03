@@ -25,7 +25,12 @@
 <body>
 
 <form id="edit-form" th:action="@{/library/books/edit(id=${book.id})}" th:method="post" action="book-edit.html">
-    <h1>Book Info:</h1>
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
+    <h1>Book edit:</h1>
 
     <div class="row">
         <label for="id-input">Id:</label>

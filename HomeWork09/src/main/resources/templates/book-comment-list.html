@@ -25,6 +25,11 @@
 <body>
 
 <form id="comment-form" th:action="@{/library/books/edit(id=${book.id})}" th:method="post" action="book-edit.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
     <h1>Book Info:</h1>
 
     <div class="row">

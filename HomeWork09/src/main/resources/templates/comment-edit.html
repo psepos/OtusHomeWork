@@ -25,7 +25,12 @@
 <body>
 
 <form id="edit-form" th:action="@{/library/comments/{id}/edit(id=${genre.id})}" th:method="post" action="genre-edit.html">
-    <h1>Genre edit:</h1>
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
+    <h1>Comment edit:</h1>
 
     <div class="row">
         <label for="id-input">Id:</label>

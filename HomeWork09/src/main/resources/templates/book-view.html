@@ -56,8 +56,8 @@
     <h1>Comments:</h1>
 
     <div class="new-comment">
-        <label for="new-comment-description">New:</label>
-        <input id="new-comment-description" name="new-comment-description-input" type="text" th:value="${newComment.description}" value="Comment1"/>
+        <label for="new-comment-description">New</label>
+        <input id="new-comment-description" name="new-comment-description-input" type="text" th:value="${comment1.description}" value="Comment1"/>
         <button type="submit" name="action" value="add-comment">Add</button>
     </div>
 
@@ -71,7 +71,7 @@
         </thead>
         <tbody>
         <tr th:each="comment : ${comments}">
-            <td th:text="${comment.id}">1</td>
+            <td th:text="${comment.commentId}">1</td>
             <td th:text="${comment.description}">Clean code</td>
             <td><a th:href="@{/library/books/{id}(id=${book.id})}">Edit</a></td>
         </tr>

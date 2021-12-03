@@ -34,18 +34,19 @@ public class BookRestController {
         model.addAttribute("books", books);
         return "book-list";
     }
+
     @GetMapping("/{id}")
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
 
         Book book = bookService.getById(id).orElseThrow(NotFoundException::new);
         BookDto bookDto = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
-        CommentDto newComment = CommentDto.toDto(ModelsObjectFactory.getComment(""));
+        CommentDto comment1 = CommentDto.toDto(ModelsObjectFactory.getComment(-1, ""));
 
         List<CommentDto> comments = CommentDto.toDto(book.getComments());
 
         model.addAttribute("book", bookDto);
         model.addAttribute("comments", comments);
-        model.addAttribute("newComment", newComment);
+        model.addAttribute("comment1", comment1);
 
         return "book-view";
     }
@@ -77,8 +78,7 @@ public class BookRestController {
                 bookService.update(book);
                 model.addAttribute(book);
             });
-        }
-        else {
+        } else {
             Book book = BookForEditDto.toModel(bookDto);
             bookService.insert(book);
         }
@@ -102,10 +102,11 @@ public class BookRestController {
     }
 
     @PostMapping(value = "/{id}", params = "action=add-comment")
-    public String addComment(BookDto bookDto, CommentDto newComment) {
+    public String addComment(BookDto bookDto, Model model) {
         long bookId = bookDto.getId();
 
-        Comment comment = CommentDto.toModel(newComment);
+        CommentDto commentDto = (CommentDto) model.getAttribute("comment1");
+        Comment comment = CommentDto.toModel(commentDto);
         Optional<Book> bookOpt = bookService.getById(bookId);
 
         bookOpt.ifPresent(b -> {
