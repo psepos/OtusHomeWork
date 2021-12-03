@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.rest.CommentDto;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
@@ -37,11 +38,15 @@ public class BookRestController {
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
 
         Book book = bookService.getById(id).orElseThrow(NotFoundException::new);
+        BookDto bookDto = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        CommentDto newComment = CommentDto.toDto(ModelsObjectFactory.getComment(""));
 
-        BookDto bookDto = BookDto.toDto(book);
         List<CommentDto> comments = CommentDto.toDto(book.getComments());
+
         model.addAttribute("book", bookDto);
         model.addAttribute("comments", comments);
+        model.addAttribute("newComment", newComment);
+
         return "book-view";
     }
 
@@ -94,6 +99,21 @@ public class BookRestController {
     @PostMapping(value = "/{id}", params = "action=edit")
     public String viewEdit(@PathVariable("id") long id) {
         return "redirect:/library/books/" + id + "/edit";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=add-comment")
+    public String addComment(BookDto bookDto, CommentDto newComment) {
+        long bookId = bookDto.getId();
+
+        Comment comment = CommentDto.toModel(newComment);
+        Optional<Book> bookOpt = bookService.getById(bookId);
+
+        bookOpt.ifPresent(b -> {
+            b.addComment(comment);
+            bookService.update(b);
+        });
+
+        return "redirect:/library/books/" + bookId;
     }
 
     @PostMapping(value = "/{id}", params = "action=delete")
