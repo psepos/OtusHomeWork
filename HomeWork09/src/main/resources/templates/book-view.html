@@ -35,6 +35,11 @@
 <body>
 
 <form id="view-form" th:action="@{/library/books/{id}(id=${book.id})}" th:method="post" action="book-view.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
     <h1>Book view:</h1>
 
     <div class="row">
@@ -57,7 +62,7 @@
 
     <div class="new-comment">
         <label for="new-comment-description">New</label>
-        <input id="new-comment-description" name="new-comment-description-input" type="text" th:value="${comment1.description}" value="Comment1"/>
+        <input id="new-comment-description" name="new-comment-description-input" type="text" th:value="${comment.description}"/>
         <button type="submit" name="action" value="add-comment">Add</button>
     </div>
 

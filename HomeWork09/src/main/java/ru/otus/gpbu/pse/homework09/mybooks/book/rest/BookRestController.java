@@ -40,13 +40,13 @@ public class BookRestController {
 
         Book book = bookService.getById(id).orElseThrow(NotFoundException::new);
         BookDto bookDto = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
-        CommentDto comment1 = CommentDto.toDto(ModelsObjectFactory.getComment(-1, ""));
+        CommentDto comment = CommentDto.toDto(ModelsObjectFactory.getComment(-1, ""));
 
         List<CommentDto> comments = CommentDto.toDto(book.getComments());
 
         model.addAttribute("book", bookDto);
         model.addAttribute("comments", comments);
-        model.addAttribute("comment1", comment1);
+        model.addAttribute("comment", comment);
 
         return "book-view";
     }
@@ -102,15 +102,14 @@ public class BookRestController {
     }
 
     @PostMapping(value = "/{id}", params = "action=add-comment")
-    public String addComment(BookDto bookDto, Model model) {
+    public String addComment(BookDto bookDto, CommentDto comment) {
         long bookId = bookDto.getId();
 
-        CommentDto commentDto = (CommentDto) model.getAttribute("comment1");
-        Comment comment = CommentDto.toModel(commentDto);
+        Comment comment1 = CommentDto.toModel(comment);
         Optional<Book> bookOpt = bookService.getById(bookId);
 
         bookOpt.ifPresent(b -> {
-            b.addComment(comment);
+            b.addComment(comment1);
             bookService.update(b);
         });
 
