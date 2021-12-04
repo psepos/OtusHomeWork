@@ -10,6 +10,7 @@ import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -85,5 +86,12 @@ public class AuthorRestController {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(NotFoundException ex) {
         return ResponseEntity.badRequest().body("Not found: " + ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        String message = ex.getMessage() + Arrays.toString(ex.getStackTrace());
+        log.error(message);
+        return ResponseEntity.badRequest().body("Error: " + ex.getMessage());
     }
 }

@@ -4,12 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/library/comments")
@@ -22,14 +21,22 @@ public class CommentRestController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        //CommentDto comment = BookDto.toDto(commentService.getById(id).orElseThrow(NotFoundException::new));
-        //model.addAttribute("comment", comment);
+    public String editPage(@PathVariable("id") long id, @RequestParam("bookId") long bookId, Model model) throws NotFoundException {
+        CommentDto comment = CommentDto.toDto(commentService.getById(id).orElseThrow(NotFoundException::new));
+        model.addAttribute("comment", comment);
+        model.addAttribute("bookId", bookId);
         return "comment-edit";
     }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(NotFoundException ex) {
         return ResponseEntity.badRequest().body("Not found: " + ex.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        String message = ex.getMessage() + Arrays.toString(ex.getStackTrace());
+        log.error(message);
+        return ResponseEntity.badRequest().body("Error: " + ex.getMessage());
     }
 }
