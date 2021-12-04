@@ -77,10 +77,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="comment : ${comments}">
-            <td th:text="${comment.commentId}">1</td>
-            <td th:text="${comment.description}">Clean code</td>
-            <td><a th:href="@{/library/books/{id}(id=${book.id})}">Edit</a></td>
+        <tr th:each="comment1 : ${comments}">
+            <td th:text="${comment1.commentId}">1</td>
+            <td th:text="${comment1.description}">Clean code</td>
+            <td><a th:href="@{/library/comments/{id}/edit(id=${comment1.commentId})}">Edit</a></td>
         </tr>
         </tbody>
     </table>
