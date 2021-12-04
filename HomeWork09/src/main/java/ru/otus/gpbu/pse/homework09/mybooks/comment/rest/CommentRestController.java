@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
@@ -21,11 +22,28 @@ public class CommentRestController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editPage(@PathVariable("id") long id, @RequestParam("bookId") long bookId, Model model) throws NotFoundException {
-        CommentDto comment = CommentDto.toDto(commentService.getById(id).orElseThrow(NotFoundException::new));
+    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+        CommentDto comment = CommentDto.toDto(commentService.findById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("comment", comment);
-        model.addAttribute("bookId", bookId);
         return "comment-edit";
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=save")
+    public String savePageSave(@ModelAttribute("comment") CommentDto commentDto) {
+        Comment comment = CommentDto.toModel(commentDto);
+        commentService.update(comment);
+        return "redirect:/library/books/";
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=delete")
+    public String editPageDelete(@PathVariable("id") long id) {
+        commentService.deleteById(id);
+        return "redirect:/library/books/";
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=cancel")
+    public String editPageCancel() {
+        return "redirect:/library/books/";
     }
 
     @ExceptionHandler(NotFoundException.class)
