@@ -60,9 +60,11 @@
 
     <h1>Comments:</h1>
 
-    <div class="new-comment">
+    <div class="new-comment" th:object="${comment}">
+        <input hidden="true" id="new-comment-id" name="new-comment-description-input" th:value="${comment.commentId}"
+               type="text"/>
         <label for="new-comment-description">New</label>
-        <input id="new-comment-description" name="new-comment-description-input" type="text" th:value="${comment.description}"/>
+        <input id="new-comment-description" name="new-comment-description-input" type="text" th:field="${comment.description}"/>
         <button type="submit" name="action" value="add-comment">Add</button>
     </div>
 

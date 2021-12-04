@@ -102,7 +102,7 @@ public class BookRestController {
     }
 
     @PostMapping(value = "/{id}", params = "action=add-comment")
-    public String addComment(BookDto bookDto, CommentDto comment) {
+    public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentDto comment) {
         long bookId = bookDto.getId();
 
         Comment comment1 = CommentDto.toModel(comment);
