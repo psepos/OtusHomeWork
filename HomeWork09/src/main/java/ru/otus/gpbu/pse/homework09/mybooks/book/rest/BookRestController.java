@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
-import ru.otus.gpbu.pse.homework09.mybooks.comment.rest.CommentDto;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
@@ -39,11 +38,11 @@ public class BookRestController {
     @GetMapping("/{id}")
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
 
-        Book book = bookService.getById(id).orElseThrow(NotFoundException::new);
-        BookDto bookDto = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
-        CommentDto comment = CommentDto.toDto(ModelsObjectFactory.getComment(-1, ""));
+        Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
+        BookDto bookDto = BookDto.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
+        CommentForBookDto comment = CommentForBookDto.toDto(ModelsObjectFactory.getComment(-1, ""));
 
-        List<CommentDto> comments = CommentDto.toDto(book.getComments());
+        List<CommentForBookDto> comments = CommentForBookDto.toDto(book.getComments());
 
         model.addAttribute("book", bookDto);
         model.addAttribute("comments", comments);
@@ -54,7 +53,7 @@ public class BookRestController {
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookDto book = BookDto.toDto(bookService.getById(id).orElseThrow(NotFoundException::new));
+        BookDto book = BookDto.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("book", book);
         return "book-edit";
     }
@@ -73,7 +72,7 @@ public class BookRestController {
 
         if (bookId > 0) {
 
-            Optional<Book> bookOpt = bookService.getById(bookId);
+            Optional<Book> bookOpt = bookService.findById(bookId);
             bookOpt.ifPresent(b -> {
                 Book book = BookForEditDto.refreshModel(b, bookDto);
                 bookService.update(book);
@@ -103,11 +102,11 @@ public class BookRestController {
     }
 
     @PostMapping(value = "/{id}", params = "action=add-comment")
-    public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentDto comment) {
+    public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentForBookDto comment) {
         long bookId = bookDto.getId();
 
-        Comment comment1 = CommentDto.toModel(comment);
-        Optional<Book> bookOpt = bookService.getById(bookId);
+        Comment comment1 = CommentForBookDto.toModel(comment);
+        Optional<Book> bookOpt = bookService.findById(bookId);
 
         bookOpt.ifPresent(b -> {
             b.addComment(comment1);

@@ -13,11 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDto {
-    private long commentId;
+    private long id;
     private String description;
+    private long bookId;
 
     public static CommentDto toDto(Comment comment) {
-        return new CommentDto(comment.getId(),comment.getDescription());
+        return new CommentDto(comment.getId(),comment.getDescription(), comment.getBook().getId());
     }
 
     public static List<CommentDto> toDto(List<Comment> comment) {
@@ -27,6 +28,6 @@ public class CommentDto {
     }
 
     public static Comment toModel(CommentDto comment) {
-        return ModelsObjectFactory.getComment(comment.getCommentId(),comment.getDescription());
+        return ModelsObjectFactory.getComment(comment.getId(),comment.getDescription());
     }
 }

@@ -62,16 +62,26 @@ public class ModelsObjectFactory {
         return book;
     }
 
-    public static Comment getComment(String description){
+    public static Comment getComment() {
         Comment comment = new Comment();
+        return comment;
+    }
+
+    public static Comment getComment(String description) {
+        Comment comment = getComment();
         comment.setDescription(description);
         return comment;
     }
 
-    public static Comment getComment(long id, String description){
-        Comment comment = new Comment();
+    public static Comment getComment(long id, String description) {
+        Comment comment = getComment(description);
         comment.setId(id);
-        comment.setDescription(description);
+        return comment;
+    }
+
+    public static Comment getComment(long id, String description, Book book) {
+        Comment comment = getComment(id, description);
+        comment.setBook(book);
         return comment;
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
@@ -16,34 +17,38 @@ import java.util.Arrays;
 @Slf4j
 public class CommentRestController {
     private final CommentService commentService;
+    private final BookService bookService;
 
-    public CommentRestController(CommentService commentService) {
+    public CommentRestController(CommentService commentService, BookService bookService) {
         this.commentService = commentService;
+        this.bookService = bookService;
     }
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        CommentDto comment = CommentDto.toDto(commentService.findById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("comment", comment);
+        Comment comment = commentService.findById(id).orElseThrow(NotFoundException::new);
+        CommentDto commentDto = CommentDto.toDto(comment);
+        model.addAttribute("comment", commentDto);
         return "comment-edit";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
-    public String savePageSave(@ModelAttribute("comment") CommentDto commentDto) {
-        Comment comment = CommentDto.toModel(commentDto);
-        commentService.update(comment);
-        return "redirect:/library/books/";
+    public String savePageSave(Model model, CommentDto commentDto) {
+
+        //Comment comment = CommentDto.toModel(commentDto);
+
+        return "redirect:/library/books";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=delete")
     public String editPageDelete(@PathVariable("id") long id) {
         commentService.deleteById(id);
-        return "redirect:/library/books/";
+        return "redirect:/library/books";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=cancel")
     public String editPageCancel() {
-        return "redirect:/library/books/";
+        return "redirect:/library/books";
     }
 
     @ExceptionHandler(NotFoundException.class)
