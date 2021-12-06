@@ -15,11 +15,11 @@ import java.util.Arrays;
 @Controller
 @RequestMapping("/library/comments")
 @Slf4j
-public class CommentRestController {
+public class CommentController {
     private final CommentService commentService;
     private final BookService bookService;
 
-    public CommentRestController(CommentService commentService, BookService bookService) {
+    public CommentController(CommentService commentService, BookService bookService) {
         this.commentService = commentService;
         this.bookService = bookService;
     }

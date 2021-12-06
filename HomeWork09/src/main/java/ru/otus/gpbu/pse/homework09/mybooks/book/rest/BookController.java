@@ -18,11 +18,11 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/library/books")
 @Slf4j
-public class BookRestController {
+public class BookController {
 
     private final BookService bookService;
 
-    public BookRestController(BookService bookService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 

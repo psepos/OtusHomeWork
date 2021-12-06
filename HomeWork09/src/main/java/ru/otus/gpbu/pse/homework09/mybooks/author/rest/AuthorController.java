@@ -16,11 +16,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/library/authors")
 @Slf4j
-public class AuthorRestController {
+public class AuthorController {
 
     private final AuthorService authorService;
 
-    public AuthorRestController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 

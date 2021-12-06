@@ -16,10 +16,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/library/genres")
 @Slf4j
-public class GenreRestController {
+public class GenreController {
     private final GenreService genreService;
 
-    public GenreRestController(GenreService genreService) {
+    public GenreController(GenreService genreService) {
         this.genreService = genreService;
     }
 
