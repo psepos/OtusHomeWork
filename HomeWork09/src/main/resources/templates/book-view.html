@@ -53,6 +53,17 @@
     </div>
 
     <div class="row">
+        <label for="book-genre">Genre:</label>
+        <input id="book-genre" name="genre" readonly="readonly" type="text" th:value="${book.genre}" value="Genre1"/>
+    </div>
+
+    <div class="row">
+        <label for="book-author">Author:</label>
+        <input id="book-author" name="author" readonly="readonly" type="text" th:value="${book.author}" value="Author1"/>
+    </div>
+
+
+    <div class="row">
         <button type="submit" name="action" value="edit">Edit</button>
         <button type="submit" name="action" value="delete">Delete</button>
         <button type="submit" name="action" value="cancel">Cancel</button>

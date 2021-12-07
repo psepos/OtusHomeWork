@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/library")
 @Slf4j
-public class MainMenuRestService {
+public class MainMenuController {
 
     @GetMapping
     public String mainPage() {

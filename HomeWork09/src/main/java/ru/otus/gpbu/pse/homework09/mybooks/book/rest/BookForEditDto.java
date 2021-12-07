@@ -9,7 +9,7 @@ import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookForEditDto {
+ public class BookForEditDto {
     private long id;
     private String name;
 

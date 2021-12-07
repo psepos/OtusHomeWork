@@ -103,17 +103,13 @@ public class BookController {
 
     @PostMapping(value = "/{id}", params = "action=add-comment")
     public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentForBookDto comment) {
-        long bookId = bookDto.getId();
 
-        Comment comment1 = CommentForBookDto.toModel(comment);
-        Optional<Book> bookOpt = bookService.findById(bookId);
-
-        bookOpt.ifPresent(b -> {
-            b.addComment(comment1);
+        bookService.findById(bookDto.getId()).ifPresent(b -> {
+            b.addComment(CommentForBookDto.toModel(comment));
             bookService.update(b);
         });
 
-        return "redirect:/library/books/" + bookId;
+        return "redirect:/library/books/" + bookDto.getId();
     }
 
     @PostMapping(value = "/{id}", params = "action=delete")
