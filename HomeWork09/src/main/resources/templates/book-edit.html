@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/books/edit(id=${book.id})}" th:method="post" action="book-edit.html">
+<form id="edit-form" th:action="@{/library/books/{id}/edit(id=${book.id})}" th:method="post" action="book-edit.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>

@@ -5,12 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/library/comments")
@@ -33,22 +35,24 @@ public class CommentController {
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
-    public String savePageSave(Model model, CommentDto commentDto) {
+    public String savePageSave(CommentDto commentDto) {
 
-        //Comment comment = CommentDto.toModel(commentDto);
+        bookService.findById(commentDto.getBookId()).ifPresent(book -> {
+            commentService.update(CommentDto.toModel(commentDto, book));
+        });
 
-        return "redirect:/library/books";
+        return "redirect:/library/books/" + commentDto.getBookId();
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=delete")
-    public String editPageDelete(@PathVariable("id") long id) {
-        commentService.deleteById(id);
-        return "redirect:/library/books";
+    public String editPageDelete(CommentDto commentDto) {
+        commentService.deleteById(commentDto.getId());
+        return "redirect:/library/books/" + commentDto.getBookId();
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=cancel")
-    public String editPageCancel() {
-        return "redirect:/library/books";
+    public String editPageCancel(CommentDto commentDto, Model model) {
+        return "redirect:/library/books/" + commentDto.getBookId();
     }
 
     @ExceptionHandler(NotFoundException.class)

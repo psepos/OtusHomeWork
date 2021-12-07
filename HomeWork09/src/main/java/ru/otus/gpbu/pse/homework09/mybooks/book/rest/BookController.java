@@ -87,13 +87,13 @@ public class BookController {
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=cancel")
-    public String editCancel() {
-        return "redirect:/library/books";
+    public String editCancel(@PathVariable("id") long id) {
+        return "redirect:/library/books/" +id;
     }
 
     @PostMapping(value = "/{id}", params = "action=cancel")
-    public String viewCancel() {
-        return "redirect:/library/books";
+    public String viewCancel(@PathVariable("id") long id) {
+        return "redirect:/library/books/" + id;
     }
 
     @PostMapping(value = "/{id}", params = "action=edit")
