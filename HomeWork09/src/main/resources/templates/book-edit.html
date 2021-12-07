@@ -38,8 +38,20 @@
     </div>
 
     <div class="row">
-        <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" type="text" th:value="${book.name}" value="John Doe"/>
+        <label for="book-name-input">Name:</label>
+        <input id="book-name-input" name="name" type="text" th:value="${book.name}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <label for="genre-id-input">Genre ID:</label>
+        <input id="genre-id-input" name="id" type="text" th:value="${genre.id}" value="1"/>
+        <input id="genre-name-input" name="name" readonly="true" type="text" th:value="${genre.name}" value="Genre1"/>
+    </div>
+
+    <div class="row">
+        <label for="author-id-input">Genre ID:</label>
+        <input id="author-id-input" name="id" type="text" th:value="${author.id}" value="1"/>
+        <input id="author-name-input" name="name" readonly="true" type="text" th:value="${author.name}" value="Author1"/>
     </div>
 
     <div class="row">

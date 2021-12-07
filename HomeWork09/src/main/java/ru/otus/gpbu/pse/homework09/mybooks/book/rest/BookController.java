@@ -5,11 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework09.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.rest.AuthorDto;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.rest.GenreDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,8 +57,15 @@ public class BookController {
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        BookDto book = BookDto.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
-        model.addAttribute("book", book);
+
+        Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
+        BookDto bookDto = BookDto.toDto(book);
+        GenreDto genreDto = GenreDto.toDto(book.getGenre());
+        AuthorDto authorDto = AuthorDto.toDto(book.getAuthor());
+
+        model.addAttribute("book", bookDto);
+        model.addAttribute("genre", genreDto);
+        model.addAttribute("author", authorDto);
         return "book-edit";
     }
 
@@ -66,29 +77,36 @@ public class BookController {
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
-    public String editSave(BookForEditDto bookDto, Model model) {
+    public String editSave(@PathVariable("id") long id, BookForEditDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
 
         long bookId = bookDto.getId();
+        Genre genre = GenreDto.toModel(genreDto);
+        Author author = AuthorDto.toModel(authorDto);
 
         if (bookId > 0) {
 
             Optional<Book> bookOpt = bookService.findById(bookId);
             bookOpt.ifPresent(b -> {
                 Book book = BookForEditDto.refreshModel(b, bookDto);
+                book.setAuthor(author);
+                book.setGenre(genre);
+
                 bookService.update(book);
-                model.addAttribute(book);
             });
         } else {
             Book book = BookForEditDto.toModel(bookDto);
+            book.setAuthor(author);
+            book.setGenre(genre);
+
             bookService.insert(book);
         }
 
-        return "redirect:/library/books";
+        return "redirect:/library/books/" + id;
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=cancel")
     public String editCancel(@PathVariable("id") long id) {
-        return "redirect:/library/books/" +id;
+        return "redirect:/library/books/" + id;
     }
 
     @PostMapping(value = "/{id}", params = "action=cancel")
