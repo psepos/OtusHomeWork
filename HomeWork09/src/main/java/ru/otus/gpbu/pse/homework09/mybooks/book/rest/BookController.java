@@ -65,7 +65,7 @@ public class BookController {
         return "book-edit";
     }
 
-    @PostMapping(value = "/edit", params = "action=save")
+    @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(BookForEditDto bookDto, Model model) {
 
         long bookId = bookDto.getId();
@@ -92,8 +92,8 @@ public class BookController {
     }
 
     @PostMapping(value = "/{id}", params = "action=cancel")
-    public String viewCancel(@PathVariable("id") long id) {
-        return "redirect:/library/books/" + id;
+    public String viewCancel() {
+        return "redirect:/library/books";
     }
 
     @PostMapping(value = "/{id}", params = "action=edit")
