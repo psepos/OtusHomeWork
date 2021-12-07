@@ -35,9 +35,9 @@
     </thead>
     <tbody>
         <tr th:each="genre : ${genres}">
-            <td th:text="${genre.id}">1</td>
-            <td th:text="${genre.name}">Genre1</td>
-            <td><a th:href="@{/library/genres/{id}(id=${genre.id})}">View</a></td>
+            <td th:text="${genre.genreId}">1</td>
+            <td th:text="${genre.genreName}">Genre1</td>
+            <td><a th:href="@{/library/genres/{id}(id=${genre.genreId})}">View</a></td>
         </tr>
     </tbody>
 </table>

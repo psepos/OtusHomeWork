@@ -5,14 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/library/comments")
@@ -46,7 +44,7 @@ public class CommentController {
 
     @PostMapping(value = "/{id}/edit", params = "action=delete")
     public String editPageDelete(CommentDto commentDto) {
-        commentService.deleteById(commentDto.getId());
+        commentService.deleteById(commentDto.getCommentId());
         return "redirect:/library/books/" + commentDto.getBookId();
     }
 

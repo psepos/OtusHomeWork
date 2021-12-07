@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 public class BookDto {
 
-    private long id;
-    private String name;
+    private long bookId;
+    private String bookName;
     private String genre;
     private String author;
 

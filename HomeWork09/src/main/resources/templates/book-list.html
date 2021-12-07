@@ -36,11 +36,11 @@
     </thead>
     <tbody>
         <tr th:each="book : ${books}">
-            <td th:text="${book.id}">1</td>
-            <td th:text="${book.name}">Clean code</td>
+            <td th:text="${book.bookId}">1</td>
+            <td th:text="${book.bookName}">Clean code</td>
             <td th:text="${book.genre}">Programming</td>
             <td th:text="${book.author}">Martin R.</td>
-            <td><a th:href="@{/library/books/{id}(id=${book.id})}">View</a></td>
+            <td><a th:href="@{/library/books/{id}(id=${book.bookId})}">View</a></td>
         </tr>
     </tbody>
 </table>

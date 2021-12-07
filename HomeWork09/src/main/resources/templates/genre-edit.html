@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/genres/{id}/edit(id=${genre.id})}" th:method="post" action="genre-edit.html">
+<form id="edit-form" th:action="@{/library/genres/{id}/edit(id=${genre.genreId})}" th:method="post" action="genre-edit.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>
@@ -33,12 +33,12 @@
 
     <div class="row">
         <label for="id-input">Id:</label>
-        <input id="id-input" type="text" readonly="readonly" th:value="${genre.id}" value="1"/>
+        <input id="id-input" name="genreId" type="text" readonly="readonly" th:value="${genre.genreId}" value="1"/>
     </div>
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" type="text" th:value="${genre.name}" value="Comedy"/>
+        <input id="holder-input" name="genreName" type="text" th:value="${genre.genreName}" value="Comedy"/>
     </div>
 
     <div class="row">

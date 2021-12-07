@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CommentForBookDto {
     private long commentId;
-    private String description;
+    private String commentDescription;
 
     public static CommentForBookDto toDto(Comment comment) {
         return new CommentForBookDto(comment.getId(),comment.getDescription());
@@ -27,6 +27,6 @@ public class CommentForBookDto {
     }
 
     public static Comment toModel(CommentForBookDto comment) {
-        return ModelsObjectFactory.getComment(comment.getCommentId(),comment.getDescription());
+        return ModelsObjectFactory.getComment(comment.getCommentId(),comment.getCommentDescription());
     }
 }

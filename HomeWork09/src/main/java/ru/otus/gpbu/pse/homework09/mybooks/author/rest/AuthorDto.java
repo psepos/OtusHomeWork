@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorDto {
-    private long id;
-    private String name;
+    private long authorId;
+    private String authorName;
 
     public static AuthorDto toDto(Author author) {
         return new AuthorDto(author.getId(), author.getName());
@@ -26,7 +26,7 @@ public class AuthorDto {
     }
 
     public static Author toModel(AuthorDto authorDto) {
-        return new Author(authorDto.getId(), authorDto.getName());
+        return new Author(authorDto.getAuthorId(), authorDto.getAuthorName());
     }
 
 }

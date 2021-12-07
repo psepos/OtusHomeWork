@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="view-form" th:action="@{/library/authors/{id}(id=${author.id})}" th:method="post" action="author-view.html">
+<form id="view-form" th:action="@{/library/authors/{id}(id=${author.authorId})}" th:method="post" action="author-view.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>
@@ -33,12 +33,12 @@
 
     <div class="row">
         <label for="id-input">Id:</label>
-        <input id="id-input" type="text" readonly="readonly" th:value="${author.id}" value="1"/>
+        <input id="id-input" type="text" name="authorId" readonly="readonly" th:value="${author.authorId}" value="1"/>
     </div>
 
     <div class="row">
         <label for="holder-input">Name:</label>
-        <input id="holder-input" name="name" readonly="readonly" type="text" th:value="${author.name}" value="John Doe"/>
+        <input id="holder-input" name="authorName" readonly="readonly" type="text" th:value="${author.authorName}" value="John Doe"/>
     </div>
 
     <div class="row">

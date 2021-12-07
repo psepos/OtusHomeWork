@@ -12,15 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GenreDto {
-    private long id;
-    private String name;
+    private long genreId;
+    private String genreName;
 
     public static GenreDto toDto(Genre genre) {
         return new GenreDto(genre.getId(), genre.getName());
     }
 
     public static Genre toModel(GenreDto genre) {
-        return new Genre(genre.getId(), genre.getName());
+        return new Genre(genre.getGenreId(), genre.getGenreName());
     }
 
     public static List<GenreDto> toDto(List<Genre> genres) {
@@ -32,8 +32,8 @@ public class GenreDto {
     @Override
     public String toString() {
         return "GenreDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + genreId +
+                ", name='" + genreName + '\'' +
                 '}';
     }
 }

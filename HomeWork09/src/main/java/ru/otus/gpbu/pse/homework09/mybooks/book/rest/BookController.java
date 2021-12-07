@@ -9,7 +9,6 @@ import ru.otus.gpbu.pse.homework09.mybooks.author.Author;
 import ru.otus.gpbu.pse.homework09.mybooks.author.rest.AuthorDto;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
-import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
@@ -79,7 +78,7 @@ public class BookController {
     @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(@PathVariable("id") long id, BookForEditDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
 
-        long bookId = bookDto.getId();
+        long bookId = bookDto.getBookId();
         Genre genre = GenreDto.toModel(genreDto);
         Author author = AuthorDto.toModel(authorDto);
 
@@ -122,12 +121,12 @@ public class BookController {
     @PostMapping(value = "/{id}", params = "action=add-comment")
     public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentForBookDto comment) {
 
-        bookService.findById(bookDto.getId()).ifPresent(b -> {
+        bookService.findById(bookDto.getBookId()).ifPresent(b -> {
             b.addComment(CommentForBookDto.toModel(comment));
             bookService.update(b);
         });
 
-        return "redirect:/library/books/" + bookDto.getId();
+        return "redirect:/library/books/" + bookDto.getBookId();
     }
 
     @PostMapping(value = "/{id}", params = "action=delete")
@@ -143,13 +142,13 @@ public class BookController {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(NotFoundException ex) {
-        return ResponseEntity.badRequest().body("Not found: " + ex.getMessage());
+        return ResponseEntity.badRequest().body("Not found: " + ex.getMessage() + " " + Arrays.toString(ex.getStackTrace()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         String message = ex.getMessage() + Arrays.toString(ex.getStackTrace());
         log.error(message);
-        return ResponseEntity.badRequest().body("Error: " + ex.getMessage());
+        return ResponseEntity.badRequest().body("Error: " + ex.getMessage() + " " + Arrays.toString(ex.getStackTrace()));
     }
 }

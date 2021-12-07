@@ -10,19 +10,19 @@ import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 @AllArgsConstructor
 @NoArgsConstructor
  public class BookForEditDto {
-    private long id;
-    private String name;
+    private long bookId;
+    private String bookName;
 
     public static BookForEditDto toDto(Book book) {
         return new BookForEditDto(book.getId(), book.getName());
     }
 
     public static Book toModel(BookForEditDto bookDto) {
-        return ModelsObjectFactory.getBook(bookDto.getId(), bookDto.getName());
+        return ModelsObjectFactory.getBook(bookDto.getBookId(), bookDto.getBookName());
     }
 
     public static Book refreshModel(Book book, BookForEditDto bookDto) {
-        book.setName(bookDto.getName());
+        book.setName(bookDto.getBookName());
         return book;
     }
 }
