@@ -1,0 +1,154 @@
+package ru.otus.gpbu.pse.homework10.mybooks.book.rest;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import ru.otus.gpbu.pse.homework10.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework10.mybooks.author.rest.AuthorDto;
+import ru.otus.gpbu.pse.homework10.mybooks.book.Book;
+import ru.otus.gpbu.pse.homework10.mybooks.book.service.BookService;
+import ru.otus.gpbu.pse.homework10.mybooks.common.ModelsObjectFactory;
+import ru.otus.gpbu.pse.homework10.mybooks.common.NotFoundException;
+import ru.otus.gpbu.pse.homework10.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework10.mybooks.genre.rest.GenreDto;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@Controller
+@RequestMapping("/library/books")
+@Slf4j
+public class BookController {
+
+    private final BookService bookService;
+
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @GetMapping
+    public String findAll(Model model) {
+
+        List<BookDto> books = BookDto.toDto(bookService.getAll());
+
+        model.addAttribute("books", books);
+        return "book-list";
+    }
+
+    @GetMapping("/{id}")
+    public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+
+        Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
+        BookDto bookDto = BookDto.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
+        CommentForBookDto comment = CommentForBookDto.toDto(ModelsObjectFactory.getComment(-1, ""));
+
+        List<CommentForBookDto> comments = CommentForBookDto.toDto(book.getComments());
+
+        model.addAttribute("book", bookDto);
+        model.addAttribute("comments", comments);
+        model.addAttribute("comment", comment);
+
+        return "book-view";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
+
+        Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
+        BookDto bookDto = BookDto.toDto(book);
+        GenreDto genreDto = GenreDto.toDto(book.getGenre());
+        AuthorDto authorDto = AuthorDto.toDto(book.getAuthor());
+
+        model.addAttribute("book", bookDto);
+        model.addAttribute("genre", genreDto);
+        model.addAttribute("author", authorDto);
+        return "book-edit";
+    }
+
+    @GetMapping("/create")
+    public String editPage(Model model) {
+        BookForEditDto book = BookForEditDto.toDto(ModelsObjectFactory.getBook());
+        model.addAttribute("book", book);
+        return "book-edit";
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=save")
+    public String editSave(@PathVariable("id") long id, BookForEditDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
+
+        long bookId = bookDto.getBookId();
+        Genre genre = GenreDto.toModel(genreDto);
+        Author author = AuthorDto.toModel(authorDto);
+
+        if (bookId > 0) {
+
+            Optional<Book> bookOpt = bookService.findById(bookId);
+            bookOpt.ifPresent(b -> {
+                Book book = BookForEditDto.refreshModel(b, bookDto);
+                book.setAuthor(author);
+                book.setGenre(genre);
+
+                bookService.update(book);
+            });
+        } else {
+            Book book = BookForEditDto.toModel(bookDto);
+            book.setAuthor(author);
+            book.setGenre(genre);
+
+            bookService.insert(book);
+        }
+
+        return "redirect:/library/books/" + id;
+    }
+
+    @PostMapping(value = "/{id}/edit", params = "action=cancel")
+    public String editCancel(@PathVariable("id") long id) {
+        return "redirect:/library/books/" + id;
+    }
+
+    @PostMapping(value = "/{id}", params = "action=cancel")
+    public String viewCancel() {
+        return "redirect:/library/books";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=edit")
+    public String viewEdit(@PathVariable("id") long id) {
+        return "redirect:/library/books/" + id + "/edit";
+    }
+
+    @PostMapping(value = "/{id}", params = "action=add-comment")
+    public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentForBookDto comment) {
+
+        bookService.findById(bookDto.getBookId()).ifPresent(b -> {
+            b.addComment(CommentForBookDto.toModel(comment));
+            bookService.update(b);
+        });
+
+        return "redirect:/library/books/" + bookDto.getBookId();
+    }
+
+    @PostMapping(value = "/{id}", params = "action=delete")
+    public String delete(@PathVariable("id") long id) {
+        bookService.deleteById(id);
+        return "redirect:/library/books";
+    }
+
+    @PostMapping(value = "/{id}/delete", params = "action=cancel")
+    public String deleteCancel() {
+        return "redirect:/library/books";
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFound(NotFoundException ex) {
+        return ResponseEntity.badRequest().body("Not found: " + ex.getMessage() + " " + Arrays.toString(ex.getStackTrace()));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        String message = ex.getMessage() + Arrays.toString(ex.getStackTrace());
+        log.error(message);
+        return ResponseEntity.badRequest().body("Error: " + ex.getMessage() + " " + Arrays.toString(ex.getStackTrace()));
+    }
+}

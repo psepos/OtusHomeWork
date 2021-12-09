@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 50px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        .new-comment {
+            margin-top: 1px;
+            margin-bottom: 10px;
+        }
+
+        .comments, .comments td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="view-form" th:action="@{/library/books/{id}(id=${book.bookId})}" th:method="post" action="book-view.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
+    <h1>Book view:</h1>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" type="text" name="bookId" readonly="readonly" th:value="${book.bookId}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">Name:</label>
+        <input id="holder-input" name="bookName" readonly="readonly" type="text" th:value="${book.bookName}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <label for="book-genre">Genre:</label>
+        <input id="book-genre" name="genre" readonly="readonly" type="text" th:value="${book.genre}" value="Genre1"/>
+    </div>
+
+    <div class="row">
+        <label for="book-author">Author:</label>
+        <input id="book-author" name="author" readonly="readonly" type="text" th:value="${book.author}" value="Author1"/>
+    </div>
+
+
+    <div class="row">
+        <button type="submit" name="action" value="edit">Edit</button>
+        <button type="submit" name="action" value="delete">Delete</button>
+        <button type="submit" name="action" value="cancel">Cancel</button>
+    </div>
+
+    <h1>Comments:</h1>
+
+    <div class="new-comment" th:object="${comment}">
+        <input hidden="true" id="new-comment-id" name="commentId" th:value="${comment.commentId}"
+               type="text"/>
+        <label for="new-comment-description">New</label>
+        <input id="new-comment-description" name="commentDescription" type="text" th:value="${comment.commentDescription}"/>
+        <button type="submit" name="action" value="add-comment">Add</button>
+    </div>
+
+
+    <table class="comments" title="Comments">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comment1 : ${comments}">
+            <td th:text="${comment1.commentId}">1</td>
+            <td th:text="${comment1.commentDescription}">Clean code</td>
+            <td><a th:href="@{/library/comments/{id}/edit(id=${comment1.commentId})}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+
+</body>
+</html>

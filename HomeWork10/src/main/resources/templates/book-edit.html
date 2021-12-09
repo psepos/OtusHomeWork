@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="edit-form" th:action="@{/library/books/{id}/edit(id=${book.bookId})}" th:method="post" action="book-edit.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
+    <h1>Book edit:</h1>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" type="text" name="bookId" readonly="readonly" th:value="${book.bookId}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="book-name-input">Name:</label>
+        <input id="book-name-input" type="text" name="bookName" th:value="${book.bookName}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <label for="genre-id-input">Genre ID:</label>
+        <input id="genre-id-input" name="genreId" type="text" th:value="${genre.genreId}" value="1"/>
+        <input id="genre-name-input" name="genreName" readonly="true" type="text" th:value="${genre.genreName}" value="Genre1"/>
+    </div>
+
+    <div class="row">
+        <label for="author-id-input">Genre ID:</label>
+        <input id="author-id-input" name="authorId" type="text" th:value="${author.authorId}" value="1"/>
+        <input id="author-name-input" name="authorName" readonly="true" type="text" th:value="${author.authorName}" value="Author1"/>
+    </div>
+
+    <div class="row">
+        <button type="submit" name="action" value="save">Save</button>
+        <button type="submit" name="action" value="cancel">Cancel</button>
+    </div>
+</form>
+
+</body>
+</html>
