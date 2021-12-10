@@ -37,7 +37,7 @@ public class Book {
     private Author author;
 
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(targetEntity = Comment.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     public void addComment(Comment comment) {
