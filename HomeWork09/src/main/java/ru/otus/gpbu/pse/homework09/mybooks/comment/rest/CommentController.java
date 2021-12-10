@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.Comment;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.dto.CommentDto;
+import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentMappingService;
 import ru.otus.gpbu.pse.homework09.mybooks.comment.service.CommentService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 
@@ -18,16 +20,18 @@ import java.util.Arrays;
 public class CommentController {
     private final CommentService commentService;
     private final BookService bookService;
+    private final CommentMappingService commentMappingService;
 
-    public CommentController(CommentService commentService, BookService bookService) {
+    public CommentController(CommentService commentService, BookService bookService, CommentMappingService commentMappingService) {
         this.commentService = commentService;
         this.bookService = bookService;
+        this.commentMappingService = commentMappingService;
     }
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
         Comment comment = commentService.findById(id).orElseThrow(NotFoundException::new);
-        CommentDto commentDto = CommentDto.toDto(comment);
+        CommentDto commentDto = commentMappingService.toDto(comment);
         model.addAttribute("comment", commentDto);
         return "comment-edit";
     }
@@ -36,7 +40,7 @@ public class CommentController {
     public String savePageSave(CommentDto commentDto) {
 
         bookService.findById(commentDto.getBookId()).ifPresent(book -> {
-            commentService.update(CommentDto.toModel(commentDto, book));
+            commentService.update(commentMappingService.toModel(commentDto, book));
         });
 
         return "redirect:/library/books/" + commentDto.getBookId();

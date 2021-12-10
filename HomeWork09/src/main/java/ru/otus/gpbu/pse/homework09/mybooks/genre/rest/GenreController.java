@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.dto.GenreDto;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.service.GenreMappingService;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.service.GenreService;
 
 import java.util.Arrays;
@@ -18,15 +20,17 @@ import java.util.List;
 @Slf4j
 public class GenreController {
     private final GenreService genreService;
+    private final GenreMappingService genreMappingService;
 
-    public GenreController(GenreService genreService) {
+    public GenreController(GenreService genreService, GenreMappingService genreMappingService) {
         this.genreService = genreService;
+        this.genreMappingService = genreMappingService;
     }
 
     @GetMapping
     public String findAll(Model model) {
 
-        List<GenreDto> genres = GenreDto.toDto(genreService.getAll());
+        List<GenreDto> genres = genreMappingService.toDto(genreService.getAll());
 
         model.addAttribute("genres", genres);
         return "genre-list";
@@ -34,28 +38,28 @@ public class GenreController {
 
     @GetMapping("/{id}")
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        GenreDto genre = GenreDto.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
+        GenreDto genre = genreMappingService.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("genre", genre);
         return "genre-view";
     }
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        GenreDto genre = GenreDto.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
+        GenreDto genre = genreMappingService.toDto(genreService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("genre", genre);
         return "genre-edit";
     }
 
     @GetMapping("/create")
     public String editPage(Model model) {
-        GenreDto genre = GenreDto.toDto(ModelsObjectFactory.getGenre(""));
+        GenreDto genre = genreMappingService.toDto(ModelsObjectFactory.getGenre(""));
         model.addAttribute("genre", genre);
         return "genre-edit";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(GenreDto genreDto, Model model) {
-        Genre genre = GenreDto.toModel(genreDto);
+        Genre genre = genreMappingService.toModel(genreDto);
         genreService.update(genre);
         model.addAttribute(genre);
         return "redirect:/library/genres";

@@ -1,4 +1,4 @@
-package ru.otus.gpbu.pse.homework09.mybooks.book.rest;
+package ru.otus.gpbu.pse.homework09.mybooks.book.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

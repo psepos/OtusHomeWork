@@ -42,4 +42,5 @@ public class AuthorServiceImpl implements AuthorService {
     public List<Author> getAll() {
         return repository.findAll();
     }
+
 }

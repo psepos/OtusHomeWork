@@ -6,13 +6,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.author.Author;
-import ru.otus.gpbu.pse.homework09.mybooks.author.rest.AuthorDto;
+import ru.otus.gpbu.pse.homework09.mybooks.author.dto.AuthorDto;
+import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorMappingService;
 import ru.otus.gpbu.pse.homework09.mybooks.book.Book;
+import ru.otus.gpbu.pse.homework09.mybooks.book.dto.BookDto;
+import ru.otus.gpbu.pse.homework09.mybooks.book.dto.CommentForBookDto;
+import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookMappingService;
 import ru.otus.gpbu.pse.homework09.mybooks.book.service.BookService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
 import ru.otus.gpbu.pse.homework09.mybooks.genre.Genre;
-import ru.otus.gpbu.pse.homework09.mybooks.genre.rest.GenreDto;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.dto.GenreDto;
+import ru.otus.gpbu.pse.homework09.mybooks.genre.service.GenreMappingService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,15 +29,23 @@ import java.util.Optional;
 public class BookController {
 
     private final BookService bookService;
+    private final AuthorMappingService authorMappingService;
 
-    public BookController(BookService bookService) {
+    // Mappings
+    private final BookMappingService bookMappingService;
+    private final GenreMappingService genreMappingService;
+
+    public BookController(BookService bookService, AuthorMappingService authorMappingService, BookMappingService bookMappingService, GenreMappingService genreMappingService) {
         this.bookService = bookService;
+        this.authorMappingService = authorMappingService;
+        this.bookMappingService = bookMappingService;
+        this.genreMappingService = genreMappingService;
     }
 
     @GetMapping
     public String findAll(Model model) {
 
-        List<BookDto> books = BookDto.toDto(bookService.getAll());
+        List<BookDto> books = bookMappingService.toDto(bookService.getAll());
 
         model.addAttribute("books", books);
         return "book-list";
@@ -42,7 +55,7 @@ public class BookController {
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
 
         Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
-        BookDto bookDto = BookDto.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
+        BookDto bookDto = bookMappingService.toDto(bookService.findById(id).orElseThrow(NotFoundException::new));
         CommentForBookDto comment = CommentForBookDto.toDto(ModelsObjectFactory.getComment(-1, ""));
 
         List<CommentForBookDto> comments = CommentForBookDto.toDto(book.getComments());
@@ -58,9 +71,9 @@ public class BookController {
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
 
         Book book = bookService.findById(id).orElseThrow(NotFoundException::new);
-        BookDto bookDto = BookDto.toDto(book);
-        GenreDto genreDto = GenreDto.toDto(book.getGenre());
-        AuthorDto authorDto = AuthorDto.toDto(book.getAuthor());
+        BookDto bookDto = bookMappingService.toDto(book);
+        GenreDto genreDto = genreMappingService.toDto(book.getGenre());
+        AuthorDto authorDto = authorMappingService.toDto(book.getAuthor());
 
         model.addAttribute("book", bookDto);
         model.addAttribute("genre", genreDto);
@@ -70,30 +83,30 @@ public class BookController {
 
     @GetMapping("/create")
     public String editPage(Model model) {
-        BookForEditDto book = BookForEditDto.toDto(ModelsObjectFactory.getBook());
+        BookDto book = bookMappingService.toDto(ModelsObjectFactory.getBook());
         model.addAttribute("book", book);
         return "book-edit";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
-    public String editSave(@PathVariable("id") long id, BookForEditDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
+    public String editSave(@PathVariable("id") long id, BookDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
 
         long bookId = bookDto.getBookId();
-        Genre genre = GenreDto.toModel(genreDto);
-        Author author = AuthorDto.toModel(authorDto);
+        Genre genre = genreMappingService.toModel(genreDto);
+        Author author = authorMappingService.toModel(authorDto);
 
         if (bookId > 0) {
 
             Optional<Book> bookOpt = bookService.findById(bookId);
             bookOpt.ifPresent(b -> {
-                Book book = BookForEditDto.refreshModel(b, bookDto);
+                Book book = bookMappingService.refreshModel(b, bookDto);
                 book.setAuthor(author);
                 book.setGenre(genre);
 
                 bookService.update(book);
             });
         } else {
-            Book book = BookForEditDto.toModel(bookDto);
+            Book book = bookMappingService.toModel(bookDto);
             book.setAuthor(author);
             book.setGenre(genre);
 

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.gpbu.pse.homework09.mybooks.author.Author;
+import ru.otus.gpbu.pse.homework09.mybooks.author.dto.AuthorDto;
+import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorMappingService;
 import ru.otus.gpbu.pse.homework09.mybooks.author.service.AuthorService;
 import ru.otus.gpbu.pse.homework09.mybooks.common.ModelsObjectFactory;
 import ru.otus.gpbu.pse.homework09.mybooks.common.NotFoundException;
@@ -19,15 +21,17 @@ import java.util.List;
 public class AuthorController {
 
     private final AuthorService authorService;
+    private final AuthorMappingService authorMappingService;
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, AuthorMappingService authorMappingService) {
         this.authorService = authorService;
+        this.authorMappingService = authorMappingService;
     }
 
     @GetMapping
     public String findAll(Model model) {
 
-        List<AuthorDto> authors = AuthorDto.toDto(authorService.getAll());
+        List<AuthorDto> authors = authorMappingService.toDto(authorService.getAll());
 
         model.addAttribute("authors", authors);
         return "author-list";
@@ -35,28 +39,28 @@ public class AuthorController {
 
     @GetMapping("/{id}")
     public String viewPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
+        AuthorDto author = authorMappingService.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
         return "author-view";
     }
 
     @GetMapping("/{id}/edit")
     public String editPage(@PathVariable("id") long id, Model model) throws NotFoundException {
-        AuthorDto author = AuthorDto.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
+        AuthorDto author = authorMappingService.toDto(authorService.getById(id).orElseThrow(NotFoundException::new));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
     @GetMapping("/create")
     public String createPage(Model model) {
-        AuthorDto author = AuthorDto.toDto(ModelsObjectFactory.getAuthor(""));
+        AuthorDto author = authorMappingService.toDto(ModelsObjectFactory.getAuthor(""));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
     @PostMapping(value = "/{id}/edit", params = "action=save")
     public String editSave(AuthorDto authorDto, Model model) {
-        Author author = AuthorDto.toModel(authorDto);
+        Author author = authorMappingService.toModel(authorDto);
         authorService.update(author);
         model.addAttribute(author);
         return "redirect:/library/authors";
