@@ -57,16 +57,10 @@ public class GenreController {
         return "genre-edit";
     }
 
-    @PostMapping(value = "/{id}/edit", params = "action=save")
-    public String editSave(GenreDto genreDto, Model model) {
+    @PostMapping(value = "/edit")
+    public String editSave(GenreDto genreDto) {
         Genre genre = genreMappingService.toModel(genreDto);
         genreService.update(genre);
-        model.addAttribute(genre);
-        return "redirect:/library/genres";
-    }
-
-    @PostMapping(value = "/{id}/edit", params = "action=cancel")
-    public String toHomePage() {
         return "redirect:/library/genres";
     }
 
@@ -75,19 +69,9 @@ public class GenreController {
         return "redirect:/library/genres/" + id + "/edit";
     }
 
-    @PostMapping(value = "/{id}", params = "action=cancel")
-    public String toHomePage(@PathVariable("id") long id) {
-        return "redirect:/library/genres/";
-    }
-
-    @PostMapping(value = "/edit", params = "action=cancel")
-    public String editCancel() {
-        return "redirect:/library/genres";
-    }
-
-    @PostMapping(value = "/{id}", params = "action=delete")
-    public String delete(@PathVariable("id") long id) {
-        genreService.deleteById(id);
+    @PostMapping(value = "/delete")
+    public String delete(GenreDto genreDto) {
+        genreService.deleteById(genreDto.getGenreId());
         return "redirect:/library/genres";
     }
 

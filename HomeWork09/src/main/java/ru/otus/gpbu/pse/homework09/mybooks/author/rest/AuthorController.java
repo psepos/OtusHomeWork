@@ -58,7 +58,7 @@ public class AuthorController {
         return "author-edit";
     }
 
-    @PostMapping(value = "/edit", params = "action=save")
+    @PostMapping(value = "/edit")
     public String editSave(AuthorDto authorDto, Model model) {
         Author author = authorMappingService.toModel(authorDto);
         authorService.update(author);
@@ -66,24 +66,9 @@ public class AuthorController {
         return "redirect:/library/authors";
     }
 
-    @PostMapping(value = "/edit", params = "action=cancel")
-    public String editPageCancel() {
-        return "redirect:/library/authors";
-    }
-
-    @PostMapping(value = "/{id}", params = "action=edit")
-    public String toEditPage(@PathVariable("id") long id) {
-        return "redirect:/library/authors/" + id + "/edit";
-    }
-
-    @PostMapping(value = "/{id}", params = "action=delete")
-    public String viewPageDelete(@PathVariable("id") long id) {
-        authorService.deleteById(id);
-        return "redirect:/library/authors";
-    }
-
-    @PostMapping(value = "/{id}", params = "action=cancel")
-    public String viewPageCancel() {
+    @PostMapping(value = "/delete")
+    public String viewPageDelete(AuthorDto authorDto) {
+        authorService.deleteById(authorDto.getAuthorId());
         return "redirect:/library/authors";
     }
 

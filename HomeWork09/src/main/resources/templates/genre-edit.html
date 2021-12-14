@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/genres/{id}/edit(id=${genre.genreId})}" th:method="post" action="genre-edit.html">
+<form id="edit-form" th:action="@{/library/genres/edit}" th:method="post" action="genre-edit.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>
@@ -43,7 +43,7 @@
 
     <div class="row">
         <button type="submit" name="action" value="save">Save</button>
-        <button type="submit" name="action" value="cancel">Cancel</button>
+        <button type="button" name="action" value="cancel" onclick="window.location.href='/library/genres';">Cancel</button>
     </div>
 </form>
 
