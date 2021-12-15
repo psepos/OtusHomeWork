@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="delete-form" th:action="@{/library/genres/{id}(id=${genre.genreId})}" th:method="post" action="genre-view.html">
+<form id="delete-form" th:action="@{/library/genres/delete}" th:method="post" action="genre-view.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>
@@ -43,9 +43,9 @@
     </div>
 
     <div class="row">
-        <button type="submit" name="action" value="edit">Edit</button>
+        <a th:href="@{/library/genres/{id}/edit(id=${genre.genreId})}" class="button" >Edit</a>
         <button type="submit" name="action" value="delete">Delete</button>
-        <button type="button" name="action" value="cancel" onclick="window.location.href='/library/genres';">Cancel</button>
+        <a th:href="@{/library/genres}" class="button" >Cancel</a>
     </div>
 </form>
 

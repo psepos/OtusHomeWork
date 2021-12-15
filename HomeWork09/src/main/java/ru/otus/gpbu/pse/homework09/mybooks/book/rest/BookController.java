@@ -88,7 +88,7 @@ public class BookController {
         return "book-edit";
     }
 
-    @PostMapping(value = "/{id}/edit", params = "action=save")
+    @PostMapping(value = "/save")
     public String editSave(@PathVariable("id") long id, BookDto bookDto, GenreDto genreDto, AuthorDto authorDto) {
 
         long bookId = bookDto.getBookId();
@@ -116,21 +116,6 @@ public class BookController {
         return "redirect:/library/books/" + id;
     }
 
-    @PostMapping(value = "/{id}/edit", params = "action=cancel")
-    public String editCancel(@PathVariable("id") long id) {
-        return "redirect:/library/books/" + id;
-    }
-
-    @PostMapping(value = "/{id}", params = "action=cancel")
-    public String viewCancel() {
-        return "redirect:/library/books";
-    }
-
-    @PostMapping(value = "/{id}", params = "action=edit")
-    public String viewEdit(@PathVariable("id") long id) {
-        return "redirect:/library/books/" + id + "/edit";
-    }
-
     @PostMapping(value = "/{id}", params = "action=add-comment")
     public String addComment(BookDto bookDto, @ModelAttribute("comment") CommentForBookDto comment) {
 
@@ -142,14 +127,9 @@ public class BookController {
         return "redirect:/library/books/" + bookDto.getBookId();
     }
 
-    @PostMapping(value = "/{id}", params = "action=delete")
+    @PostMapping(value = "/delete")
     public String delete(@PathVariable("id") long id) {
         bookService.deleteById(id);
-        return "redirect:/library/books";
-    }
-
-    @PostMapping(value = "/{id}/delete", params = "action=cancel")
-    public String deleteCancel() {
         return "redirect:/library/books";
     }
 

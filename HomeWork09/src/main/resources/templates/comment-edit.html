@@ -24,7 +24,7 @@
 </head>
 <body>
 
-<form id="edit-form" th:action="@{/library/comments/{id}/edit(id=${comment.commentId})}" th:object="${comment}" th:method="post" action="comment-edit.html">
+<form id="edit-form" th:action="@{/library/comments/edit}" th:object="${comment}" th:method="post" action="comment-edit.html">
     <div>
         <td><a th:href="@{/library}">Home</a></td>
     </div>
@@ -50,7 +50,7 @@
     <div class="row">
         <button type="submit" name="action" value="save">Save</button>
         <button type="submit" name="action" value="delete">Delete</button>
-        <button type="submit" name="action" value="cancel">Cancel</button>
+        <a th:href="@{/library/books/{id}(id=${comment.bookId})}" class="button" >Cancel</a>
     </div>
 </form>
 

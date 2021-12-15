@@ -36,7 +36,7 @@ public class CommentController {
         return "comment-edit";
     }
 
-    @PostMapping(value = "/{id}/edit", params = "action=save")
+    @PostMapping(value = "/edit")
     public String savePageSave(CommentDto commentDto) {
 
         bookService.findById(commentDto.getBookId()).ifPresent(book -> {
@@ -46,14 +46,9 @@ public class CommentController {
         return "redirect:/library/books/" + commentDto.getBookId();
     }
 
-    @PostMapping(value = "/{id}/edit", params = "action=delete")
+    @PostMapping(value = "/delete")
     public String editPageDelete(CommentDto commentDto) {
         commentService.deleteById(commentDto.getCommentId());
-        return "redirect:/library/books/" + commentDto.getBookId();
-    }
-
-    @PostMapping(value = "/{id}/edit", params = "action=cancel")
-    public String editPageCancel(CommentDto commentDto, Model model) {
         return "redirect:/library/books/" + commentDto.getBookId();
     }
 

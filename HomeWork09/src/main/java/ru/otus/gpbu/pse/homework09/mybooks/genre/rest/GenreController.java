@@ -64,11 +64,6 @@ public class GenreController {
         return "redirect:/library/genres";
     }
 
-    @PostMapping(value = "/{id}", params = "action=edit")
-    public String toEditPage(@PathVariable("id") long id) {
-        return "redirect:/library/genres/" + id + "/edit";
-    }
-
     @PostMapping(value = "/delete")
     public String delete(GenreDto genreDto) {
         genreService.deleteById(genreDto.getGenreId());
