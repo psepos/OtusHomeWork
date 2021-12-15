@@ -42,9 +42,9 @@
     </div>
 
     <div class="row">
-        <button type="button" name="action" value="edit" th:onclick="window.location.href='/library/authors/${author.authorId}/edit';">Edit</button>
+        <a th:href="@{/library/authors/{id}/edit(id=${author.authorId})}" class="button">Edit</a>
         <button type="submit" name="action" value="delete">Delete</button>
-        <button type="button" name="action" value="cancel" onclick="window.location.href='/library/authors';">Cancel</button>
+        <a th:href="@{/library/authors}" class="button" >Cancel</a>
     </div>
 </form>
 
