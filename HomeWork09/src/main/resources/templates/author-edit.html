@@ -43,7 +43,7 @@
 
     <div class="row">
         <button type="submit" name="action" value="save">Save</button>
-        <button type="button" name="action" value="cancel" onclick="window.location.href='/library/authors';">Cancel</button>
+        <a th:href="@{/library/authors/{id}(id=${author.authorId})}" class="button" >Cancel</a>
     </div>
 </form>
 
