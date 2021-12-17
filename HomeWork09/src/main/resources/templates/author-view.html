@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View author</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="view-form" th:action="@{/library/authors/delete}" th:method="post" action="author-view.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+    <h1>Author:</h1>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" type="text" name="authorId" readonly="readonly" th:value="${author.authorId}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">Name:</label>
+        <input id="holder-input" name="authorName" readonly="readonly" type="text" th:value="${author.authorName}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <a th:href="@{/library/authors/{id}/edit(id=${author.authorId})}" class="button">Edit</a>
+        <button type="submit" name="action" value="delete">Delete</button>
+        <a th:href="@{/library/authors}" class="button" >Cancel</a>
+    </div>
+</form>
+
+</body>
+</html>

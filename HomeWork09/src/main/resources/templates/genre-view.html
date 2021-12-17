@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>View genre</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="delete-form" th:action="@{/library/genres/delete}" th:method="post" action="genre-view.html">
+    <div>
+        <td><a th:href="@{/library}">Home</a></td>
+    </div>
+    <hr>
+
+    <h1>Genre view:</h1>
+
+    <div class="row">
+        <label for="id-input">Id:</label>
+        <input id="id-input" name="genreId" type="text" readonly="readonly" th:value="${genre.genreId}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">Name:</label>
+        <input id="holder-input" name="genreName" readonly="readonly" type="text" th:value="${genre.genreName}" value="John Doe"/>
+    </div>
+
+    <div class="row">
+        <a th:href="@{/library/genres/{id}/edit(id=${genre.genreId})}" class="button" >Edit</a>
+        <button type="submit" name="action" value="delete">Delete</button>
+        <a th:href="@{/library/genres}" class="button" >Cancel</a>
+    </div>
+</form>
+
+</body>
+</html>
